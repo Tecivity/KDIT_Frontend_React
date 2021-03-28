@@ -32,4 +32,17 @@ const Routes = () => {
   )
 }
 
+const ProtectedRoute = ({ auth, component: Component, ...rest }) => {
+  return (
+    <Route
+      {...rest}
+      render={() => auth ? (
+        <Component />
+      ) : (
+        <Redirect to="/auth" />
+      )}
+    />
+  )
+}
+
 export default App;

@@ -1,0 +1,86 @@
+.mainView {
+    display: flex;
+}
+
+.boxSystem{
+    padding: 20px;
+    width: 100%;
+    color: white;
+    text-align: center;
+}
+
+.loginView{
+    height: 95vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.welcome{
+    width: 100%;
+    max-width: 520px;
+    background-color: #fff;
+    padding: 15px 30px;
+}
+
+.welcome h2{
+    color: #888;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.welcome h2 span{
+    color:#FE4880;
+    font-weight: 700;
+}
+
+.welcome button{
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 8px;
+    background-image: linear-gradient(to right,#FFCE00,#FFCE00 50%,#FF4880);
+    background-size: 200%;
+    background-position: 0%;
+    transition: 0.4s;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+}
+
+.welcome button:hover{
+    background-position: 100% 0%;
+}
+
+.Input, .Post{
+    border: 1px solid hsl(216,8%,88%);
+    border-radius: 4px;
+    width: 576px;
+    margin: 20px auto;
+    background-color:#fff;
+    color: black;
+}
+
+.Input__header{
+    background-color: #61b0ff;
+    border-bottom: 2px solid #2c78eb;
+    border-radius: 2px 2px 0 0;
+    margin: 0;
+    padding: 15px;
+    color: white;
+    font-size: 20px;
+}
+
+.Input__field{
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    font-size: 20px;
+    background-color: #fff;
+    border: none;
+}
+
+.Input__field:focus{
+    outline: none;
+}
