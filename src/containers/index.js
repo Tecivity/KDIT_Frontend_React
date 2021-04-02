@@ -1,7 +1,15 @@
 import HomePage from './homePage'
 import AuthPage from './authPage'
+import ProfilePage from './ProfilePage'
+import AboutPage from './AboutPage'
+import SubComPage from './SubComPage'
+import HelpPage from './HelpPage'
 
 export {
     HomePage,
-    AuthPage
+    AuthPage,
+    ProfilePage,
+    AboutPage,
+    SubComPage,
+    HelpPage
 }

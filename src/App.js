@@ -2,16 +2,19 @@ import { useContext } from 'react';
 import {
 	BrowserRouter as Router,
 	Switch,
-	Route,
-	Redirect,
+	Route,            
+	Redirect,                                                                                                              
 } from 'react-router-dom';
 
 //Import Pages
-import { AuthPage, HomePage } from './containers';
-import SubComPage from './containers/SubComPage';
-import HelpPage from './containers/HelpPage';
-import AboutPage from './containers/AboutPage';
-import ProfilePage from './containers/ProfilePage';
+import { 
+	AuthPage, 
+	HomePage, 
+	SubComPage , 
+	HelpPage , 
+	AboutPage , 
+	ProfilePage 
+} from './containers';
 
 //Import Components
 

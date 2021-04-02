@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import './index.css';
 import firebase from '../firebase';
 import Login from '../components/Authen';
-import Navbar from '../components/Navbar';
+import {Navbar} from '../components';
 import { Redirect } from 'react-router-dom';
 import { SessionApi } from '../hook/SessionApi';
 
