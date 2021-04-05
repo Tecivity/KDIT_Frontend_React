@@ -1,12 +1,39 @@
 import React from 'react';
-import {Navbar} from '../components';
+import { Navbar, ProfileNavbar } from '../components';
 
 const ProfilePage = () => {
+	//Data
+	const menus = [
+		{
+			to: '/profile',
+			text: 'Profile',
+		},
+		{
+			to: '/account',
+			text: 'Account',
+		},
+		{
+			to: '/safetyandprivacy',
+			text: 'Safety & Privacy',
+		},
+		{
+			to: '/subscription',
+			text: 'Subscription',
+		},
+		{
+			to: '/feedsetting',
+			text: 'Feed Setting',
+		},
+	];
+
 	return (
 		<>
 			<Navbar />
+			<hr />
 			<div>
-				<h1>This is Profile Page</h1>
+				{menus.map((menu) => {
+					return <ProfileNavbar menu={menu} />;
+				})}
 			</div>
 		</>
 	);
