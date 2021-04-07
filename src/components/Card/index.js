@@ -1,5 +1,7 @@
 import './index.css';
 import Post from './Post';
+import PostForm from './PostForm';
+import React, { useState, useEffect } from 'react';
 
 export default function Card() {
 	//Data
@@ -82,10 +84,21 @@ export default function Card() {
 		},
 	];
 
+	//States
+	const [posts, setPosts] = useState(postsData);
+
+	//Functions
+	const updatePost = (newPost) => {
+		console.log(newPost.content);
+		const newPosts = [newPost, ...posts];
+		setPosts(newPosts);
+	};
+
 	return (
 		<div className="card">
+			<PostForm updatePost={updatePost} />
 			<div className="content">
-				{postsData.map((post) => {
+				{posts.map((post) => {
 					return <Post post={post} />;
 				})}
 			</div>

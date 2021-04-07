@@ -1,61 +1,62 @@
 body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+		'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+		'Helvetica Neue', sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
 
-#navbox  {
-    /* Orange Bar */
-    position: absolute;
-    width: 1600px;
-    height: 45px;
-    left: 0px;
-    top: 0px;
+#navbox {
+	/* Orange Bar */
+	position: absolute;
+	width: 1600px;
+	height: 45px;
+	left: 0px;
+	top: 0px;
 
-    background: #F48C51;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  }
+	background: #f48c51;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
 
-#siteName { /*K | K-Dit*/
-    position: absolute;
-    width: 131px;
-    height: 44px;
-    left: 50px;
-    top: 0px;
-    
-    font-family: Public Sans;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 24px;
-    line-height: 28px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    
-    color: #FFFFFF;
-    
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  }
+#siteName {
+	/*K | K-Dit*/
+	position: absolute;
+	width: 131px;
+	height: 44px;
+	left: 50px;
+	top: 0px;
+
+	font-family: Public Sans;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 24px;
+	line-height: 28px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+
+	color: #ffffff;
+
+	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
 
 #menuText {
-    /*sub-com, Help, About Us*/
-    position: absolute;
-    width: 117px;
-    height: 45px;
-    left: 1372px;
-    top: 0px;
+	/*sub-com, Help, About Us*/
+	position: absolute;
+	width: 117px;
+	height: 45px;
+	left: 1372px;
+	top: 0px;
 
-    font-family: Public Sans;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 21px;
-    display: flex;
-    align-items: center;
-    text-align: center;
+	font-family: Public Sans;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 21px;
+	display: flex;
+	align-items: center;
+	text-align: center;
 
-    color: #FFFFFF;
-  }
+	color: #ffffff;
+}
