@@ -2,10 +2,10 @@ import './index.css';
 
 import React from 'react';
 
-const HelpBox = ({ question, answer }) => {
+const HelpBox = ({ id, question, answer }) => {
 	return (
 		<>
-			<div>
+			<div id={id}>
 				<hr />
 				<h2>{question}</h2>
 				<h2>{answer}</h2>

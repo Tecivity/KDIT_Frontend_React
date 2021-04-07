@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const SubComBox = ({ subCom }) => {
 	return (
 		<>
-			<div>
+			<div id={subCom.id}>
 				<hr />
 				<h1>{subCom.name}</h1>
 				<h2>{subCom.description}</h2>

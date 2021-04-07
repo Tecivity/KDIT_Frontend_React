@@ -8,7 +8,7 @@ const Post = ({ post }) => {
 
 	return (
 		<>
-			<div>
+			<div id={posts.id}>
 				<hr />
 				<ul>
 					<li>{post.voteUp}</li>

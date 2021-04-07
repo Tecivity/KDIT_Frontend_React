@@ -5,14 +5,17 @@ const HelpPage = () => {
 	//Data
 	const questions = [
 		{
+			id: 1,
 			question: 'Have Problem with Login?',
 			answer: 'Try Login Again',
 		},
 		{
+			id: 2,
 			question: "Didn't know where to start?",
 			answer: 'Let me be your guide',
 		},
 		{
+			id: 3,
 			question: 'How can i change my name?',
 			answer: 'Go to profile setting',
 		},
@@ -20,14 +23,17 @@ const HelpPage = () => {
 
 	const FAQ = [
 		{
+			id: 4,
 			question: 'Have Problem with Login?',
 			answer: 'Try Login Again',
 		},
 		{
+			id: 5,
 			question: "Didn't know where to start?",
 			answer: 'Let me be your guide',
 		},
 		{
+			id: 6,
 			question: 'How can i change my name?',
 			answer: 'Go to profile setting',
 		},
@@ -44,6 +50,7 @@ const HelpPage = () => {
 				{questions.map((question) => {
 					return (
 						<HelpBox
+							id={question.id}
 							question={question.question}
 							answer={question.answer}
 						/>
@@ -55,6 +62,7 @@ const HelpPage = () => {
 				{FAQ.map((question) => {
 					return (
 						<HelpBox
+							id={question.id}
 							question={question.question}
 							answer={question.answer}
 						/>
