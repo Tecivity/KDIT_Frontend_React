@@ -94,12 +94,28 @@ export default function Card() {
 		setPosts(newPosts);
 	};
 
+	const upVote = (id) => {
+		const targetPostIndex = posts.findIndex((post) => post.id === id);
+		const newPosts = [...posts];
+		newPosts[targetPostIndex].voteUp += 1;
+		setPosts(newPosts);
+	};
+
+	const downVote = (id) => {
+		const targetPostIndex = posts.findIndex((post) => post.id === id);
+		const newPosts = [...posts];
+		newPosts[targetPostIndex].voteDown += 1;
+		setPosts(newPosts);
+	};
+
 	return (
 		<div className="card">
 			<PostForm updatePost={updatePost} />
 			<div className="content">
 				{posts.map((post) => {
-					return <Post post={post} />;
+					return (
+						<Post post={post} upVote={upVote} downVote={downVote} />
+					);
 				})}
 			</div>
 		</div>

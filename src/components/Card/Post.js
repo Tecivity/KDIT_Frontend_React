@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Post = ({ post }) => {
+const Post = ({ post, upVote, downVote }) => {
 	//States
 	const [posts, setPosts] = useState(post);
 
@@ -14,6 +14,8 @@ const Post = ({ post }) => {
 					<li>{post.voteUp}</li>
 					<li>{post.voteDown}</li>
 				</ul>
+				<button onClick={() => upVote(post.id)}>Vote</button>
+				<button onClick={() => downVote(post.id)}>Devote</button>
 				<h1>{post.content}</h1>
 				<p>by {post.userid}</p>
 				<p>{post.timeStamp}</p>
