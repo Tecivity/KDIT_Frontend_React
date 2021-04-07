@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { SessionApi } from '../../hook/SessionApi';
+import { Link } from 'react-router-dom';
 
 const PostForm = ({ updatePost }) => {
 	//States
@@ -10,6 +12,9 @@ const PostForm = ({ updatePost }) => {
 		voteUp: 0,
 		voteDown: 0,
 	});
+
+	//Contexts
+	const { session } = React.useContext(SessionApi);
 
 	//Functions
 	const handleChange = (e) => {
@@ -33,18 +38,25 @@ const PostForm = ({ updatePost }) => {
 	};
 	return (
 		<>
-			<div>
-				<textarea
-					name=""
-					id=""
-					cols="30"
-					rows="10"
-					placeholder="What's going on today"
-					name="content"
-					onChange={handleChange}
-				></textarea>
-				<button onClick={handleClick}>Post</button>
-			</div>
+			{session ? (
+				<div>
+					<textarea
+						name=""
+						id=""
+						cols="30"
+						rows="10"
+						placeholder="What's going on today"
+						name="content"
+						onChange={handleChange}
+					></textarea>
+					<button onClick={handleClick}>Post</button>
+				</div>
+			) : (
+				<div>
+					<h1>Please Login to Create Post</h1>
+					<Link to="/auth">Login Here</Link>
+				</div>
+			)}
 		</>
 	);
 };

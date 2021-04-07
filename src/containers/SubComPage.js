@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navbar, SubComBox } from '../components';
+import { SessionApi } from '../hook/SessionApi';
 
 const SubComPage = () => {
 	//Datas
@@ -26,13 +27,20 @@ const SubComPage = () => {
 		},
 	];
 
+	//Contexts
+	const { session } = React.useContext(SessionApi);
+
 	return (
 		<>
 			<Navbar />
 			<div>
-				{subComDatas.map((subCom) => {
-					return <SubComBox subCom={subCom} />;
-				})}
+				{session ? (
+					subComDatas.map((subCom) => {
+						return <SubComBox subCom={subCom} />;
+					})
+				) : (
+					<h1>Please Login to Follow our Sub-Community</h1>
+				)}
 			</div>
 		</>
 	);

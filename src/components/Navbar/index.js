@@ -1,10 +1,14 @@
 import './index.css';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { SessionApi } from '../../hook/SessionApi';
 
 export default function Navbar() {
 	//States
 	const [searchText, setSearchText] = useState('');
+
+	//Context
+	const { session, handleLogout } = React.useContext(SessionApi);
 
 	//Functions
 	const handleSearch = () => {
@@ -20,6 +24,7 @@ export default function Navbar() {
 						<input
 							type="text"
 							onChange={(e) => setSearchText(e.target.value)}
+							placeholder="search something..."
 						/>
 						<button>Search</button>
 
@@ -38,6 +43,15 @@ export default function Navbar() {
 							</li>
 						</ul>
 					</div>
+					{session ? (
+						<Link to="/auth" onClick={() => handleLogout()}>
+							<button className="create-button">Logout</button>
+						</Link>
+					) : (
+						<Link to="/auth">
+							<button className="create-button">Login</button>
+						</Link>
+					)}
 				</header>
 			</div>
 		</div>

@@ -2,18 +2,18 @@ import { useContext } from 'react';
 import {
 	BrowserRouter as Router,
 	Switch,
-	Route,            
-	Redirect,                                                                                                              
+	Route,
+	Redirect,
 } from 'react-router-dom';
 
 //Import Pages
-import { 
-	AuthPage, 
-	HomePage, 
-	SubComPage , 
-	HelpPage , 
-	AboutPage , 
-	ProfilePage 
+import {
+	AuthPage,
+	HomePage,
+	SubComPage,
+	HelpPage,
+	AboutPage,
+	ProfilePage,
 } from './containers';
 
 //Import Components
@@ -34,7 +34,7 @@ function App() {
 }
 
 const Routes = () => {
-	// const Session = useContext(SessionApi)
+	const Session = useContext(SessionApi);
 	return (
 		<Switch>
 			<Route exact path="/" component={HomePage} />
@@ -42,7 +42,12 @@ const Routes = () => {
 			<Route exact path="/sub-community" component={SubComPage} />
 			<Route exact path="/help" component={HelpPage} />
 			<Route exact path="/about" component={AboutPage} />
-			<Route exact path="/Profile" component={ProfilePage} />
+			<ProtectedRoute
+				auth={Session.session}
+				exact
+				path="/Profile"
+				component={ProfilePage}
+			/>
 
 			<Redirect to="/" />
 		</Switch>

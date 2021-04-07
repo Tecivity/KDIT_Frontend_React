@@ -20,7 +20,7 @@ export default function Login({
 
 	return (
 		<>
-			<form onSubmit={submitHandler}>
+			<form onSubmit={submitHandler} class="auth">
 				<div className="form-inner">
 					<h2>{hasAccount ? 'Sign Up' : 'Login'}</h2>
 					<div className="form-group">
@@ -84,7 +84,6 @@ export default function Login({
 					</div>
 				</div>
 			</form>
-			
 		</>
 	);
 }
