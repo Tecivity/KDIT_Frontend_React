@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './index.css';
 import firebase from '../firebase';
-import { Navbar, Login } from '../components';
+import { Navbar, Login, Signup } from '../components';
 import { Redirect } from 'react-router-dom';
 import { SessionApi } from '../hook/SessionApi';
 
@@ -116,7 +116,6 @@ export default function AuthPage() {
 						emailError={emailError}
 						passwordError={passwordError}
 					/>
-					<button onClick={googleLogin}>Sign in With Google</button>
 				</div>
 			)}
 			{/* <div className="loginView">

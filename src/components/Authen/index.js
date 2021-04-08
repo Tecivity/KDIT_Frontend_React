@@ -1,5 +1,6 @@
 import React from 'react';
-import './styles.css';
+import { Signup } from '../../components';
+// import './styles.css';
 
 export default function Login({
 	email,
@@ -34,7 +35,6 @@ export default function Login({
 						/>
 						<p className="errorMsg">{emailError}</p>
 					</div>
-
 					<div className="form-group">
 						<label>Password</label>
 						<input
@@ -46,7 +46,6 @@ export default function Login({
 						/>
 						<p className="errorMsg">{passwordError}</p>
 					</div>
-
 					<div>
 						{!hasAccount ? (
 							<>
@@ -82,6 +81,8 @@ export default function Login({
 							</>
 						)}
 					</div>
+					{/* Sign in with Google */}
+					<Signup />
 				</div>
 			</form>
 		</>
