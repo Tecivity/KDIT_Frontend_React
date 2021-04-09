@@ -1,3 +1,12 @@
+@font-face {
+	font-family: Public_Sans;
+	src: url("PublicSans-VariableFont_wght.ttf");
+}
+
+ul {
+    list-style-type: none;
+}
+
 body {
 	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
@@ -14,6 +23,7 @@ body {
 	height: 45px;
 	left: 0px;
 	top: 0px;
+	z-index: 100;
 
 	background: #f48c51;
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -26,116 +36,152 @@ body {
 	height: 44px;
 	left: 66px;
 	top: 0px;
+	margin-left: auto;
+	margin-right: auto;
 
-	font-family: Public Sans;
+	font-family: Public_Sans;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 24px;
 	line-height: 28px;
 	display: flex;
+	justify-content: center;
 	align-items: center;
 	text-align: center;
 	text-decoration: none;
 
 	color: #ffffff;
+	background-color: #f48c51;
 
 	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	transition: 1s;
+	transition-timing-function: ease;
 }
 .siteName:hover {
-	color: white;
-	text-shadow: black;
-	font-size: 26px;
+	height: 55px;
 }
 
 .subcomText {
 	/*sub-com, Help, About Us*/
 	position: absolute;
-	width: 117px;
+	width: 120px;
 	height: 45px;
 	left: 62%;
 	top: 0px;
 
-	font-family: Public Sans;
+	font-family: Public_Sans;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 18px;
 	line-height: 21px;
 	display: flex;
+	justify-content: center;
 	align-items: center;
 	text-align: center;
 	text-decoration: none;
 
 	color: #ffffff;
+	background-color: #f48c51;
+
+	transition: 1s;
+	transition-timing-function: ease;
+}
+.subcomText:hover {
+	height: 55px;
 }
 
 .helpText {
 	/*sub-com, Help, About Us*/
 	position: absolute;
-	width: 117px;
+	width: 120px;
 	height: 45px;
-	left: 69%;
+	left: 68%;
 	top: 0px;
 
-	font-family: Public Sans;
+	font-family: Public_Sans;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 18px;
 	line-height: 21px;
 	display: flex;
+	justify-content: center;
 	align-items: center;
 	text-align: center;
 	text-decoration: none;
 
 	color: #ffffff;
+	background-color: #f48c51;
+
+	transition: 1s;
+	transition-timing-function: ease;
+}
+.helpText:hover {
+	height: 55px;
 }
 
 .aboutText {
 	/*sub-com, Help, About Us*/
 	position: absolute;
-	width: 117px;
+	width: 120px;
 	height: 45px;
 	left: 74%;
 	top: 0px;
 
-	font-family: Public Sans;
+	font-family: Public_Sans;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 18px;
 	line-height: 21px;
 	display: flex;
+	justify-content: center;
 	align-items: center;
 	text-align: center;
 	text-decoration: none;
 
 	color: #ffffff;
+	background-color: #f48c51;
+
+	transition: 1s;
+	transition-timing-function: ease;
+}
+.aboutText:hover {
+	height: 55px;
 }
 
 .profileText {
 	/*sub-com, Help, About Us*/
 	position: absolute;
-	width: 117px;
+	width: 120px;
 	height: 45px;
-	left: 81%;
+	left: 80%;
 	top: 0px;
 
-	font-family: Public Sans;
+	font-family: Public_Sans;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 18px;
 	line-height: 21px;
 	display: flex;
+	justify-content: center;
 	align-items: center;
 	text-align: center;
 	text-decoration: none;
 
 	color: #ffffff;
+	background-color: #f48c51;
+
+	transition: 1s;
+	transition-timing-function: ease;
+}
+.profileText:hover {
+	height: 55px;
 }
 
 .searchBar {
 	position: absolute;
 	width: 50%;
 	height: 27px;
-	left: 181px;
+	left: 200px;
 	top: 7px;
 
 	background: #E9E5E5;
@@ -153,9 +199,10 @@ body {
 	background: conic-gradient(from 180deg at 50% 50%, #FA00FF 0deg, #8B16FF 58.12deg, #2400FF 120deg, #00E0FF 180deg, #00FF29 245.62deg, #FFC42B 298.12deg, #FF005C 360deg);
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	border-radius: 10px;
+	transition: 1s;
 }
 .testLogo:hover {
-	background: conic-gradient(from 200deg at 50% 50%, #FA00FF 0deg, #8B16FF 58.12deg, #2400FF 120deg, #00E0FF 180deg, #00FF29 245.62deg, #FFC42B 298.12deg, #FF005C 360deg);
+	transform: rotate(90deg);
 }
 
 .searchIcon {
@@ -168,4 +215,27 @@ body {
 	color: black;
 
 	background: url(https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Vector_search_icon.svg/1200px-Vector_search_icon.svg.png);
+}
+
+.create-button {
+	/*sub-com, Help, About Us*/
+	position: absolute;
+	width: 120px;
+	height: 45px;
+	right: 0%;
+	top: 0px;
+
+	font-family: Public_Sans;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 21px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	text-decoration: none;
+
+	color: #ffffff;
+	background-color: #ffaa79;
 }
