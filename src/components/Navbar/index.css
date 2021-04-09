@@ -24,7 +24,7 @@ body {
 	position: absolute;
 	width: 131px;
 	height: 44px;
-	left: 50px;
+	left: 66px;
 	top: 0px;
 
 	font-family: Public Sans;
@@ -41,13 +41,18 @@ body {
 
 	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
+.siteName:hover {
+	color: white;
+	text-shadow: black;
+	font-size: 26px;
+}
 
 .subcomText {
 	/*sub-com, Help, About Us*/
 	position: absolute;
 	width: 117px;
 	height: 45px;
-	left: 1138px;
+	left: 62%;
 	top: 0px;
 
 	font-family: Public Sans;
@@ -68,7 +73,7 @@ body {
 	position: absolute;
 	width: 117px;
 	height: 45px;
-	left: 1255px;
+	left: 69%;
 	top: 0px;
 
 	font-family: Public Sans;
@@ -89,7 +94,7 @@ body {
 	position: absolute;
 	width: 117px;
 	height: 45px;
-	left: 1372px;
+	left: 74%;
 	top: 0px;
 
 	font-family: Public Sans;
@@ -110,7 +115,7 @@ body {
 	position: absolute;
 	width: 117px;
 	height: 45px;
-	left: 1489px;
+	left: 81%;
 	top: 0px;
 
 	font-family: Public Sans;
@@ -149,13 +154,16 @@ body {
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	border-radius: 10px;
 }
+.testLogo:hover {
+	background: conic-gradient(from 200deg at 50% 50%, #FA00FF 0deg, #8B16FF 58.12deg, #2400FF 120deg, #00E0FF 180deg, #00FF29 245.62deg, #FFC42B 298.12deg, #FF005C 360deg);
+}
 
 .searchIcon {
 	/* image 2 */
 	position: absolute;
 	width: 19px;
 	height: 19px;
-	left: 1014px;
+	left: 57%;
 	top: 13px;
 	color: black;
 

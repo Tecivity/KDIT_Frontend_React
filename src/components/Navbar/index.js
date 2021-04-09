@@ -20,7 +20,7 @@ export default function Navbar() {
 			<div className="content">
 				<header>
 					<div>
-						<div className="testLogo"><a href="/"></a></div>
+						<div className="testLogo"></div>
 						<Link to="/" className="siteName">K | Keddit</Link>
 						<input
 							type="text"
