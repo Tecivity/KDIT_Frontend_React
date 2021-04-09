@@ -1,15 +1,15 @@
 .side-navbar {
 	height: 100%; /* Full-height: remove this if you want "auto" height */
-	width: 20rem; /* Set the width of the sidebar */
+	width: 350px; /* Set the width of the sidebar */
 	position: fixed; /* Fixed Sidebar (stay in place on scroll) */
 	z-index: 1; /* Stay on top */
-	top: 0; /* Stay at the top */
-	right: 0;
+	top: 85px; /* Stay at the top */
+	right: 5%;
 	overflow-x: hidden; /* Disable horizontal scroll */
 	padding-top: 20px;
 	/*background: #F48C51;*/
 	
 
-	/*background: #C4C4C4;*/
+	background: #C4C4C4;
 	border-radius: 10px;
 }
