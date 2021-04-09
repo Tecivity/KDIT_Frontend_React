@@ -7,4 +7,9 @@
 	right: 0;
 	overflow-x: hidden; /* Disable horizontal scroll */
 	padding-top: 20px;
+	/*background: #F48C51;*/
+	
+
+	/*background: #C4C4C4;*/
+	border-radius: 10px;
 }

@@ -7,10 +7,10 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-#navbox {
+.navbar {
 	/* Orange Bar */
-	position: absolute;
-	width: 1600px;
+	position: fixed;
+	width: 100%;
 	height: 45px;
 	left: 0px;
 	top: 0px;
@@ -19,7 +19,7 @@ body {
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-#siteName {
+.siteName {
 	/*K | K-Dit*/
 	position: absolute;
 	width: 131px;
@@ -35,13 +35,56 @@ body {
 	display: flex;
 	align-items: center;
 	text-align: center;
+	text-decoration: none;
 
 	color: #ffffff;
 
 	text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-#menuText {
+.subcomText {
+	/*sub-com, Help, About Us*/
+	position: absolute;
+	width: 117px;
+	height: 45px;
+	left: 1138px;
+	top: 0px;
+
+	font-family: Public Sans;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 21px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	text-decoration: none;
+
+	color: #ffffff;
+}
+
+.helpText {
+	/*sub-com, Help, About Us*/
+	position: absolute;
+	width: 117px;
+	height: 45px;
+	left: 1255px;
+	top: 0px;
+
+	font-family: Public Sans;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 21px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	text-decoration: none;
+
+	color: #ffffff;
+}
+
+.aboutText {
 	/*sub-com, Help, About Us*/
 	position: absolute;
 	width: 117px;
@@ -57,6 +100,64 @@ body {
 	display: flex;
 	align-items: center;
 	text-align: center;
+	text-decoration: none;
 
 	color: #ffffff;
+}
+
+.profileText {
+	/*sub-com, Help, About Us*/
+	position: absolute;
+	width: 117px;
+	height: 45px;
+	left: 1489px;
+	top: 0px;
+
+	font-family: Public Sans;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 21px;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	text-decoration: none;
+
+	color: #ffffff;
+}
+
+.searchBar {
+	position: absolute;
+	width: 50%;
+	height: 27px;
+	left: 181px;
+	top: 7px;
+
+	background: #E9E5E5;
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.testLogo{
+	/* Logo */
+	position: absolute;
+	width: 30px;
+	height: 30px;
+	left: 16px;
+	top: 7px;
+
+	background: conic-gradient(from 180deg at 50% 50%, #FA00FF 0deg, #8B16FF 58.12deg, #2400FF 120deg, #00E0FF 180deg, #00FF29 245.62deg, #FFC42B 298.12deg, #FF005C 360deg);
+	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 10px;
+}
+
+.searchIcon {
+	/* image 2 */
+	position: absolute;
+	width: 19px;
+	height: 19px;
+	left: 1014px;
+	top: 13px;
+	color: black;
+
+	background: url(https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Vector_search_icon.svg/1200px-Vector_search_icon.svg.png);
 }

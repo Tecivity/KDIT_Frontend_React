@@ -20,26 +20,28 @@ export default function Navbar() {
 			<div className="content">
 				<header>
 					<div>
-						<Link to="/">Home</Link>
+						<div className="testLogo"><a href="/"></a></div>
+						<Link to="/" className="siteName">K | Keddit</Link>
 						<input
 							type="text"
+							className="searchBar"
 							onChange={(e) => setSearchText(e.target.value)}
-							placeholder="search something..."
+							placeholder=" Try, รีวิววิชาเลือก"
 						/>
-						<button>Search</button>
+						<button className="searchIcon">Search</button>
 
 						<ul>
 							<li>
-								<Link to="/sub-community">Sub Community</Link>
+								<Link to="/sub-community" className="subcomText">Sub-Com</Link>
 							</li>
 							<li>
-								<Link to="/help">Help</Link>
+								<Link to="/help" className="helpText">Help</Link>
 							</li>
 							<li>
-								<Link to="/about">About Us</Link>
+								<Link to="/about" className="aboutText">About Us</Link>
 							</li>
 							<li>
-								<Link to="/profile">Profile</Link>
+								<Link to="/profile" className="profileText">Profile</Link>
 							</li>
 						</ul>
 					</div>
