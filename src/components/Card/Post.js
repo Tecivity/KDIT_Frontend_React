@@ -8,18 +8,20 @@ const Post = ({ post, upVote, downVote }) => {
 
 	return (
 		<>
-			<div id={posts.id}>
-				<hr />
-				<ul>
-					<li>{post.voteUp}</li>
-					<li>{post.voteDown}</li>
+			<div id={posts.id} className="postPane">
+				
+				<ul className="votePane">
+					<li className="voteNum">{post.voteUp}<button onClick={() => upVote(post.id)} className="voteBT">⬆</button></li>
+					
+					<li className="voteNum">{post.voteDown}<button onClick={() => downVote(post.id)} className="voteBT">⬇</button></li>
+					
 				</ul>
-				<button onClick={() => upVote(post.id)}>Vote</button>
-				<button onClick={() => downVote(post.id)}>Devote</button>
+				
+				
 				<h1>{post.content}</h1>
 				<p>by {post.userid}</p>
 				<p>{post.timeStamp}</p>
-				<hr />
+				
 			</div>
 		</>
 	);

@@ -59,6 +59,7 @@ body {
 }
 .siteName:hover {
 	height: 55px;
+	background-color: #f16d20;
 }
 
 .subcomText {
@@ -66,7 +67,7 @@ body {
 	position: absolute;
 	width: 120px;
 	height: 45px;
-	left: 62%;
+	right: 28%;
 	top: 0px;
 
 	font-family: Public_Sans;
@@ -88,6 +89,7 @@ body {
 }
 .subcomText:hover {
 	height: 55px;
+	background-color: #f16d20;
 }
 
 .helpText {
@@ -95,7 +97,7 @@ body {
 	position: absolute;
 	width: 120px;
 	height: 45px;
-	left: 68%;
+	right: 21%;
 	top: 0px;
 
 	font-family: Public_Sans;
@@ -117,6 +119,7 @@ body {
 }
 .helpText:hover {
 	height: 55px;
+	background-color: #f16d20;
 }
 
 .aboutText {
@@ -124,7 +127,7 @@ body {
 	position: absolute;
 	width: 120px;
 	height: 45px;
-	left: 74%;
+	right: 14%;
 	top: 0px;
 
 	font-family: Public_Sans;
@@ -146,6 +149,7 @@ body {
 }
 .aboutText:hover {
 	height: 55px;
+	background-color: #f16d20;
 }
 
 .profileText {
@@ -153,7 +157,7 @@ body {
 	position: absolute;
 	width: 120px;
 	height: 45px;
-	left: 80%;
+	right: 7%;
 	top: 0px;
 
 	font-family: Public_Sans;
@@ -175,6 +179,7 @@ body {
 }
 .profileText:hover {
 	height: 55px;
+	background-color: #f16d20;
 }
 
 .searchBar {
@@ -239,4 +244,8 @@ body {
 
 	color: #ffffff;
 	background-color: #ffaa79;
+	transition: 500ms;
+}
+.create-button:hover {
+	background-color: #4cc216;
 }

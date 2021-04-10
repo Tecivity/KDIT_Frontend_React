@@ -1,9 +1,22 @@
+@font-face {
+	font-family: DM Sans;
+	src: url("DMSans-Regular.ttf");
+}
+
+h1.loginWarn {
+    color: grey;
+    align-content: center;
+    text-align: center;
+    justify-content: center;
+}
+
 .card {
     position: absolute;
     width: 60%;
     left: 8%;
-    top: 153px;
+    top: 85px;
     z-index: 20;
+    font-family: DM Sans;
 
     background: #FFFFFF;
     box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
@@ -16,4 +29,56 @@
     font-weight: 500;
     font-size: 20px;
     line-height: 26px;
+}
+
+.voteBT {
+    font-weight: 900;
+    font-size: 20px;
+    border: transparent;
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    margin-left: 4px;
+    margin-right: 4px;
+    background-color: aquamarine;
+    transition: 500ms;
+}
+.voteBT:hover {
+    background-color: rgb(85, 219, 174);
+}
+
+.voteNum {
+    font-family: DM Sans;
+    font-style: normal;
+    font-size: 20px;
+    font-weight: bold;
+    color: gray;
+    margin-right: 5px;
+    transition: 1500ms;
+}
+.voteNum:active {
+    color: green;
+}
+
+.votePane {
+    background: #F0BFA3;
+    border-radius: 10px;
+}
+
+.postPane {
+    background: #E8E8E8;
+    border-radius: 10px;
+}
+
+.loginPost {
+    font-family: DM Sans;
+    font-size: 15px;
+    text-decoration: none;
+    transition: 500ms;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+}
+.loginPost:hover {
+    background-color: green;
 }

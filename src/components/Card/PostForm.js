@@ -53,8 +53,8 @@ const PostForm = ({ updatePost }) => {
 				</div>
 			) : (
 				<div>
-					<h1>Please Login to Create Post</h1>
-					<Link to="/auth">Login Here</Link>
+					<h1 class="loginWarn">Please Login to Create Post</h1>
+					<Link to="/auth" className="loginPost">Login Here</Link>
 				</div>
 			)}
 		</>
