@@ -5,8 +5,8 @@ const AboutPage = () => {
 	return (
 		<>
 			<Navbar />
-			<div>
-				<h1>Connect NSIT together</h1>
+			<div className="centerDiv">
+				<h1 class="head">Connect </h1><h1 class="orangeHead">NISIT</h1><h1 class="Head"> together</h1>
 				<h3>
 					Keddit is a home to many communities in KMITL, endless
 					conversation and authenic human connection.

@@ -6,6 +6,17 @@
     font-family: DM Sans;
 }
 
+h1.head {
+    font-size: 30px;
+    color: rgb(26, 26, 26);
+    display: inline;
+}
+h1.orangeHead {
+    font-size: 30px;
+    color: #f48c51;
+    display: inline;
+}
+
 .mainView {
     display: flex;
 }
@@ -102,4 +113,12 @@
 
 .Input__field:focus{
     outline: none;
+}
+
+.centerDiv {
+    top: 20%;
+    align-content: center;
+    text-align: center;
+    justify-content: center;
+    margin-top: 20%;
 }
