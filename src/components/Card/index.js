@@ -104,7 +104,7 @@ export default function Card() {
 	const downVote = (id) => {
 		const targetPostIndex = posts.findIndex((post) => post.id === id);
 		const newPosts = [...posts];
-		newPosts[targetPostIndex].voteDown += 1;
+		newPosts[targetPostIndex].voteUp -= 1;
 		setPosts(newPosts);
 	};
 

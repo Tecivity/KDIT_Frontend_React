@@ -6,7 +6,8 @@ body {
 		'Helvetica Neue', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	background: #F0F0F0;
+	/* background: #F0F0F0; */
+	background: white;
 }
 
 code {
@@ -17,19 +18,19 @@ code {
 /* width */
 ::-webkit-scrollbar {
 	width: 10px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-	background: rgb(180, 180, 180); 
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-	background: #888; 
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-	background: #f48c51; 
-  }
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: rgb(180, 180, 180);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #f48c51;
+}

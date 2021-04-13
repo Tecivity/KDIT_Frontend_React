@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { SessionApi } from '../../hook/SessionApi';
 import { Link } from 'react-router-dom';
+import profilePic from '../../components/Test.jpg';
 
 const PostForm = ({ updatePost }) => {
 	//States
@@ -33,28 +34,49 @@ const PostForm = ({ updatePost }) => {
 				id: new Date().getTime().toString(),
 			};
 			updatePost(newPost);
-			console.log(newPost);
+			console.log(e.target.value);
+			e.target.value = '';
 		}
 	};
 	return (
 		<>
 			{session ? (
-				<div>
-					<textarea
-						name=""
-						id=""
-						cols="30"
-						rows="10"
-						placeholder="What's going on today"
-						name="content"
-						onChange={handleChange}
-					></textarea>
-					<button onClick={handleClick}>Post</button>
+				<div className="postFormBox">
+					<div>
+						<img
+							src={profilePic}
+							alt="profile picture"
+							className="profilePic"
+						/>
+					</div>
+					<div className="postForm">
+						<div className="postText">
+							<textarea
+								name=""
+								id=""
+								cols="30"
+								rows="5"
+								placeholder="What's going on today"
+								name="content"
+								onChange={handleChange}
+							></textarea>
+							<div className="postOption">
+								<button>Upload Picture/Video</button>
+								<button>Event</button>
+								<button>Reviews</button>
+								<button
+									onClick={handleClick}
+									className="postBT"
+								>
+									Post
+								</button>
+							</div>
+						</div>
+					</div>
 				</div>
 			) : (
 				<div>
 					<h1 class="loginWarn">Please Login to Create Post</h1>
-					<Link to="/auth" className="loginPost">Login Here</Link>
 				</div>
 			)}
 		</>

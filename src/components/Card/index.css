@@ -1,84 +1,205 @@
 @font-face {
 	font-family: DM Sans;
-	src: url("DMSans-Regular.ttf");
+	src: url('DMSans-Regular.ttf');
 }
 
 h1.loginWarn {
-    color: grey;
-    align-content: center;
-    text-align: center;
-    justify-content: center;
+	color: grey;
+	align-content: center;
+	text-align: center;
+	justify-content: center;
 }
 
 .card {
-    position: absolute;
-    width: 60%;
-    left: 8%;
-    top: 85px;
-    z-index: 20;
-    font-family: DM Sans;
+	position: absolute;
+	width: 60%;
+	left: 8%;
+	top: 85px;
+	z-index: 20;
+	font-family: DM Sans;
 
-    background: #FFFFFF;
-    box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
+	background: #ffffff;
+	border: 1px solid lightgrey;
+	/* box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25); */
+	border-radius: 20px;
 }
 
 .content {
-    font-family: DM Sans;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 26px;
+	font-family: DM Sans;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 26px;
 }
 
-.voteBT {
-    font-weight: 900;
-    font-size: 20px;
-    border: transparent;
-    width: 30px;
-    height: 30px;
-    border-radius: 4px;
-    margin-left: 4px;
-    margin-right: 4px;
-    background-color: aquamarine;
-    transition: 500ms;
-}
-.voteBT:hover {
-    background-color: rgb(85, 219, 174);
+.voteUpBT {
+	font-weight: 900;
+	font-size: 20px;
+	border: transparent;
+	width: 30px;
+	height: 30px;
+	border-radius: 4px;
+	margin-left: 4px;
+	margin-right: 4px;
+
+	transition: 500ms;
 }
 
-.voteNum {
-    font-family: DM Sans;
-    font-style: normal;
-    font-size: 20px;
-    font-weight: bold;
-    color: gray;
-    margin-right: 5px;
-    transition: 1500ms;
+.voteUpBT:focus {
+	background-color: lightgreen;
+}
+.voteUpBT:hover {
+	background-color: rgb(85, 219, 174);
+}
+
+.voteDownBT {
+	font-weight: 900;
+	font-size: 20px;
+	border: transparent;
+	width: 30px;
+	height: 30px;
+	border-radius: 4px;
+	margin-left: 4px;
+	margin-right: 4px;
+
+	transition: 500ms;
+}
+
+.voteDownBT:focus {
+	background-color: red;
+}
+.voteDownBT:hover {
+	background-color: rgb(219, 85, 107);
+}
+
+/* .voteNum {
+	font-family: DM Sans;
+	font-style: normal;
+	font-size: 20px;
+	font-weight: bold;
+	color: gray;
+	margin-right: 5px;
+	transition: 1500ms;
 }
 .voteNum:active {
-    color: green;
-}
+	color: green;
+} */
 
 .votePane {
-    background: #F0BFA3;
-    border-radius: 10px;
+	background: #f0bfa3;
+	border-radius: 0;
+	margin: 0;
+	padding: 0;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 .postPane {
-    background: #E8E8E8;
-    border-radius: 10px;
+	/* background: #e8e8e8; */
+	/* border-radius: 10px; */
+
+	display: flex;
+	flex-direction: column-reverse;
+	margin: 0;
+
+	border: solid lightgrey;
+	border-width: 1px 0;
 }
 
 .loginPost {
-    font-family: DM Sans;
-    font-size: 15px;
-    text-decoration: none;
-    transition: 500ms;
-    text-align: center;
-    align-content: center;
-    justify-content: center;
+	font-family: DM Sans;
+	font-size: 15px;
+	text-decoration: none;
+	transition: 500ms;
+	text-align: center;
+	align-content: center;
+	justify-content: center;
 }
 .loginPost:hover {
-    background-color: green;
+	background-color: green;
+}
+
+.post {
+	display: flex;
+	flex-direction: row;
+	font-size: 1rem;
+}
+
+.postBy {
+	display: flex;
+	flex-direction: row;
+}
+.postBy p {
+	margin: 0;
+	margin-right: 5px;
+}
+
+.postBy .displayName {
+	font-size: 1.2rem;
+	font-weight: 700;
+}
+
+.postBy .timestamp {
+	color: gray;
+}
+
+.infoPane {
+	background: #f0bfa3;
+	border-radius: 0;
+	margin: 0;
+	padding: 5px;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.infoPane p {
+	margin: 0;
+}
+
+.profilePic {
+	object-fit: cover;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+
+	margin: 0.5rem;
+}
+
+.postText textarea {
+	width: 100%;
+	margin: 0.2rem;
+	resize: none;
+	font-size: 1.5rem;
+
+	border: none;
+	outline: none;
+}
+
+.postForm {
+	width: 100%;
+	margin: 1rem 1rem;
+}
+
+.postFormBox {
+	display: flex;
+	flex-direction: row;
+	margin: 0rem;
+	margin-bottom: 2rem;
+	padding-bottom: 0.5rem;
+	border-bottom: 1px solid lightgrey;
+}
+
+.postOption {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+}
+
+.postBT {
+	justify-self: flex-end;
 }

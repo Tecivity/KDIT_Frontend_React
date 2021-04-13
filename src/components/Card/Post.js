@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import profilePic from '../../components/Test.jpg';
 
 const Post = ({ post, upVote, downVote }) => {
 	//States
@@ -9,19 +10,48 @@ const Post = ({ post, upVote, downVote }) => {
 	return (
 		<>
 			<div id={posts.id} className="postPane">
-				
-				<ul className="votePane">
-					<li className="voteNum">{post.voteUp}<button onClick={() => upVote(post.id)} className="voteBT">⬆</button></li>
-					
-					<li className="voteNum">{post.voteDown}<button onClick={() => downVote(post.id)} className="voteBT">⬇</button></li>
-					
-				</ul>
-				
-				
-				<h1>{post.content}</h1>
-				<p>by {post.userid}</p>
-				<p>{post.timeStamp}</p>
-				
+				<div className="infoPane">
+					<div className="votePane">
+						<button
+							onClick={() => upVote(post.id)}
+							className="voteUpBT"
+						>
+							⬆
+						</button>
+
+						{post.voteUp}
+
+						<button
+							onClick={() => downVote(post.id)}
+							className="voteDownBT"
+						>
+							⬇
+						</button>
+					</div>
+					<p>Comments</p>
+					<p>Re-post</p>
+				</div>
+
+				<div>
+					<div className="post">
+						<div>
+							<img
+								src={profilePic}
+								alt="profile picture"
+								className="profilePic"
+							/>
+						</div>
+
+						<div className="postInfo">
+							<div className="postBy">
+								<p className="displayName">Display Name</p>
+								<p className="username">@{post.userid}</p>
+								<p className="timestamp"> - {post.timeStamp}</p>
+							</div>
+							<h1>{post.content}</h1>
+						</div>
+					</div>
+				</div>
 			</div>
 		</>
 	);
