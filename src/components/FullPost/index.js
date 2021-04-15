@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import profilePic from '../../components/Test.jpg';
+import profilePic from '../../assets/Test.jpg';
 import './index.css';
 
 const FullPost = ({ post, upVote, downVote }) => {

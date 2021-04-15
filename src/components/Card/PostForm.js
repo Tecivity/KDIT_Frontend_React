@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { SessionApi } from '../../hook/SessionApi';
 import { Link } from 'react-router-dom';
-import profilePic from '../../components/Test.jpg';
+import profilePic from '../../assets/Test.jpg';
 
 const PostForm = ({ updatePost }) => {
 	//States

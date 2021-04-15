@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Redirect, Link } from 'react-router-dom';
-import profilePic from '../../components/Test.jpg';
+import profilePic from '../../assets/Test.jpg';
 
 const Post = ({ post, upVote, downVote }) => {
 	//States
