@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { Redirect, Link } from 'react-router-dom';
 import profilePic from '../../components/Test.jpg';
 
 const Post = ({ post, upVote, downVote }) => {
@@ -6,10 +7,19 @@ const Post = ({ post, upVote, downVote }) => {
 	const [posts, setPosts] = useState(post);
 
 	//Function
+	const handlePostClick = () => {
+		console.log('post clicked');
+	};
 
 	return (
-		<>
-			<div id={posts.id} className="postPane">
+		<Link
+			to={{
+				pathname: `/post/${posts.id}`,
+				state: posts,
+			}}
+			style={{ textDecoration: 'none' }}
+		>
+			<div id={posts.id} className="postPane" onClick={handlePostClick}>
 				<div className="infoPane">
 					<div className="votePane">
 						<button
@@ -48,12 +58,14 @@ const Post = ({ post, upVote, downVote }) => {
 								<p className="username">@{post.userid}</p>
 								<p className="timestamp"> - {post.timeStamp}</p>
 							</div>
-							<h1>{post.content}</h1>
+							<div className="postContent">
+								<p>{post.content}</p>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</>
+		</Link>
 	);
 };
 

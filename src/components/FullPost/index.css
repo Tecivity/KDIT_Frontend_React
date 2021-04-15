@@ -1,8 +1,3 @@
-@font-face {
-	font-family: DM Sans;
-	src: url('DMSans-Regular.ttf');
-}
-
 * {
 	color: black;
 }
@@ -14,20 +9,6 @@ h1.loginWarn {
 	justify-content: center;
 }
 
-.card {
-	position: absolute;
-	width: 60%;
-	left: 8%;
-	top: 85px;
-	z-index: 20;
-	font-family: DM Sans;
-
-	background: #ffffff;
-	border: 1px solid lightgrey;
-	/* box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25); */
-	border-radius: 20px;
-}
-
 .content {
 	font-family: DM Sans;
 	font-style: normal;
@@ -36,7 +17,22 @@ h1.loginWarn {
 	line-height: 26px;
 }
 
-.voteUpBT {
+.fullPane {
+	position: absolute;
+	width: 60%;
+	left: 8%;
+	top: 85px;
+	z-index: 20;
+	font-family: DM Sans;
+	padding: 0.5rem 0;
+
+	background: #ffffff;
+	border: 1px solid lightgrey;
+	/* box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25); */
+	border-radius: 20px;
+}
+
+.full-voteUpBT {
 	font-weight: 900;
 	font-size: 20px;
 	border: transparent;
@@ -49,14 +45,14 @@ h1.loginWarn {
 	transition: 500ms;
 }
 
-.voteUpBT:focus {
+.full-voteUpBT:focus {
 	background-color: lightgreen;
 }
-.voteUpBT:hover {
+.full-voteUpBT:hover {
 	background-color: rgb(85, 219, 174);
 }
 
-.voteDownBT {
+.full-voteDownBT {
 	font-weight: 900;
 	font-size: 20px;
 	border: transparent;
@@ -69,10 +65,10 @@ h1.loginWarn {
 	transition: 500ms;
 }
 
-.voteDownBT:focus {
+.full-voteDownBT:focus {
 	background-color: red;
 }
-.voteDownBT:hover {
+.full-voteDownBT:hover {
 	background-color: rgb(219, 85, 107);
 }
 
@@ -89,8 +85,8 @@ h1.loginWarn {
 	color: green;
 } */
 
-.votePane {
-	background: white;
+.full-votePane {
+	background: #f0bfa3;
 	border-radius: 0;
 	margin: 0;
 	padding: 0;
@@ -100,28 +96,20 @@ h1.loginWarn {
 	align-items: center;
 }
 
-.postPane {
+.full-postPane {
 	/* background: #e8e8e8; */
 	/* border-radius: 10px; */
 
 	display: flex;
 	flex-direction: column-reverse;
 	margin: 0;
-	padding-top: 1rem;
-
-	border: solid lightgrey;
-	border-width: 1px 0;
 
 	color: black;
 
 	transition: 500ms;
 }
 
-.postPane:hover {
-	background: rgb(226, 226, 226);
-}
-
-.postPane:hover .infoPane {
+.full-postPane:hover {
 	background: rgb(226, 226, 226);
 }
 
@@ -138,37 +126,32 @@ h1.loginWarn {
 	background-color: green;
 }
 
-.post {
+.full-post {
 	display: flex;
 	flex-direction: row;
 	font-size: 1rem;
 }
 
-.postBy {
+.full-postBy {
 	display: flex;
 	flex-direction: row;
 }
-.postBy p {
+.full-postBy p {
 	margin: 0;
 	margin-right: 5px;
 }
 
-.postBy .displayName {
-	font-size: 1rem;
+.full-postBy .full-displayName {
+	font-size: 1.2rem;
 	font-weight: 700;
 }
 
-.postBy .timestamp {
+.full-postBy .full-timestamp {
 	color: gray;
 }
 
-.postContent {
-	font-size: 1.2rem;
-	font-weight: 500;
-}
-
-.infoPane {
-	background: white;
+.full-infoPane {
+	background: #f0bfa3;
 	border-radius: 0;
 	margin: 0;
 	padding: 5px;
@@ -176,39 +159,37 @@ h1.loginWarn {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
-
-	transition: 500ms;
 }
 
-.infoPane p {
+.full-infoPane p {
 	margin: 0;
 }
 
-.profilePic {
+.full-profilePic {
 	object-fit: cover;
-	width: 50px;
-	height: 50px;
+	width: 80px;
+	height: 80px;
 	border-radius: 50%;
 
 	margin: 0.5rem;
 }
 
-.postText textarea {
+.full-postText textarea {
 	width: 100%;
 	margin: 0.2rem;
 	resize: none;
-	font-size: 1rem;
+	font-size: 1.5rem;
 
 	border: none;
 	outline: none;
 }
 
-.postForm {
+.full-postForm {
 	width: 100%;
 	margin: 1rem 1rem;
 }
 
-.postFormBox {
+.full-postFormBox {
 	display: flex;
 	flex-direction: row;
 	margin: 0rem;
@@ -217,13 +198,13 @@ h1.loginWarn {
 	border-bottom: 1px solid lightgrey;
 }
 
-.postOption {
+.full-postOption {
 	width: 100%;
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
 }
 
-.postBT {
+.full-postBT {
 	justify-self: flex-end;
 }

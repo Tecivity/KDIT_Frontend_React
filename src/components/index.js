@@ -6,6 +6,7 @@ import HelpBox from './HelpBox';
 import ProfileNavbar from './ProfileNavbar';
 import SubComBox from './SubComBox';
 import Signup from './FirebaseUI/Signup';
+import FullPost from './FullPost/index';
 
 export {
 	Navbar,
@@ -16,4 +17,5 @@ export {
 	ProfileNavbar,
 	SubComBox,
 	Signup,
+	FullPost,
 };

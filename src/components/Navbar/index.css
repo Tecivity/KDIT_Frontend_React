@@ -1,10 +1,10 @@
 @font-face {
 	font-family: Public_Sans;
-	src: url("PublicSans-VariableFont_wght.ttf");
+	src: url('PublicSans-VariableFont_wght.ttf');
 }
 
 ul {
-    list-style-type: none;
+	list-style-type: none;
 }
 
 body {
@@ -26,7 +26,7 @@ body {
 	z-index: 100;
 
 	background: #f48c51;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	/* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
 }
 
 .siteName {
@@ -188,12 +188,16 @@ body {
 	height: 27px;
 	left: 200px;
 	top: 7px;
+	padding-left: 10px;
 
-	background: #E9E5E5;
-	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+	background: white;
+	outline: none;
+	border: none;
+	border-radius: 10px;
+	/* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
 }
 
-.testLogo{
+.testLogo {
 	/* Logo */
 	position: absolute;
 	width: 30px;
@@ -201,7 +205,16 @@ body {
 	left: 16px;
 	top: 7px;
 
-	background: conic-gradient(from 180deg at 50% 50%, #FA00FF 0deg, #8B16FF 58.12deg, #2400FF 120deg, #00E0FF 180deg, #00FF29 245.62deg, #FFC42B 298.12deg, #FF005C 360deg);
+	background: conic-gradient(
+		from 180deg at 50% 50%,
+		#fa00ff 0deg,
+		#8b16ff 58.12deg,
+		#2400ff 120deg,
+		#00e0ff 180deg,
+		#00ff29 245.62deg,
+		#ffc42b 298.12deg,
+		#ff005c 360deg
+	);
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 	border-radius: 10px;
 	transition: 1s;
