@@ -14,7 +14,21 @@ code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 		monospace;
 }
-
+/* dark mode goes here 
+@media (prefers-color-scheme: light) {
+	body, h1, h2, h3 {
+	  background-color: white;
+	  color: black;
+	}
+  }
+@media (prefers-color-scheme: dark) {
+	body, h1, h2, h3 {
+	  background-color: black;
+	  color: white;
+	}
+}
+/**/
+/*scroll bar*/
 /* width */
 ::-webkit-scrollbar {
 	width: 10px;
