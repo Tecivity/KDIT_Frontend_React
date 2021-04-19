@@ -42,10 +42,10 @@ const HelpPage = () => {
 	return (
 		<>
 			<Navbar />
-			<div>
-				<h1>Need Help?</h1>
+			<div class="topHelpBox">
+				<h1 class="helpHead">Need Help?</h1>
 			</div>
-			<div>
+			<div class="helpBox">
 				<h2>How can we help?</h2>
 				{questions.map((question) => {
 					return (

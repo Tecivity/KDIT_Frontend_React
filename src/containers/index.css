@@ -16,6 +16,10 @@ h1.orangeHead {
 	color: #f48c51;
 	display: inline;
 }
+h1.helpHead {
+	text-align: center;
+	font-size: 35px;
+}
 
 .mainView {
 	display: flex;
@@ -122,4 +126,20 @@ h1.orangeHead {
 	text-align: center;
 	justify-content: center;
 	margin-top: 20%;
+}
+
+.topHelpBox {
+	margin-top: 70px;
+}
+
+.helpBox {
+	width: 80%;
+	margin-left: 10%;
+	background-color: white;
+}
+
+.subcomPane {
+	margin-top: 60px;
+	width: 80%;
+	margin-left: 10%;
 }
