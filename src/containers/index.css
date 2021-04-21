@@ -123,3 +123,8 @@ h1.orangeHead {
 	justify-content: center;
 	margin-top: 20%;
 }
+
+.homepage {
+	display: flex;
+	flex-direction: row;
+}

@@ -17,58 +17,44 @@ export default function Navbar() {
 
 	return (
 		<div className="navbar">
-			<div className="content">
-				<header>
-					<div>
-						<div className="testLogo"></div>
-						<Link to="/" className="siteName">
-							K | Keddit
-						</Link>
-						<input
-							type="text"
-							className="searchBar"
-							onChange={(e) => setSearchText(e.target.value)}
-							placeholder="Search Something..."
-						/>
-						<button className="searchIcon">Search</button>
+			<div className="menu">
+				<div className="testLogo"></div>
+				<Link to="/" className="siteName">
+					K | Keddit
+				</Link>
+				<input
+					type="text"
+					className="searchBar"
+					onChange={(e) => setSearchText(e.target.value)}
+					placeholder="Search Something..."
+				/>
+				<button className="searchIcon">Search</button>
 
-						<ul>
-							<li>
-								<Link
-									to="/sub-community"
-									className="subcomText"
-								>
-									Sub-Com
-								</Link>
-							</li>
-							<li>
-								<Link to="/help" className="helpText">
-									Help
-								</Link>
-							</li>
-							<li>
-								<Link to="/about" className="aboutText">
-									About Us
-								</Link>
-							</li>
-							<li>
-								<Link to="/profile" className="profileText">
-									Profile
-								</Link>
-							</li>
-						</ul>
-					</div>
-					{session ? (
-						<Link to="/auth" onClick={() => handleLogout()}>
-							<button className="create-button">Logout</button>
-						</Link>
-					) : (
-						<Link to="/auth">
-							<button className="create-button">Login</button>
-						</Link>
-					)}
-				</header>
+				<Link to="/sub-community" className="subcomText">
+					Sub-Com
+				</Link>
+
+				<Link to="/help" className="helpText">
+					Help
+				</Link>
+
+				<Link to="/about" className="aboutText">
+					About Us
+				</Link>
+
+				<Link to="/profile" className="profileText">
+					Profile
+				</Link>
 			</div>
+			{session ? (
+				<Link to="/auth" onClick={() => handleLogout()}>
+					<button className="create-button">Logout</button>
+				</Link>
+			) : (
+				<Link to="/auth">
+					<button className="create-button">Login</button>
+				</Link>
+			)}
 		</div>
 	);
 }
