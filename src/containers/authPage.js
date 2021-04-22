@@ -118,20 +118,6 @@ export default function AuthPage() {
 					/>
 				</div>
 			)}
-			{/* <div className="loginView">
-                <Login
-                    email={email}
-                    setEmail={setEmail}
-                    password={password}
-                    setPassword={setPassword}
-                    handleLogin={handleLogin}
-                    handleSingup={handleSingup}
-                    hasAccount={hasAccount}
-                    setHasAccount={setHasAccount}
-                    emailError={emailError}
-                    passwordError={passwordError}
-                />
-            </div> */}
 		</div>
 	);
 }

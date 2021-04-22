@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { SessionApi } from '../../hook/SessionApi';
 import { Link } from 'react-router-dom';
 import profilePic from '../../assets/Test.jpg';
 
 const PostForm = ({ updatePost }) => {
+	const { user } = useContext(SessionApi);
+	const defaultImage = 'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg'
+	const [imageURL, setImageURL] = useState(user.photoURL)
 	//States
 	const [post, setPost] = useState({
 		content: '',
@@ -43,11 +46,10 @@ const PostForm = ({ updatePost }) => {
 			{session ? (
 				<div className="postFormBox">
 					<div>
-						<img
-							src={profilePic}
+						<img src={imageURL}
+							onError={() => setImageURL(defaultImage)}
 							alt="profile picture"
-							className="profilePic"
-						/>
+							className="profilePic" />
 					</div>
 					<div className="postForm">
 						<div className="postText">

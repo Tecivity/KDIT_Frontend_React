@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import profilePic from '../../assets/Test.jpg';
+import { SessionApi } from '../../hook/SessionApi'
 
 const Post = ({ post, upVote, downVote }) => {
+	const { user,session } = useContext(SessionApi);
+	const defaultImage = 'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg'
+	const [imageURL, setImageURL] = useState(user.photoURL)
 	//States
 	const [posts, setPosts] = useState(post);
 
@@ -45,17 +49,16 @@ const Post = ({ post, upVote, downVote }) => {
 				<div>
 					<div className="post">
 						<div>
-							<img
-								src={profilePic}
-								alt="profile picture"
-								className="profilePic"
-							/>
+						<img src={session ? imageURL : defaultImage}
+							onError={() => setImageURL(defaultImage)}
+							alt="profile picture"
+							className="profilePic" />
 						</div>
 
 						<div className="postInfo">
 							<div className="postBy">
 								<p className="displayName">Display Name</p>
-								<p className="username">@{post.userid}</p>
+								<p className="username">@{post.userUID}</p>
 								<p className="timestamp"> - {post.timeStamp}</p>
 							</div>
 							<div className="postContent">
