@@ -16,18 +16,14 @@ export default function Card() {
 		fetchData()
 	};
 
-	const upVote = (id) => {
-		const targetPostIndex = posts.findIndex((post) => post.id === id);
-		const newPosts = [...posts];
-		newPosts[targetPostIndex].voteUp += 1;
-		setPosts(newPosts);
+	const upVote = (post) => {
+		ref.doc(post.id).set({...post, voteUp:post.voteUp+1})
+		fetchData()
 	};
 
-	const downVote = (id) => {
-		const targetPostIndex = posts.findIndex((post) => post.id === id);
-		const newPosts = [...posts];
-		newPosts[targetPostIndex].voteUp -= 1;
-		setPosts(newPosts);
+	const downVote = (post) => {
+		ref.doc(post.id).set({...post, voteDown:post.voteDown-1})
+		fetchData()
 	};
 
 	const fetchData = async () => {

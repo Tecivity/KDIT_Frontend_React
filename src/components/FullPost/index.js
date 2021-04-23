@@ -12,7 +12,7 @@ const FullPost = ({ post, upVote, downVote }) => {
 				<div className="full-infoPane">
 					<div className="full-votePane">
 						<button
-							onClick={() => upVote(post.id)}
+							onClick={() => upVote(post)}
 							className="full-voteUpBT"
 						>
 							⬆
@@ -21,7 +21,7 @@ const FullPost = ({ post, upVote, downVote }) => {
 						{post.voteUp}
 
 						<button
-							onClick={() => downVote(post.id)}
+							onClick={() => downVote(post)}
 							className="full-voteDownBT"
 						>
 							⬇

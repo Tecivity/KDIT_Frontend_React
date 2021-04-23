@@ -2,8 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import profilePic from '../../assets/Test.jpg';
 import { SessionApi } from '../../hook/SessionApi'
+import { useHistory } from 'react-router-dom'
 
 const Post = ({ post, upVote, downVote }) => {
+	const history = useHistory()
 	const { user,session } = useContext(SessionApi);
 	const defaultImage = 'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg'
 	const [imageURL, setImageURL] = useState(user.photoURL)
@@ -13,30 +15,24 @@ const Post = ({ post, upVote, downVote }) => {
 	//Function
 	const handlePostClick = () => {
 		console.log('post clicked');
+		history.push(`/post/${posts.id}`)
 	};
 
 	return (
-		<Link
-			to={{
-				pathname: `/post/${posts.id}`,
-				state: posts,
-			}}
-			style={{ textDecoration: 'none' }}
-		>
 			<div id={posts.id} className="postPane" onClick={handlePostClick}>
 				<div className="infoPane">
 					<div className="votePane">
 						<button
-							onClick={() => upVote(post.id)}
+							onClick={() => upVote(post)}
 							className="voteUpBT"
 						>
 							⬆
 						</button>
 
-						{post.voteUp}
+						{post.voteUp + post.voteDown}
 
 						<button
-							onClick={() => downVote(post.id)}
+							onClick={() => downVote(post)}
 							className="voteDownBT"
 						>
 							⬇
@@ -68,7 +64,6 @@ const Post = ({ post, upVote, downVote }) => {
 					</div>
 				</div>
 			</div>
-		</Link>
 	);
 };
 
