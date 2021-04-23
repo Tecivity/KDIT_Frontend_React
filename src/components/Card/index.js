@@ -1,10 +1,9 @@
-import './index.css';
-import Post from './Post';
+import './index.css'
+import Post from './Post'
 import PostForm from './PostForm';
-import React, { useState, useEffect } from 'react';
-import firebase from '../../firebase';
-import PostService from '../../firebase/firestore';
-import { PostModel } from '../../firebase/models';
+import React, { useState, useEffect } from 'react'
+import firebase from '../../firebase'
+import { PostModel } from '../../firebase/models'
 
 export default function Card() {
 	const ref = firebase.firestore().collection('posts')
@@ -13,10 +12,8 @@ export default function Card() {
 	const [posts, setPosts] = useState([]);
 
 	//Functions
-	const updatePost = (newPost) => {
-		console.log(newPost.content);
-		const newPosts = [newPost, ...posts];
-		setPosts(newPosts);
+	const updatePost = () => {
+		fetchData()
 	};
 
 	const upVote = (id) => {
@@ -49,8 +46,7 @@ export default function Card() {
 				)
 				postsArray.push(post)
 			})
-			console.log(postsArray)
-			setPosts(postsArray)
+			setPosts(postsArray.reverse())
 		})
 	}
 
@@ -62,11 +58,9 @@ export default function Card() {
 		<div className="card">
 			<PostForm updatePost={updatePost} />
 			<div className="content">
-				{posts.map((post) => {
-					return (
-						<Post post={post} upVote={upVote} downVote={downVote} />
-					);
-				})}
+				{posts.map((post) => (
+					<Post post={post} upVote={upVote} downVote={downVote} />
+				))}
 			</div>
 		</div>
 	);
