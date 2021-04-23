@@ -1,14 +1,19 @@
 .side-navbar {
-	height: 100%; /* Full-height: remove this if you want "auto" height */
-	width: 25%; /* Set the width of the sidebar */
+	height: 80%; /* Full-height: remove this if you want "auto" height */
+	width: 23%; /* Set the width of the sidebar */
 	position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-	z-index: 1; /* Stay on top */
-	top: 85px; /* Stay at the top */
-	right: 5%;
+	top: 1rem; /* Stay at the top */
+	right: 4%;
 	overflow-x: hidden; /* Disable horizontal scroll */
-	padding-top: 20px;
-	/*background: #F48C51;*/
+}
 
-	background: #c4c4c4;
-	border-radius: 10px;
+.trends {
+	position: relative;
+	margin-top: 2rem;
+	width: 90%;
+	height: 80%;
+
+	background: rgb(247, 247, 247);
+	border-radius: 1rem;
+	z-index: -1;
 }

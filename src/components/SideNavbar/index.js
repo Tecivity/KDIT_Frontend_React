@@ -1,14 +1,16 @@
 import './index.css';
 
 import React from 'react';
+import SearchBar from '../SearchBar';
 
 const SideNavbar = () => {
 	return (
 		<>
 			<div className="side-navbar">
-				<h1>This is Side Navbar</h1>
-				<h2>Trending</h2>
-				<h2>Sub-community Suggestions</h2>
+				<SearchBar />
+				<div className="trends">
+					<h3>This is Trends</h3>
+				</div>
 			</div>
 		</>
 	);

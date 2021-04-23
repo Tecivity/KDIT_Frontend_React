@@ -1,4 +1,4 @@
-import './index.css';
+import './style.css';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { SessionApi } from '../../hook/SessionApi';
@@ -19,44 +19,27 @@ export default function Navbar() {
 		<div className="navbar">
 			<div className="content">
 				<header>
-					<div>
+					<div className="menu">
 						<div className="testLogo"></div>
 						<Link to="/" className="siteName">
-							K | Keddit
+							Home
 						</Link>
-						<input
-							type="text"
-							className="searchBar"
-							onChange={(e) => setSearchText(e.target.value)}
-							placeholder="Search Something..."
-						/>
-						<button className="searchIcon">Search</button>
 
-						<ul>
-							<li>
-								<Link
-									to="/sub-community"
-									className="subcomText"
-								>
-									Sub-Com
-								</Link>
-							</li>
-							<li>
-								<Link to="/help" className="helpText">
-									Help
-								</Link>
-							</li>
-							<li>
-								<Link to="/about" className="aboutText">
-									About Us
-								</Link>
-							</li>
-							<li>
-								<Link to="/profile" className="profileText">
-									Profile
-								</Link>
-							</li>
-						</ul>
+						<Link to="/sub-community" className="subcomText">
+							Sub-Com
+						</Link>
+
+						<Link to="/help" className="helpText">
+							Help
+						</Link>
+
+						<Link to="/about" className="aboutText">
+							About Us
+						</Link>
+
+						<Link to="/profile" className="profileText">
+							Profile
+						</Link>
 					</div>
 					{session ? (
 						<Link to="/auth" onClick={() => handleLogout()}>
