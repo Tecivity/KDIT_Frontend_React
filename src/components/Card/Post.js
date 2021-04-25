@@ -58,7 +58,8 @@ const Post = ({ post, upVote, downVote }) => {
 								<p className="timestamp"> - {post.timeStamp}</p>
 							</div>
 							<div className="postContent">
-								<p>{post.content}</p>
+								<p>{post.content}</p>   
+								{/* แสดง Post */}
 							</div>
 						</div>
 					</div>
