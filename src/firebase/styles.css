@@ -1,0 +1,18 @@
+.componentBox{
+    position: relative;
+
+    margin: 10px 20% 10px 20%;
+    padding: 10px;
+    border-radius: 50px;
+    box-shadow: 5px 5px 10px black;
+
+}
+
+.componentBox *{
+    margin: 10px;
+}
+
+.componentBox progress{
+    padding: 20px;
+    width: 400px;
+}
