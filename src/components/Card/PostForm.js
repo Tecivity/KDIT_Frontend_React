@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import firebase from '../../firebase';
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import MyUploadAdapter from "../../firebase/ckeditor_image_firebase"
 
 const PostForm = ({ updatePost }) => {
   const { session, user } = useContext(SessionApi);
@@ -94,6 +95,9 @@ const PostForm = ({ updatePost }) => {
               onReady={(editor) => {
                 // You can store the "editor" and use when it is needed.
                 console.log("Editor is ready to use!", editor);
+                editor.plugins.get("FileRepository").createUploadAdapter = loader => {
+                  return new MyUploadAdapter(loader);
+                };
               }}
               onChange={(event, editor) => {
                 const data = editor.getData();
