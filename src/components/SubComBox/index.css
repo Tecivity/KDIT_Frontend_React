@@ -1,6 +1,24 @@
 .subcomDiv {
-    background-color: rgb(255, 197, 122);
+	margin: 1rem;
+
+	width: 35%;
+	padding: 1rem;
+
+	border: 3px solid #f48c51;
+	border-radius: 3rem;
 }
 .subcomDiv:hover {
-    background-color: rgb(196, 196, 196);
+	background-color: rgb(196, 196, 196);
+}
+
+.btn {
+	margin: 0.3rem;
+
+	padding: 0.5rem;
+
+	background: #f48c51;
+
+	border-radius: 1rem;
+
+	color: white;
 }
