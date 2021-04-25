@@ -57,12 +57,6 @@ const PostForm = ({ updatePost }) => {
     return [hour, minute].join(":")
   }
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    const name = e.target.name;
-    setPost({ ...post, [name]: value });
-  };
-
   const handleClick = (e) => {
     if (post.content) {
       const newPost = {
@@ -99,6 +93,7 @@ const PostForm = ({ updatePost }) => {
               onChange={(event, editor) => {
                 const data = editor.getData();
                 console.log({ event, editor, data });
+                setPost({ ...post, "content": data });
               }}
               onBlur={(event, editor) => {
                 console.log("Blur.", editor);
@@ -108,14 +103,6 @@ const PostForm = ({ updatePost }) => {
               }}
             />
             <div className="postText">
-              <textarea
-                id=""
-                cols="30"
-                rows="5"
-                placeholder="What's going on today"
-                name="content"
-                onChange={handleChange}
-              ></textarea>
               <div className="postOption">
                 <button>Upload Picture/Video</button>
                 <button>Event</button>
