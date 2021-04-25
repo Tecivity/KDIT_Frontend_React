@@ -23,7 +23,7 @@ const Hits = ({ hits }) => (
 	<div className="hitContainer">
 		{hits.map((hit) => (
 			<p key={hit.objectID} className="hit">
-				{hit.post_title}
+				{hit.content}
 			</p>
 		))}
 	</div>
@@ -65,7 +65,7 @@ const CustomSearchBox = connectSearchBox(SearchBox);
 
 const SearchBar = () => {
 	return (
-		<InstantSearch searchClient={searchClient} indexName="demo_media">
+		<InstantSearch searchClient={searchClient} indexName="posts">
 			<CustomSearchBox />
 			<Configure hitsPerPage={4} />
 		</InstantSearch>
