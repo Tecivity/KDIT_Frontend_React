@@ -52,6 +52,15 @@ export default function Navbar() {
 					)}
 				</header>
 			</div>
+			{session ? (
+				<Link to="/auth" onClick={() => handleLogout()}>
+					<button className="create-button">Logout</button>
+				</Link>
+			) : (
+				<Link to="/auth">
+					<button className="create-button">Login</button>
+				</Link>
+			)}
 		</div>
 	);
 }
