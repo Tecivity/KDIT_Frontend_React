@@ -33,7 +33,7 @@ const SubComPage = () => {
 	return (
 		<>
 			<Navbar />
-			<div>
+			<div className="subcomPane">
 				{session ? (
 					subComDatas.map((subCom) => {
 						return <SubComBox subCom={subCom} />;

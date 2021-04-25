@@ -1,6 +1,6 @@
 @font-face {
 	font-family: DM Sans;
-	src: url('DMSans-Regular.ttf');
+	src: url('../assets/DMSans-Regular.ttf');
 }
 * {
 	font-family: DM Sans;
@@ -15,6 +15,10 @@ h1.orangeHead {
 	font-size: 30px;
 	color: #f48c51;
 	display: inline;
+}
+h1.helpHead {
+	text-align: center;
+	font-size: 35px;
 }
 
 .mainView {
@@ -127,4 +131,20 @@ h1.orangeHead {
 .homepage {
 	display: flex;
 	flex-direction: row;
+}
+.topHelpBox {
+	margin-top: 70px;
+}
+
+.helpBox {
+	width: 80%;
+	margin-left: 10%;
+	border-radius: 20px;
+	background-color: rgb(167, 167, 167);
+}
+
+.subcomPane {
+	margin-top: 60px;
+	width: 80%;
+	margin-left: 10%;
 }

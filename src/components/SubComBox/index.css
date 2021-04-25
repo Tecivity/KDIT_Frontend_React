@@ -1,0 +1,6 @@
+.subcomDiv {
+    background-color: rgb(255, 197, 122);
+}
+.subcomDiv:hover {
+    background-color: rgb(196, 196, 196);
+}

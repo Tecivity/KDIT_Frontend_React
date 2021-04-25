@@ -223,12 +223,12 @@ body {
 		#ff005c 360deg
 	);
 	box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-	border-radius: 10px;
+	border-radius: 15px;
 	transition: 1s;
 	transition-timing-function: ease;
 }
 .testLogo:hover {
-	transform: rotate(360deg);
+	transform: rotate(720deg);
 }
 
 .searchIcon {

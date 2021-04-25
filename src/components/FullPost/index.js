@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import profilePic from '../../components/Test.jpg';
+import profilePic from '../../assets/Test.jpg';
 import './index.css';
 
 const FullPost = ({ post, upVote, downVote }) => {
@@ -12,7 +12,7 @@ const FullPost = ({ post, upVote, downVote }) => {
 				<div className="full-infoPane">
 					<div className="full-votePane">
 						<button
-							onClick={() => upVote(post.id)}
+							onClick={() => upVote(post)}
 							className="full-voteUpBT"
 						>
 							⬆
@@ -21,7 +21,7 @@ const FullPost = ({ post, upVote, downVote }) => {
 						{post.voteUp}
 
 						<button
-							onClick={() => downVote(post.id)}
+							onClick={() => downVote(post)}
 							className="full-voteDownBT"
 						>
 							⬇
