@@ -71,7 +71,12 @@ const PostForm = ({ updatePost }) => {
       e.target.value = ''
       clearInput()
     }
-  };
+  }
+
+  useEffect(()=>{
+    setImageURL(user.photoURL)
+  },[user])
+
   return (
     <>
       {session ? (

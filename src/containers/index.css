@@ -148,3 +148,12 @@ h1.helpHead {
 	width: 80%;
 	margin-left: 10%;
 }
+
+.auth-loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -50%);
+    opacity: 0.5;
+}

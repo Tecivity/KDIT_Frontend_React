@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Redirect, Link } from 'react-router-dom';
-import profilePic from '../../assets/Test.jpg';
 import { SessionApi } from '../../hook/SessionApi'
 import { useHistory } from 'react-router-dom'
 import parse from 'html-react-parser';
@@ -20,7 +19,7 @@ const Post = ({ post, upVote, downVote }) => {
 	};
 
 	return (
-			<div id={posts.id} className="postPane" onClick={handlePostClick}>
+			<div id={posts.id} className="postPane" >
 				<div className="infoPane">
 					<div className="votePane">
 						<button
@@ -58,7 +57,7 @@ const Post = ({ post, upVote, downVote }) => {
 								<p className="username">@{post.userUID}</p>
 								<p className="timestamp"> - {post.timeStamp}</p>
 							</div>
-							<div className="postContent">
+							<div className="postContent" onClick={handlePostClick}>
 								<p>{parse(post.content)}</p>   
 								{/* แสดง Post */}
 							</div>
