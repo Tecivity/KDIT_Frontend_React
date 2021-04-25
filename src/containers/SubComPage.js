@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, SubComBox } from '../components';
+import { Navbar, SubComBox, SideNavbar } from '../components';
 import { SessionApi } from '../hook/SessionApi';
 
 const SubComPage = () => {
@@ -42,6 +42,7 @@ const SubComPage = () => {
 					<h1>Please Login to Follow our Sub-Community</h1>
 				)}
 			</div>
+			<SideNavbar />
 		</>
 	);
 };

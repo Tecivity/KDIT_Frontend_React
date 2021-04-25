@@ -19,8 +19,8 @@ h1.loginWarn {
 
 .fullPane {
 	position: absolute;
-	width: 60%;
-	left: 8%;
+	width: 43%;
+	left: 25%;
 	top: 85px;
 	z-index: 20;
 	font-family: DM Sans;
@@ -107,10 +107,6 @@ h1.loginWarn {
 	color: black;
 
 	transition: 500ms;
-}
-
-.full-postPane:hover {
-	background: rgb(226, 226, 226);
 }
 
 .loginPost {
