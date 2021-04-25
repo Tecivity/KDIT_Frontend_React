@@ -55,7 +55,10 @@ const Post = ({ post, upVote, downVote }) => {
 							<div className="postBy">
 								<p className="displayName">Display Name</p>
 								<p className="username">@{post.userUID}</p>
-								<p className="timestamp"> - {post.timeStamp}</p>
+								<p className="timestamp"> - {new Date(post.timeStamp).toLocaleString([],{
+                                dateStyle: "long",
+                                timeStyle: "short",
+                            })}</p>
 							</div>
 							<div className="postContent" onClick={handlePostClick}>
 								<p>{parse(post.content)}</p>   
