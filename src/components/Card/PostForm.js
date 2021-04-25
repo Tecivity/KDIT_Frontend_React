@@ -2,6 +2,8 @@ import React, { useState, useEffect, useContext } from 'react';
 import { SessionApi } from '../../hook/SessionApi';
 import { Link } from 'react-router-dom';
 import firebase from '../../firebase';
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 const PostForm = ({ updatePost }) => {
   const { session, user } = useContext(SessionApi);
@@ -55,12 +57,6 @@ const PostForm = ({ updatePost }) => {
     return [hour, minute].join(":")
   }
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    const name = e.target.name;
-    setPost({ ...post, [name]: value });
-  };
-
   const handleClick = (e) => {
     if (post.content) {
       const newPost = {
@@ -87,16 +83,26 @@ const PostForm = ({ updatePost }) => {
               className="profilePic" />
           </div>
           <div className="postForm">
+          <CKEditor
+              editor={ClassicEditor}
+              data="<p>What's going on today</p>"
+              onReady={(editor) => {
+                // You can store the "editor" and use when it is needed.
+                console.log("Editor is ready to use!", editor);
+              }}
+              onChange={(event, editor) => {
+                const data = editor.getData();
+                console.log({ event, editor, data });
+                setPost({ ...post, "content": data });
+              }}
+              onBlur={(event, editor) => {
+                console.log("Blur.", editor);
+              }}
+              onFocus={(event, editor) => {
+                console.log("Focus.", editor);
+              }}
+            />
             <div className="postText">
-              <textarea
-                name=""
-                id=""
-                cols="30"
-                rows="5"
-                placeholder="What's going on today"
-                name="content"
-                onChange={handleChange}
-              ></textarea>
               <div className="postOption">
                 <button>Upload Picture/Video</button>
                 <button>Event</button>

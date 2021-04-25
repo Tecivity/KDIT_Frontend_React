@@ -3,6 +3,7 @@ import { Redirect, Link } from 'react-router-dom';
 import profilePic from '../../assets/Test.jpg';
 import { SessionApi } from '../../hook/SessionApi'
 import { useHistory } from 'react-router-dom'
+import parse from 'html-react-parser';
 
 const Post = ({ post, upVote, downVote }) => {
 	const history = useHistory()
@@ -58,7 +59,8 @@ const Post = ({ post, upVote, downVote }) => {
 								<p className="timestamp"> - {post.timeStamp}</p>
 							</div>
 							<div className="postContent">
-								<p>{post.content}</p>
+								<p>{parse(post.content)}</p>   
+								{/* แสดง Post */}
 							</div>
 						</div>
 					</div>
