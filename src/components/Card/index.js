@@ -55,7 +55,7 @@ export default function Card() {
 			<PostForm updatePost={updatePost} />
 			<div className="content">
 				{posts.map((post) => (
-					<Post post={post} upVote={upVote} downVote={downVote} />
+					<Post post={post} upVote={upVote} downVote={downVote}/>
 				))}
 			</div>
 		</div>

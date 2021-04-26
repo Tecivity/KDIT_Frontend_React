@@ -60,7 +60,7 @@ const PostForm = ({ updatePost }) => {
 		return [hour, minute].join(':');
 	}
 
-	const handleClick = (e) => {
+	const handleClick = async (e) => {
 		if (post.content) {
 			const newPost = {
 				...post,
@@ -69,10 +69,11 @@ const PostForm = ({ updatePost }) => {
 				subCom: 'test Sub Com',
 				subComUID: 'subcomUID',
 			};
-			firebase.firestore().collection('posts').add(newPost);
+			await firebase.firestore().collection('posts').add(newPost);
 			updatePost();
 			e.target.value = '';
 			clearInput();
+			window.location.reload();
 		}
 	};
 
