@@ -8,7 +8,7 @@ import { User } from '../../firebase/models';
 
 const Post = ({ post, upVote, downVote }) => {
 	const history = useHistory()
-	const { user, session } = useContext(SessionApi);
+	const { session } = useContext(SessionApi);
 	const defaultImage = 'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg'
 	//States
 	const [posts, setPosts] = useState(post);
@@ -67,7 +67,7 @@ const Post = ({ post, upVote, downVote }) => {
 			<div>
 				<div className="post">
 					<div>
-						<img src={session ? postUser.photoURL : defaultImage}
+						<img src={postUser.photoURL}
 							onError={defaultImage}
 							alt="profile picture"
 							className="profilePic" />
