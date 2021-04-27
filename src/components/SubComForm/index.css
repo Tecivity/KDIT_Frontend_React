@@ -1,0 +1,53 @@
+.subcomForm {
+	margin-top: 2rem;
+}
+
+.subcomForm label {
+	font-size: 1.5rem;
+}
+
+.inputForm {
+	display: flex;
+	flex-direction: column;
+}
+
+.nameInput {
+	margin: 1rem 0;
+
+	border-width: 0 0 1px 0;
+}
+
+.nameInput:focus {
+	outline: none;
+
+	border-width: 0 0 2px 0;
+}
+
+.desInput {
+	margin: 1rem 0;
+	padding: 0.5rem;
+
+	resize: none;
+	white-space: pre-wrap;
+}
+
+.btn {
+	margin: auto;
+	margin-bottom: 1rem;
+
+	padding: 0.5rem;
+
+	background: #f48c51;
+
+	border-radius: 1rem;
+
+	color: white;
+
+	width: 100%;
+
+	transition: 0.3s;
+}
+
+.btn:active {
+	transform: translateY(5px);
+}

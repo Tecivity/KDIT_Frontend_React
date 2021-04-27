@@ -26,7 +26,7 @@ export default function Navbar() {
 						</Link>
 
 						<Link to="/sub-community" className="subcomText">
-							Sub-Com
+							Community
 						</Link>
 
 						<Link to="/help" className="helpText">

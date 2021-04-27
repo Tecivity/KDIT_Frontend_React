@@ -42,32 +42,32 @@ const HelpPage = () => {
 	return (
 		<>
 			<Navbar />
-			<div class="topHelpBox">
-				<h1 class="helpHead">Need Help?</h1>
-			</div>
-			<div class="helpBox">
-				<h2>How can we help?</h2>
-				{questions.map((question) => {
-					return (
-						<HelpBox
-							id={question.id}
-							question={question.question}
-							answer={question.answer}
-						/>
-					);
-				})}
-				<hr />
-				<hr />
-				<h2>FAQ</h2>
-				{FAQ.map((question) => {
-					return (
-						<HelpBox
-							id={question.id}
-							question={question.question}
-							answer={question.answer}
-						/>
-					);
-				})}
+			<div className="helpPane">
+				<div class="topHelpBox">
+					<h1 class="helpHead">Need Help?</h1>
+					<div class="helpBoxPane">
+						{questions.map((question) => {
+							return (
+								<HelpBox
+									id={question.id}
+									question={question.question}
+									answer={question.answer}
+								/>
+							);
+						})}
+
+						{/* <h2>FAQ</h2> */}
+						{FAQ.map((question) => {
+							return (
+								<HelpBox
+									id={question.id}
+									question={question.question}
+									answer={question.answer}
+								/>
+							);
+						})}
+					</div>
+				</div>
 			</div>
 		</>
 	);

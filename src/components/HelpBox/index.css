@@ -1,3 +1,38 @@
 body {
-    color: black;
+	color: black;
+}
+
+.helpBox {
+	margin: 1rem;
+	padding: 2rem;
+
+	width: 35%;
+
+	border: 2px solid orange;
+	border-radius: 3rem;
+}
+
+.seeMoreHelpBtn {
+	padding: 0.5rem;
+
+	width: 100%;
+
+	background: #f48c51;
+
+	border: none;
+	border-radius: 1rem;
+
+	font-size: 1rem;
+	font-weight: 500;
+	color: white;
+
+	transition: 0.3s;
+}
+
+.seeMoreHelpBtn:hover {
+	transform: translateY(-3px);
+}
+
+.seeMoreHelpBtn:active {
+	transform: translateY(5px);
 }

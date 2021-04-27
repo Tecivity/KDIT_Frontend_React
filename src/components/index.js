@@ -8,6 +8,7 @@ import SubComBox from './SubComBox';
 import Signup from './FirebaseUI/Signup';
 import FullPost from './FullPost/index';
 import SearchBar from './SearchBar/index';
+import SubComForm from './SubComForm/index';
 
 export {
 	Navbar,
@@ -20,4 +21,5 @@ export {
 	Signup,
 	FullPost,
 	SearchBar,
+	SubComForm,
 };
