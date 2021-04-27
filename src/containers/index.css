@@ -132,15 +132,27 @@ h1.helpHead {
 	display: flex;
 	flex-direction: row;
 }
+
+.helpPane {
+	position: absolute;
+	margin: 0;
+	width: 75%;
+	left: 20%;
+}
+
 .topHelpBox {
 	margin-top: 70px;
 }
 
-.helpBox {
-	width: 80%;
+.helpBoxPane {
 	margin-left: 10%;
-	border-radius: 20px;
-	background-color: rgb(167, 167, 167);
+	padding: 2rem;
+
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+
+	/* background-color: rgb(167, 167, 167); */
 }
 
 .subcomPane {

@@ -2,9 +2,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import { SessionApi } from '../../hook/SessionApi';
 import { Link } from 'react-router-dom';
 import firebase from '../../firebase';
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import MyUploadAdapter from "../../firebase/ckeditor_image_firebase"
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import MyUploadAdapter from '../../firebase/ckeditor_image_firebase';
 
 const PostForm = ({ updatePost }) => {
 	const { session, user } = useContext(SessionApi);
@@ -81,61 +81,63 @@ const PostForm = ({ updatePost }) => {
 		setImageURL(user.photoURL);
 	}, [user]);
 
-  return (
-    <>
-      {session ? (
-        <div className="postFormBox">
-          <div>
-            <img src={imageURL}
-              onError={() => setImageURL(defaultImage)}
-              alt="profile picture"
-              className="profilePic" />
-          </div>
-          <div className="postForm">
-          <CKEditor
-              editor={ClassicEditor}
-              data="<p>What's going on today</p>"
-              onReady={(editor) => {
-                // You can store the "editor" and use when it is needed.
-                console.log("Editor is ready to use!", editor);
-                editor.plugins.get("FileRepository").createUploadAdapter = loader => {
-                  return new MyUploadAdapter(loader);
-                };
-              }}
-              onChange={(event, editor) => {
-                const data = editor.getData();
-                console.log({ event, editor, data });
-                setPost({ ...post, "content": data });
-              }}
-              onBlur={(event, editor) => {
-                console.log("Blur.", editor);
-              }}
-              onFocus={(event, editor) => {
-                console.log("Focus.", editor);
-              }}
-            />
-            <div className="postText">
-              <div className="postOption">
-                <button>Upload Picture/Video</button>
-                <button>Event</button>
-                <button>Reviews</button>
-                <button
-                  onClick={handleClick}
-                  className="postBT"
-                >
-                  Post
+	return (
+		<>
+			{session ? (
+				<div className="postFormBox">
+					<div>
+						<img
+							src={imageURL}
+							onError={() => setImageURL(defaultImage)}
+							alt="profile picture"
+							className="profilePic"
+						/>
+					</div>
+					<div className="postForm">
+						<CKEditor
+							className="ckEditor"
+							editor={ClassicEditor}
+							data="<p>What's going on today</p>"
+							onReady={(editor) => {
+								// You can store the "editor" and use when it is needed.
+								console.log('Editor is ready to use!', editor);
+								editor.plugins.get(
+									'FileRepository',
+								).createUploadAdapter = (loader) => {
+									return new MyUploadAdapter(loader);
+								};
+							}}
+							onChange={(event, editor) => {
+								const data = editor.getData();
+								console.log({ event, editor, data });
+								setPost({ ...post, content: data });
+							}}
+							onBlur={(event, editor) => {
+								console.log('Blur.', editor);
+							}}
+							onFocus={(event, editor) => {
+								console.log('Focus.', editor);
+							}}
+						/>
+						<div className="postText">
+							<div className="postOption">
+								<button
+									onClick={handleClick}
+									className="postBT"
+								>
+									Post
 								</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div>
-          <h1 class="loginWarn">Please Login to Create Post</h1>
-        </div>
-      )}
-    </>
-  );
+							</div>
+						</div>
+					</div>
+				</div>
+			) : (
+				<div>
+					<h1 class="loginWarn">Please Login to Create Post</h1>
+				</div>
+			)}
+		</>
+	);
 };
 
 export default PostForm;
