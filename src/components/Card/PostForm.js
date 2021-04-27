@@ -69,11 +69,12 @@ const PostForm = ({ updatePost }) => {
 				subCom: 'test Sub Com',
 				subComUID: 'subcomUID',
 			};
-			await firebase.firestore().collection('posts').add(newPost);
-			updatePost();
-			e.target.value = '';
-			clearInput();
-			window.location.reload();
+			firebase.firestore().collection('posts').add(newPost).then(() => {
+				updatePost()
+				e.target.value = ''
+				clearInput()
+				window.location.reload()
+			})
 		}
 	};
 

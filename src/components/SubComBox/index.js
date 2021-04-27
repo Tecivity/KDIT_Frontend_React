@@ -7,7 +7,7 @@ const SubComBox = ({ subCom }) => {
 			<div id={subCom.id} className="subcomDiv">
 				<div className="subComImagePane">
 					<img
-						src="https://cdn.jeab.com/wp-content/uploads/2020/03/wallpaper-for-jeab06.jpg"
+						src={subCom.photoURL}
 						alt=""
 						className="subComImg"
 					/>
@@ -21,7 +21,7 @@ const SubComBox = ({ subCom }) => {
 							color: 'grey',
 						}}
 					>
-						1K Members
+						{subCom.totalFollow} Members
 					</p>
 					<h4>{subCom.description}</h4>
 				</div>
