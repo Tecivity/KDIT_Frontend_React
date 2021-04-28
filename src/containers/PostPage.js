@@ -4,6 +4,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import firebase from '../firebase';
 import { PostModel } from '../firebase/models';
 
+
 const PostPage = () => {
 	const { id } = useParams();
 	const ref = firebase.firestore().collection('posts').doc(id)
