@@ -32,6 +32,7 @@ const PostPage = () => {
 			)
 			setPost(fetchPost)
 		})
+		//console.log(`postpage -> id : ${id}, post : ${post.userUID}`)
 	}
 
 	useEffect(() => {
@@ -43,7 +44,7 @@ const PostPage = () => {
 			<Navbar />
 			<SideNavbar />
 			<div className>
-				<FullPost post={post} upVote={upVote} downVote={downVote} />
+				<FullPost post={post} id={id} upVote={upVote} downVote={downVote} />
 			</div>
 		</>
 	);

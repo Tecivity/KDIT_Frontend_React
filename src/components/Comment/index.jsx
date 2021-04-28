@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import firebase from '../../firebase';
-import { PostModel } from '../../firebase/models';
+import { CommentModel } from '../../firebase/models';
 import CommentForm from './CommentForm';
 import CommentCard from './CommentCard';
 
-const Comment = () => {
-	const ref = firebase.firestore().collection('posts');
+const Comment = ({post, id}) => {
+	const ref = firebase
+	.firestore()
+	.collection('comments')
 
 	//States
-	const [posts, setPosts] = useState([]);
+	const [comments, setComments] = useState([]);
 
 	//Functions
 	const updatePost = () => {
@@ -26,23 +28,26 @@ const Comment = () => {
 	};
 
 	const fetchData = async () => {
-		const postsArray = [];
-		ref.onSnapshot((querySnapshot) => {
-			querySnapshot.forEach((doc) => {
-				const post = new PostModel(
+		ref
+		.orderBy('timeStamp', 'desc')
+		.where('postUID', '==', id)
+		.get()
+		.then((data) => {
+			let data_comments = [];
+			data.forEach(doc => {
+				const comment = new CommentModel(
 					doc.id,
+					doc.data().postUID,
 					doc.data().userUID,
 					doc.data().content,
-					doc.data().voteUp,
-					doc.data().voteDown,
 					doc.data().timeStamp,
-					doc.data().subCom,
-					doc.data().subComUID,
-				);
-				postsArray.push(post);
-			});
-			setPosts(postsArray.reverse());
-		});
+					doc.data().voteUp,
+					doc.data().voteDown
+				)
+				data_comments.push(comment);
+			})
+			setComments(data_comments);
+		})
 	};
 
 	useEffect(() => {
@@ -51,13 +56,11 @@ const Comment = () => {
 
 	return (
 		<div className="commentCard">
-			<CommentForm />
+			<CommentForm post={post} id={id} />
 			<div className="content">
-				{posts.map((post) => (
+				{comments.map((comment) => (
 					<CommentCard
-						post={post}
-						upVote={upVote}
-						downVote={downVote}
+						comment={comment}
 					/>
 				))}
 			</div>

@@ -1,4 +1,4 @@
-class Commemt{
+class Comment{
     constructor(id,postId,userId,content,timeStamp,voteUp,voteDown){
         this.id = id 
         this.postId = postId
@@ -10,4 +10,4 @@ class Commemt{
     }
 }
 
-module.exports = Commemt
+module.exports = Comment;
