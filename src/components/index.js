@@ -10,6 +10,7 @@ import FullPost from './FullPost/index';
 import SearchBar from './SearchBar/index';
 import SubComForm from './SubComForm/index';
 import FullSubCom from './FullSubCom/index';
+import Profile from './Profile/index.jsx';
 
 export {
 	Navbar,
@@ -24,4 +25,5 @@ export {
 	SearchBar,
 	SubComForm,
 	FullSubCom,
+	Profile,
 };

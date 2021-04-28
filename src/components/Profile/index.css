@@ -1,0 +1,8 @@
+.profilePane {
+	position: absolute;
+	left: 25%;
+
+	width: 43%;
+
+	border: 1px solid black;
+}
