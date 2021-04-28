@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import './index.css';
 
 const SubComBox = ({ subCom }) => {
+	//History
+	const history = useHistory();
+
+	//Functions
+	const handleOnClick = () => {
+		history.push(`/community/${subCom.id}`);
+	};
+
 	return (
 		<>
-			<div id={subCom.id} className="subcomDiv">
+			<div id={subCom.id} className="subcomDiv" onClick={handleOnClick}>
 				<div className="subComImagePane">
-					<img
-						src={subCom.photoURL}
-						alt=""
-						className="subComImg"
-					/>
+					<img src={subCom.photoURL} alt="" className="subComImg" />
 				</div>
 				<div className="subcomInfoPane">
 					<h3 style={{ display: 'inline' }}>{subCom.name} ○ </h3>

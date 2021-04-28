@@ -1,0 +1,12 @@
+.fullComPane {
+	position: absolute;
+	width: 43%;
+	left: 25%;
+	padding: 0;
+
+	z-index: 20;
+	font-family: DM Sans;
+
+	background: #ffffff;
+	border: 1px solid lightgrey;
+}

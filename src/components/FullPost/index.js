@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import profilePic from '../../assets/Test.jpg';
+import Comment from '../Comment/index';
 import './index.css';
 
 const FullPost = ({ post, upVote, downVote }) => {
@@ -28,7 +29,6 @@ const FullPost = ({ post, upVote, downVote }) => {
 						</button>
 					</div>
 					<p>Comments</p>
-					<p>Re-post</p>
 				</div>
 
 				<div>
@@ -57,7 +57,7 @@ const FullPost = ({ post, upVote, downVote }) => {
 			</div>
 			{/* Comments */}
 			<div className="commentPane">
-				<h1>This is comments</h1>
+				<Comment />
 			</div>
 		</div>
 	);
