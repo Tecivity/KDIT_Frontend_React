@@ -1,5 +1,5 @@
 import React from 'react';
-import { Signup } from '../../components';
+import { Signup } from '..';
 // import './styles.css';
 
 export default function Login({
