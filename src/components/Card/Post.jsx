@@ -63,7 +63,7 @@ const Post = ({ post, upVote, downVote }) => {
 	}, []);
 
 	return (
-		<div id={posts.id} className="postPane" onClick={handlePostClick}>
+		<div id={posts.id} className="postPane">
 			<div className="infoPane">
 				<div className="votePane">
 					<button onClick={() => upVote(post)} className="voteUpBT">
@@ -115,7 +115,7 @@ const Post = ({ post, upVote, downVote }) => {
 								<div></div>
 							)}
 						</div>
-						<div className="postContent">
+						<div className="postContent" onClick={handlePostClick}>
 							<p>{parse(post.content)}</p>
 							{/* แสดง Post */}
 						</div>
