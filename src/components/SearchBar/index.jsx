@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './index.css';
 import algoliasearch from 'algoliasearch/lite';
+import { stripHtml } from "string-strip-html";
+
 import {
 	InstantSearch,
 	// SearchBox,
@@ -23,7 +25,7 @@ const Hits = ({ hits }) => (
 	<div className="hitContainer">
 		{hits.map((hit) => (
 			<p key={hit.objectID} className="hit">
-				{hit.content}
+				{stripHtml(hit.content).result}
 			</p>
 		))}
 	</div>
