@@ -8,7 +8,7 @@ import { User } from '../../firebase/models';
 
 const Post = ({ post, upVote, downVote }) => {
 	const history = useHistory();
-	const { session,user,loading } = useContext(SessionApi);
+	const { session, user, loading } = useContext(SessionApi);
 	const defaultImage =
 		'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg';
 	//States
@@ -21,15 +21,20 @@ const Post = ({ post, upVote, downVote }) => {
 		history.push(`/post/${posts.id}`);
 	};
 
-	const deletePost = () =>{
-		if (!window.confirm("Are you sure for delete post ❓")) {
-			return console.log('Cancel delete.')
+	const deletePost = () => {
+		if (!window.confirm('Are you sure for delete post ❓')) {
+			return console.log('Cancel delete.');
 		}
-		firebase.firestore().collection('posts').doc(post.id).delete().then(()=>{
-			console.log("deleted post.")
-			window.location.reload();
-		})
-	}
+		firebase
+			.firestore()
+			.collection('posts')
+			.doc(post.id)
+			.delete()
+			.then(() => {
+				console.log('deleted post.');
+				window.location.reload();
+			});
+	};
 
 	const fetchData = async () => {
 		firebase
@@ -58,7 +63,7 @@ const Post = ({ post, upVote, downVote }) => {
 	}, []);
 
 	return (
-		<div id={posts.id} className="postPane">
+		<div id={posts.id} className="postPane" onClick={handlePostClick}>
 			<div className="infoPane">
 				<div className="votePane">
 					<button onClick={() => upVote(post)} className="voteUpBT">
@@ -102,12 +107,15 @@ const Post = ({ post, upVote, downVote }) => {
 									timeStyle: 'short',
 								})}
 							</p>
-							{post.userUID == user.uid ? <div>
-								<button onClick={deletePost}>X</button>
-							</div>:<div></div>}
-							
+							{post.userUID == user.uid ? (
+								<div>
+									<button onClick={deletePost}>X</button>
+								</div>
+							) : (
+								<div></div>
+							)}
 						</div>
-						<div className="postContent" onClick={handlePostClick}>
+						<div className="postContent">
 							<p>{parse(post.content)}</p>
 							{/* แสดง Post */}
 						</div>

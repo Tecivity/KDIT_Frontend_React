@@ -5,6 +5,7 @@ import AboutPage from './AboutPage';
 import SubComPage from './SubComPage';
 import HelpPage from './HelpPage';
 import PostPage from './PostPage';
+import FullSubComPage from './FullSubComPage';
 
 export {
 	HomePage,
@@ -14,4 +15,5 @@ export {
 	SubComPage,
 	HelpPage,
 	PostPage,
+	FullSubComPage,
 };
