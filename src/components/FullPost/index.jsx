@@ -4,7 +4,8 @@ import Comment from '../Comment/index';
 import parse from 'html-react-parser';
 import './index.css';
 
-const FullPost = ({ post, upVote, downVote }) => {
+const FullPost = ({ post, upVote, downVote, id }) => {
+	//console.log(`fullpost -> id : ${id}, post : ${post.userUID}`)
 	return (
 		<div className="fullPane">
 			<div>
@@ -68,7 +69,7 @@ const FullPost = ({ post, upVote, downVote }) => {
 				</div>
 				{/* Comments */}
 				<div className="commentPane">
-					<Comment />
+					<Comment post={post} id={id} />
 				</div>
 			</div>
 		</div>
