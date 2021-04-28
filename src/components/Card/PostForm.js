@@ -9,8 +9,10 @@ import MyUploadAdapter from '../../firebase/ckeditor_image_firebase';
 const PostForm = ({ updatePost }) => {
 	const { session, user } = useContext(SessionApi);
 	const defaultImage =
-		'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg';
-	const [imageURL, setImageURL] = useState(user.photoURL);
+		'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg'
+	const [imageURL, setImageURL] = useState(user.photoURL)
+
+
 
 	//States
 	const [post, setPost] = useState({
@@ -69,11 +71,12 @@ const PostForm = ({ updatePost }) => {
 				subCom: 'test Sub Com',
 				subComUID: 'subcomUID',
 			};
-			await firebase.firestore().collection('posts').add(newPost);
-			updatePost();
-			e.target.value = '';
-			clearInput();
-			window.location.reload();
+			firebase.firestore().collection('posts').add(newPost).then(() => {
+				updatePost()
+				e.target.value = ''
+				clearInput()
+				window.location.reload()
+			})
 		}
 	};
 
@@ -98,26 +101,28 @@ const PostForm = ({ updatePost }) => {
 							className="ckEditor"
 							editor={ClassicEditor}
 							data="<p>What's going on today</p>"
-							onReady={(editor) => {
+							onReady={editor => {
 								// You can store the "editor" and use when it is needed.
-								console.log('Editor is ready to use!', editor);
-								editor.plugins.get(
-									'FileRepository',
-								).createUploadAdapter = (loader) => {
-									return new MyUploadAdapter(loader);
-								};
+								// console.log('Editor is ready to use!', editor);
+								if (editor) {
+									editor.plugins.get(
+										'FileRepository',
+									).createUploadAdapter = (loader) => {
+										return new MyUploadAdapter(loader);
+									};
+								}
 							}}
 							onChange={(event, editor) => {
 								const data = editor.getData();
-								console.log({ event, editor, data });
+								// console.log({ event, editor, data });
 								setPost({ ...post, content: data });
 							}}
-							onBlur={(event, editor) => {
-								console.log('Blur.', editor);
-							}}
-							onFocus={(event, editor) => {
-								console.log('Focus.', editor);
-							}}
+							// onBlur={(event, editor) => {
+							// 	console.log('Blur.', editor);
+							// }}
+							// onFocus={(event, editor) => {
+							// 	console.log('Focus.', editor);
+							// }}
 						/>
 						<div className="postText">
 							<div className="postOption">

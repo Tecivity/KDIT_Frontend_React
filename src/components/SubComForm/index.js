@@ -1,9 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './index.css';
+import firebase from '../../firebase'
+import { SessionApi } from '../../hook/SessionApi'
 
 const SubComForm = () => {
+	const { user } = useContext(SessionApi)
 	//States
-	const [subcom, setSubCom] = useState({ name: '', description: '' });
+	const [subcom, setSubCom] = useState({
+		name: '',
+		description: '',
+		ownerUID: '',
+		photoURL: ''
+	});
 
 	//Functions
 	const handleChange = (e) => {
@@ -12,10 +20,23 @@ const SubComForm = () => {
 		setSubCom({ ...subcom, [name]: value });
 	};
 
+	const clearInput = () => {
+		setSubCom({ name: '', description: '' })
+	}
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (subcom.name && subcom.description) {
-			//Add to Firebase
+			firebase.firestore().collection('sub_community').add({
+				...subcom,
+				ownerUID: user.uid,
+				photoURL: 'https://cdn.jeab.com/wp-content/uploads/2020/03/wallpaper-for-jeab06.jpg',
+				totalFollow: 0
+			}).then(() => {
+				e.target.value = ''
+				clearInput()
+				window.location.reload()
+			})
 		}
 	};
 
@@ -30,18 +51,17 @@ const SubComForm = () => {
 							name="name"
 							className="nameInput"
 							placeholder="What's Your Community Name?"
-							onChange={() => handleChange()}
+							onChange={(e) => handleChange(e)}
 						/>
 						<label htmlFor="">Description</label>
 						<textarea
-							name=""
 							id=""
 							cols="30"
 							rows="10"
 							name="description"
 							className="desInput"
 							placeholder="Write something about your community..."
-							onChange={() => handleChange()}
+							onChange={(e) => handleChange(e)}
 						></textarea>
 					</div>
 					<button onClick={handleSubmit} className="btn">
