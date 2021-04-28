@@ -19,7 +19,8 @@ var uiConfig = {
 					displayName: userCredential.displayName,
 					photoURL: userCredential.photoURL,
 					phoneNumber: userCredential.phoneNumber,
-					email: userCredential.email
+					email: userCredential.email,
+					role: 'user'
 				}).then(()=>{
 					console.log('Sync auth to firestore')
 				})

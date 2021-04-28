@@ -11,6 +11,7 @@ export const SessionProvider = ({ children }) => {
         setLoading(true)
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
+                console.log(user)
                 setUser(user)
                 setSession(true)
                 setLoading(false)

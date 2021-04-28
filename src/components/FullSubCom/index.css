@@ -10,3 +10,57 @@
 	background: #ffffff;
 	border: 1px solid lightgrey;
 }
+
+.comInfoPane {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.fullsubcomForm {
+	width: 90%;
+}
+
+.subcom-btn {
+	margin: 0.3rem;
+	padding: 0.5rem;
+
+	width: 8rem;
+	height: 3rem;
+
+	background: #f48c51;
+
+	border: none;
+	border-radius: 1.5rem;
+
+	color: white;
+	font-size: 1.3rem;
+
+	transition: 0.3s;
+}
+
+.subcom-btn:hover {
+	transform: translateY(-3px);
+}
+
+.subcom-btn:active {
+	transform: translateY(5px);
+}
+
+.edit-btn {
+	background: white;
+
+	border: 2px solid #f48c51;
+	border-radius: 1rem;
+
+	width: 5rem;
+	height: 2rem;
+
+	transition: 0.2s;
+}
+
+.edit-btn:active {
+	background: #f48c51;
+	color: white;
+}
