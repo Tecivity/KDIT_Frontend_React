@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import parse from 'html-react-parser';
 import firebase from '../../firebase';
 import { User } from '../../firebase/models';
+import './index.css';
 
 const CommentCard = ({ post, upVote, downVote }) => {
 	const history = useHistory();
@@ -48,37 +49,36 @@ const CommentCard = ({ post, upVote, downVote }) => {
 	}, []);
 
 	return (
-		<div id={posts.id} className="postPane">
-			<div className="infoPane">
-				<div className="votePane">
-					<button onClick={() => upVote(post)} className="voteUpBT">
-						⬆
-					</button>
-
-					{post.voteUp + post.voteDown}
-
-					<button
-						onClick={() => downVote(post)}
-						className="voteDownBT"
-					>
-						⬇
-					</button>
-				</div>
-				<p>Comments</p>
-			</div>
-
+		<div id={posts.id} className="commentPane">
 			<div>
 				<div className="post">
-					<div>
+					<div className="commentVotePane">
 						<img
 							src={postUser.photoURL}
 							onError={defaultImage}
 							alt="profile picture"
 							className="profilePic"
 						/>
+						<div className="voteCommentPane">
+							<button
+								onClick={() => upVote(post)}
+								className="voteUpBT"
+							>
+								⬆
+							</button>
+
+							{post.voteUp + post.voteDown}
+
+							<button
+								onClick={() => downVote(post)}
+								className="voteDownBT"
+							>
+								⬇
+							</button>
+						</div>
 					</div>
 
-					<div className="postInfo">
+					<div className="commentInfo">
 						<div className="postBy">
 							<p className="displayName">
 								{postUser.displayName}

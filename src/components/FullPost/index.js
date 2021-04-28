@@ -29,7 +29,6 @@ const FullPost = ({ post, upVote, downVote }) => {
 						</button>
 					</div>
 					<p>Comments</p>
-					<p>Re-post</p>
 				</div>
 
 				<div>

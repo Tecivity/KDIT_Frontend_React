@@ -50,8 +50,8 @@ const Comment = () => {
 	}, []);
 
 	return (
-		<div className="card">
-			<CommentForm updatePost={updatePost} />
+		<div className="commentCard">
+			<CommentForm />
 			<div className="content">
 				{posts.map((post) => (
 					<CommentCard
