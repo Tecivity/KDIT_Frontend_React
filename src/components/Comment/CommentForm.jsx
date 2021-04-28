@@ -12,6 +12,7 @@ const CommentForm = () => {
 
 	const handleSubmit = () => {
 		//Submit Comment
+		setComment('');
 	};
 
 	return (
@@ -25,6 +26,7 @@ const CommentForm = () => {
 					placeholder="What's Your Thought About This..."
 					className="commentTextarea"
 					onChange={handleOnChange}
+					value={comment}
 				></textarea>
 				<button className="postCommentBtn" onClick={handleSubmit}>
 					Post

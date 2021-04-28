@@ -1,15 +1,15 @@
-import Navbar from './Navbar';
-import Card from './Card';
+import Navbar from './Navbar/index.jsx';
+import Card from './Card/index.jsx';
 import Login from './Authen';
-import SideNavbar from './SideNavbar';
-import HelpBox from './HelpBox';
-import ProfileNavbar from './ProfileNavbar';
-import SubComBox from './SubComBox';
-import Signup from './FirebaseUI/Signup';
-import FullPost from './FullPost/index';
-import SearchBar from './SearchBar/index';
-import SubComForm from './SubComForm/index';
-import FullSubCom from './FullSubCom/index';
+import SideNavbar from './SideNavbar/index.jsx';
+import HelpBox from './HelpBox/index.jsx';
+import ProfileNavbar from './ProfileNavbar/index.jsx';
+import SubComBox from './SubComBox/index.jsx';
+import Signup from './FirebaseUI/Signup.jsx';
+import FullPost from './FullPost/index.jsx';
+import SearchBar from './SearchBar/index.jsx';
+import SubComForm from './SubComForm/index.jsx';
+import FullSubCom from './FullSubCom/index.jsx';
 import Profile from './Profile/index.jsx';
 
 export {
