@@ -5,10 +5,11 @@ import { useHistory } from 'react-router-dom';
 import parse from 'html-react-parser';
 import firebase from '../../firebase';
 import { User } from '../../firebase/models';
+import './index.css';
 
-const Post = ({ post, upVote, downVote }) => {
+const CommentCard = ({ post, upVote, downVote }) => {
 	const history = useHistory();
-	const { session, user, loading } = useContext(SessionApi);
+	const { session } = useContext(SessionApi);
 	const defaultImage =
 		'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg';
 	//States
@@ -19,21 +20,6 @@ const Post = ({ post, upVote, downVote }) => {
 	const handlePostClick = () => {
 		console.log('post clicked');
 		history.push(`/post/${posts.id}`);
-	};
-
-	const deletePost = () => {
-		if (!window.confirm('Are you sure for delete post ❓')) {
-			return console.log('Cancel delete.');
-		}
-		firebase
-			.firestore()
-			.collection('posts')
-			.doc(post.id)
-			.delete()
-			.then(() => {
-				console.log('deleted post.');
-				window.location.reload();
-			});
 	};
 
 	const fetchData = async () => {
@@ -63,37 +49,36 @@ const Post = ({ post, upVote, downVote }) => {
 	}, []);
 
 	return (
-		<div id={posts.id} className="postPane" onClick={handlePostClick}>
-			<div className="infoPane">
-				<div className="votePane">
-					<button onClick={() => upVote(post)} className="voteUpBT">
-						⬆
-					</button>
-
-					{post.voteUp + post.voteDown}
-
-					<button
-						onClick={() => downVote(post)}
-						className="voteDownBT"
-					>
-						⬇
-					</button>
-				</div>
-				<p>Comments</p>
-			</div>
-
+		<div id={posts.id} className="commentPane">
 			<div>
 				<div className="post">
-					<div>
+					<div className="commentVotePane">
 						<img
 							src={postUser.photoURL}
 							onError={defaultImage}
 							alt="profile picture"
 							className="profilePic"
 						/>
+						<div className="voteCommentPane">
+							<button
+								onClick={() => upVote(post)}
+								className="voteUpBT"
+							>
+								⬆
+							</button>
+
+							{post.voteUp + post.voteDown}
+
+							<button
+								onClick={() => downVote(post)}
+								className="voteDownBT"
+							>
+								⬇
+							</button>
+						</div>
 					</div>
 
-					<div className="postInfo">
+					<div className="commentInfo">
 						<div className="postBy">
 							<p className="displayName">
 								{postUser.displayName}
@@ -107,15 +92,8 @@ const Post = ({ post, upVote, downVote }) => {
 									timeStyle: 'short',
 								})}
 							</p>
-							{post.userUID == user.uid ? (
-								<div>
-									<button onClick={deletePost}>X</button>
-								</div>
-							) : (
-								<div></div>
-							)}
 						</div>
-						<div className="postContent">
+						<div className="postContent" onClick={handlePostClick}>
 							<p>{parse(post.content)}</p>
 							{/* แสดง Post */}
 						</div>
@@ -126,4 +104,4 @@ const Post = ({ post, upVote, downVote }) => {
 	);
 };
 
-export default Post;
+export default CommentCard;

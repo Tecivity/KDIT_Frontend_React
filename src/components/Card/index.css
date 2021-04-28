@@ -238,6 +238,7 @@ h1.loginWarn {
 
 	font-size: 1rem;
 
+	margin: 1rem;
 	margin-left: auto;
 }
 
@@ -279,4 +280,15 @@ h1.loginWarn {
 }
 .conPostBtn:active {
 	background: #cc7746;
+}
+
+.image img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+}
+
+.ckEditor {
+	width: 100%;
 }

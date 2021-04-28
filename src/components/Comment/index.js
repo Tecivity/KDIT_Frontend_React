@@ -1,11 +1,10 @@
-import './index.css';
-import Post from './Post';
-import PostForm from './PostForm';
 import React, { useState, useEffect } from 'react';
 import firebase from '../../firebase';
 import { PostModel } from '../../firebase/models';
+import CommentForm from './CommentForm';
+import CommentCard from './CommentCard';
 
-export default function Card() {
+const Comment = () => {
 	const ref = firebase.firestore().collection('posts');
 
 	//States
@@ -51,13 +50,21 @@ export default function Card() {
 	}, []);
 
 	return (
-		<div className="card">
-			<PostForm updatePost={updatePost} />
+		<div className="commentCard">
+			<CommentForm />
 			<div className="content">
 				{posts.map((post) => (
-					<Post post={post} upVote={upVote} downVote={downVote} />
+					<CommentCard
+						post={post}
+						upVote={upVote}
+						downVote={downVote}
+					/>
 				))}
 			</div>
 		</div>
 	);
-}
+
+	return <></>;
+};
+
+export default Comment;
