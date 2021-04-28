@@ -6,3 +6,15 @@
 
 	border: 1px solid black;
 }
+
+.editProfilePane {
+	display: flex;
+	justify-content: center;
+
+	border: 1px solid black;
+}
+
+.editProfileForm {
+	display: flex;
+	flex-direction: column;
+}
