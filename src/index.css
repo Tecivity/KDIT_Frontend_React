@@ -15,17 +15,6 @@ code {
 		monospace;
 }
 
-button {
-	transition: 0.3s;
-}
-
-button:hover {
-	transform: translateY(-3px);
-}
-
-button:active {
-	transform: translateY(5px);
-}
 /* dark mode goes here 
 @media (prefers-color-scheme: light) {
 	body, h1, h2, h3 {
