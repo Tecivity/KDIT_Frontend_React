@@ -1,11 +1,40 @@
-import React, { useState } from 'react';
-import profilePic from '../../assets/Test.jpg';
+import React, { useState,useEffect } from 'react';
 import Comment from '../Comment/index';
 import parse from 'html-react-parser';
+import firebase from '../../firebase'
 import './index.css';
+import { User } from '../../firebase/models';
 
 const FullPost = ({ post, upVote, downVote, id }) => {
-	//console.log(`fullpost -> id : ${id}, post : ${post.userUID}`)
+	const [postUser, setPostUser] = useState('');
+
+	const fetchData = async () => {
+		firebase
+			.firestore()
+			.collection('users')
+			.doc(post.userUID)
+			.get()
+			.then((doc) => {
+				const pUser = new User(
+					doc.id,
+					doc.data().totalVote,
+					doc.data().bio,
+					doc.data().displayName,
+					doc.data().photoURL,
+					doc.data().email,
+				);
+				setPostUser(pUser);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
+	useEffect(() => {
+		fetchData();
+		console.log(postUser)
+	}, [post]);
+	
 	return (
 		<div className="fullPane">
 			<div>
@@ -35,7 +64,7 @@ const FullPost = ({ post, upVote, downVote, id }) => {
 						<div className="full-post">
 							<div>
 								<img
-									src={profilePic}
+									src={postUser.photoURL}
 									alt="full-profile picture"
 									className="full-profilePic"
 								/>
@@ -44,7 +73,7 @@ const FullPost = ({ post, upVote, downVote, id }) => {
 							<div className="full-postInfo">
 								<div className="full-postBy">
 									<p className="full-displayName">
-										Display Name
+										{postUser.displayName}
 									</p>
 									<p className="full-username">
 										@{post.userid}

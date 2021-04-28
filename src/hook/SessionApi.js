@@ -6,6 +6,8 @@ export const SessionProvider = ({ children }) => {
     const [user,setUser] = useState('')
     const [session,setSession] = useState(false)
     const [loading, setLoading] = useState(false)
+    const defaultImage =
+		'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg'
 
     const authListener = () => {
         setLoading(true)
@@ -41,7 +43,8 @@ export const SessionProvider = ({ children }) => {
                 handleLogout,
                 authListener,
                 loading,
-                setLoading
+                setLoading,
+                defaultImage
                 }}>
             {children}
         </SessionApi.Provider>

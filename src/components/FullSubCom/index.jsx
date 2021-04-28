@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './index.css';
 
-const FullSubCom = ({ subCom }) => {
+const FullSubCom = ({ subCom, update }) => {
 	//States
 	const [edit, setEdit] = useState(false);
-
-	useEffect(() => {
-		console.log(subCom);
-	}, []);
+	const [newSubCom, setNewSubCom] = useState({
+		name: '',
+		description: '',
+		photoURL: ''
+	})
 
 	//Functions
 	const handleOnClick = () => {
@@ -17,7 +18,7 @@ const FullSubCom = ({ subCom }) => {
 	const handleChange = (e) => {
 		const name = e.target.name;
 		const value = e.target.value;
-		// setSubCom({ ...subcom, [name]: value });
+		setNewSubCom({ ...newSubCom, [name]: value });
 	};
 
 	const clearInput = () => {
@@ -26,24 +27,17 @@ const FullSubCom = ({ subCom }) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// if (subcom.name && subcom.description) {
-		// 	firebase
-		// 		.firestore()
-		// 		.collection('sub_community')
-		// 		.add({
-		// 			...subcom,
-		// 			ownerUID: user.uid,
-		// 			photoURL:
-		// 				'https://cdn.jeab.com/wp-content/uploads/2020/03/wallpaper-for-jeab06.jpg',
-		// 			totalFollow: 0,
-		// 		})
-		// 		.then(() => {
-		// 			e.target.value = '';
-		// 			clearInput();
-		// 			window.location.reload();
-		// 		});
-		// }
+		console.log(newSubCom)
+		update(newSubCom)
 	};
+
+	useEffect(() => {
+		setNewSubCom({
+			name: subCom.name,
+			description: subCom.description,
+			photoURL: subCom.photoURL
+		})
+	}, [subCom])
 
 	return (
 		<div className="fullComPane">
@@ -69,8 +63,8 @@ const FullSubCom = ({ subCom }) => {
 										type="text"
 										name="name"
 										className="nameInput"
-										placeholder="What's Your Community Name?"
 										onChange={(e) => handleChange(e)}
+										value={newSubCom.name}
 									/>
 									<label htmlFor="">Description</label>
 									<textarea
@@ -79,8 +73,8 @@ const FullSubCom = ({ subCom }) => {
 										rows="10"
 										name="description"
 										className="desInput"
-										placeholder="Write something about your community..."
 										onChange={(e) => handleChange(e)}
+										value={newSubCom.description}
 									></textarea>
 								</div>
 								<button onClick={handleSubmit} className="btn">

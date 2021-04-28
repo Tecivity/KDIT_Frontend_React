@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './index.css';
+import { SessionApi } from '../../hook/SessionApi'
 
 const Profile = () => {
+	const { user, defaultImage } = useContext(SessionApi)
 	//States
 	const [edit, setEdit] = useState(false);
 
@@ -12,8 +14,13 @@ const Profile = () => {
 
 	return (
 		<div className="profilePane">
-			<h1>Profile Pic HERE</h1>
-			<h2>Name Here</h2>
+			<img
+				src={user.photoURL}
+				onError={defaultImage}
+				alt="profile picture"
+				className="profilePic"
+			/>
+			<h2>{user.displayName}</h2>
 			<h3>Bio ต้องมีมั้ยนิ้</h3>
 			<button onClick={handleOnClick}>Edit</button>
 			{edit && (
