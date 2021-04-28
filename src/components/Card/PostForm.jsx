@@ -101,7 +101,12 @@ const PostForm = ({ updatePost }) => {
 							className="ckEditor"
 							editor={ClassicEditor}
 							data="<p>What's going on today</p>"
-							onReady={editor => {
+							config={{         
+								mediaEmbed: {
+									previewsInData: true
+								}
+							  }} 
+							onReady={(editor,config)=> {
 								// You can store the "editor" and use when it is needed.
 								// console.log('Editor is ready to use!', editor);
 								if (editor) {
