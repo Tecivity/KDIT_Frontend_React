@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import profilePic from '../../assets/Test.jpg';
 import Comment from '../Comment/index';
+import parse from 'html-react-parser';
 import './index.css';
 
 const FullPost = ({ post, upVote, downVote }) => {
-	//States
-	const [posts, setPosts] = useState(post);
 
 	return (
 		<div className="fullPane">
-			<div id={posts.id} className="full-postPane">
+			<div id={post.id} className="full-postPane">
 				<div className="full-infoPane">
 					<div className="full-votePane">
 						<button
@@ -50,7 +49,10 @@ const FullPost = ({ post, upVote, downVote }) => {
 									- {post.timeStamp}
 								</p>
 							</div>
-							<h1>{post.content}</h1>
+							<div className="postContent">
+								<p>{post.content}</p>
+								{/* แสดง Post */}
+							</div>
 						</div>
 					</div>
 				</div>

@@ -1,15 +1,21 @@
-import React from 'react';
-import Card from '../Card';
-import PostForm from '../Card/PostForm';
+import React, { useState, useEffect } from 'react';
 import './index.css';
 
-const FullSubCom = () => {
+const FullSubCom = ({ subCom }) => {
+	// const [subCom,setSubCom] = useState({})
+
+	useEffect(() => {
+		console.log(subCom)
+	}, [])
+
 	return (
 		<div className="fullComPane">
 			<div className="comInfoPane">
-				<h1>Image Here</h1>
-				<h2>Name</h2>
-				<h2>Description</h2>
+				<div className="subComImagePane">
+					<img src={subCom.photoURL} alt="" className="subComImg" />
+				</div>
+				<h2>{subCom.name}</h2>
+				<h2>{subCom.description}</h2>
 				<button>Edit</button>
 				<button>Follow</button>
 			</div>
