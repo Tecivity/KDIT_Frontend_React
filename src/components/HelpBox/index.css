@@ -36,3 +36,34 @@ body {
 .seeMoreHelpBtn:active {
 	transform: translateY(5px);
 }
+
+/* Popups */
+.popup-content {
+	width: 80%;
+	height: 70%;
+
+	border: 5px solid #f48c51;
+	border-radius: 2rem;
+}
+
+.modal {
+	padding: 1rem;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.close {
+	position: absolute;
+
+	align-self: flex-end;
+}
+
+.modal .header {
+	border-bottom: 1px solid lightgrey;
+}
+
+.modal .content {
+	margin-top: 2rem;
+}
