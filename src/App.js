@@ -41,7 +41,7 @@ const Routes = () => {
 		<Switch>
 			<Route exact path="/" component={HomePage} />
 			<Route exact path="/auth" component={AuthPage} />
-			<Route exact path="/sub-community" component={SubComPage} />
+			<Route exact path="/community" component={SubComPage} />
 			<Route exact path="/help" component={HelpPage} />
 			<Route exact path="/about" component={AboutPage} />
 			<Route exact path="/post/:id" component={PostPage} />

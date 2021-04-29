@@ -55,7 +55,7 @@ const FullSubCom = ({ subCom, update }) => {
 				<h2 style={{ marginBottom: '0' }}>{subCom.name}</h2>
 				<p>{subCom.description}</p>
 				<button className="subcom-btn">Follow</button>
-				<button className="edit-btn" onClick={handleOnClick}>
+				<button className="editCombtn" onClick={handleOnClick}>
 					{edit ? 'X' : 'Edit'}
 				</button>
 				{edit && (

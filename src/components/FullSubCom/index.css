@@ -48,7 +48,7 @@
 	transform: translateY(5px);
 }
 
-.edit-btn {
+.editCombtn {
 	background: white;
 
 	border: 2px solid #f48c51;
@@ -60,12 +60,12 @@
 	transition: 0.2s;
 }
 
-.edit-btn:hover {
+.editCombtn:hover {
 	background: #f48c51;
 	color: white;
 }
 
-.edit-btn:active {
+.editCombtn:active {
 	background: #ad6439;
 	color: white;
 }

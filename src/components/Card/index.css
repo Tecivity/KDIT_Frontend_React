@@ -243,11 +243,13 @@ h1.loginWarn {
 .postForm {
 	width: 90%;
 	margin: 1rem 1rem;
+	margin-bottom: 0;
 }
 
 .postFormBox {
 	display: flex;
 	flex-direction: row;
+	justify-content: center;
 	margin: 0rem;
 	margin-bottom: 2rem;
 	padding-bottom: 0.5rem;
@@ -274,7 +276,7 @@ h1.loginWarn {
 
 	font-size: 1rem;
 
-	margin: 1rem;
+	margin: 0.5rem;
 	margin-left: auto;
 }
 

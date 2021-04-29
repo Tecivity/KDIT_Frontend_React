@@ -37,74 +37,37 @@ body {
 }
 
 .siteName {
-	font-weight: 700;
-	text-decoration: none;
 	padding-left: 1rem;
 	padding-right: 1rem;
+
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+
+	font-weight: 700;
+	text-decoration: none;
+
+	transition: 0.1s;
 }
 
 .siteName:hover {
 	background-color: #ffccaef1;
-	color: #f8640e;
 	border: none;
 	border-radius: 3rem;
+
+	transform: scale(1.2);
 }
 
-.siteName:not:focus {
+.siteName:active {
+	transform: scale(1);
+}
+
+.siteName:hover h4 {
 	color: #f8640e;
 }
 
-.subcomText {
-	font-weight: 700;
-	text-decoration: none;
-	padding-left: 1rem;
-	padding-right: 1rem;
-}
-
-.subcomText:hover {
-	background-color: #ffccaef1;
-	color: #f8640e;
-	border: none;
-	border-radius: 3rem;
-}
-
-.helpText {
-	font-weight: 700;
-	text-decoration: none;
-	padding-left: 1rem;
-}
-
-.helpText:hover {
-	background-color: #ffccaef1;
-	color: #f8640e;
-	border: none;
-	border-radius: 3rem;
-}
-
-.aboutText {
-	font-weight: 700;
-	text-decoration: none;
-	padding-left: 1rem;
-}
-
-.aboutText:hover {
-	background-color: #ffccaef1;
-	color: #f8640e;
-	border: none;
-	border-radius: 3rem;
-}
-
-.profileText {
-	font-weight: 700;
-	text-decoration: none;
-	padding-left: 1rem;
-}
-
-.profileText:hover {
-	background-color: #ffccaef1;
-	color: #f8640e;
-	border: none;
-	border-radius: 3rem;
+.siteName h4 {
+	margin: 0.5rem;
 }
 
 .create-button {
