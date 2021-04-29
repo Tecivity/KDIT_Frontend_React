@@ -1,5 +1,5 @@
 import React from 'react';
-import { HelpBox, Navbar } from '../components';
+import { HelpBox, Navbar, SearchBar } from '../components';
 
 const HelpPage = () => {
 	//Data
@@ -44,7 +44,12 @@ const HelpPage = () => {
 			<Navbar />
 			<div className="helpPane">
 				<div class="topHelpBox">
-					<h1 class="helpHead">Need Help?</h1>
+					<h1
+						class="helpHead"
+						style={{ fontSize: '5em', margin: '0' }}
+					>
+						Need Help?
+					</h1>
 					<div class="helpBoxPane">
 						{questions.map((question) => {
 							return (
