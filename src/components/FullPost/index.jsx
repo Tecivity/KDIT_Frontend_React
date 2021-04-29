@@ -20,7 +20,7 @@ const FullPost = ({ post, upVote, downVote, id }) => {
 	);
 
   const fetchData = async () => {
-    firebase
+    await firebase
       .firestore()
       .collection("users")
       .doc(post.userUID)
@@ -35,6 +35,7 @@ const FullPost = ({ post, upVote, downVote, id }) => {
           doc.data().email
         );
         setPostUser(pUser);
+		console.log(postUser.photoURL);
       })
       .catch((err) => {
         console.log(err);
@@ -43,7 +44,7 @@ const FullPost = ({ post, upVote, downVote, id }) => {
 
   useEffect(() => {
     fetchData();
-    console.log(postUser);
+    console.log(postUser.photoURL);
   }, [post]);
 
   //Functions
