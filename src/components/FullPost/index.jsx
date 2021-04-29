@@ -9,15 +9,31 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import MyUploadAdapter from "../../firebase/ckeditor_image_firebase";
 
-const FullPost = ({ post, upVote, downVote, id }) => {
+const FullPost = ({ post, id }) => {
   const [postUser, setPostUser] = useState("");
 
   const { session, user, loading } = useContext(SessionApi);
 
   //States
-	const [newPost, setNewPost] = useState(
-		""
-	);
+	const [newPost, setNewPost] = useState("");
+
+	const upVote = (post) => {
+		firebase
+			.firestore()
+			.collection('posts')
+			.doc(post.id)
+			.set({ ...post, voteUp: post.voteUp + 1 });
+		fetchData();
+	};
+
+	const downVote = (post) => {
+		firebase
+			.firestore()
+			.collection('posts')
+			.doc(post.id)
+			.set({ ...post, voteDown: post.voteDown - 1 });
+		fetchData();
+	};
 
   const fetchData = async () => {
     firebase
@@ -79,7 +95,7 @@ const FullPost = ({ post, upVote, downVote, id }) => {
                 ⬆
               </button>
 
-              {post.voteUp}
+              {post.voteUp + post.voteDown}
 
               <button
                 onClick={() => downVote(post)}

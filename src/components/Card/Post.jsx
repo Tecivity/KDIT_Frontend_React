@@ -6,23 +6,36 @@ import parse from 'html-react-parser';
 import firebase from '../../firebase';
 import { User } from '../../firebase/models';
 
-const Post = ({ post, upVote, downVote }) => {
+const Post = ({ post }) => {
 	const history = useHistory();
 	const { session, user, loading } = useContext(SessionApi);
 	const defaultImage =
 		'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg';
 	//States
-	const [posts, setPosts] = useState(post);
 	const [postUser, setPostUser] = useState('');
 
 	//Function
 	const handlePostClick = () => {
 		console.log('post clicked');
-		history.push(`/post/${posts.id}`);
+		history.push(`/post/${post.id}`);
 	};
 
-	const editPost = () => {
-		//Edit Post Code HERE
+	const upVote = (post) => {
+		firebase
+			.firestore()
+			.collection('posts')
+			.doc(post.id)
+			.set({ ...post, voteUp: post.voteUp + 1 });
+		fetchData();
+	};
+
+	const downVote = (post) => {
+		firebase
+			.firestore()
+			.collection('posts')
+			.doc(post.id)
+			.set({ ...post, voteDown: post.voteDown - 1 });
+		fetchData();
 	};
 
 	const deletePost = () => {
@@ -53,7 +66,7 @@ const Post = ({ post, upVote, downVote }) => {
 					doc.data().bio,
 					doc.data().displayName,
 					doc.data().photoURL,
-					doc.data().email,
+					doc.data().email
 				);
 				setPostUser(pUser);
 			})
@@ -67,7 +80,7 @@ const Post = ({ post, upVote, downVote }) => {
 	}, []);
 
 	return (
-		<div id={posts.id} className="postPane">
+		<div id={post.id} className="postPane">
 			<div className="infoPane">
 				<div className="votePane">
 					<button onClick={() => upVote(post)} className="voteUpBT">
@@ -113,7 +126,6 @@ const Post = ({ post, upVote, downVote }) => {
 							</p>
 							{post.userUID == user.uid ? (
 								<div>
-									<button onClick={editPost}>edit</button>
 									<button onClick={deletePost}>X</button>
 								</div>
 							) : (
