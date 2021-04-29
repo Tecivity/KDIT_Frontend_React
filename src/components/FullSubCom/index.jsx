@@ -7,8 +7,8 @@ const FullSubCom = ({ subCom, update }) => {
 	const [newSubCom, setNewSubCom] = useState({
 		name: '',
 		description: '',
-		photoURL: ''
-	})
+		photoURL: '',
+	});
 
 	//Functions
 	const handleOnClick = () => {
@@ -27,25 +27,32 @@ const FullSubCom = ({ subCom, update }) => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(newSubCom)
-		update(newSubCom)
+		console.log(newSubCom);
+		update(newSubCom);
 	};
 
 	useEffect(() => {
 		setNewSubCom({
 			name: subCom.name,
 			description: subCom.description,
-			photoURL: subCom.photoURL
-		})
-	}, [subCom])
+			photoURL: subCom.photoURL,
+		});
+	}, [subCom]);
 
 	return (
 		<div className="fullComPane">
 			<div className="comInfoPane">
+				<div className="bannerImgPane">
+					<img
+						src="https://images7.alphacoders.com/110/thumbbig-1104854.jpg"
+						alt=""
+						className="bannerImg"
+					/>
+				</div>
 				<div className="subComImagePane">
 					<img src={subCom.photoURL} alt="" className="subComImg" />
 				</div>
-				<h2>{subCom.name}</h2>
+				<h2 style={{ marginBottom: '0' }}>{subCom.name}</h2>
 				<p>{subCom.description}</p>
 				<button className="subcom-btn">Follow</button>
 				<button className="edit-btn" onClick={handleOnClick}>

@@ -69,3 +69,31 @@
 	background: #ad6439;
 	color: white;
 }
+
+.subComImg {
+	border: 4px solid white;
+}
+
+.comInfoPane {
+	margin-top: 12rem;
+}
+
+.bannerImgPane {
+	position: absolute;
+	left: 0;
+	top: 0;
+
+	width: 100%;
+	height: 15rem;
+
+	z-index: -1;
+}
+
+.bannerImg {
+	width: 100%;
+	height: 100%;
+
+	object-fit: cover;
+
+	z-index: -1;
+}
