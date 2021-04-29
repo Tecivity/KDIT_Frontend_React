@@ -21,6 +21,10 @@ const Post = ({ post, upVote, downVote }) => {
 		history.push(`/post/${posts.id}`);
 	};
 
+	const editPost = () => {
+		//Edit Post Code HERE
+	};
+
 	const deletePost = () => {
 		if (!window.confirm('Are you sure for delete post ❓')) {
 			return console.log('Cancel delete.');
@@ -109,6 +113,7 @@ const Post = ({ post, upVote, downVote }) => {
 							</p>
 							{post.userUID == user.uid ? (
 								<div>
+									<button onClick={editPost}>edit</button>
 									<button onClick={deletePost}>X</button>
 								</div>
 							) : (
