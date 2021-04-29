@@ -1,9 +1,7 @@
-@font-face {
-	font-family: DM Sans;
-	src: url('../assets/DMSans-Regular.ttf');
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 * {
-	font-family: DM Sans;
+	font-family: 'Roboto', sans-serif;
 }
 
 h1.head {
@@ -21,6 +19,55 @@ h1.helpHead {
 	font-size: 35px;
 }
 
+/* Login Page  */
+.auth {
+	height: 100vh;
+
+	/* border: 1px solid black; */
+}
+
+.welcomeBackground {
+	position: absolute;
+	top: 0;
+
+	width: 100vw;
+	height: 100vh;
+
+	z-index: -1;
+
+	border: 1px solid black;
+
+	background-image: url('../assets/NISIT\ BACKGROUND.png');
+	background-size: 90vw;
+	background-position-x: 250%;
+	background-position-y: 50%;
+	background-repeat: no-repeat;
+
+	transition: 0.3s;
+}
+
+.welcomeTextPane {
+	position: absolute;
+	top: 20%;
+	left: 10%;
+
+	line-height: 2rem;
+
+	font-size: 2em;
+
+	opacity: 1;
+}
+
+.nisitText {
+	font-size: 3em;
+	text-shadow: 5px 5px #f48c51;
+}
+
+.welcomeImgPane {
+	position: absolute;
+	top: 0;
+}
+
 .mainView {
 	display: flex;
 }
@@ -32,7 +79,7 @@ h1.helpHead {
 	text-align: center;
 }
 
-.loginView {
+/* .loginView {
 	height: 50vh;
 	width: 40vh;
 	margin-left: 40%;
@@ -48,7 +95,7 @@ h1.helpHead {
 }
 .loginView:hover {
 	border-radius: 20px;
-}
+} */
 
 .welcome {
 	width: 100%;

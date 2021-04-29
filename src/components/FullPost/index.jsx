@@ -35,6 +35,15 @@ const FullPost = ({ post, upVote, downVote, id }) => {
 		console.log(postUser);
 	}, [post]);
 
+	//Functions
+	const editPost = () => {
+		//Edit Post
+		setEdit(!edit);
+	};
+
+	//States
+	const [edit, setEdit] = useState(false);
+
 	return (
 		<div className="fullPane">
 			<div>
@@ -85,7 +94,12 @@ const FullPost = ({ post, upVote, downVote, id }) => {
 								</div>
 								<div className="full-postContent">
 									{post.content ? (
-										<p>{parse(post.content)}</p>
+										edit ? (
+											<p>{parse(post.content)}</p>
+										) : (
+											//Edit Post
+											<p>Edit Mode</p>
+										)
 									) : (
 										<div></div>
 									)}
@@ -93,6 +107,9 @@ const FullPost = ({ post, upVote, downVote, id }) => {
 									{/* แสดง Post */}
 								</div>
 							</div>
+							<button onClick={editPost}>
+								{edit ? 'X' : 'Edit'}
+							</button>
 						</div>
 					</div>
 				</div>

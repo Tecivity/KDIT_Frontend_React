@@ -4,6 +4,8 @@ import firebase from '../firebase';
 import { Navbar, Login, Signup } from '../components';
 import { Redirect } from 'react-router-dom';
 import { SessionApi } from '../hook/SessionApi';
+import { bounceInLeft, fadeIn } from 'react-animations';
+import Radium, { StyleRoot } from 'radium';
 
 export default function AuthPage() {
 	const { user, setUser, setSession } = useContext(SessionApi);
@@ -97,9 +99,31 @@ export default function AuthPage() {
 
 	var provider = new firebase.auth.GoogleAuthProvider();
 
+	//Animations
+	const styles = {
+		bounceInLeft: {
+			animation: '1s',
+			animationName: Radium.keyframes(bounceInLeft, 'bounceInLeft'),
+		},
+		fadeIn: {
+			animation: '1s',
+			animationName: Radium.keyframes(fadeIn, 'fadeIn'),
+		},
+	};
+
 	return (
-		<div class="auth">
-			<Navbar user={user} handleLogout={handleLogout} />
+		<div className="auth">
+			<StyleRoot>
+				<div className="welcomeTextPane" style={styles.bounceInLeft}>
+					<h1 className="nisitText">NISIT</h1>
+					<h2 className="nisitSubText">
+						We Connect{' '}
+						<span style={{ color: '#f48c51' }}>Student </span>{' '}
+					</h2>
+				</div>
+				<div className="welcomeBackground" style={styles.fadeIn}></div>
+			</StyleRoot>
+
 			{user ? (
 				<Redirect push to="/" />
 			) : (
