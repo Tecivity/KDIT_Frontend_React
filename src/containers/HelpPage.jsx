@@ -1,5 +1,5 @@
 import React from 'react';
-import { HelpBox, Navbar } from '../components';
+import { HelpBox, Navbar, SearchBar } from '../components';
 import { SessionApi } from '../hook/SessionApi';
 
 const HelpPage = () => {
