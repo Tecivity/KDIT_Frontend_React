@@ -4,6 +4,7 @@ import { SessionApi } from '../hook/SessionApi';
 import firebase from '../firebase';
 import { SubComModel } from '../firebase/models';
 import HashLoader from "react-spinners/HashLoader"
+import { UserService,PostService } from '../services'
 
 const SubComPage = () => {
 	const ref = firebase.firestore().collection('sub_community');
@@ -17,12 +18,12 @@ const SubComPage = () => {
 	const { session, authListener, loading } = React.useContext(SessionApi);
 
 	const firebaseTest = async () => {
-		const data = await ref.doc('LmTGbTtE694gNj5UAE0').get();
-		if (data.data()) {
-			console.log(true);
-		} else {
-			console.log(false);
-		}
+		// UserService.getUser('6Mwv521K17NLixAMhAnR04cUYtE2').then(test => {
+		// 	console.log(test)
+		// })
+		const test = await PostService.getAllPost()
+		console.log(test)
+
 	};
 
 	const fetchData = async () => {
@@ -34,7 +35,7 @@ const SubComPage = () => {
 					doc.data().name,
 					doc.data().description,
 					doc.data().ownerUID,
-					doc.data().photoURL,	
+					doc.data().photoURL,
 					doc.data().totalFollow
 				);
 				subComsArray.push(subCom);

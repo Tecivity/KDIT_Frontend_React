@@ -1,11 +1,52 @@
 import React, { useState, useContext } from 'react';
 import './index.css';
 import { SessionApi } from '../../hook/SessionApi';
+import firebase from '../../firebase'
 
 const Profile = () => {
 	const { user, defaultImage } = useContext(SessionApi);
 	//States
 	const [edit, setEdit] = useState(false);
+
+	const storage = firebase.storage()
+	const [image, setImage] = useState(null)
+	const [url, setUrl] = useState("")
+	const [progress, setProgress] = useState(0)
+	const [path, setPath] = useState('')
+
+	const handleChange = e => {
+		if (e.target.files[0]) {
+			setImage(e.target.files[0])
+			console.log(e.target.files[0])
+		}
+	}
+
+	const handleUpload = e => {
+		e.preventDefault()
+		const uploadTask = storage.ref(`images/${image.name}`).put(image)
+		uploadTask.on(
+			"state_changed",
+			snapshot => {
+				const progress = Math.round(
+					(snapshot.bytesTransferred / snapshot.totalBytes) * 100
+				)
+				setProgress(progress)
+			},
+			error => {
+				console.log(error)
+			},
+			() => {
+				storage
+					.ref("images")
+					.child(image.name)
+					.getDownloadURL()
+					.then(url => {
+						console.log(url)
+						setUrl(url)
+					})
+			}
+		)
+	}
 
 	//Functions
 	const handleOnClick = () => {
@@ -46,7 +87,19 @@ const Profile = () => {
 						<div className="editProfilePane">
 							<form action="" className="editProfileForm">
 								<label htmlFor="">Profile Picture</label>
-								<h1>Upload Pic Here</h1>
+								<div className="componentBox">
+									<h1>Upload picture</h1>
+									<br />
+									<progress value={progress} max="100" />
+									<br />
+									<input type="file" onChange={handleChange} />
+									<button onClick={handleUpload}>Upload</button>
+									<br />
+									{(url !== "") ? (<a href={url}>Click me</a>) : (<h3>upload something</h3>)}
+									<br />
+									<img src={url || "http://via.placeholder.com/400"} alt="firebase-image" width="400px" />
+
+								</div>
 								<label htmlFor="">Display Name</label>
 								<input type="text" name="displayNames" />
 								<label htmlFor="">Username</label>

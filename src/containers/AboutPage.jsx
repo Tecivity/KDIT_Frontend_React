@@ -1,7 +1,15 @@
 import React from 'react';
 import { Navbar } from '../components';
+import { SessionApi } from '../hook/SessionApi';
 
 const AboutPage = () => {
+	const { authListener, loading } = React.useContext(SessionApi)
+
+	React.useEffect(() => {
+		authListener()
+	}, [])
+
+
 	return (
 		<>
 			<Navbar />
