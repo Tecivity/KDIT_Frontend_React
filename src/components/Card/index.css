@@ -255,9 +255,15 @@ h1.loginWarn {
 	margin-bottom: 2rem;
 	padding-bottom: 1rem;
 
-	border: 4px solid #f48c51;
-	border-width: 0 4px 4px 4px;
+	border: 1px solid #f48c51;
+	border-width: 0 3px 3px 3px;
 	border-radius: 0 0 2rem 2rem;
+
+	transition: 0.5s;
+}
+
+.postFormBox:hover {
+	transform: translateY(0);
 }
 
 .postOption {
@@ -341,4 +347,51 @@ h1.loginWarn {
 
 .page h2 {
 	margin: 0.5rem;
+}
+
+.pausePost {
+	margin-bottom: 3rem;
+	padding: 1rem;
+
+	display: flex;
+	justify-content: center;
+
+	background: #f48c51;
+
+	border: 5px dotted #7a482b;
+	border-width: 0 5px 5px 5px;
+	border-radius: 0 0 2rem 2rem;
+
+	color: white;
+
+	transition: 0.3s;
+}
+
+.pausePost:hover {
+	padding-top: 2rem;
+}
+
+.pausePost h1 {
+	margin: auto;
+
+	color: white;
+}
+
+/* Transition */
+.postTransition-enter {
+	opacity: 1;
+	transform: translateY(-15rem);
+}
+.postTransition-enter-active {
+	opacity: 1;
+	transform: translateY(0);
+	transition: 200ms;
+}
+.postTransition-exit {
+	opacity: 1;
+}
+.postTransition-exit-active {
+	opacity: 1;
+	transform: translateY(-15rem);
+	transition: 200ms;
 }
