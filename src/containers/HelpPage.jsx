@@ -1,9 +1,16 @@
+<<<<<<< HEAD
+import React, { useState } from 'react';
+import { HelpBox, Navbar } from '../components';
+=======
 import React from 'react';
 import { HelpBox, Navbar, SearchBar } from '../components';
+>>>>>>> 76ee48fc05352f7eedd9b81b6aa9133941d103bd
 import { SessionApi } from '../hook/SessionApi';
 
 const HelpPage = () => {
-	const { authListener, loading } = React.useContext(SessionApi)
+	const { authListener, loading } = React.useContext(SessionApi);
+
+	const [inProp, setInProp] = useState(false);
 	//Data
 	const questions = [
 		{
@@ -42,13 +49,13 @@ const HelpPage = () => {
 	];
 
 	React.useEffect(() => {
-		authListener()
-	}, [])
-
+		authListener();
+	}, []);
 
 	return (
 		<>
 			<Navbar />
+
 			<div className="helpPane">
 				<div class="topHelpBox">
 					<h1

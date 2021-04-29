@@ -1,18 +1,19 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { SessionApi } from '../../hook/SessionApi';
-import { Link } from 'react-router-dom';
+import { Link, Switch } from 'react-router-dom';
 import firebase from '../../firebase';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import MyUploadAdapter from '../../firebase/ckeditor_image_firebase';
-import { slideInDown, fadeIn } from 'react-animations';
-import Radium, { StyleRoot } from 'radium';
+import { CSSTransition, SwitchTransition } from 'react-transition-group';
+import { MdEdit } from 'react-icons/md';
 
 const PostForm = ({ updatePost }) => {
 	const { session, user } = useContext(SessionApi);
 	const defaultImage =
 		'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg';
 	const [imageURL, setImageURL] = useState(user.photoURL);
+	const [posting, setPosting] = useState(false);
 
 	//States
 	const [post, setPost] = useState({
@@ -37,18 +38,6 @@ const PostForm = ({ updatePost }) => {
 			voteUp: 0,
 			voteDown: 0,
 		});
-	};
-
-	//Animations
-	const styles = {
-		slideInDown: {
-			animation: '1s',
-			animationName: Radium.keyframes(slideInDown, 'slideInDown'),
-		},
-		fadeIn: {
-			animation: '1s',
-			animationName: Radium.keyframes(fadeIn, 'fadeIn'),
-		},
 	};
 
 	function currentDate() {
@@ -96,74 +85,112 @@ const PostForm = ({ updatePost }) => {
 		}
 	};
 
+	const handlePosting = () => {
+		setPosting(true);
+	};
+
+	const handleNotPosting = () => {
+		setPosting(false);
+	};
+
 	useEffect(() => {
 		setImageURL(user.photoURL);
 	}, [user]);
 
 	return (
 		<>
-			<StyleRoot>
-				{session ? (
-					<div className="postFormBox">
-						<div>
-							<img
-								src={imageURL}
-								onError={() => setImageURL(defaultImage)}
-								alt="profile picture"
-								className="form-profilePic"
-							/>
-						</div>
-						<div className="postForm">
-							<CKEditor
-								className="ckEditor"
-								editor={ClassicEditor}
-								data="<p>What's going on today</p>"
-								config={{
-									mediaEmbed: {
-										previewsInData: true,
-									},
-								}}
-								onReady={(editor, config) => {
-									// You can store the "editor" and use when it is needed.
-									// console.log('Editor is ready to use!', editor);
-									if (editor) {
-										editor.plugins.get(
-											'FileRepository',
-										).createUploadAdapter = (loader) => {
-											return new MyUploadAdapter(loader);
-										};
-									}
-								}}
-								onChange={(event, editor) => {
-									const data = editor.getData();
-									// console.log({ event, editor, data });
-									setPost({ ...post, content: data });
-								}}
-								// onBlur={(event, editor) => {
-								// 	console.log('Blur.', editor);
-								// }}
-								// onFocus={(event, editor) => {
-								// 	console.log('Focus.', editor);
-								// }}
-							/>
-							<div className="postText">
-								<div className="postOption">
-									<button
-										onClick={handleClick}
-										className="postBT"
-									>
-										Post
-									</button>
+			{session ? (
+				<>
+					<SwitchTransition>
+						<CSSTransition
+							key={posting}
+							timeout={300}
+							addEndListener={(node, done) => {
+								node.addEventListener(
+									'transitionend',
+									done,
+									false,
+								);
+							}}
+							classNames="postTransition"
+						>
+							{posting ? (
+								<div className="postFormBox">
+									<div>
+										<img
+											src={imageURL}
+											onError={() =>
+												setImageURL(defaultImage)
+											}
+											alt="profile picture"
+											className="form-profilePic"
+										/>
+									</div>
+
+									<div className="postForm">
+										<CKEditor
+											className="ckEditor"
+											editor={ClassicEditor}
+											data="<p>What's going on today</p>"
+											config={{
+												mediaEmbed: {
+													previewsInData: true,
+												},
+											}}
+											onReady={(editor, config) => {
+												if (editor) {
+													editor.plugins.get(
+														'FileRepository',
+													).createUploadAdapter = (
+														loader,
+													) => {
+														return new MyUploadAdapter(
+															loader,
+														);
+													};
+												}
+											}}
+											onChange={(event, editor) => {
+												const data = editor.getData();
+												setPost({
+													...post,
+													content: data,
+												});
+											}}
+										/>
+										<div className="postText">
+											<div className="postOption">
+												<button
+													onClick={handleClick}
+													className="postBT"
+												>
+													Post
+												</button>
+											</div>
+										</div>
+									</div>
 								</div>
-							</div>
-						</div>
-					</div>
-				) : (
-					<div>
-						<h1 class="loginWarn">Please Login to Create Post</h1>
-					</div>
-				)}
-			</StyleRoot>
+							) : (
+								<div
+									className="pausePost"
+									onClick={handlePosting}
+								>
+									<h1>
+										<MdEdit
+											size="50px"
+											style={{ fill: '#7a482b' }}
+										/>
+									</h1>
+								</div>
+							)}
+						</CSSTransition>
+					</SwitchTransition>
+				</>
+			) : (
+				<div>
+					<h1 class="loginWarn">Please Login to Create Post</h1>
+				</div>
+			)}
 		</>
 	);
 };

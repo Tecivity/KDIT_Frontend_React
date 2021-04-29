@@ -57,6 +57,14 @@ h1.helpHead {
 .nisitText {
 	font-size: 3em;
 	text-shadow: 5px 5px #f48c51;
+
+	transition: 0.5s;
+}
+
+.welcomeTextPane:hover .nisitText {
+	transform: translateY(-5rem) translateX(-3rem);
+
+	text-shadow: 5rem 5rem #f48c51;
 }
 
 .welcomeImgPane {
@@ -278,4 +286,20 @@ h1.helpHead {
 
 .btnPane {
 	width: 20%;
+}
+
+.my-node-enter {
+	opacity: 0;
+}
+.my-node-enter-active {
+	opacity: 1;
+	transform: translateX(5rem);
+	transition: opacity 200ms;
+}
+.my-node-exit {
+	opacity: 1;
+}
+.my-node-exit-active {
+	opacity: 0;
+	transition: opacity 200ms;
 }

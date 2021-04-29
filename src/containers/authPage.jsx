@@ -106,7 +106,7 @@ export default function AuthPage() {
 			animationName: Radium.keyframes(bounceInLeft, 'bounceInLeft'),
 		},
 		fadeIn: {
-			animation: '1s',
+			animation: '3s',
 			animationName: Radium.keyframes(fadeIn, 'fadeIn'),
 		},
 	};
@@ -118,7 +118,7 @@ export default function AuthPage() {
 					<h1 className="nisitText">NISIT</h1>
 					<h2 className="nisitSubText">
 						We Connect{' '}
-						<span style={{ color: '#f48c51' }}>Student </span>{' '}
+						<span style={{ color: '#f48c51' }}>Students</span>{' '}
 					</h2>
 					{user ? (
 						<Redirect push to="/" />
