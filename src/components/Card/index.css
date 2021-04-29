@@ -145,18 +145,37 @@ h1.loginWarn {
 	font-size: 1rem;
 }
 
+.postInfo {
+	margin: 0;
+
+	width: 100%;
+
+	/* border: 1px solid black; */
+}
+
 .postBy {
 	display: flex;
 	flex-direction: row;
+
+	margin: 0;
+
+	/* border: 1px solid black; */
 }
 .postBy p {
 	margin: 0;
-	margin-right: 5px;
+	margin-right: 0.5rem;
 }
 
 .postBy .displayName {
-	font-size: 1rem;
+	font-size: 0.8rem;
 	font-weight: 700;
+
+	/* width: 45%; */
+}
+
+.postBy .username {
+	font-size: 0.7rem;
+	color: grey;
 }
 
 .postBy .timestamp {
@@ -164,8 +183,15 @@ h1.loginWarn {
 }
 
 .postContent {
-	font-size: 1.2rem;
+	margin-top: 0;
+	padding-top: 0;
+
+	width: 100%;
+
+	font-size: 1rem;
 	font-weight: 500;
+
+	/* border: 1px solid black; */
 }
 
 .infoPane {
@@ -191,7 +217,17 @@ h1.loginWarn {
 	height: 50px;
 	border-radius: 50%;
 
-	margin: 0.5rem;
+	margin-right: 1rem;
+	margin-left: 1rem;
+}
+
+.form-profilePic {
+	object-fit: cover;
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+
+	margin: 1rem;
 }
 
 .postText textarea {
@@ -291,4 +327,12 @@ h1.loginWarn {
 
 .ckEditor {
 	width: 100%;
+}
+
+.page {
+	border-bottom: 1px solid lightgrey;
+}
+
+.page h2 {
+	margin: 0.5rem;
 }

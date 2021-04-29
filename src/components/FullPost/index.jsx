@@ -1,7 +1,7 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Comment from '../Comment/index';
 import parse from 'html-react-parser';
-import firebase from '../../firebase'
+import firebase from '../../firebase';
 import './index.css';
 import { User } from '../../firebase/models';
 
@@ -32,9 +32,9 @@ const FullPost = ({ post, upVote, downVote, id }) => {
 
 	useEffect(() => {
 		fetchData();
-		console.log(postUser)
+		console.log(postUser);
 	}, [post]);
-	
+
 	return (
 		<div className="fullPane">
 			<div>
@@ -66,7 +66,7 @@ const FullPost = ({ post, upVote, downVote, id }) => {
 								<img
 									src={postUser.photoURL}
 									alt="full-profile picture"
-									className="full-profilePic"
+									className="fullprofilePic"
 								/>
 							</div>
 
@@ -83,7 +83,7 @@ const FullPost = ({ post, upVote, downVote, id }) => {
 										- {post.timeStamp}
 									</p>
 								</div>
-								<div className="postContent">
+								<div className="full-postContent">
 									{post.content ? (
 										<p>{parse(post.content)}</p>
 									) : (

@@ -14,14 +14,12 @@ const Post = ({ post, upVote, downVote }) => {
 	//States
 	const [posts, setPosts] = useState(post);
 	const [postUser, setPostUser] = useState('');
-	
 
 	//Function
 	const handlePostClick = () => {
 		console.log('post clicked');
 		history.push(`/post/${posts.id}`);
 	};
-	
 
 	const deletePost = () => {
 		if (!window.confirm('Are you sure for delete post ❓')) {
@@ -103,7 +101,7 @@ const Post = ({ post, upVote, downVote }) => {
 							<p className="username">@{post.userUID}</p>
 							<p className="timestamp">
 								{' '}
-								-{' '}
+								•{' '}
 								{new Date(post.timeStamp).toLocaleString([], {
 									dateStyle: 'long',
 									timeStyle: 'short',
@@ -121,7 +119,6 @@ const Post = ({ post, upVote, downVote }) => {
 							<p>{parse(post.content)}</p>
 							{/* แสดง Post */}
 						</div>
-						
 					</div>
 				</div>
 			</div>
