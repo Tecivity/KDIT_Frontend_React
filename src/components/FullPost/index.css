@@ -134,12 +134,17 @@ h1.loginWarn {
 }
 .full-postBy p {
 	margin: 0;
-	margin-right: 5px;
+	margin-right: 0.5rem;
 }
 
 .full-postBy .full-displayName {
-	font-size: 1.2rem;
+	font-size: 0.8rem;
 	font-weight: 700;
+}
+
+.full-postBy .username {
+	font-size: 0.7rem;
+	color: grey;
 }
 
 .full-postBy .full-timestamp {
@@ -161,10 +166,10 @@ h1.loginWarn {
 	margin: 0;
 }
 
-.full-profilePic {
+.fullprofilePic {
 	object-fit: cover;
-	width: 80px;
-	height: 80px;
+	width: 50px;
+	height: 50px;
 	border-radius: 50%;
 
 	margin: 0.5rem;
@@ -203,4 +208,20 @@ h1.loginWarn {
 
 .full-postBT {
 	justify-self: flex-end;
+}
+
+.full-postContent {
+	margin-top: 0;
+	padding-top: 0;
+
+	width: 100%;
+
+	font-size: 1rem;
+	font-weight: 500;
+
+	/* border: 1px solid black; */
+}
+
+.full-postInfo {
+	width: 100%;
 }

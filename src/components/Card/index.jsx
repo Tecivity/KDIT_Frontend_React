@@ -52,6 +52,9 @@ export default function Card() {
 
 	return (
 		<div className="card">
+			<div className="page">
+				<h2>Home</h2>
+			</div>
 			<PostForm updatePost={updatePost} />
 			<div className="content">
 				{posts.map((post) => (

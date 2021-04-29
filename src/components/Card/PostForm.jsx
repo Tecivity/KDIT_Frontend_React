@@ -9,10 +9,8 @@ import MyUploadAdapter from '../../firebase/ckeditor_image_firebase';
 const PostForm = ({ updatePost }) => {
 	const { session, user } = useContext(SessionApi);
 	const defaultImage =
-		'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg'
-	const [imageURL, setImageURL] = useState(user.photoURL)
-
-
+		'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg';
+	const [imageURL, setImageURL] = useState(user.photoURL);
 
 	//States
 	const [post, setPost] = useState({
@@ -71,12 +69,16 @@ const PostForm = ({ updatePost }) => {
 				subCom: 'test Sub Com',
 				subComUID: 'subcomUID',
 			};
-			firebase.firestore().collection('posts').add(newPost).then(() => {
-				updatePost()
-				e.target.value = ''
-				clearInput()
-				window.location.reload()
-			})
+			firebase
+				.firestore()
+				.collection('posts')
+				.add(newPost)
+				.then(() => {
+					updatePost();
+					e.target.value = '';
+					clearInput();
+					window.location.reload();
+				});
 		}
 	};
 
@@ -93,7 +95,7 @@ const PostForm = ({ updatePost }) => {
 							src={imageURL}
 							onError={() => setImageURL(defaultImage)}
 							alt="profile picture"
-							className="profilePic"
+							className="form-profilePic"
 						/>
 					</div>
 					<div className="postForm">
@@ -101,12 +103,12 @@ const PostForm = ({ updatePost }) => {
 							className="ckEditor"
 							editor={ClassicEditor}
 							data="<p>What's going on today</p>"
-							config={{         
+							config={{
 								mediaEmbed: {
-									previewsInData: true
-								}
-							  }} 
-							onReady={(editor,config)=> {
+									previewsInData: true,
+								},
+							}}
+							onReady={(editor, config) => {
 								// You can store the "editor" and use when it is needed.
 								// console.log('Editor is ready to use!', editor);
 								if (editor) {
