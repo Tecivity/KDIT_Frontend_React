@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import { HelpBox, Navbar } from '../components';
-=======
-import React from 'react';
+import React,{useState} from 'react';
 import { HelpBox, Navbar, SearchBar } from '../components';
->>>>>>> 76ee48fc05352f7eedd9b81b6aa9133941d103bd
 import { SessionApi } from '../hook/SessionApi';
 
 const HelpPage = () => {

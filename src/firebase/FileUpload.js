@@ -2,20 +2,22 @@ import React, { useState, useEffect } from 'react'
 import firebase from '../firebase'
 import './styles.css'
 
-export default function FileUpload() {
+export default function FileUpload({ url, setUrl }) {
     const storage = firebase.storage()
 
     const [image, setImage] = useState(null)
-    const [url, setUrl] = useState("")
     const [progress, setProgress] = useState(0)
+    const [path, setPath] = useState('')
 
     const handleChange = e => {
         if (e.target.files[0]) {
             setImage(e.target.files[0])
+            setPath(URL.createObjectURL(e.target.files[0]))
         }
     }
 
-    const handleUplode = () => {
+    const handleUpload = e => {
+        e.preventDefault()
         const uploadTask = storage.ref(`images/${image.name}`).put(image)
         uploadTask.on(
             "state_changed",
@@ -41,21 +43,20 @@ export default function FileUpload() {
         )
     }
 
-    console.log("image:", image)
-
     return (
-        <div className="componentBox">
-            <h1>StorageTest!</h1>
+        <div>
+            <h1>Upload picture</h1>
             <br />
             <progress value={progress} max="100" />
             <br />
             <input type="file" onChange={handleChange} />
-            <button onClick={handleUplode}>Uplode</button>
+            <button onClick={handleUpload}>Upload</button>
             <br />
-            {(url !== "") ? (<a href={url}>Click me</a>) : (<h3>upload something</h3>)}
-            <br />
+            <h3>Preview image</h3>
+            {image ? <img src={path} alt="firebase-image" width="400px" /> : <></>}
+            <h3>Uploaded image</h3>
             <img src={url || "http://via.placeholder.com/400"} alt="firebase-image" width="400px" />
-
+            {(url !== "") ? (<a href={url}>Click me</a>) : (<h3>upload something</h3>)}
         </div>
     )
 }
