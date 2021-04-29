@@ -120,8 +120,12 @@ h1.helpHead {
 	outline: none;
 }
 
-.centerDiv {
-	top: 20%;
+.about {
+	position: absolute;
+	left: 25%;
+	width: 65%;
+
+	/* top: 20%; */
 	align-content: center;
 	text-align: center;
 	justify-content: center;
