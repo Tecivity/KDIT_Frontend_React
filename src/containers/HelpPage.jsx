@@ -1,6 +1,10 @@
 import React from 'react';
+<<<<<<< HEAD
+import { HelpBox, Navbar, SearchBar } from '../components';
+=======
 import { HelpBox, Navbar } from '../components';
 import { SessionApi } from '../hook/SessionApi';
+>>>>>>> 558086cb673fde6c503787e8d2c410c98d290a22
 
 const HelpPage = () => {
 	const { authListener, loading } = React.useContext(SessionApi)
@@ -51,7 +55,12 @@ const HelpPage = () => {
 			<Navbar />
 			<div className="helpPane">
 				<div class="topHelpBox">
-					<h1 class="helpHead">Need Help?</h1>
+					<h1
+						class="helpHead"
+						style={{ fontSize: '5em', margin: '0' }}
+					>
+						Need Help?
+					</h1>
 					<div class="helpBoxPane">
 						{questions.map((question) => {
 							return (
