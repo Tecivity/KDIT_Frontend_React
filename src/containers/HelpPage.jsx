@@ -1,5 +1,7 @@
 import React from 'react';
 import { HelpBox, Navbar } from '../components';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 
 const HelpPage = () => {
 	//Data
@@ -68,6 +70,16 @@ const HelpPage = () => {
 						})}
 					</div>
 				</div>
+				<Popup trigger={<button>Trigger</button>} position="top left">
+					{(close) => (
+						<div>
+							Content here
+							<a className="close" onClick={close}>
+								&times;
+							</a>
+						</div>
+					)}
+				</Popup>
 			</div>
 		</>
 	);
