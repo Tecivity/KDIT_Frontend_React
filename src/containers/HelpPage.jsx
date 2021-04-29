@@ -1,7 +1,13 @@
 import React from 'react';
+<<<<<<< HEAD
 import { HelpBox, Navbar, SearchBar } from '../components';
+=======
+import { HelpBox, Navbar } from '../components';
+import { SessionApi } from '../hook/SessionApi';
+>>>>>>> 558086cb673fde6c503787e8d2c410c98d290a22
 
 const HelpPage = () => {
+	const { authListener, loading } = React.useContext(SessionApi)
 	//Data
 	const questions = [
 		{
@@ -38,6 +44,11 @@ const HelpPage = () => {
 			answer: 'Go to profile setting',
 		},
 	];
+
+	React.useEffect(() => {
+		authListener()
+	}, [])
+
 
 	return (
 		<>
