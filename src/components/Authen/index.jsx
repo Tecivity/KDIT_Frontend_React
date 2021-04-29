@@ -23,7 +23,7 @@ export default function Login({
 		<>
 			<form onSubmit={submitHandler} class="auth">
 				<div className="form-inner">
-					<h2>{hasAccount ? 'Sign Up' : 'Login'}</h2>
+					{/* <h2>{hasAccount ? 'Sign Up' : 'Login'}</h2>
 					<div className="form-group">
 						<label>Username</label>
 						<input
@@ -80,8 +80,7 @@ export default function Login({
 								</p>
 							</>
 						)}
-					</div>
-					{/* Sign in with Google */}
+					</div> */}
 					<Signup />
 				</div>
 			</form>

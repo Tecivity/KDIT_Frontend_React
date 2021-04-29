@@ -120,28 +120,16 @@ export default function AuthPage() {
 						We Connect{' '}
 						<span style={{ color: '#f48c51' }}>Student </span>{' '}
 					</h2>
+					{user ? (
+						<Redirect push to="/" />
+					) : (
+						<div className="loginView">
+							<Signup />
+						</div>
+					)}
 				</div>
 				<div className="welcomeBackground" style={styles.fadeIn}></div>
 			</StyleRoot>
-
-			{user ? (
-				<Redirect push to="/" />
-			) : (
-				<div className="loginView">
-					<Login
-						email={email}
-						setEmail={setEmail}
-						password={password}
-						setPassword={setPassword}
-						handleLogin={handleLogin}
-						handleSingup={handleSingup}
-						hasAccount={hasAccount}
-						setHasAccount={setHasAccount}
-						emailError={emailError}
-						passwordError={passwordError}
-					/>
-				</div>
-			)}
 		</div>
 	);
 }
