@@ -22,8 +22,6 @@ h1.helpHead {
 /* Login Page  */
 .auth {
 	height: 100vh;
-
-	/* border: 1px solid black; */
 }
 
 .welcomeBackground {
@@ -34,8 +32,6 @@ h1.helpHead {
 	height: 100vh;
 
 	z-index: -1;
-
-	border: 1px solid black;
 
 	background-image: url('../assets/NISIT\ BACKGROUND.png');
 	background-size: 90vw;
@@ -68,6 +64,14 @@ h1.helpHead {
 	top: 0;
 }
 
+.loginView {
+	transition: 0.3s;
+}
+
+.loginView:hover {
+	transform: scale(1.2);
+}
+
 .mainView {
 	display: flex;
 }
@@ -79,23 +83,10 @@ h1.helpHead {
 	text-align: center;
 }
 
-/* .loginView {
-	height: 50vh;
-	width: 40vh;
-	margin-left: 40%;
-	margin-top: 12%;
-	border-radius: 5px;
-	box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.25);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background-color: #f48c51;
-
-	transition: 1s;
+.loginView {
 }
 .loginView:hover {
-	border-radius: 20px;
-} */
+}
 
 .welcome {
 	width: 100%;

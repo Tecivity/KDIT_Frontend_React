@@ -11,27 +11,37 @@ var uiConfig = {
 	callbacks: {
 		signInSuccessWithAuthResult: async (authResult) => {
 			const userInfo = authResult.additionalUserInfo;
-			const userCredential = firebase.auth().currentUser
+			const userCredential = firebase.auth().currentUser;
 			// console.log(userInfo)
 			if (userInfo.isNewUser) {
-				firebase.firestore().collection('users').doc(userCredential.uid).set({
-					totalVote: 0,
-					displayName: userCredential.displayName,
-					photoURL: userCredential.photoURL,
-					phoneNumber: userCredential.phoneNumber,
-					email: userCredential.email,
-					role: 'user'
-				}).then(()=>{
-					console.log('Sync auth to firestore')
-				})
-			}else{
-				firebase.firestore().collection('users').doc(userCredential.uid).update({
-					displayName: userCredential.displayName,
-					photoURL: userCredential.photoURL,
-					phoneNumber: userCredential.phoneNumber
-				}).then(()=>{
-					console.log('Update auth to firestore')
-				})
+				firebase
+					.firestore()
+					.collection('users')
+					.doc(userCredential.uid)
+					.set({
+						totalVote: 0,
+						displayName: userCredential.displayName,
+						photoURL: userCredential.photoURL,
+						phoneNumber: userCredential.phoneNumber,
+						email: userCredential.email,
+						role: 'user',
+					})
+					.then(() => {
+						console.log('Sync auth to firestore');
+					});
+			} else {
+				firebase
+					.firestore()
+					.collection('users')
+					.doc(userCredential.uid)
+					.update({
+						displayName: userCredential.displayName,
+						photoURL: userCredential.photoURL,
+						phoneNumber: userCredential.phoneNumber,
+					})
+					.then(() => {
+						console.log('Update auth to firestore');
+					});
 			}
 			if (userInfo.isNewUser && userInfo.providerId === 'password') {
 				try {
@@ -42,9 +52,9 @@ var uiConfig = {
 				}
 			}
 			return false;
-		}
-	}
-}
+		},
+	},
+};
 
 const Signup = () => {
 	//States
