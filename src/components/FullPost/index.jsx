@@ -9,9 +9,14 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import MyUploadAdapter from '../../firebase/ckeditor_image_firebase';
 import { BiUpArrow, BiDownArrow, BiCommentDetail } from 'react-icons/bi';
+<<<<<<< HEAD
 import { MdCancel, MdEdit } from 'react-icons/md';
+=======
+import { useHistory } from 'react-router-dom';
+>>>>>>> ab2ebb061bd426e05b7ed491b95f2fea7fa59548
 
 const FullPost = ({ post, id }) => {
+	const history = useHistory();
 	const [postUser, setPostUser] = useState('');
 
 	const { session, user, loading } = useContext(SessionApi);
@@ -38,6 +43,21 @@ const FullPost = ({ post, id }) => {
 		fetchData();
 	};
 
+	const deletePost = () => {
+		if (!window.confirm('Are you sure for delete post ❓')) {
+			return console.log('Cancel delete.');
+		}
+		firebase
+			.firestore()
+			.collection('posts')
+			.doc(post.id)
+			.delete()
+			.then(() => {
+				console.log('deleted post.');
+				history.push(`/`);
+			});
+	};
+
 	const fetchData = async () => {
 		firebase
 			.firestore()
@@ -58,17 +78,31 @@ const FullPost = ({ post, id }) => {
 			})
 			.catch((err) => {
 				console.log(err);
+<<<<<<< HEAD
 			});
+=======
+			})
+>>>>>>> ab2ebb061bd426e05b7ed491b95f2fea7fa59548
 		if (post.id) {
 			firebase
 				.firestore()
 				.collection('comments')
 				.where('postUID', '==', post.id)
 				.get()
+<<<<<<< HEAD
 				.then((snap) => {
 					setTotalComment(snap.size);
 				});
 		}
+=======
+				.then(snap => {
+					setTotalComment(snap.size)
+
+				})
+		}
+
+
+>>>>>>> ab2ebb061bd426e05b7ed491b95f2fea7fa59548
 	};
 
 	useEffect(() => {
@@ -145,13 +179,19 @@ const FullPost = ({ post, id }) => {
 									<p className="full-displayName">
 										{postUser.displayName}
 									</p>
-									<p className="full-username">
-										@{post.userid}
-									</p>
-									<p className="full-timestamp">
+									<p className="timestamp">
 										{' '}
-										- {post.timeStamp}
+								•{' '}
+										{new Date(post.timeStamp).toLocaleString([], {
+											dateStyle: 'long',
+											timeStyle: 'short',
+										})}
 									</p>
+									{post.userUID == user.uid ? (
+										<div>
+											<button onClick={deletePost}>X</button>
+										</div>
+									) : (<div></div>)}
 								</div>
 								<div className="full-postContent">
 									{post.content ? (
