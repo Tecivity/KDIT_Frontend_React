@@ -8,6 +8,7 @@ import { SessionApi } from "../../hook/SessionApi";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import MyUploadAdapter from "../../firebase/ckeditor_image_firebase";
+import testImg from '../../assets/Test.jpg'
 
 const FullPost = ({ post, id }) => {
   const [postUser, setPostUser] = useState("");
