@@ -2,14 +2,19 @@
 	display: flex;
 	flex-direction: column-reverse;
 	margin: 0;
-	/* padding-top: 1rem; */
-
-	border: solid lightgrey;
-	border-width: 1px 0;
-
-	color: black;
 
 	transition: 500ms;
+}
+
+.comment {
+	margin: 0.5rem 0;
+
+	display: flex;
+	flex-direction: row;
+	font-size: 1rem;
+
+	border: 2px solid #f48c51;
+	border-radius: 2rem;
 }
 
 .commentInfoPane {
@@ -34,16 +39,21 @@
 
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 
 	border: 1px solid lightgrey;
 	border-width: 0 1px 0 0;
 }
 
 .voteCommentPane {
+	margin-top: 1rem;
+
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	align-content: center;
+
+	/* border: 1px solid black; */
 }
 
 .commentInfo {
@@ -105,4 +115,48 @@
 
 .postCommentBtn:active {
 	transform: translateY(5px);
+}
+
+.voteUpBTC {
+	font-weight: 900;
+	font-size: 20px;
+
+	width: 2.5rem;
+	height: 2.5rem;
+
+	border: none;
+	border-radius: 50%;
+
+	background: white;
+
+	transition: 500ms;
+}
+
+.voteUpBTC:focus {
+	background-color: lightgreen;
+}
+.voteUpBTC:hover {
+	background-color: rgb(85, 219, 174);
+}
+
+.voteDownBTC {
+	font-weight: 900;
+	font-size: 20px;
+
+	width: 2.5rem;
+	height: 2.5rem;
+
+	border: none;
+	border-radius: 50%;
+
+	background: white;
+
+	transition: 500ms;
+}
+
+.voteDownBTC:focus {
+	background-color: red;
+}
+.voteDownBTC:hover {
+	background-color: rgb(219, 85, 107);
 }

@@ -16,15 +16,7 @@ const FullSubComPage = () => {
 			.doc(id)
 			.get()
 			.then((doc) => {
-				const pSubCOm = new SubComModel(
-					doc.id,
-					doc.data().name,
-					doc.data().description,
-					doc.data().ownerUID,
-					doc.data().photoURL,
-					doc.data().totalFollow,
-				);
-				setSubCom(pSubCOm);
+				setSubCom({id:doc.id, ...doc.data()});
 			})
 			.then(()=>{
 				console.log('fetch subcom success')

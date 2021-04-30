@@ -1,54 +1,18 @@
 import React, { useState, useContext, useEffect } from 'react';
 import './index.css';
 import { SessionApi } from '../../hook/SessionApi';
-import firebase from '../../firebase'
-import Post from '../Card/Post'
-import PostForm from '../Card/PostForm'
-import { PostModel } from '../../firebase/models'
+import firebase from '../../firebase';
+import Post from '../Card/Post';
+import PostForm from '../Card/PostForm';
+import FileUpload from '../../firebase/FileUpload';
+import Popup from 'reactjs-popup';
+import { MdCancel } from 'react-icons/md';
 
 const Profile = () => {
-	const { user, defaultImage } = useContext(SessionApi);
+	const { user, defaultImage, defaultBanner, userInfo } = useContext(SessionApi);
 	const [edit, setEdit] = useState(false);
-	const [posts, setPosts] = useState([])
-	const storage = firebase.storage()
-	const [image, setImage] = useState(null)
-	const [url, setUrl] = useState("")
-	const [progress, setProgress] = useState(0)
-	const [path, setPath] = useState('')
-
-	const handleChange = e => {
-		if (e.target.files[0]) {
-			setImage(e.target.files[0])
-			console.log(e.target.files[0])
-		}
-	}
-
-	const handleUpload = e => {
-		e.preventDefault()
-		const uploadTask = storage.ref(`images/${image.name}`).put(image)
-		uploadTask.on(
-			"state_changed",
-			snapshot => {
-				const progress = Math.round(
-					(snapshot.bytesTransferred / snapshot.totalBytes) * 100
-				)
-				setProgress(progress)
-			},
-			error => {
-				console.log(error)
-			},
-			() => {
-				storage
-					.ref("images")
-					.child(image.name)
-					.getDownloadURL()
-					.then(url => {
-						console.log(url)
-						setUrl(url)
-					})
-			}
-		)
-	}
+	const [posts, setPosts] = useState([]);
+	const [url, setUrl] = useState('');
 
 	const updatePost = () => {
 		fetchData();
@@ -64,22 +28,12 @@ const Profile = () => {
 		firebase
 			.firestore()
 			.collection('posts')
-			.where('userUID','==',user.uid)
+			.where('userUID', '==', userInfo.id)
 			.onSnapshot((querySnapshot) => {
 				querySnapshot.forEach((doc) => {
-					const post = new PostModel(
-						doc.id,
-						doc.data().userUID,
-						doc.data().content,
-						doc.data().voteUp,
-						doc.data().voteDown,
-						doc.data().timeStamp,
-						doc.data().subCom,
-						doc.data().subComUID,
-					);
-					postsArray.push(post);
+					postsArray.push({id:doc.id, ...doc.data()})
 				});
-				setPosts(postsArray.reverse());
+				setPosts(postsArray);
 			});
 	};
 
@@ -90,46 +44,73 @@ const Profile = () => {
 	return (
 		<>
 			<div className="profilePane">
-				<div className="profileInfoPane">
-					<div className="bannerImgPane">
-						<img
-							src="https://images7.alphacoders.com/110/thumbbig-1104854.jpg"
-							alt=""
-							className="bannerImg"
-						/>
-					</div>
+				<div className="bannerImgPane">
 					<img
-						src={user.photoURL}
-						onError={defaultImage}
-						alt="profile picture"
-						className="full-profilePic"
+						src={userInfo.bannerURL || defaultBanner}
+						onError={defaultBanner}
+						alt=""
+						className="bannerImg"
 					/>
-					<h2 style={{ marginTop: '0', marginBottom: '0rem' }}>
-						{user.displayName}
-					</h2>
-					<h3
-						style={{
-							marginTop: '0',
-							color: 'grey',
-							fontWeight: '200',
-						}}
-					>
-						@username
-					</h3>
-					<p style={{ marginTop: '0' }}>Bio ต้องมีมั้ยนิ้</p>
-					<div className="card">
-						<PostForm updatePost={updatePost} />
-						<div className="content">
-							{posts.map((post) => (
-								<Post post={post} />
-							))}
-						</div>
+				</div>
+				<div className="profileInfoPane">
+					<div>
+						<img
+							src={userInfo.photoURL || defaultImage}
+							onError={defaultImage}
+							alt="profile picture"
+							className="full-profilePic"
+						/>
+						<h2 style={{ marginTop: '0', marginBottom: '0rem' }}>
+							{user.displayName}
+						</h2>
+						<h3
+							style={{
+								marginTop: '0',
+								color: 'grey',
+								fontWeight: '200',
+							}}
+						>
+							@username
+						</h3>
+						<p style={{ marginTop: '0' }}>Bio ต้องมีมั้ยนิ้</p>
 					</div>
-					{edit && (
-						<div className="editProfilePane">
-							<form action="" className="editProfileForm">
-								<label htmlFor="">Profile Picture</label>
-								<div className="componentBox">
+					<div style={{ alignSelf: 'center' }}>
+						{/* <button className="edit-btn" onClick={handleOnClick}>
+							{edit ? 'X' : 'Edit'}
+						</button> */}
+					</div>
+
+					<Popup
+						trigger={
+							<button
+								className="edit-btn"
+								onClick={handleOnClick}
+							>
+								{edit ? 'X' : 'Edit'}
+							</button>
+						}
+						modal
+						className="editProfile"
+					>
+						{(close) => (
+							<div className="modal">
+								<div className="close" onClick={close}>
+									<MdCancel
+										size="30px"
+										style={{ fill: '#f48c51' }}
+									/>
+								</div>
+
+								<div className="content">
+									<div className="editProfilePane">
+										<form
+											action=""
+											className="editProfileForm"
+										>
+											<label htmlFor="">
+												Profile Picture
+											</label>
+											{/* <div className="componentBox">
 									<h1>Upload picture</h1>
 									<br />
 									<progress value={progress} max="100" />
@@ -139,25 +120,43 @@ const Profile = () => {
 									<br />
 									{(url !== "") ? (<a href={url}>Click me</a>) : (<h3>upload something</h3>)}
 									<br />
+									<h3>Uploaded image</h3>
 									<img src={url || "http://via.placeholder.com/400"} alt="firebase-image" width="400px" />
+									<h3>Preview image</h3>
+									{image ? <img src={path} alt="firebase-image" width="400px" /> : <></>}
+								</div> */}
+											<FileUpload
+												url={url}
+												setUrl={setUrl}
+											/>
+											<label htmlFor="">
+												Display Name
+											</label>
+											<input
+												type="text"
+												name="displayNames"
+											/>
 
+											<button className="btn">
+												Save Changes
+											</button>
+										</form>
+									</div>
 								</div>
-								<label htmlFor="">Display Name</label>
-								<input type="text" name="displayNames" />
-								<label htmlFor="">Username</label>
-								<input type="text" name="username" />
-								<button className="btn">Save Changes</button>
-							</form>
-						</div>
-					)}
+							</div>
+						)}
+					</Popup>
 				</div>
 
-				<button className="edit-btn" onClick={handleOnClick}>
-					{edit ? 'X' : 'Edit'}
-				</button>
-
+				<div className="profileCard">
+					{/* <PostForm updatePost={updatePost} /> */}
+					<div className="content">
+						{posts.map((post) => (
+							<Post post={post} />
+						))}
+					</div>
+				</div>
 			</div>
-
 		</>
 	);
 };

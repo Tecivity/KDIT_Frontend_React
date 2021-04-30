@@ -16,6 +16,8 @@ import {
 	ProfilePage,
 	PostPage,
 	FullSubComPage,
+	ExplorePage,
+	WelcomePage,
 } from './containers';
 
 //Import Components
@@ -46,6 +48,8 @@ const Routes = () => {
 			<Route exact path="/about" component={AboutPage} />
 			<Route exact path="/post/:id" component={PostPage} />
 			<Route exact path="/community/:id" component={FullSubComPage} />
+			<Route exact path="/explore" component={ExplorePage} />
+			<Route exact path="/welcome" component={WelcomePage} />
 			<ProtectedRoute
 				auth={Session.session}
 				exact

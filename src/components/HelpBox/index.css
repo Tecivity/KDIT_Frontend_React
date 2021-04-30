@@ -69,11 +69,11 @@ body {
 	transform: scale(1);
 }
 
-.modal .header {
+.popup .modal .header {
 	border-bottom: 1px solid lightgrey;
 }
 
-.modal .content {
+.popup .modal .content {
 	margin-top: 2rem;
 }
 

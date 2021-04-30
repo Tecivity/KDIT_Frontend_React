@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { SessionApi } from '../../hook/SessionApi';
-import { Link } from 'react-router-dom';
+import { Link, Switch } from 'react-router-dom';
 import firebase from '../../firebase';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import MyUploadAdapter from '../../firebase/ckeditor_image_firebase';
-import { slideInDown, fadeIn } from 'react-animations';
-import Radium, { StyleRoot } from 'radium';
 
 const PostForm = ({ updatePost }) => {
 	const { session, user } = useContext(SessionApi);
@@ -39,18 +37,6 @@ const PostForm = ({ updatePost }) => {
 		});
 	};
 
-	//Animations
-	const styles = {
-		slideInDown: {
-			animation: '1s',
-			animationName: Radium.keyframes(slideInDown, 'slideInDown'),
-		},
-		fadeIn: {
-			animation: '1s',
-			animationName: Radium.keyframes(fadeIn, 'fadeIn'),
-		},
-	};
-
 	function currentDate() {
 		const d = new Date();
 		var month = '' + (d.getMonth() + 1);
@@ -80,8 +66,7 @@ const PostForm = ({ updatePost }) => {
 				...post,
 				timeStamp: currentDate() + 'T' + currentTime(),
 				userUID: user.uid,
-				subCom: 'test Sub Com',
-				subComUID: 'subcomUID',
+				subComUID: '8bDoItM7A7pZZgKO45UK'
 			};
 			firebase
 				.firestore()
@@ -102,68 +87,61 @@ const PostForm = ({ updatePost }) => {
 
 	return (
 		<>
-			<StyleRoot>
-				{session ? (
-					<div className="postFormBox">
-						<div>
-							<img
-								src={imageURL}
-								onError={() => setImageURL(defaultImage)}
-								alt="profile picture"
-								className="form-profilePic"
-							/>
-						</div>
-						<div className="postForm">
-							<CKEditor
-								className="ckEditor"
-								editor={ClassicEditor}
-								data="<p>What's going on today</p>"
-								config={{
-									mediaEmbed: {
-										previewsInData: true,
-									},
-								}}
-								onReady={(editor, config) => {
-									// You can store the "editor" and use when it is needed.
-									// console.log('Editor is ready to use!', editor);
-									if (editor) {
-										editor.plugins.get(
-											'FileRepository',
-										).createUploadAdapter = (loader) => {
-											return new MyUploadAdapter(loader);
-										};
-									}
-								}}
-								onChange={(event, editor) => {
-									const data = editor.getData();
-									// console.log({ event, editor, data });
-									setPost({ ...post, content: data });
-								}}
-								// onBlur={(event, editor) => {
-								// 	console.log('Blur.', editor);
-								// }}
-								// onFocus={(event, editor) => {
-								// 	console.log('Focus.', editor);
-								// }}
-							/>
-							<div className="postText">
-								<div className="postOption">
-									<button
-										onClick={handleClick}
-										className="postBT"
-									>
-										Post
-									</button>
-								</div>
+			{session ? (
+				<div className="postFormBox">
+					<div>
+						<img
+							src={imageURL}
+							onError={() => setImageURL(defaultImage)}
+							alt="profile picture"
+							className="form-profilePic"
+						/>
+					</div>
+
+					<div className="postForm">
+						<CKEditor
+							className="ckEditor"
+							editor={ClassicEditor}
+							data="<p>What's going on today</p>"
+							config={{
+								mediaEmbed: {
+									previewsInData: true,
+								},
+							}}
+							onReady={(editor, config) => {
+								if (editor) {
+									editor.plugins.get(
+										'FileRepository',
+									).createUploadAdapter = (loader) => {
+										return new MyUploadAdapter(loader);
+									};
+								}
+							}}
+							onChange={(event, editor) => {
+								const data = editor.getData();
+								setPost({
+									...post,
+									content: data,
+								});
+							}}
+						/>
+						<div className="postText">
+							<div className="postOption">
+								<button
+									onClick={handleClick}
+									className="postBT"
+								>
+									Post
+								</button>
 							</div>
 						</div>
 					</div>
-				) : (
-					<div>
-						<h1 class="loginWarn">Please Login to Create Post</h1>
-					</div>
-				)}
-			</StyleRoot>
+				</div>
+			) : (
+				<div>
+					<h1 class="loginWarn">Please Login to Create Post</h1>
+				</div>
+			)}
 		</>
 	);
 };
