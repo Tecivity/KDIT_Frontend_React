@@ -159,6 +159,8 @@ h1.loginWarn {
 	flex-direction: row;
 	justify-content: space-around;
 	align-items: center;
+
+	border-top: 2px solid #f48c51;
 }
 
 .full-infoPane p {
