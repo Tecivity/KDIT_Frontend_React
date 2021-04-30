@@ -26,7 +26,7 @@ var uiConfig = {
 						phoneNumber: userCredential.phoneNumber,
 						email: userCredential.email,
 						role: 'user',
-						coverURL: "https://images7.alphacoders.com/110/thumbbig-1104854.jpg"
+						bannerURL: "https://images7.alphacoders.com/110/thumbbig-1104854.jpg"
 					})
 					.then(() => {
 						console.log('Sync auth to firestore');

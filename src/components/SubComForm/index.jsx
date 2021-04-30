@@ -4,7 +4,7 @@ import firebase from '../../firebase'
 import { SessionApi } from '../../hook/SessionApi'
 
 const SubComForm = () => {
-	const { user } = useContext(SessionApi)
+	const { user,defaultBanner } = useContext(SessionApi)
 	//States
 	const [subcom, setSubCom] = useState({
 		name: '',
@@ -31,7 +31,8 @@ const SubComForm = () => {
 				...subcom,
 				ownerUID: user.uid,
 				photoURL: 'https://cdn.jeab.com/wp-content/uploads/2020/03/wallpaper-for-jeab06.jpg',
-				totalFollow: 0
+				totalFollow: 0,
+				bannerURL: defaultBanner
 			}).then(() => {
 				e.target.value = ''
 				clearInput()

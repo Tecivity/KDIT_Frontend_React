@@ -12,13 +12,13 @@ export const SessionProvider = ({ children }) => {
     const defaultBanner = "https://images7.alphacoders.com/110/thumbbig-1104854.jpg"
 
     const getUserInfo = (id) => {
-        firebase
+        return firebase
             .firestore()
             .collection('users')
             .doc(id)
             .get()
             .then(doc => {
-                setUserInfo({id:doc.id, ...doc.data()})
+                return({id:doc.id, ...doc.data()})
             })
     }
 
@@ -30,7 +30,9 @@ export const SessionProvider = ({ children }) => {
                 setUser(user)
                 setSession(true)
                 setLoading(false)
-                getUserInfo(user.uid)
+                getUserInfo(user.uid).then(data=>{
+                    setUserInfo(data)
+                })
             } else {
                 setUser('')
                 setUserInfo('')
@@ -61,7 +63,8 @@ export const SessionProvider = ({ children }) => {
                 setLoading,
                 defaultImage,
                 defaultBanner,
-                userInfo
+                userInfo,
+                getUserInfo
                 }}>
             {children}
         </SessionApi.Provider>

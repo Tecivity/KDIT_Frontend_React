@@ -134,17 +134,7 @@ export default function Card() {
     const postsArray = [];
     ref.onSnapshot((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        const post = new PostModel(
-          doc.id,
-          doc.data().userUID,
-          doc.data().content,
-          doc.data().voteUp,
-          doc.data().voteDown,
-          doc.data().timeStamp,
-          doc.data().subCom,
-          doc.data().subComUID
-        );
-        postsArray.push(post);
+        postsArray.push({id:doc.id, ...doc.data()});
       });
       setPosts(postsArray.reverse());
     });

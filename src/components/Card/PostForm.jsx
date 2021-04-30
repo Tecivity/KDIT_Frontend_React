@@ -66,8 +66,7 @@ const PostForm = ({ updatePost }) => {
 				...post,
 				timeStamp: currentDate() + 'T' + currentTime(),
 				userUID: user.uid,
-				subCom: 'test Sub Com',
-				subComUID: 'subcomUID',
+				subComUID: '8bDoItM7A7pZZgKO45UK'
 			};
 			firebase
 				.firestore()
