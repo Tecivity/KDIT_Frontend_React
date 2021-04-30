@@ -1,5 +1,4 @@
 import firebase from '../firebase'
-import { User } from '../firebase/models'
 
 class UserService {
 
@@ -10,15 +9,7 @@ class UserService {
 			.doc(id)
 			.get()
 			.then((doc) => {
-				const pUser = new User(
-					doc.id,
-					doc.data().totalVote,
-					doc.data().bio,
-					doc.data().displayName,
-					doc.data().photoURL,
-					doc.data().email
-				);
-				return pUser
+				return({id:doc.id, ...doc.data()})
 			})
 			.catch((err) => {
 				return err
