@@ -7,10 +7,12 @@ import { PostModel } from "../../firebase/models";
 import { SessionApi } from '../../hook/SessionApi';
 
 export default function Card() {
-  const ref = firebase.firestore().collection("posts");
-  const {user} = useContext(SessionApi);
+  const ref = firebase.firestore().collection("posts")
+  const {user} = useContext(SessionApi)
   //States
   const [posts, setPosts] = useState([]);
+  const voteUp = 'voteUp';
+  const voteDown = 'voteDown';
 
   //Functions
   const updatePost = () => {
@@ -42,12 +44,14 @@ export default function Card() {
     })
 	.then((data) => {
 		// no data in database, not voted yet
+
 		if(data.empty) {
 			return firebase.firestore()
 				.collection("votes")
 				.add({
 					postUID: post.id, // postUID
-					userUID: user.uid 
+					userUID: user.uid
+          , voteType: voteUp
 				})
 				.then(() => {
 					postData.voteUp++;
@@ -59,18 +63,37 @@ export default function Card() {
 					console.log('vote success');
 				})
 		} else {
-			console.log("unvoted!!! ");
-			// firebase.firestore()
-			// .doc(`/votes/${data.docs[0].id}`).delete()
-			// .then(() => {
-			// 	postDoc.update({ voteUp: firebase.firestore.FieldValue.increment(-1)})
-			// })
-			// .then(() => {
-			// 	console.log(postData)
-			// })
-			// .catch(err => {
-			// 	console.error( err.code );
-			// })
+      console.log(data.docs[0].data());
+      const voteType = data.docs[0].data().voteType;
+      if(voteType === voteUp){
+        firebase.firestore()
+        .doc(`/votes/${data.docs[0].id}`).delete()
+        .then(() => {
+          postDoc.update({ voteUp: firebase.firestore.FieldValue.increment(-1)});
+          console.log("unvoted!!! ");
+        })
+        .catch(err => {
+          console.error( err.code );
+        })
+      } else if (voteType === voteDown) {
+        firebase.firestore()
+        .doc(`/votes/${data.docs[0].id}`)
+        .update({
+          "voteType": voteUp
+        })
+        .then(() => {
+          postDoc.update({ 
+            voteUp: firebase.firestore.FieldValue.increment(1),
+            voteDown: firebase.firestore.FieldValue.increment(-1)
+          })
+          console.log('change to voteUp');
+        })
+        .catch(err => {
+          console.error( err.code );
+        })
+      } else {
+        console.error( 'error' )
+      }
 		}
 	})
 	.catch(err => {
@@ -110,6 +133,7 @@ export default function Card() {
 				.add({
 					postUID: post.id, // postUID
 					userUID: user.uid 
+          , voteType: voteDown
 				})
 				.then(() => {
 					postData.voteDown++;
@@ -121,7 +145,39 @@ export default function Card() {
 					console.log('vote success');
 				})
 		} else {
-			console.log("unvoted!!! ");
+			console.log(data.docs[0].data());
+      const voteType = data.docs[0].data().voteType;
+      // voteDown === voteDown
+      if(voteType === voteDown){
+        firebase.firestore()
+        .doc(`/votes/${data.docs[0].id}`).delete()
+        .then(() => {
+          postDoc.update({ voteUp: firebase.firestore.FieldValue.increment(-1)});
+          console.log("unvoted!!! ");
+        })
+        .catch(err => {
+          console.error( err.code );
+        })
+        // voteUp === voteUp
+      } else if (voteType === voteUp) {
+        firebase.firestore()
+        .doc(`/votes/${data.docs[0].id}`)
+        .update({
+          "voteType": voteDown
+        })
+        .then(() => {
+          postDoc.update({ 
+            voteUp: firebase.firestore.FieldValue.increment(-1),
+            voteDown: firebase.firestore.FieldValue.increment(1)
+          })
+          console.log('change to voteDown');
+        })
+        .catch(err => {
+          console.error( err.code );
+        })
+      } else {
+        console.error( 'error' )
+      }
 		}
 	})
 	.catch(err => {
@@ -134,34 +190,24 @@ export default function Card() {
     const postsArray = [];
     ref.onSnapshot((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        const post = new PostModel(
-          doc.id,
-          doc.data().userUID,
-          doc.data().content,
-          doc.data().voteUp,
-          doc.data().voteDown,
-          doc.data().timeStamp,
-          doc.data().subCom,
-          doc.data().subComUID
-        );
-        postsArray.push(post);
-      });
-      setPosts(postsArray.reverse());
-    });
-  };
+        postsArray.push({id:doc.id, ...doc.data()})
+      })
+      setPosts(postsArray)
+    })
+  }
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
 
   return (
     <div className="card">
       <PostForm updatePost={updatePost} />
       <div className="content">
         {posts.map((post) => (
-          <Post post={post} upVote={upVote} downVote={downVote} />
+          <Post post={post} upVote={upVote} downVote={downVote}/>
         ))}
       </div>
     </div>
-  );
+  )
 }

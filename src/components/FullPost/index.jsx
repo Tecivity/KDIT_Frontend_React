@@ -11,6 +11,8 @@ import MyUploadAdapter from '../../firebase/ckeditor_image_firebase';
 import { BiUpArrow, BiDownArrow, BiCommentDetail } from 'react-icons/bi';
 import { useHistory } from 'react-router-dom';
 import { MdCancel, MdEdit, MdDelete } from 'react-icons/md';
+import { PostService } from '../../services'
+
 const FullPost = ({ post, id }) => {
 	const history = useHistory();
 	const [postUser, setPostUser] = useState('');
@@ -43,16 +45,10 @@ const FullPost = ({ post, id }) => {
 		if (!window.confirm('Are you sure for delete post ❓')) {
 			return console.log('Cancel delete.');
 		}
-		firebase
-			.firestore()
-			.collection('posts')
-			.doc(post.id)
-			.delete()
-			.then(() => {
-				console.log('deleted post.');
-				history.push(`/`);
-			});
-	};
+		PostService.deletePost(post.id).then(()=>{
+			history.push(`/`);
+		})
+	}
 
 	const fetchData = async () => {
 		firebase
@@ -69,8 +65,7 @@ const FullPost = ({ post, id }) => {
 					doc.data().photoURL,
 					doc.data().email,
 				);
-				setPostUser(pUser);
-				console.log(postUser.photoURL);
+				setPostUser(pUser)
 			})
 			.catch((err) => {
 				console.log(err);

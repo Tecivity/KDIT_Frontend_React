@@ -4,17 +4,17 @@ import { SessionApi } from '../../hook/SessionApi';
 import { useHistory } from 'react-router-dom';
 import parse from 'html-react-parser';
 import firebase from '../../firebase';
-import { User } from '../../firebase/models';
 import { BiUpArrow, BiDownArrow, BiCommentDetail } from 'react-icons/bi';
+import { CommentService, PostService, UserService } from '../../services';
 
-const Post = ({ post }) => {
+const Post = ({ post, upVote, downVote}) => {
 	const history = useHistory();
 	const { session, user, loading } = useContext(SessionApi);
 	const defaultImage =
 		'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg';
 	//States
 	const [postUser, setPostUser] = useState('');
-	const [totalComment, setTotalComment] = useState(0);
+	const [totalComment, setTotalComment] = useState(0)
 
 	//Function
 	const handlePostClick = () => {
@@ -22,67 +22,22 @@ const Post = ({ post }) => {
 		history.push(`/post/${post.id}`);
 	};
 
-	const upVote = (post) => {
-		firebase
-			.firestore()
-			.collection('posts')
-			.doc(post.id)
-			.set({ ...post, voteUp: post.voteUp + 1 });
-		fetchData();
-	};
-
-	const downVote = (post) => {
-		firebase
-			.firestore()
-			.collection('posts')
-			.doc(post.id)
-			.set({ ...post, voteDown: post.voteDown - 1 });
-		fetchData();
-	};
-
 	const deletePost = () => {
 		if (!window.confirm('Are you sure for delete post ❓')) {
 			return console.log('Cancel delete.');
 		}
-		firebase
-			.firestore()
-			.collection('posts')
-			.doc(post.id)
-			.delete()
-			.then(() => {
-				console.log('deleted post.');
-				window.location.reload();
-			});
+		PostService.deletePost(post.id).then(()=>{
+			window.location.reload()
+		})
 	};
 
 	const fetchData = async () => {
-		firebase
-			.firestore()
-			.collection('users')
-			.doc(post.userUID)
-			.get()
-			.then((doc) => {
-				const pUser = new User(
-					doc.id,
-					doc.data().totalVote,
-					doc.data().bio,
-					doc.data().displayName,
-					doc.data().photoURL,
-					doc.data().email,
-				);
-				setPostUser(pUser);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-		firebase
-			.firestore()
-			.collection('comments')
-			.where('postUID', '==', post.id)
-			.get()
-			.then((snap) => {
-				setTotalComment(snap.size);
-			});
+		UserService.getUser(post.userUID).then(data=>{
+			setPostUser(data)
+		})
+		CommentService.getCommentSize(post.id).then(data=>{
+			setTotalComment(data)
+		})
 	};
 
 	useEffect(() => {
@@ -151,7 +106,7 @@ const Post = ({ post }) => {
 						alignItems: 'center',
 					}}
 				>
-					<h4 style={{ margin: '0' }}>{totalComment}</h4>
+					<h4>{totalComment}</h4>
 					<BiCommentDetail
 						size="25px"
 						style={{ marginLeft: '0.5rem' }}

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import firebase from 'firebase';
-import StyleFirebaseUI from 'react-firebaseui/StyledFirebaseAuth';
+import StyleFirebaseUI from 'react-firebaseui/StyledFirebaseAuth'
 
 var uiConfig = {
 	signInFlow: 'popup',
@@ -12,6 +12,7 @@ var uiConfig = {
 		signInSuccessWithAuthResult: async (authResult) => {
 			const userInfo = authResult.additionalUserInfo;
 			const userCredential = firebase.auth().currentUser;
+			
 			// console.log(userInfo)
 			if (userInfo.isNewUser) {
 				firebase
@@ -25,24 +26,26 @@ var uiConfig = {
 						phoneNumber: userCredential.phoneNumber,
 						email: userCredential.email,
 						role: 'user',
+						bannerURL: "https://images7.alphacoders.com/110/thumbbig-1104854.jpg"
 					})
 					.then(() => {
 						console.log('Sync auth to firestore');
 					});
-			} else {
-				firebase
-					.firestore()
-					.collection('users')
-					.doc(userCredential.uid)
-					.update({
-						displayName: userCredential.displayName,
-						photoURL: userCredential.photoURL,
-						phoneNumber: userCredential.phoneNumber,
-					})
-					.then(() => {
-						console.log('Update auth to firestore');
-					});
-			}
+			} 
+			// else {
+			// 	firebase
+			// 		.firestore()
+			// 		.collection('users')
+			// 		.doc(userCredential.uid)
+			// 		.update({
+			// 			displayName: userCredential.displayName,
+			// 			photoURL: userCredential.photoURL,
+			// 			phoneNumber: userCredential.phoneNumber,
+			// 		})
+			// 		.then(() => {
+			// 			console.log('Update auth to firestore');
+			// 		});
+			// }
 			if (userInfo.isNewUser && userInfo.providerId === 'password') {
 				try {
 					await authResult.user.sendEmailVerification();
@@ -58,7 +61,7 @@ var uiConfig = {
 
 const Signup = () => {
 	//States
-	const [user, setUser] = useState(null);
+	const [user, setUser] = useState(null)
 
 	//Effects
 	useEffect(() => {

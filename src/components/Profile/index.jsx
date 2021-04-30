@@ -4,13 +4,12 @@ import { SessionApi } from '../../hook/SessionApi';
 import firebase from '../../firebase';
 import Post from '../Card/Post';
 import PostForm from '../Card/PostForm';
-import { PostModel } from '../../firebase/models';
 import FileUpload from '../../firebase/FileUpload';
 import Popup from 'reactjs-popup';
 import { MdCancel } from 'react-icons/md';
 
 const Profile = () => {
-	const { user, defaultImage } = useContext(SessionApi);
+	const { user, defaultImage, defaultBanner, userInfo } = useContext(SessionApi);
 	const [edit, setEdit] = useState(false);
 	const [posts, setPosts] = useState([]);
 	const [url, setUrl] = useState('');
@@ -29,22 +28,12 @@ const Profile = () => {
 		firebase
 			.firestore()
 			.collection('posts')
-			.where('userUID', '==', user.uid)
+			.where('userUID', '==', userInfo.id)
 			.onSnapshot((querySnapshot) => {
 				querySnapshot.forEach((doc) => {
-					const post = new PostModel(
-						doc.id,
-						doc.data().userUID,
-						doc.data().content,
-						doc.data().voteUp,
-						doc.data().voteDown,
-						doc.data().timeStamp,
-						doc.data().subCom,
-						doc.data().subComUID,
-					);
-					postsArray.push(post);
+					postsArray.push({id:doc.id, ...doc.data()})
 				});
-				setPosts(postsArray.reverse());
+				setPosts(postsArray);
 			});
 	};
 
@@ -57,7 +46,8 @@ const Profile = () => {
 			<div className="profilePane">
 				<div className="bannerImgPane">
 					<img
-						src="https://images7.alphacoders.com/110/thumbbig-1104854.jpg"
+						src={userInfo.bannerURL || defaultBanner}
+						onError={defaultBanner}
 						alt=""
 						className="bannerImg"
 					/>
@@ -65,7 +55,7 @@ const Profile = () => {
 				<div className="profileInfoPane">
 					<div>
 						<img
-							src={user.photoURL}
+							src={userInfo.photoURL || defaultImage}
 							onError={defaultImage}
 							alt="profile picture"
 							className="full-profilePic"

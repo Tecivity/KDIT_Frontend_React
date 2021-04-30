@@ -3,28 +3,27 @@ import { PostModel } from '../firebase/models'
 
 class PostService {
 
-    async getAllPost() {
-        const postsArray = []
-        await firebase
+    getAllPost() {
+        return firebase
             .firestore()
             .collection('posts')
             .onSnapshot((querySnapshot) => {
-                // const postsArray = []
+                const postsArray = []
                 querySnapshot.forEach((doc) => {
-                    const post = new PostModel(
-                        doc.id,
-                        doc.data().userUID,
-                        doc.data().content,
-                        doc.data().voteUp,
-                        doc.data().voteDown,
-                        doc.data().timeStamp,
-                        doc.data().subCom,
-                        doc.data().subComUID,
-                    );
-                    postsArray.push(post);
+                    postsArray.push({ id: doc.id, ...doc.data() });
                 })
+                return (postsArray)
             })
-        return postsArray
+    }
+
+    deletePost(id) {
+        return firebase
+            .firestore()
+            .collection('posts')
+            .doc(id)
+            .delete(data => {
+                return ({ message: 'deleted post.', data: data })
+            })
     }
 }
 

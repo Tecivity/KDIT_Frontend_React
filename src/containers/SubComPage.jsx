@@ -15,14 +15,12 @@ const SubComPage = () => {
 	const [showCreate, setShowCreate] = useState(false);
 
 	//Contexts
-	const { session, authListener, loading } = React.useContext(SessionApi);
+	const { session, authListener, loading , userInfo, getUserInfo, user } = React.useContext(SessionApi);
 
 	const firebaseTest = async () => {
-		// UserService.getUser('6Mwv521K17NLixAMhAnR04cUYtE2').then(test => {
-		// 	console.log(test)
-		// })
-		const test = await PostService.getAllPost()
-		console.log(test)
+		getUserInfo(user.uid).then(data => {
+			console.log(data)
+		})
 
 	};
 
@@ -30,17 +28,9 @@ const SubComPage = () => {
 		const subComsArray = [];
 		ref.onSnapshot((querySnapshot) => {
 			querySnapshot.forEach((doc) => {
-				const subCom = new SubComModel(
-					doc.id,
-					doc.data().name,
-					doc.data().description,
-					doc.data().ownerUID,
-					doc.data().photoURL,
-					doc.data().totalFollow
-				);
-				subComsArray.push(subCom);
+				subComsArray.push({id:doc.id, ...doc.data()});
 			});
-			setSubComs(subComsArray.reverse());
+			setSubComs(subComsArray);
 		});
 	};
 
