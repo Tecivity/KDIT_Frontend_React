@@ -14,6 +14,7 @@ const Post = ({ post }) => {
 		'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg';
 	//States
 	const [postUser, setPostUser] = useState('');
+	const [totalComment, setTotalComment] = useState(0)
 
 	//Function
 	const handlePostClick = () => {
@@ -74,6 +75,14 @@ const Post = ({ post }) => {
 			.catch((err) => {
 				console.log(err);
 			});
+		firebase
+			.firestore()
+			.collection('comments')
+			.where('postUID','==',post.id)
+			.get()
+			.then(snap => {
+				setTotalComment(snap.size)
+			})
 	};
 
 	useEffect(() => {
@@ -144,7 +153,7 @@ const Post = ({ post }) => {
 						alignItems: 'center',
 					}}
 				>
-					<h4>Comment numbers HERE</h4>
+					<h4>{totalComment}</h4>
 					<BiCommentDetail
 						size="25px"
 						style={{ marginLeft: '0.5rem' }}

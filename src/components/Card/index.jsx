@@ -76,7 +76,6 @@ export default function Card() {
 	.catch(err => {
 		console.error( err.code );
 	})
-
     fetchData();
   };
 

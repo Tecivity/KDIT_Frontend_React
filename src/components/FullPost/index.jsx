@@ -14,6 +14,7 @@ const FullPost = ({ post, id }) => {
 	const [postUser, setPostUser] = useState('');
 
 	const { session, user, loading } = useContext(SessionApi);
+	const [totalComment, setTotalComment] = useState(0)
 
 	//States
 	const [newPost, setNewPost] = useState('');
@@ -37,7 +38,7 @@ const FullPost = ({ post, id }) => {
 	};
 
 	const fetchData = async () => {
-		await firebase
+		firebase
 			.firestore()
 			.collection('users')
 			.doc(post.userUID)
@@ -56,7 +57,20 @@ const FullPost = ({ post, id }) => {
 			})
 			.catch((err) => {
 				console.log(err);
-			});
+			})
+		if(post.id){
+			firebase
+			.firestore()
+			.collection('comments')
+			.where('postUID', '==', post.id)
+			.get()
+			.then(snap => {
+					setTotalComment(snap.size)
+
+			})
+		}
+		
+
 	};
 
 	useEffect(() => {
@@ -109,7 +123,12 @@ const FullPost = ({ post, id }) => {
 								<BiDownArrow size="25px" />
 							</button>
 						</div>
-						<BiCommentDetail size="25px" />
+
+						<h4>{totalComment}</h4>
+						<BiCommentDetail
+							size="25px"
+							style={{ marginLeft: '0.5rem' }}
+						/>
 					</div>
 
 					<div>
@@ -163,11 +182,11 @@ const FullPost = ({ post, id }) => {
 																	'FileRepository',
 																).createUploadAdapter = (
 																	loader,
-																) => {
-																	return new MyUploadAdapter(
-																		loader,
-																	);
-																};
+																	) => {
+																		return new MyUploadAdapter(
+																			loader,
+																		);
+																	};
 															}
 														}}
 														onChange={(
