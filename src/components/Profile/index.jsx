@@ -6,6 +6,8 @@ import Post from '../Card/Post';
 import PostForm from '../Card/PostForm';
 import { PostModel } from '../../firebase/models';
 import FileUpload from '../../firebase/FileUpload';
+import Popup from 'reactjs-popup';
+import { MdCancel } from 'react-icons/md';
 
 const Profile = () => {
 	const { user, defaultImage } = useContext(SessionApi);
@@ -53,39 +55,72 @@ const Profile = () => {
 	return (
 		<>
 			<div className="profilePane">
-				<div className="profileInfoPane">
-					<div className="bannerImgPane">
-						<img
-							src="https://images7.alphacoders.com/110/thumbbig-1104854.jpg"
-							alt=""
-							className="bannerImg"
-						/>
-					</div>
+				<div className="bannerImgPane">
 					<img
-						src={user.photoURL}
-						onError={defaultImage}
-						alt="profile picture"
-						className="full-profilePic"
+						src="https://images7.alphacoders.com/110/thumbbig-1104854.jpg"
+						alt=""
+						className="bannerImg"
 					/>
-					<h2 style={{ marginTop: '0', marginBottom: '0rem' }}>
-						{user.displayName}
-					</h2>
-					<h3
-						style={{
-							marginTop: '0',
-							color: 'grey',
-							fontWeight: '200',
-						}}
-					>
-						@username
-					</h3>
-					<p style={{ marginTop: '0' }}>Bio ต้องมีมั้ยนิ้</p>
+				</div>
+				<div className="profileInfoPane">
+					<div>
+						<img
+							src={user.photoURL}
+							onError={defaultImage}
+							alt="profile picture"
+							className="full-profilePic"
+						/>
+						<h2 style={{ marginTop: '0', marginBottom: '0rem' }}>
+							{user.displayName}
+						</h2>
+						<h3
+							style={{
+								marginTop: '0',
+								color: 'grey',
+								fontWeight: '200',
+							}}
+						>
+							@username
+						</h3>
+						<p style={{ marginTop: '0' }}>Bio ต้องมีมั้ยนิ้</p>
+					</div>
+					<div style={{ alignSelf: 'center' }}>
+						{/* <button className="edit-btn" onClick={handleOnClick}>
+							{edit ? 'X' : 'Edit'}
+						</button> */}
+					</div>
 
-					{edit && (
-						<div className="editProfilePane">
-							<form action="" className="editProfileForm">
-								<label htmlFor="">Profile Picture</label>
-								{/* <div className="componentBox">
+					<Popup
+						trigger={
+							<button
+								className="edit-btn"
+								onClick={handleOnClick}
+							>
+								{edit ? 'X' : 'Edit'}
+							</button>
+						}
+						modal
+						className="editProfile"
+					>
+						{(close) => (
+							<div className="modal">
+								<div className="close" onClick={close}>
+									<MdCancel
+										size="30px"
+										style={{ fill: '#f48c51' }}
+									/>
+								</div>
+
+								<div className="content">
+									<div className="editProfilePane">
+										<form
+											action=""
+											className="editProfileForm"
+										>
+											<label htmlFor="">
+												Profile Picture
+											</label>
+											{/* <div className="componentBox">
 									<h1>Upload picture</h1>
 									<br />
 									<progress value={progress} max="100" />
@@ -100,20 +135,29 @@ const Profile = () => {
 									<h3>Preview image</h3>
 									{image ? <img src={path} alt="firebase-image" width="400px" /> : <></>}
 								</div> */}
-								<FileUpload url={url} setUrl={setUrl} />
-								<label htmlFor="">Display Name</label>
-								<input type="text" name="displayNames" />
-								<label htmlFor="">Username</label>
-								<input type="text" name="username" />
-								<button className="btn">Save Changes</button>
-							</form>
-						</div>
-					)}
+											<FileUpload
+												url={url}
+												setUrl={setUrl}
+											/>
+											<label htmlFor="">
+												Display Name
+											</label>
+											<input
+												type="text"
+												name="displayNames"
+											/>
+
+											<button className="btn">
+												Save Changes
+											</button>
+										</form>
+									</div>
+								</div>
+							</div>
+						)}
+					</Popup>
 				</div>
 
-				<button className="edit-btn" onClick={handleOnClick}>
-					{edit ? 'X' : 'Edit'}
-				</button>
 				<div className="profileCard">
 					{/* <PostForm updatePost={updatePost} /> */}
 					<div className="content">
