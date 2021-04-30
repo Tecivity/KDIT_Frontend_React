@@ -1,17 +1,17 @@
 import React, { useState, useContext, useEffect } from 'react';
 import './index.css';
 import { SessionApi } from '../../hook/SessionApi';
-import firebase from '../../firebase'
-import Post from '../Card/Post'
-import PostForm from '../Card/PostForm'
-import { PostModel } from '../../firebase/models'
+import firebase from '../../firebase';
+import Post from '../Card/Post';
+import PostForm from '../Card/PostForm';
+import { PostModel } from '../../firebase/models';
 import FileUpload from '../../firebase/FileUpload';
 
 const Profile = () => {
 	const { user, defaultImage } = useContext(SessionApi);
 	const [edit, setEdit] = useState(false);
-	const [posts, setPosts] = useState([])
-	const [url, setUrl] = useState("")
+	const [posts, setPosts] = useState([]);
+	const [url, setUrl] = useState('');
 
 	const updatePost = () => {
 		fetchData();
@@ -27,7 +27,7 @@ const Profile = () => {
 		firebase
 			.firestore()
 			.collection('posts')
-			.where('userUID','==',user.uid)
+			.where('userUID', '==', user.uid)
 			.onSnapshot((querySnapshot) => {
 				querySnapshot.forEach((doc) => {
 					const post = new PostModel(
@@ -80,7 +80,7 @@ const Profile = () => {
 						@username
 					</h3>
 					<p style={{ marginTop: '0' }}>Bio ต้องมีมั้ยนิ้</p>
-					
+
 					{edit && (
 						<div className="editProfilePane">
 							<form action="" className="editProfileForm">
@@ -109,22 +109,20 @@ const Profile = () => {
 							</form>
 						</div>
 					)}
-					<div className="card">
-						<PostForm updatePost={updatePost} />
-						<div className="content">
-							{posts.map((post) => (
-								<Post post={post} />
-							))}
-						</div>
-					</div>
 				</div>
 
 				<button className="edit-btn" onClick={handleOnClick}>
 					{edit ? 'X' : 'Edit'}
 				</button>
-
+				<div className="profileCard">
+					{/* <PostForm updatePost={updatePost} /> */}
+					<div className="content">
+						{posts.map((post) => (
+							<Post post={post} />
+						))}
+					</div>
+				</div>
 			</div>
-
 		</>
 	);
 };

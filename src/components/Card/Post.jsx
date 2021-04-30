@@ -5,7 +5,7 @@ import { useHistory } from 'react-router-dom';
 import parse from 'html-react-parser';
 import firebase from '../../firebase';
 import { User } from '../../firebase/models';
-import { BiUpArrow, BiDownArrow } from 'react-icons/bi';
+import { BiUpArrow, BiDownArrow, BiCommentDetail } from 'react-icons/bi';
 
 const Post = ({ post }) => {
 	const history = useHistory();
@@ -84,7 +84,7 @@ const Post = ({ post }) => {
 		<div id={post.id} className="postPane">
 			<div>
 				<div className="post">
-					<div>
+					<div onClick={handlePostClick}>
 						<img
 							src={postUser.photoURL}
 							onError={defaultImage}
@@ -137,7 +137,19 @@ const Post = ({ post }) => {
 						<BiDownArrow size="25px" />
 					</button>
 				</div>
-				<p>Comments</p>
+				<div
+					style={{
+						display: 'flex',
+						flexDirection: 'row',
+						alignItems: 'center',
+					}}
+				>
+					<h4>Comment numbers HERE</h4>
+					<BiCommentDetail
+						size="25px"
+						style={{ marginLeft: '0.5rem' }}
+					/>
+				</div>
 			</div>
 		</div>
 	);

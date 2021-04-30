@@ -5,11 +5,13 @@
 	width: 43%;
 
 	padding-top: 10rem;
-	padding-left: 1.5rem;
+	padding-left: 0rem;
 
 	display: flex;
 	flex-direction: row;
 	align-items: flex-start;
+	justify-content: flex-start;
+	flex-wrap: wrap;
 
 	border: 1px solid lightgrey;
 }
@@ -46,7 +48,9 @@
 }
 
 .profileInfoPane {
-	width: 90%;
+	margin: 0;
+	padding-left: 1.5rem;
+	width: 80%;
 
 	/* border: 1px solid black; */
 }
@@ -54,4 +58,10 @@
 .edit-btn {
 	margin-top: 15%;
 	margin-right: 1.5rem;
+}
+
+.profileCard {
+	width: 100%;
+
+	border-top: 3px solid lightgrey;
 }

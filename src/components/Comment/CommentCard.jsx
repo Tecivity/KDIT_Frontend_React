@@ -1,102 +1,103 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Redirect, Link } from "react-router-dom";
-import { SessionApi } from "../../hook/SessionApi";
-import { useHistory } from "react-router-dom";
-import parse from "html-react-parser";
-import firebase from "../../firebase";
-import { User } from "../../firebase/models";
-import "./index.css";
+import React, { useState, useEffect, useContext } from 'react';
+import { Redirect, Link } from 'react-router-dom';
+import { SessionApi } from '../../hook/SessionApi';
+import { useHistory } from 'react-router-dom';
+import parse from 'html-react-parser';
+import firebase from '../../firebase';
+import { User } from '../../firebase/models';
+import './index.css';
+import { BiUpArrow, BiDownArrow } from 'react-icons/bi';
 
 const CommentCard = ({ comment }) => {
-  const history = useHistory();
-  const { session } = useContext(SessionApi);
-  const defaultImage =
-    "https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg";
+	const history = useHistory();
+	const { session } = useContext(SessionApi);
+	const defaultImage =
+		'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg';
 
-  //States
-  const [commentOwner, setcommentOwner] = useState({});
+	//States
+	const [commentOwner, setcommentOwner] = useState({});
 
-  // console.log(comment)
+	// console.log(comment)
 
-  const fetchData = async () => {
-    firebase
-      .firestore()
-      .collection("users")
-      .doc(comment.userId)
-      .get()
-      .then((doc) => {
-        const pUser = new User(
-          doc.id,
-          doc.data().totalVote,
-          doc.data().bio,
-          doc.data().displayName,
-          doc.data().photoURL,
-          doc.data().email
-        );
-        setcommentOwner(pUser);
-        // console.log(commentOwner.displayName)
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+	const fetchData = async () => {
+		firebase
+			.firestore()
+			.collection('users')
+			.doc(comment.userId)
+			.get()
+			.then((doc) => {
+				const pUser = new User(
+					doc.id,
+					doc.data().totalVote,
+					doc.data().bio,
+					doc.data().displayName,
+					doc.data().photoURL,
+					doc.data().email,
+				);
+				setcommentOwner(pUser);
+				// console.log(commentOwner.displayName)
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+	useEffect(() => {
+		fetchData();
+	}, []);
 
-  return (
-    <div id={comment.id} className="commentPane">
-      <div>
-        <div className="post">
-          <div className="commentVotePane">
-            <img
-              src={commentOwner.photoURL}
-              onError={defaultImage}
-              alt="profile picture"
-              className="profilePic"
-            />
-            <div className="voteCommentPane">
-              <button
-                // onClick={}
-                className="voteUpBT"
-              >
-                ⬆
-              </button>
+	return (
+		<div id={comment.id} className="commentPane">
+			<div className="comment">
+				<div className="commentVotePane">
+					<img
+						src={commentOwner.photoURL}
+						onError={defaultImage}
+						alt="profile picture"
+						className="profilePic"
+					/>
+					<div className="voteCommentPane">
+						<button
+							// onClick={}
+							className="voteUpBTC"
+						>
+							<BiUpArrow size="25px" />
+						</button>
 
-              {comment.voteUp - comment.voteDown}
+						{comment.voteUp - comment.voteDown}
 
-              <button
-                // onClick={}
-                className="voteDownBT"
-              >
-                ⬇
-              </button>
-            </div>
-          </div>
+						<button
+							// onClick={}
+							className="voteDownBTC"
+						>
+							<BiDownArrow size="25px" />
+						</button>
+					</div>
+				</div>
 
-          <div className="commentInfo">
-            <div className="postBy">
-              <p className="displayName">{commentOwner.displayName}</p>
-              <p className="username">@{comment.userId}</p>
-              <p className="timestamp">
-                {" "}
-                -{" "}
-                {new Date(comment.timeStamp).toLocaleString([], {
-                  dateStyle: "long",
-                  timeStyle: "short",
-                })}
-              </p>
-            </div>
-            <div className="postContent">
-              <p>{parse(comment.content)}</p>
-              {/* แสดง Post */}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+				<div className="commentInfo">
+					<div className="postBy">
+						<p className="displayName">
+							{commentOwner.displayName}
+						</p>
+						{/* <p className="username">@{comment.userId}</p> */}
+						<p className="timestamp">
+							{' '}
+							-{' '}
+							{new Date(comment.timeStamp).toLocaleString([], {
+								dateStyle: 'long',
+								timeStyle: 'short',
+							})}
+						</p>
+					</div>
+					<div className="postContent">
+						<p>{parse(comment.content)}</p>
+						{/* แสดง Post */}
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default CommentCard;
