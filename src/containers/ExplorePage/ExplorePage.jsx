@@ -1,8 +1,5 @@
+//React
 import React, { useState } from 'react';
-import { SearchBar, Navbar } from '../../components';
-import algoliasearch from 'algoliasearch/lite';
-import { stripHtml } from 'string-strip-html';
-
 import {
 	InstantSearch,
 	// SearchBox,
@@ -15,7 +12,13 @@ import {
 	connectSearchBox,
 	connectHits,
 } from 'react-instantsearch-dom';
+//Components
+import { SearchBar, Navbar } from '../../components';
+//External
+import algoliasearch from 'algoliasearch/lite';
+import { stripHtml } from 'string-strip-html';
 
+//Custom Components
 const searchClient = algoliasearch(
 	'JG2RW7MF5D',
 	'512e0cbf39c768a80f6c1f95f8099be2',
@@ -54,7 +57,6 @@ const ExplorePage = () => {
 		<>
 			<Navbar />
 			<div className="explorePane">
-				{/* <CustomSearchBox /> */}
 				This is Explore Page
 				<div>
 					<InstantSearch

@@ -1,13 +1,25 @@
+//React
 import React, { useEffect, useState } from 'react';
-import { Navbar, Card, SideNavbar, FullSubCom } from '../../components';
 import { useParams } from 'react-router-dom';
+//Components
+import { Navbar, Card, SideNavbar, FullSubCom } from '../../components';
+//Firebase
 import firebase from '../../firebase';
 import { SubComModel } from '../../firebase/models';
 
 const FullSubComPage = () => {
-	const { id } = useParams();
+	//States
 	const [subCom, setSubCom] = useState({});
 
+	//Effects
+	useEffect(() => {
+		fetchData();
+	}, []);
+
+	//Params
+	const { id } = useParams();
+
+	//Functios
 	const fetchData = async () => {
 		firebase
 			.firestore()
@@ -37,10 +49,7 @@ const FullSubComPage = () => {
 			});
 	};
 
-	useEffect(() => {
-		fetchData();
-	}, []);
-
+	//Render
 	return (
 		<div>
 			<Navbar />

@@ -1,7 +1,10 @@
+//React
 import React, { useState, useEffect, useContext } from 'react';
-import { SessionApi } from '../../hook/SessionApi'
-import firebase from '../../firebase'
-import Post from '../Card/Post'
+//Components
+import { SessionApi } from '../../hook/SessionApi';
+import Post from '../PostCard/Post';
+//Firebase
+import firebase from '../../firebase';
 import './index.css';
 
 const FullSubCom = ({ subCom, update }) => {
@@ -11,10 +14,24 @@ const FullSubCom = ({ subCom, update }) => {
 		name: '',
 		description: '',
 		photoURL: '',
-		bannerURL: ''
+		bannerURL: '',
 	});
-	const { defaultBanner, userInfo, user } = useContext(SessionApi)
 	const [posts, setPosts] = useState([]);
+
+	//Effects
+	useEffect(() => {
+		fetchData();
+		setNewSubCom({
+			name: subCom.name,
+			description: subCom.description,
+			photoURL: subCom.photoURL,
+			bannerURL: subCom.bannerURL,
+		});
+		console.log(subCom);
+	}, [subCom]);
+
+	//Contexts
+	const { defaultBanner, userInfo, user } = useContext(SessionApi);
 
 	//Functions
 	const handleOnClick = () => {
@@ -39,7 +56,6 @@ const FullSubCom = ({ subCom, update }) => {
 
 	const fetchData = async () => {
 		if (subCom.id) {
-			console.log(subCom.id)
 			const postsArray = [];
 			firebase
 				.firestore()
@@ -47,31 +63,18 @@ const FullSubCom = ({ subCom, update }) => {
 				.where('subComUID', '==', subCom.id)
 				.onSnapshot((querySnapshot) => {
 					querySnapshot.forEach((doc) => {
-						postsArray.push({ id: doc.id, ...doc.data() })
+						postsArray.push({ id: doc.id, ...doc.data() });
 					});
-					setPosts(postsArray)
+					setPosts(postsArray);
 				});
 		}
-
 	};
-
-	useEffect(() => {
-		
-		fetchData();
-		setNewSubCom({
-			name: subCom.name,
-			description: subCom.description,
-			photoURL: subCom.photoURL,
-			bannerURL: subCom.bannerURL
-		});
-		console.log(subCom)
-	}, [subCom]);
 
 	return (
 		<div className="fullComPane">
 			<div className="comInfoPane">
 				<div className="bannerImgPane">
-				<img
+					<img
 						src={subCom.bannerURL || defaultBanner}
 						onError={defaultBanner}
 						alt=""
@@ -85,44 +88,61 @@ const FullSubCom = ({ subCom, update }) => {
 				<p>{subCom.description}</p>
 				<button className="subcom-btn">Follow</button>
 
-				{userInfo.id == subCom.ownerUID ? <>
-					<button className="editCombtn" onClick={handleOnClick}>
-						{edit ? 'X' : 'Edit'}
-					</button>
-					{edit && (
-						<>
-							<div className="fullsubcomForm">
-								<form action="">
-									<label htmlFor="">Community Picture</label>
-									<h1>Upload Picture Here</h1>
-									<div className="inputForm">
-										<label htmlFor="">Community Name</label>
-										<input
-											type="text"
-											name="name"
-											className="nameInput"
-											onChange={(e) => handleChange(e)}
-											value={newSubCom.name}
-										/>
-										<label htmlFor="">Description</label>
-										<textarea
-											id=""
-											cols="30"
-											rows="10"
-											name="description"
-											className="desInput"
-											onChange={(e) => handleChange(e)}
-											value={newSubCom.description}
-										></textarea>
-									</div>
-									<button onClick={handleSubmit} className="btn">
-										Save
-								</button>
-								</form>
-							</div>
-						</>
-					)}
-				</> : <></>}
+				{userInfo.id == subCom.ownerUID ? (
+					<>
+						<button className="editCombtn" onClick={handleOnClick}>
+							{edit ? 'X' : 'Edit'}
+						</button>
+						{edit && (
+							<>
+								<div className="fullsubcomForm">
+									<form action="">
+										<label htmlFor="">
+											Community Picture
+										</label>
+										<h1>Upload Picture Here</h1>
+										<div className="inputForm">
+											<label htmlFor="">
+												Community Name
+											</label>
+											<input
+												type="text"
+												name="name"
+												className="nameInput"
+												onChange={(e) =>
+													handleChange(e)
+												}
+												value={newSubCom.name}
+											/>
+											<label htmlFor="">
+												Description
+											</label>
+											<textarea
+												id=""
+												cols="30"
+												rows="10"
+												name="description"
+												className="desInput"
+												onChange={(e) =>
+													handleChange(e)
+												}
+												value={newSubCom.description}
+											></textarea>
+										</div>
+										<button
+											onClick={handleSubmit}
+											className="btn"
+										>
+											Save
+										</button>
+									</form>
+								</div>
+							</>
+						)}
+					</>
+				) : (
+					<></>
+				)}
 			</div>
 			<div className="profileCard">
 				{/* <PostForm updatePost={updatePost} /> */}

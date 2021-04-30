@@ -31,3 +31,8 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 }
+
+h1.helpHead {
+	text-align: center;
+	font-size: 35px;
+}

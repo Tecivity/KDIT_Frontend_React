@@ -1,18 +1,25 @@
+//React
 import React, { useState, useEffect, useContext } from 'react';
-import { SessionApi } from '../../hook/SessionApi';
 import { Link, Switch } from 'react-router-dom';
+//Components
+import { SessionApi } from '../../hook/SessionApi';
+//Firebase
 import firebase from '../../firebase';
+import MyUploadAdapter from '../../firebase/ckeditor_image_firebase';
+//External
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import MyUploadAdapter from '../../firebase/ckeditor_image_firebase';
 
 const PostForm = ({ updatePost }) => {
-	const { session, user } = useContext(SessionApi);
+	//Variables
 	const defaultImage =
 		'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg';
-	const [imageURL, setImageURL] = useState(user.photoURL);
+
+	//Contexts
+	const { session, user } = useContext(SessionApi);
 
 	//States
+	const [imageURL, setImageURL] = useState(user.photoURL);
 	const [post, setPost] = useState({
 		content: '',
 		subCom: '',
@@ -23,6 +30,11 @@ const PostForm = ({ updatePost }) => {
 		voteDown: 0,
 	});
 	const [show, setShow] = useState(true);
+
+	//Effects
+	useEffect(() => {
+		setImageURL(user.photoURL);
+	}, [user]);
 
 	//Functions
 	const clearInput = () => {
@@ -66,7 +78,7 @@ const PostForm = ({ updatePost }) => {
 				...post,
 				timeStamp: currentDate() + 'T' + currentTime(),
 				userUID: user.uid,
-				subComUID: '8bDoItM7A7pZZgKO45UK'
+				subComUID: '8bDoItM7A7pZZgKO45UK',
 			};
 			firebase
 				.firestore()
@@ -80,10 +92,6 @@ const PostForm = ({ updatePost }) => {
 				});
 		}
 	};
-
-	useEffect(() => {
-		setImageURL(user.photoURL);
-	}, [user]);
 
 	return (
 		<>
@@ -104,7 +112,20 @@ const PostForm = ({ updatePost }) => {
 							editor={ClassicEditor}
 							data="<p>What's going on today</p>"
 							config={{
-								toolbar: ['heading', '|', 'bold', 'italic', 'blockQuote', 'link', 'numberedList', 'imageUpload',  'mediaEmbed', '|', 'undo', 'redo'],
+								toolbar: [
+									'heading',
+									'|',
+									'bold',
+									'italic',
+									'blockQuote',
+									'link',
+									'numberedList',
+									'imageUpload',
+									'mediaEmbed',
+									'|',
+									'undo',
+									'redo',
+								],
 								mediaEmbed: {
 									previewsInData: true,
 								},

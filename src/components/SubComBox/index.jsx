@@ -1,5 +1,7 @@
+//React
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+//CSS
 import './index.css';
 
 const SubComBox = ({ subCom }) => {

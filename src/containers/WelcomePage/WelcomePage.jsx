@@ -1,9 +1,13 @@
+//React
 import React, { useState } from 'react';
-import './WelcomePage.css';
 import Select from 'react-select';
-import Radium, { StyleRoot } from 'radium';
 import { bounceInLeft, fadeIn, slideInUp } from 'react-animations';
+//External
+import Radium, { StyleRoot } from 'radium';
+//CSS
+import './WelcomePage.css';
 
+//Data
 const options = [
 	{
 		value: 'chocolate',
@@ -36,8 +40,10 @@ const styles = {
 };
 
 const WelcomePage = () => {
+	//States
 	const [showSuggest, setShowSuggest] = useState(false);
 
+	//Render
 	return (
 		<StyleRoot>
 			<div className="welcomePane">

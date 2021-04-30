@@ -1,24 +1,38 @@
+//React
 import React, { useState, useContext, useEffect } from 'react';
-import './index.css';
-import { SessionApi } from '../../hook/SessionApi';
-import firebase from '../../firebase';
-import Post from '../Card/Post';
-import PostForm from '../Card/PostForm';
-import FileUpload from '../../firebase/FileUpload';
 import Popup from 'reactjs-popup';
 import { MdCancel } from 'react-icons/md';
+//Components
+import { SessionApi } from '../../hook/SessionApi';
+import Post from '../PostCard/Post';
+//Firebase
+import firebase from '../../firebase';
+//External
+import FileUpload from '../../firebase/FileUpload';
+//CSS
+import './index.css';
 
 const Profile = () => {
-	const { user, defaultImage, defaultBanner, userInfo } = useContext(SessionApi);
+	//States
 	const [edit, setEdit] = useState(false);
 	const [posts, setPosts] = useState([]);
 	const [url, setUrl] = useState('');
 
+	//Contexts
+	const { user, defaultImage, defaultBanner, userInfo } = useContext(
+		SessionApi,
+	);
+
+	//Effects
+	useEffect(() => {
+		fetchData();
+	}, []);
+
+	//Functions
 	const updatePost = () => {
 		fetchData();
 	};
 
-	//Functions
 	const handleOnClick = () => {
 		setEdit(!edit);
 	};
@@ -31,15 +45,11 @@ const Profile = () => {
 			.where('userUID', '==', userInfo.id)
 			.onSnapshot((querySnapshot) => {
 				querySnapshot.forEach((doc) => {
-					postsArray.push({id:doc.id, ...doc.data()})
+					postsArray.push({ id: doc.id, ...doc.data() });
 				});
 				setPosts(postsArray);
 			});
 	};
-
-	useEffect(() => {
-		fetchData();
-	}, []);
 
 	return (
 		<>

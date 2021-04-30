@@ -1,7 +1,6 @@
-import './style.css';
-import React, { useState, useEffect } from 'react';
+//React
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { SessionApi } from '../../hook/SessionApi';
 import {
 	MdHome,
 	MdSearch,
@@ -10,7 +9,10 @@ import {
 	MdInfo,
 	MdAccountCircle,
 } from 'react-icons/md';
-import { useHistory, useParams } from 'react-router-dom';
+//Components
+import { SessionApi } from '../../hook/SessionApi';
+//CSS
+import './style.css';
 
 export default function Navbar() {
 	//States

@@ -1,22 +1,37 @@
+//React
 import React, { useState, useEffect, useContext } from 'react';
 import { Redirect, Link } from 'react-router-dom';
-import { SessionApi } from '../../hook/SessionApi';
 import { useHistory } from 'react-router-dom';
-import parse from 'html-react-parser';
-import firebase from '../../firebase';
 import { BiUpArrow, BiDownArrow, BiCommentDetail } from 'react-icons/bi';
+//Components
+import { SessionApi } from '../../hook/SessionApi';
+//Firebase
+import firebase from '../../firebase';
 import { CommentService, PostService, UserService } from '../../services';
+//External
+import parse from 'html-react-parser';
 
-const Post = ({ post, upVote, downVote}) => {
-	const history = useHistory();
-	const { session, user, loading } = useContext(SessionApi);
+const Post = ({ post, upVote, downVote }) => {
+	//Variables
 	const defaultImage =
 		'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg';
+
 	//States
 	const [postUser, setPostUser] = useState('');
-	const [totalComment, setTotalComment] = useState(0)
+	const [totalComment, setTotalComment] = useState(0);
 
-	//Function
+	//Effects
+	useEffect(() => {
+		fetchData();
+	}, []);
+
+	//Context
+	const { session, user, loading } = useContext(SessionApi);
+
+	//History
+	const history = useHistory();
+
+	//Functions
 	const handlePostClick = () => {
 		console.log('post clicked');
 		history.push(`/post/${post.id}`);
@@ -26,23 +41,19 @@ const Post = ({ post, upVote, downVote}) => {
 		if (!window.confirm('Are you sure for delete post ❓')) {
 			return console.log('Cancel delete.');
 		}
-		PostService.deletePost(post.id).then(()=>{
-			window.location.reload()
-		})
+		PostService.deletePost(post.id).then(() => {
+			window.location.reload();
+		});
 	};
 
 	const fetchData = async () => {
-		UserService.getUser(post.userUID).then(data=>{
-			setPostUser(data)
-		})
-		CommentService.getCommentSize(post.id).then(data=>{
-			setTotalComment(data)
-		})
+		UserService.getUser(post.userUID).then((data) => {
+			setPostUser(data);
+		});
+		CommentService.getCommentSize(post.id).then((data) => {
+			setTotalComment(data);
+		});
 	};
-
-	useEffect(() => {
-		fetchData();
-	}, []);
 
 	return (
 		<div id={post.id} className="postPane">
@@ -62,7 +73,6 @@ const Post = ({ post, upVote, downVote}) => {
 							<p className="displayName">
 								{postUser.displayName}
 							</p>
-							{/* <p className="username">@{post.userUID}</p> */}
 							<p className="timestamp">
 								{' '}
 								•{' '}
@@ -75,11 +85,12 @@ const Post = ({ post, upVote, downVote}) => {
 								<div>
 									<button onClick={deletePost}>X</button>
 								</div>
-							) : (<div></div>)}
+							) : (
+								<div></div>
+							)}
 						</div>
 						<div className="postContent" onClick={handlePostClick}>
 							<p>{parse(post.content)}</p>
-							{/* แสดง Post */}
 						</div>
 					</div>
 				</div>

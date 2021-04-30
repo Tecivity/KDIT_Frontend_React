@@ -1,24 +1,37 @@
+//React
 import React, { useState, useEffect, useContext } from 'react';
-import { Redirect, Link } from 'react-router-dom';
-import { SessionApi } from '../../hook/SessionApi';
 import { useHistory } from 'react-router-dom';
-import parse from 'html-react-parser';
+import { BiUpArrow, BiDownArrow } from 'react-icons/bi';
+//Components
+import { SessionApi } from '../../hook/SessionApi';
+//Firebase
 import firebase from '../../firebase';
 import { User } from '../../firebase/models';
+//External
+import parse from 'html-react-parser';
+//CSS
 import './index.css';
-import { BiUpArrow, BiDownArrow } from 'react-icons/bi';
 
 const CommentCard = ({ comment }) => {
-	const history = useHistory();
-	const { session } = useContext(SessionApi);
+	//Variables
 	const defaultImage =
 		'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg';
 
 	//States
 	const [commentOwner, setcommentOwner] = useState({});
 
-	// console.log(comment)
+	//Effects
+	useEffect(() => {
+		fetchData();
+	}, []);
 
+	//Context
+	const { session } = useContext(SessionApi);
+
+	//Hstory
+	const history = useHistory();
+
+	//Functions
 	const fetchData = async () => {
 		firebase
 			.firestore()
@@ -41,10 +54,6 @@ const CommentCard = ({ comment }) => {
 				console.log(err);
 			});
 	};
-
-	useEffect(() => {
-		fetchData();
-	}, []);
 
 	return (
 		<div id={comment.id} className="commentPane">

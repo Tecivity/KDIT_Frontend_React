@@ -1,14 +1,23 @@
+//React
 import React, { useState, useEffect } from 'react';
-import firebase from '../../firebase';
-import { CommentModel } from '../../firebase/models';
+//Components
 import CommentForm from './CommentForm';
 import CommentCard from './CommentCard';
+//Firebase
+import firebase from '../../firebase';
+import { CommentModel } from '../../firebase/models';
 
 const Comment = ({ post, id }) => {
+	//Variables
 	const ref = firebase.firestore().collection('comments');
 
 	//States
 	const [comments, setComments] = useState([]);
+
+	//Effects
+	useEffect(() => {
+		fetchData();
+	}, []);
 
 	//Functions
 	const updatePost = () => {
@@ -47,10 +56,6 @@ const Comment = ({ post, id }) => {
 			});
 	};
 
-	useEffect(() => {
-		fetchData();
-	}, []);
-
 	return (
 		<div className="commentCard">
 			<CommentForm post={post} id={id} />
@@ -61,8 +66,6 @@ const Comment = ({ post, id }) => {
 			</div>
 		</div>
 	);
-
-	return <></>;
 };
 
 export default Comment;

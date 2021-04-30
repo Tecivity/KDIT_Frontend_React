@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+//React
+import React, { useState, useEffect } from 'react';
+//Components
 import { HelpBox, Navbar } from '../../components';
 import { SessionApi } from '../../hook/SessionApi';
+//CSS
 import './HelpPage.css';
 
 const HelpPage = () => {
+	//States
+	const [inProp, setInProp] = useState(false);
+
+	//Contexts
 	const { authListener, loading } = React.useContext(SessionApi);
 
-	const [inProp, setInProp] = useState(false);
+	//Effects
+	useEffect(() => {
+		authListener();
+	}, []);
+
 	//Data
 	const questions = [
 		{
@@ -62,10 +73,6 @@ const HelpPage = () => {
 				'<p>&#8226 The submission post can be edited. However, you can simply delete it and resubmit it. The sooner you do this, the less likely you will lose any votes or comments.</p><p>&#8226 We are not encouraged to make changes to your post very often because it can mislead the viewer who visits your content.<p></p>&#8226 The submission timestamp of the post or comment which will initiate the first time when the post or comment is submitted will not and cannot be changed under any circumstances, this is the prevention measure to the user who aim to exploit the filter and sorting of this site by trying to push the older or outdated content to the public eye.</p><p>&#8226 You can edit your post at any time by clicking the edit button on the top right of your post or comment, after that the editor will pop-up just like when you want to submit your post or comment in the first place. You can change your content and make a change to your post then submit or click cancel to abort this operation.</p>',
 		},
 	];
-
-	React.useEffect(() => {
-		authListener();
-	}, []);
 
 	return (
 		<>

@@ -1,19 +1,31 @@
+//React
 import React, { useState, useEffect } from 'react';
+//Components
 import { Navbar, SubComBox, SideNavbar, SubComForm } from '../../components';
 import { SessionApi } from '../../hook/SessionApi';
+//Firebase
 import firebase from '../../firebase';
 import { SubComModel } from '../../firebase/models';
+//External
 import HashLoader from 'react-spinners/HashLoader';
 import { UserService, PostService } from '../../services';
+//CSS
 import './ComPage.css';
 
 const SubComPage = () => {
+	//Variables
 	const ref = firebase.firestore().collection('sub_community');
 	const auth = firebase.auth();
 
 	//States
 	const [subComs, setSubComs] = useState([]);
 	const [showCreate, setShowCreate] = useState(false);
+
+	//Effects
+	useEffect(() => {
+		fetchData();
+		authListener();
+	}, []);
 
 	//Contexts
 	const {
@@ -25,6 +37,7 @@ const SubComPage = () => {
 		user,
 	} = React.useContext(SessionApi);
 
+	//Functions
 	const firebaseTest = async () => {
 		getUserInfo(user.uid).then((data) => {
 			console.log(data);
@@ -41,20 +54,15 @@ const SubComPage = () => {
 		});
 	};
 
-	useEffect(() => {
-		fetchData();
-		authListener();
-	}, []);
-
-	//Functions
 	const handleShowCreate = () => {
 		setShowCreate(!showCreate);
 	};
 
+	//Render
 	return (
 		<>
 			<Navbar />
-			<div className="subcomPane">
+			<div className="com-pane">
 				{loading ? (
 					<div className="auth-loading">
 						<HashLoader
@@ -68,8 +76,8 @@ const SubComPage = () => {
 					<div>
 						{session ? (
 							<>
-								<div className="mySubCom">
-									<div className="mySubComTextPane">
+								<div className="myCom">
+									<div className="myComTextPane">
 										{showCreate ? (
 											<SubComForm />
 										) : (
@@ -83,16 +91,16 @@ const SubComPage = () => {
 											</>
 										)}
 									</div>
-									<div className="btnPane">
+									<div className="com-btnPane">
 										<button
-											className="createSubComBtn"
+											className="createComBtn"
 											onClick={handleShowCreate}
 										>
 											{showCreate ? 'X' : 'Create'}
 										</button>
 									</div>
 								</div>
-								<div className="ourSubCom">
+								<div className="ourCom">
 									<h1>Our Community</h1>
 									<div>
 										{subComs.map((subCom) => {

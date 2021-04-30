@@ -1,12 +1,13 @@
+//React
 import React, { useState } from 'react';
-import './index.css';
+//External
 import algoliasearch from 'algoliasearch/lite';
-import { stripHtml } from "string-strip-html";
+import { stripHtml } from 'string-strip-html';
+//CSS
+import './index.css';
 
 import {
 	InstantSearch,
-	// SearchBox,
-	// Hits,
 	connectHighlight,
 	ClearRefinements,
 	RefinementList,
@@ -16,11 +17,13 @@ import {
 	connectHits,
 } from 'react-instantsearch-dom';
 
+//Search API
 const searchClient = algoliasearch(
 	'JG2RW7MF5D',
 	'512e0cbf39c768a80f6c1f95f8099be2',
 );
 
+//Custom Hits
 const Hits = ({ hits }) => (
 	<div className="hitContainer">
 		{hits.map((hit) => (
@@ -30,9 +33,9 @@ const Hits = ({ hits }) => (
 		))}
 	</div>
 );
-
 const CustomHits = connectHits(Hits);
 
+//Custom SearchBar
 const SearchBox = ({ currentRefinement, isSearchStalled, refine }) => {
 	//States
 	const [showHit, setShowHit] = useState(false);
@@ -62,9 +65,9 @@ const SearchBox = ({ currentRefinement, isSearchStalled, refine }) => {
 		</div>
 	);
 };
-
 const CustomSearchBox = connectSearchBox(SearchBox);
 
+//Component SearchBar
 const SearchBar = () => {
 	return (
 		<InstantSearch searchClient={searchClient} indexName="posts">

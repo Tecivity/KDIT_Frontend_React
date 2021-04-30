@@ -13,6 +13,20 @@ import './authPage.css';
 import Radium, { StyleRoot } from 'radium';
 
 export default function AuthPage() {
+	//Variables
+	var provider = new firebase.auth.GoogleAuthProvider();
+
+	const styles = {
+		bounceInLeft: {
+			animation: '1s',
+			animationName: Radium.keyframes(bounceInLeft, 'bounceInLeft'),
+		},
+		fadeIn: {
+			animation: '3s',
+			animationName: Radium.keyframes(fadeIn, 'fadeIn'),
+		},
+	};
+
 	//States
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
@@ -105,21 +119,6 @@ export default function AuthPage() {
 				setSession(false);
 			}
 		});
-	};
-
-	//Variables
-	var provider = new firebase.auth.GoogleAuthProvider();
-
-	//Animations
-	const styles = {
-		bounceInLeft: {
-			animation: '1s',
-			animationName: Radium.keyframes(bounceInLeft, 'bounceInLeft'),
-		},
-		fadeIn: {
-			animation: '3s',
-			animationName: Radium.keyframes(fadeIn, 'fadeIn'),
-		},
 	};
 
 	return (

@@ -1,17 +1,34 @@
+//React
 import React, { useEffect, useState } from 'react';
-import { Navbar, Card, SideNavbar, FullPost } from '../../components';
+import HashLoader from 'react-spinners/HashLoader';
 import { useHistory, useParams } from 'react-router-dom';
+//Components
+import { Navbar, Card, SideNavbar, FullPost } from '../../components';
+import { SessionApi } from '../../hook/SessionApi';
+//Firebase
 import firebase from '../../firebase';
 import { PostModel } from '../../firebase/models';
-import { SessionApi } from '../../hook/SessionApi';
-import HashLoader from 'react-spinners/HashLoader';
 
 const PostPage = () => {
-	const { id } = useParams();
+	//Variables
 	const ref = firebase.firestore().collection('posts').doc(id);
-	const { authListener, loading } = React.useContext(SessionApi);
+
+	//States
 	const [post, setPost] = useState({});
 
+	//Effects
+	useEffect(() => {
+		authListener();
+		fetchData();
+	}, []);
+
+	//Contexts
+	const { authListener, loading } = React.useContext(SessionApi);
+
+	//Params
+	const { id } = useParams();
+
+	//Functions
 	const upVote = (post) => {
 		ref.doc(post.id).set({ ...post, voteUp: post.voteUp + 1 });
 	};
@@ -34,13 +51,11 @@ const PostPage = () => {
 			);
 			setPost(fetchPost);
 		});
+		ref.get().then((doc) => {
+			setPost({ id: doc.id, ...doc.data() });
+		});
 		//console.log(`postpage -> id : ${id}, post : ${post.userUID}`)
 	};
-
-	useEffect(() => {
-		authListener();
-		fetchData();
-	}, []);
 
 	return (
 		<>
