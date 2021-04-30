@@ -1,9 +1,9 @@
 import React from 'react';
-import { Navbar, Card, SideNavbar, CardProfile } from '../components';
-import { SessionApi } from '../hook/SessionApi';
+import { Navbar, Card, SideNavbar } from '../../components';
+import { SessionApi } from '../../hook/SessionApi';
 import { Link } from 'react-router-dom';
 import HashLoader from 'react-spinners/HashLoader';
-import './index.css';
+import './HomePage.css';
 
 export default function HomePage() {
 	const { authListener, loading } = React.useContext(SessionApi);

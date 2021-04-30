@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SearchBar, Navbar } from '../components';
+import { SearchBar, Navbar } from '../../components';
 import algoliasearch from 'algoliasearch/lite';
 import { stripHtml } from 'string-strip-html';
 

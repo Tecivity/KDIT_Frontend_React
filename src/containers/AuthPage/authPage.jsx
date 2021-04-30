@@ -1,20 +1,34 @@
+//React
 import React, { useState, useEffect, useContext } from 'react';
-import './index.css';
-import firebase from '../firebase';
-import { Navbar, Login, Signup } from '../components';
 import { Redirect } from 'react-router-dom';
-import { SessionApi } from '../hook/SessionApi';
 import { bounceInLeft, fadeIn } from 'react-animations';
+//Firbase
+import firebase from '../../firebase';
+//Components
+import { Navbar, Login, Signup } from '../../components';
+import { SessionApi } from '../../hook/SessionApi';
+//CSS
+import './authPage.css';
+//External
 import Radium, { StyleRoot } from 'radium';
 
 export default function AuthPage() {
-	const { user, setUser, setSession } = useContext(SessionApi);
+	//States
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [emailError, setEmailError] = useState('');
 	const [passwordError, setPasswordError] = useState('');
 	const [hasAccount, setHasAccount] = useState(false);
 
+	//Effects
+	useEffect(() => {
+		authListener();
+	}, []);
+
+	//Contexts
+	const { user, setUser, setSession } = useContext(SessionApi);
+
+	//Functions
 	const clearInputs = () => {
 		setEmail('');
 		setPassword('');
@@ -93,10 +107,7 @@ export default function AuthPage() {
 		});
 	};
 
-	useEffect(() => {
-		authListener();
-	}, []);
-
+	//Variables
 	var provider = new firebase.auth.GoogleAuthProvider();
 
 	//Animations
@@ -112,9 +123,9 @@ export default function AuthPage() {
 	};
 
 	return (
-		<div className="auth">
+		<div className="auth-Pane">
 			<StyleRoot>
-				<div className="welcomeTextPane" style={styles.bounceInLeft}>
+				<div className="auth-TextPane" style={styles.bounceInLeft}>
 					<h1 className="nisitText">NISIT</h1>
 					<h2 className="nisitSubText">
 						We Connect{' '}
@@ -123,12 +134,12 @@ export default function AuthPage() {
 					{user ? (
 						<Redirect push to="/" />
 					) : (
-						<div className="loginView">
+						<div className="auth-login">
 							<Signup />
 						</div>
 					)}
 				</div>
-				<div className="welcomeBackground" style={styles.fadeIn}></div>
+				<div className="auth-Background" style={styles.fadeIn}></div>
 			</StyleRoot>
 		</div>
 	);

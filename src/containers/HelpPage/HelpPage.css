@@ -1,0 +1,33 @@
+.helpPane {
+	position: absolute;
+	margin: 0;
+	width: 70%;
+	left: 25%;
+
+	border: 1px solid lightgrey;
+}
+
+.topHelpBox {
+	margin-top: 70px;
+	margin: 0 auto;
+}
+
+.helpBoxPane {
+	margin: 0;
+	margin-left: 10%;
+	padding: 2rem;
+
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.helpBoxPane {
+	margin: 0;
+	margin-left: 10%;
+	padding: 2rem;
+
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}

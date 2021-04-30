@@ -1,0 +1,20 @@
+.about-heading {
+	color: rgb(26, 26, 26);
+	display: inline;
+}
+
+.about-orangeHead {
+	color: #f48c51;
+	display: inline;
+}
+
+.about-Pane {
+	position: absolute;
+	left: 25%;
+	width: 65%;
+
+	align-content: center;
+	text-align: center;
+	justify-content: center;
+	margin-top: 20%;
+}

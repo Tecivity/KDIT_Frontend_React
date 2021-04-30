@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './index.css';
+import './WelcomePage.css';
 import Select from 'react-select';
 import Radium, { StyleRoot } from 'radium';
 import { bounceInLeft, fadeIn, slideInUp } from 'react-animations';
