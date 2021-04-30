@@ -21,26 +21,27 @@ h1.loginWarn {
 	position: absolute;
 	width: 43%;
 	left: 25%;
-	top: 85px;
 	z-index: 20;
-	font-family: DM Sans;
-	padding: 0.5rem 0;
+	padding: 1.5rem 0;
+
+	margin-bottom: 2rem;
 
 	background: #ffffff;
-	border: 1px solid lightgrey;
-	/* box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25); */
-	border-radius: 20px;
 }
 
 .full-voteUpBT {
 	font-weight: 900;
 	font-size: 20px;
-	border: transparent;
-	width: 30px;
-	height: 30px;
-	border-radius: 4px;
-	margin-left: 4px;
-	margin-right: 4px;
+
+	width: 2.5rem;
+	height: 2.5rem;
+
+	margin-right: 0.5rem;
+
+	border: none;
+	border-radius: 50%;
+
+	background: white;
 
 	transition: 500ms;
 }
@@ -55,12 +56,16 @@ h1.loginWarn {
 .full-voteDownBT {
 	font-weight: 900;
 	font-size: 20px;
-	border: transparent;
-	width: 30px;
-	height: 30px;
-	border-radius: 4px;
-	margin-left: 4px;
-	margin-right: 4px;
+
+	width: 2.5rem;
+	height: 2.5rem;
+
+	margin-left: 0.5rem;
+
+	border: none;
+	border-radius: 50%;
+
+	background: white;
 
 	transition: 500ms;
 }
@@ -72,21 +77,8 @@ h1.loginWarn {
 	background-color: rgb(219, 85, 107);
 }
 
-/* .voteNum {
-	font-family: DM Sans;
-	font-style: normal;
-	font-size: 20px;
-	font-weight: bold;
-	color: gray;
-	margin-right: 5px;
-	transition: 1500ms;
-}
-.voteNum:active {
-	color: green;
-} */
-
 .full-votePane {
-	background: #f0bfa3;
+	background: white;
 	border-radius: 0;
 	margin: 0;
 	padding: 0;
@@ -103,8 +95,12 @@ h1.loginWarn {
 	display: flex;
 	flex-direction: column-reverse;
 	margin: 0;
+	margin-bottom: 2rem;
 
-	color: black;
+	border: 4px solid #f48c51;
+	border-radius: 2rem;
+
+	box-shadow: 0 1rem #f48c51;
 
 	transition: 500ms;
 }
@@ -123,6 +119,9 @@ h1.loginWarn {
 }
 
 .full-post {
+	margin-top: 2rem;
+	padding: 0 1rem;
+
 	display: flex;
 	flex-direction: row;
 	font-size: 1rem;
@@ -138,7 +137,7 @@ h1.loginWarn {
 }
 
 .full-postBy .full-displayName {
-	font-size: 0.8rem;
+	font-size: 1rem;
 	font-weight: 700;
 }
 
@@ -152,7 +151,6 @@ h1.loginWarn {
 }
 
 .full-infoPane {
-	background: #f0bfa3;
 	border-radius: 0;
 	margin: 0;
 	padding: 5px;
@@ -160,6 +158,7 @@ h1.loginWarn {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
+	align-items: center;
 }
 
 .full-infoPane p {
@@ -168,11 +167,12 @@ h1.loginWarn {
 
 .fullprofilePic {
 	object-fit: cover;
-	width: 50px;
-	height: 50px;
+	width: 70px;
+	height: 70px;
 	border-radius: 50%;
 
 	margin: 0.5rem;
+	margin-bottom: 1rem;
 }
 
 .full-postText textarea {
@@ -196,7 +196,6 @@ h1.loginWarn {
 	margin: 0rem;
 	margin-bottom: 2rem;
 	padding-bottom: 0.5rem;
-	border-bottom: 1px solid lightgrey;
 }
 
 .full-postOption {
