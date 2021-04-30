@@ -9,12 +9,13 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import MyUploadAdapter from '../../firebase/ckeditor_image_firebase';
 import { BiUpArrow, BiDownArrow, BiCommentDetail } from 'react-icons/bi';
+import { MdCancel, MdEdit } from 'react-icons/md';
 
 const FullPost = ({ post, id }) => {
 	const [postUser, setPostUser] = useState('');
 
 	const { session, user, loading } = useContext(SessionApi);
-	const [totalComment, setTotalComment] = useState(0)
+	const [totalComment, setTotalComment] = useState(0);
 
 	//States
 	const [newPost, setNewPost] = useState('');
@@ -57,20 +58,17 @@ const FullPost = ({ post, id }) => {
 			})
 			.catch((err) => {
 				console.log(err);
-			})
-		if(post.id){
+			});
+		if (post.id) {
 			firebase
-			.firestore()
-			.collection('comments')
-			.where('postUID', '==', post.id)
-			.get()
-			.then(snap => {
-					setTotalComment(snap.size)
-
-			})
+				.firestore()
+				.collection('comments')
+				.where('postUID', '==', post.id)
+				.get()
+				.then((snap) => {
+					setTotalComment(snap.size);
+				});
 		}
-		
-
 	};
 
 	useEffect(() => {
@@ -123,12 +121,13 @@ const FullPost = ({ post, id }) => {
 								<BiDownArrow size="25px" />
 							</button>
 						</div>
-
-						<h4>{totalComment}</h4>
-						<BiCommentDetail
-							size="25px"
-							style={{ marginLeft: '0.5rem' }}
-						/>
+						<div style={{ display: 'flex', alignItems: 'center' }}>
+							<h4>{totalComment}</h4>
+							<BiCommentDetail
+								size="25px"
+								style={{ marginLeft: '0.5rem' }}
+							/>
+						</div>
 					</div>
 
 					<div>
@@ -157,54 +156,52 @@ const FullPost = ({ post, id }) => {
 								<div className="full-postContent">
 									{post.content ? (
 										edit ? (
-											<>
-												<div>
-													<p>Edit Mode</p>
-													<CKEditor
-														className="ckEditor"
-														editor={ClassicEditor}
-														data={post.content}
-														config={{
-															mediaEmbed: {
-																previewsInData: true,
-															},
-														}}
-														onReady={(
-															editor,
-															config,
-														) => {
-															// You can store the "editor" and use when it is needed.
-															// console.log('Editor is ready to use!', editor);
-															const data = editor.getData();
-															setNewPost(data);
-															if (editor) {
-																editor.plugins.get(
-																	'FileRepository',
-																).createUploadAdapter = (
+											<div className="editModePane">
+												<CKEditor
+													className="ckEditor"
+													editor={ClassicEditor}
+													data={post.content}
+													config={{
+														mediaEmbed: {
+															previewsInData: true,
+														},
+													}}
+													onReady={(
+														editor,
+														config,
+													) => {
+														// You can store the "editor" and use when it is needed.
+														// console.log('Editor is ready to use!', editor);
+														const data = editor.getData();
+														setNewPost(data);
+														if (editor) {
+															editor.plugins.get(
+																'FileRepository',
+															).createUploadAdapter = (
+																loader,
+															) => {
+																return new MyUploadAdapter(
 																	loader,
-																	) => {
-																		return new MyUploadAdapter(
-																			loader,
-																		);
-																	};
-															}
-														}}
-														onChange={(
-															event,
-															editor,
-														) => {
-															const data = editor.getData();
-															// console.log({ event, editor, data });
-															setNewPost(data);
-														}}
-													/>
-													<button
-														onClick={saveChange}
-													>
-														{'Save Change'}
-													</button>
-												</div>
-											</>
+																);
+															};
+														}
+													}}
+													onChange={(
+														event,
+														editor,
+													) => {
+														const data = editor.getData();
+														// console.log({ event, editor, data });
+														setNewPost(data);
+													}}
+												/>
+												<button
+													onClick={saveChange}
+													className="savePostBtn"
+												>
+													{'Save Change'}
+												</button>
+											</div>
 										) : (
 											//Edit Post
 											<p>{parse(post.content)}</p>
@@ -218,8 +215,21 @@ const FullPost = ({ post, id }) => {
 							</div>
 							{post.userUID === user.uid ? (
 								<div>
-									<button onClick={editPost}>
-										{edit ? 'Cancel' : 'Edit'}
+									<button
+										onClick={editPost}
+										className="editPostBtn"
+									>
+										{edit ? (
+											<MdCancel
+												size="20px"
+												style={{ fill: '#f48c51' }}
+											/>
+										) : (
+											<MdEdit
+												size="20px"
+												style={{ fill: '#f48c51' }}
+											/>
+										)}
 									</button>
 								</div>
 							) : (

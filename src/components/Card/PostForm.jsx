@@ -5,8 +5,6 @@ import firebase from '../../firebase';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import MyUploadAdapter from '../../firebase/ckeditor_image_firebase';
-import { CSSTransition, SwitchTransition } from 'react-transition-group';
-import { MdEdit } from 'react-icons/md';
 
 const PostForm = ({ updatePost }) => {
 	const { session, user } = useContext(SessionApi);
