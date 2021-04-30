@@ -7,7 +7,7 @@ import firebase from '../../firebase';
 import { BiUpArrow, BiDownArrow, BiCommentDetail } from 'react-icons/bi';
 import { CommentService, PostService, UserService } from '../../services';
 
-const Post = ({ post }) => {
+const Post = ({ post, upVote, downVote}) => {
 	const history = useHistory();
 	const { session, user, loading } = useContext(SessionApi);
 	const defaultImage =
@@ -21,126 +21,6 @@ const Post = ({ post }) => {
 		console.log('post clicked');
 		history.push(`/post/${post.id}`);
 	};
-
-	const upVote = (post) => {
-		// ref.doc(post.id).set({ ...post, voteUp: post.voteUp + 1 });
-		const voteDocument = firebase
-		  .firestore()
-		  .collection("votes")
-		  .where("userUID", "==", user.uid) // userId
-		  .where("postUID", "==", post.id) // postId
-		  .limit(1);
-	
-		const postDoc = firebase.firestore().doc(`/posts/${post.id}`); // postId
-	
-		let postData;
-	
-		postDoc.get()
-		.then((doc) => {
-		  if (doc.exists) {
-			postData = doc.data();
-			postData.postUID = doc.id;
-			return voteDocument.get();
-		  } else {
-			return console.error("Post not found");
-		  }
-		})
-		.then((data) => {
-			// no data in database, not voted yet
-			if(data.empty) {
-				return firebase.firestore()
-					.collection("votes")
-					.add({
-						postUID: post.id, // postUID
-						userUID: user.uid 
-					})
-					.then(() => {
-						postData.voteUp++;
-						return postDoc
-						.update({ voteUp: firebase.firestore.FieldValue.increment(1)} );
-					})
-					.then(() => {
-						console.log(postData);
-						console.log('vote success');
-					})
-			} else {
-				console.log("unvoted!!! ");
-			}
-		})
-		.catch(err => {
-			console.error( err.code );
-		})
-		fetchData();
-	  };
-	
-	  const downVote = (post) => {
-		// ref.doc(post.id).set({ ...post, voteDown: post.voteDown - 1 });
-		const voteDocument = firebase
-		  .firestore()
-		  .collection("votes")
-		  .where("userUID", "==", user.uid) // userId
-		  .where("postUID", "==", post.id) // postId
-		  .limit(1);
-	
-		const postDoc = firebase.firestore().doc(`/posts/${post.id}`); // postId
-	
-		let postData;
-	
-		postDoc.get()
-		.then((doc) => {
-		  if (doc.exists) {
-			postData = doc.data();
-			postData.postUID = doc.id;
-			return voteDocument.get();
-		  } else {
-			return console.error("Post not found");
-		  }
-		})
-		.then((data) => {
-			// no data in database, not voted yet
-			if(data.empty) {
-				return firebase.firestore()
-					.collection("votes")
-					.add({
-						postUID: post.id, // postUID
-						userUID: user.uid 
-					})
-					.then(() => {
-						postData.voteDown++;
-						return postDoc
-						.update({ voteDown: firebase.firestore.FieldValue.increment(1)} );
-					})
-					.then(() => {
-						console.log(postData);
-						console.log('vote success');
-					})
-			} else {
-				console.log("unvoted!!! ");
-			}
-		})
-		.catch(err => {
-			console.error( err.code );
-		})
-		fetchData();
-	  };
-
-	// const upVote = (post) => {
-	// 	firebase
-	// 		.firestore()
-	// 		.collection('posts')
-	// 		.doc(post.id)
-	// 		.set({ ...post, voteUp: post.voteUp + 1 });
-	// 	fetchData();
-	// };
-
-	// const downVote = (post) => {
-	// 	firebase
-	// 		.firestore()
-	// 		.collection('posts')
-	// 		.doc(post.id)
-	// 		.set({ ...post, voteDown: post.voteDown - 1 });
-	// 	fetchData();
-	// };
 
 	const deletePost = () => {
 		if (!window.confirm('Are you sure for delete post ❓')) {
