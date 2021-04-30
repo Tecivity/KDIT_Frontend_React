@@ -120,21 +120,7 @@ const Profile = () => {
 											<label htmlFor="">
 												Profile Picture
 											</label>
-											{/* <div className="componentBox">
-									<h1>Upload picture</h1>
-									<br />
-									<progress value={progress} max="100" />
-									<br />
-									<input type="file" onChange={handleChange} />
-									<button onClick={handleUpload}>Upload</button>
-									<br />
-									{(url !== "") ? (<a href={url}>Click me</a>) : (<h3>upload something</h3>)}
-									<br />
-									<h3>Uploaded image</h3>
-									<img src={url || "http://via.placeholder.com/400"} alt="firebase-image" width="400px" />
-									<h3>Preview image</h3>
-									{image ? <img src={path} alt="firebase-image" width="400px" /> : <></>}
-								</div> */}
+
 											<FileUpload
 												url={url}
 												setUrl={setUrl}
@@ -157,7 +143,6 @@ const Profile = () => {
 						)}
 					</Popup>
 				</div>
-
 				<div className="profileCard">
 					{/* <PostForm updatePost={updatePost} /> */}
 					<div className="content">
