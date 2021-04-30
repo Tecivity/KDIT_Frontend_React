@@ -57,15 +57,7 @@ const FullPost = ({ post, id }) => {
 			.doc(post.userUID)
 			.get()
 			.then((doc) => {
-				const pUser = new User(
-					doc.id,
-					doc.data().totalVote,
-					doc.data().bio,
-					doc.data().displayName,
-					doc.data().photoURL,
-					doc.data().email,
-				);
-				setPostUser(pUser)
+				setPostUser({id:doc.id, ...doc.data()})
 			})
 			.catch((err) => {
 				console.log(err);

@@ -60,9 +60,7 @@ const Comment = ({ post, id }) => {
 				))}
 			</div>
 		</div>
-	);
-
-	return <></>;
-};
+	)
+}
 
 export default Comment;

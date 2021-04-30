@@ -22,17 +22,7 @@ const PostPage = () => {
 
 	const fetchData = async () => {
 		ref.get().then(doc => {
-			const fetchPost = new PostModel(
-				doc.id,
-				doc.data().userUID,
-				doc.data().content,
-				doc.data().voteUp,
-				doc.data().voteDown,
-				doc.data().timeStamp,
-				doc.data().subCom,
-				doc.data().subComUID,
-			)
-			setPost(fetchPost)
+			setPost({id:doc.id, ...doc.data()})
 		})
 		//console.log(`postpage -> id : ${id}, post : ${post.userUID}`)
 	}

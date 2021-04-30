@@ -7,7 +7,7 @@ import { SessionApi } from '../../hook/SessionApi';
 const CommentForm = ({ post, id }) => {
   //States
   const [comment, setComment] = useState("");
-  const {user} = useContext(SessionApi);
+  const { user } = useContext(SessionApi);
 
   //Functions
   const handleOnChange = (e) => {
@@ -37,11 +37,9 @@ const CommentForm = ({ post, id }) => {
     return [hour, minute].join(":");
   }
 
-
-
   const handleSubmit = (e) => {
     if (comment.trim() === "") {
-		console.log({ error: 'Must not be empty'})
+      console.log({ error: 'Must not be empty' })
     } else {
       //Submit Comment
       const newComment = {
@@ -54,8 +52,8 @@ const CommentForm = ({ post, id }) => {
         voteUp: 0,
       };
 
-      console.log(newComment);
-	  console.log(user.uid)
+      console.log(newComment)
+      console.log(post)
 
       firebase
         .firestore()

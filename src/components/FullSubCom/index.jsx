@@ -39,7 +39,6 @@ const FullSubCom = ({ subCom, update }) => {
 
 	const fetchData = async () => {
 		if (subCom.id) {
-			console.log(subCom.id)
 			const postsArray = [];
 			firebase
 				.firestore()
@@ -52,11 +51,9 @@ const FullSubCom = ({ subCom, update }) => {
 					setPosts(postsArray)
 				});
 		}
-
 	};
 
-	useEffect(() => {
-		
+	useEffect(() => {		
 		fetchData();
 		setNewSubCom({
 			name: subCom.name,
