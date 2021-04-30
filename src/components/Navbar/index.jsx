@@ -86,7 +86,7 @@ export default function Navbar() {
 							size="30px"
 							style={{
 								fill:
-									mouseOver.explore || menu === '/search'
+									mouseOver.explore || menu === '/explore'
 										? '#f8640e'
 										: 'black',
 							}}

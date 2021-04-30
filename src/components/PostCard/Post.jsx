@@ -68,7 +68,7 @@ const Post = ({ post, upVote, downVote }) => {
 						/>
 					</div>
 
-					<div className="postInfo">
+					<div className="postInfo" onClick={handlePostClick}>
 						<div className="postBy">
 							<p className="displayName">
 								{postUser.displayName}
@@ -95,6 +95,7 @@ const Post = ({ post, upVote, downVote }) => {
 					</div>
 				</div>
 			</div>
+
 			<div className="infoPane">
 				<div className="votePane">
 					<button onClick={() => upVote(post)} className="voteUpBT">
@@ -117,7 +118,7 @@ const Post = ({ post, upVote, downVote }) => {
 						alignItems: 'center',
 					}}
 				>
-					<h4>{totalComment}</h4>
+					<h4 style={{ margin: '0' }}>{totalComment}</h4>
 					<BiCommentDetail
 						size="25px"
 						style={{ marginLeft: '0.5rem' }}

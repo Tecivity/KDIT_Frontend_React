@@ -1,10 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
-* {
-	font-family: 'Roboto', sans-serif;
+@font-face {
+	font-family: Iconic;
+	src: url('./assets/Free-Sans/FreeSans.ttf');
 }
 
-body {
+* {
+	font-family: Iconic;
+}
+
+html {
+	font-size: 16px;
 }
 
 /* dark mode goes here 

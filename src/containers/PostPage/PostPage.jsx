@@ -10,6 +10,9 @@ import firebase from '../../firebase';
 import { PostModel } from '../../firebase/models';
 
 const PostPage = () => {
+	//Params
+	const { id } = useParams();
+
 	//Variables
 	const ref = firebase.firestore().collection('posts').doc(id);
 
@@ -24,9 +27,6 @@ const PostPage = () => {
 
 	//Contexts
 	const { authListener, loading } = React.useContext(SessionApi);
-
-	//Params
-	const { id } = useParams();
 
 	//Functions
 	const upVote = (post) => {

@@ -95,26 +95,6 @@ h1.loginWarn {
 	display: flex;
 	flex-direction: column;
 	margin: 1rem 0;
-	padding-top: 1rem;
-
-	border: 2px solid #f48c51;
-	border-radius: 2rem;
-
-	background: white;
-
-	color: black;
-
-	transition: 0.3s;
-}
-
-.postPane:hover {
-	transform: translateY(-1.5rem);
-	box-shadow: 0 1rem #f48c51;
-}
-
-.postPane:active {
-	transform: translateY(-1rem);
-	box-shadow: 0 0.5rem #f48c51;
 }
 
 .loginPost {
@@ -134,6 +114,34 @@ h1.loginWarn {
 	display: flex;
 	flex-direction: row;
 	font-size: 1rem;
+
+	margin: 0;
+	padding-top: 1rem;
+
+	border: 2px solid #f48c51;
+	border-width: 2px 2px 2px 2px;
+	border-radius: 2rem 2rem 0 0;
+
+	background: white;
+
+	color: black;
+
+	transition: 0.2s;
+}
+
+.post:hover {
+	transform: translate(-0.6rem, -1.5rem);
+	box-shadow: 0.04rem 0.1rem #df814a, 0.08rem 0.2rem #df814a,
+		0.12rem 0.3rem #df814a, 0.16rem 0.4rem #df814a, 0.2rem 0.5rem #df814a,
+		0.24rem 0.6rem #df814a, 0.28rem 0.7rem #df814a, 0.32rem 0.8rem #df814a,
+		0.36rem 0.9rem #df814a, 0.4rem 1rem #df814a, 0.44rem 1.1rem #df814a,
+		0.48rem 1.2rem #df814a, 0.52rem 1.3rem #df814a, 0.56rem 1.4rem #df814a,
+		0.6rem 1.5rem #df814a;
+}
+
+.post:active {
+	transform: translate(0rem, 0rem);
+	box-shadow: 0rem 0rem #df814a;
 }
 
 .postInfo {
@@ -198,7 +206,8 @@ h1.loginWarn {
 
 	background: white;
 
-	border-top: 1px solid lightgrey;
+	border: 2px solid #f48c51;
+	border-width: 0 2px 2px 2px;
 	border-radius: 0 0 2rem 2rem;
 
 	transition: 500ms;
@@ -261,12 +270,12 @@ h1.loginWarn {
 
 	background: white;
 
-	transition: 0.5s;
+	transition: 0.2s;
 }
 
 .postFormBox:hover {
 	transform: translateY(-1rem);
-	box-shadow: 0 1rem #f48c51;
+	box-shadow: 0 1rem #df814a;
 }
 
 .postOption {
