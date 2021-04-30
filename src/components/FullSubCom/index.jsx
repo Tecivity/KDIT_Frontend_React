@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { SessionApi } from '../../hook/SessionApi'
 import './index.css';
 
 const FullSubCom = ({ subCom, update }) => {
@@ -9,6 +10,7 @@ const FullSubCom = ({ subCom, update }) => {
 		description: '',
 		photoURL: '',
 	});
+	const { defaultBanner } = useContext(SessionApi)
 
 	//Functions
 	const handleOnClick = () => {
@@ -44,7 +46,7 @@ const FullSubCom = ({ subCom, update }) => {
 			<div className="comInfoPane">
 				<div className="bannerImgPane">
 					<img
-						src="https://images7.alphacoders.com/110/thumbbig-1104854.jpg"
+						src={defaultBanner}
 						alt=""
 						className="bannerImg"
 					/>

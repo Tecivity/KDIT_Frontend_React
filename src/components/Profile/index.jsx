@@ -10,7 +10,7 @@ import Popup from 'reactjs-popup';
 import { MdCancel } from 'react-icons/md';
 
 const Profile = () => {
-	const { user, defaultImage } = useContext(SessionApi);
+	const { user, defaultImage, defaultBanner } = useContext(SessionApi);
 	const [edit, setEdit] = useState(false);
 	const [posts, setPosts] = useState([]);
 	const [url, setUrl] = useState('');
@@ -57,7 +57,7 @@ const Profile = () => {
 			<div className="profilePane">
 				<div className="bannerImgPane">
 					<img
-						src="https://images7.alphacoders.com/110/thumbbig-1104854.jpg"
+						src={defaultBanner}
 						alt=""
 						className="bannerImg"
 					/>

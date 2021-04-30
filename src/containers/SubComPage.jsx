@@ -15,14 +15,10 @@ const SubComPage = () => {
 	const [showCreate, setShowCreate] = useState(false);
 
 	//Contexts
-	const { session, authListener, loading } = React.useContext(SessionApi);
+	const { session, authListener, loading , userInfo } = React.useContext(SessionApi);
 
 	const firebaseTest = async () => {
-		// UserService.getUser('6Mwv521K17NLixAMhAnR04cUYtE2').then(test => {
-		// 	console.log(test)
-		// })
-		const test = await PostService.getAllPost()
-		console.log(test)
+		console.log(userInfo)
 
 	};
 

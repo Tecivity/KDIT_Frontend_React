@@ -70,8 +70,7 @@ const FullPost = ({ post, id }) => {
 					doc.data().photoURL,
 					doc.data().email,
 				);
-				setPostUser(pUser);
-				console.log(postUser.photoURL);
+				setPostUser(pUser)
 			})
 			.catch((err) => {
 				console.log(err);
