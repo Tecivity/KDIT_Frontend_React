@@ -104,6 +104,7 @@ const PostForm = ({ updatePost }) => {
 							editor={ClassicEditor}
 							data="<p>What's going on today</p>"
 							config={{
+								toolbar: ['heading', '|', 'bold', 'italic', 'blockQuote', 'link', 'numberedList', 'imageUpload',  'mediaEmbed', '|', 'undo', 'redo'],
 								mediaEmbed: {
 									previewsInData: true,
 								},
