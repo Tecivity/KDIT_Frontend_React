@@ -120,9 +120,7 @@ const Post = ({ post }) => {
 								<div>
 									<button onClick={deletePost}>X</button>
 								</div>
-							) : (
-								<div></div>
-							)}
+							) : (<div></div>)}
 						</div>
 						<div className="postContent" onClick={handlePostClick}>
 							<p>{parse(post.content)}</p>
