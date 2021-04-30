@@ -20,10 +20,10 @@ h1.loginWarn {
 	left: 25%;
 	padding: 0;
 
-	z-index: 20;
+	z-index: -1;
 	font-family: DM Sans;
 
-	background: #ffffff;
+	background: white;
 	/* border: 1px solid lightgrey; */
 	/* box-shadow: 0px 7px 4px rgba(0, 0, 0, 0.25); */
 	/* border-radius: 20px; */
@@ -40,14 +40,18 @@ h1.loginWarn {
 .voteUpBT {
 	font-weight: 900;
 	font-size: 20px;
-	border: transparent;
-	width: 30px;
-	height: 30px;
-	border-radius: 4px;
-	margin-left: 4px;
-	margin-right: 4px;
 
-	/* transition: 500ms; */
+	width: 2.5rem;
+	height: 2.5rem;
+
+	margin-right: 0.5rem;
+
+	border: none;
+	border-radius: 50%;
+
+	background: white;
+
+	transition: 500ms;
 }
 
 .voteUpBT:focus {
@@ -60,14 +64,18 @@ h1.loginWarn {
 .voteDownBT {
 	font-weight: 900;
 	font-size: 20px;
-	border: transparent;
-	width: 30px;
-	height: 30px;
-	border-radius: 4px;
-	margin-left: 4px;
-	margin-right: 4px;
 
-	/* transition: ; */
+	width: 2.5rem;
+	height: 2.5rem;
+
+	margin-left: 0.5rem;
+
+	border: none;
+	border-radius: 50%;
+
+	background: white;
+
+	transition: 500ms;
 }
 
 .voteDownBT:focus {
@@ -76,19 +84,6 @@ h1.loginWarn {
 .voteDownBT:hover {
 	background-color: rgb(219, 85, 107);
 }
-
-/* .voteNum {
-	font-family: DM Sans;
-	font-style: normal;
-	font-size: 20px;
-	font-weight: bold;
-	color: gray;
-	margin-right: 5px;
-	transition: 1500ms;
-}
-.voteNum:active {
-	color: green;
-} */
 
 .votePane {
 	background: white;
@@ -99,31 +94,34 @@ h1.loginWarn {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+
+	transition: 0.5s;
 }
 
 .postPane {
-	/* background: #e8e8e8; */
-	/* border-radius: 10px; */
-
 	display: flex;
-	flex-direction: column-reverse;
-	margin: 0;
+	flex-direction: column;
+	margin: 1rem 0;
 	padding-top: 1rem;
 
-	border: solid lightgrey;
-	border-width: 1px 0;
+	border: 2px solid #f48c51;
+	border-radius: 2rem;
+
+	background: white;
 
 	color: black;
 
-	transition: 500ms;
+	transition: 0.3s;
 }
 
 .postPane:hover {
-	background: rgb(226, 226, 226);
+	transform: translateY(-1.5rem);
+	box-shadow: 0 1rem #f48c51;
 }
 
-.postPane:hover .infoPane {
-	background: rgb(226, 226, 226);
+.postPane:active {
+	transform: translateY(-1rem);
+	box-shadow: 0 0.5rem #f48c51;
 }
 
 .loginPost {
@@ -167,7 +165,7 @@ h1.loginWarn {
 }
 
 .postBy .displayName {
-	font-size: 0.8rem;
+	font-size: 1rem;
 	font-weight: 700;
 
 	/* width: 45%; */
@@ -195,14 +193,20 @@ h1.loginWarn {
 }
 
 .infoPane {
-	background: white;
 	border-radius: 0;
 	margin: 0;
+	margin-bottom: 0rem;
 	padding: 5px;
 
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
+	align-items: center;
+
+	background: white;
+
+	border-top: 1px solid lightgrey;
+	border-radius: 0 0 2rem 2rem;
 
 	transition: 500ms;
 }
@@ -244,6 +248,8 @@ h1.loginWarn {
 	width: 90%;
 	margin: 1rem 1rem;
 	margin-bottom: 0;
+
+	background: white;
 }
 
 .postFormBox {
@@ -252,18 +258,22 @@ h1.loginWarn {
 	justify-content: center;
 
 	margin: 0rem;
+	margin-top: 1.5rem;
 	margin-bottom: 2rem;
 	padding-bottom: 1rem;
 
-	border: 1px solid #f48c51;
-	border-width: 0 3px 3px 3px;
-	border-radius: 0 0 2rem 2rem;
+	border: 2px solid #f48c51;
+
+	border-radius: 2rem;
+
+	background: white;
 
 	transition: 0.5s;
 }
 
 .postFormBox:hover {
-	transform: translateY(0);
+	transform: translateY(-1rem);
+	box-shadow: 0 1rem #f48c51;
 }
 
 .postOption {
@@ -347,51 +357,4 @@ h1.loginWarn {
 
 .page h2 {
 	margin: 0.5rem;
-}
-
-.pausePost {
-	margin-bottom: 3rem;
-	padding: 1rem;
-
-	display: flex;
-	justify-content: center;
-
-	background: #f48c51;
-
-	border: 5px dotted #7a482b;
-	border-width: 0 5px 5px 5px;
-	border-radius: 0 0 2rem 2rem;
-
-	color: white;
-
-	transition: 0.3s;
-}
-
-.pausePost:hover {
-	padding-top: 2rem;
-}
-
-.pausePost h1 {
-	margin: auto;
-
-	color: white;
-}
-
-/* Transition */
-.postTransition-enter {
-	opacity: 1;
-	transform: translateY(-15rem);
-}
-.postTransition-enter-active {
-	opacity: 1;
-	transform: translateY(0);
-	transition: 200ms;
-}
-.postTransition-exit {
-	opacity: 1;
-}
-.postTransition-exit-active {
-	opacity: 1;
-	transform: translateY(-15rem);
-	transition: 200ms;
 }

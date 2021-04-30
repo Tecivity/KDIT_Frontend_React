@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import parse from 'html-react-parser';
 import firebase from '../../firebase';
 import { User } from '../../firebase/models';
+import { BiUpArrow, BiDownArrow } from 'react-icons/bi';
 
 const Post = ({ post }) => {
 	const history = useHistory();
@@ -66,7 +67,7 @@ const Post = ({ post }) => {
 					doc.data().bio,
 					doc.data().displayName,
 					doc.data().photoURL,
-					doc.data().email
+					doc.data().email,
 				);
 				setPostUser(pUser);
 			})
@@ -81,24 +82,6 @@ const Post = ({ post }) => {
 
 	return (
 		<div id={post.id} className="postPane">
-			<div className="infoPane">
-				<div className="votePane">
-					<button onClick={() => upVote(post)} className="voteUpBT">
-						⬆
-					</button>
-
-					{post.voteUp + post.voteDown}
-
-					<button
-						onClick={() => downVote(post)}
-						className="voteDownBT"
-					>
-						⬇
-					</button>
-				</div>
-				<p>Comments</p>
-			</div>
-
 			<div>
 				<div className="post">
 					<div>
@@ -115,7 +98,7 @@ const Post = ({ post }) => {
 							<p className="displayName">
 								{postUser.displayName}
 							</p>
-							<p className="username">@{post.userUID}</p>
+							{/* <p className="username">@{post.userUID}</p> */}
 							<p className="timestamp">
 								{' '}
 								•{' '}
@@ -138,6 +121,23 @@ const Post = ({ post }) => {
 						</div>
 					</div>
 				</div>
+			</div>
+			<div className="infoPane">
+				<div className="votePane">
+					<button onClick={() => upVote(post)} className="voteUpBT">
+						<BiUpArrow size="25px" />
+					</button>
+
+					{post.voteUp + post.voteDown}
+
+					<button
+						onClick={() => downVote(post)}
+						className="voteDownBT"
+					>
+						<BiDownArrow size="25px" />
+					</button>
+				</div>
+				<p>Comments</p>
 			</div>
 		</div>
 	);
