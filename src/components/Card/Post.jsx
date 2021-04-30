@@ -7,7 +7,7 @@ import firebase from '../../firebase';
 import { User } from '../../firebase/models';
 import { BiUpArrow, BiDownArrow, BiCommentDetail } from 'react-icons/bi';
 
-const Post = ({ post }) => {
+const Post = ({ post, upVote, downVote}) => {
 	const history = useHistory();
 	const { session, user, loading } = useContext(SessionApi);
 	const defaultImage =
@@ -20,24 +20,6 @@ const Post = ({ post }) => {
 	const handlePostClick = () => {
 		console.log('post clicked');
 		history.push(`/post/${post.id}`);
-	};
-
-	const upVote = (post) => {
-		firebase
-			.firestore()
-			.collection('posts')
-			.doc(post.id)
-			.set({ ...post, voteUp: post.voteUp + 1 });
-		fetchData();
-	};
-
-	const downVote = (post) => {
-		firebase
-			.firestore()
-			.collection('posts')
-			.doc(post.id)
-			.set({ ...post, voteDown: post.voteDown - 1 });
-		fetchData();
 	};
 
 	const deletePost = () => {
