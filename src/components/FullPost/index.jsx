@@ -9,12 +9,8 @@ import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import MyUploadAdapter from '../../firebase/ckeditor_image_firebase';
 import { BiUpArrow, BiDownArrow, BiCommentDetail } from 'react-icons/bi';
-<<<<<<< HEAD
-import { MdCancel, MdEdit } from 'react-icons/md';
-=======
 import { useHistory } from 'react-router-dom';
->>>>>>> ab2ebb061bd426e05b7ed491b95f2fea7fa59548
-
+import { MdCancel, MdEdit, MdDelete } from 'react-icons/md';
 const FullPost = ({ post, id }) => {
 	const history = useHistory();
 	const [postUser, setPostUser] = useState('');
@@ -78,31 +74,17 @@ const FullPost = ({ post, id }) => {
 			})
 			.catch((err) => {
 				console.log(err);
-<<<<<<< HEAD
 			});
-=======
-			})
->>>>>>> ab2ebb061bd426e05b7ed491b95f2fea7fa59548
 		if (post.id) {
 			firebase
 				.firestore()
 				.collection('comments')
 				.where('postUID', '==', post.id)
 				.get()
-<<<<<<< HEAD
 				.then((snap) => {
 					setTotalComment(snap.size);
 				});
 		}
-=======
-				.then(snap => {
-					setTotalComment(snap.size)
-
-				})
-		}
-
-
->>>>>>> ab2ebb061bd426e05b7ed491b95f2fea7fa59548
 	};
 
 	useEffect(() => {
@@ -181,17 +163,14 @@ const FullPost = ({ post, id }) => {
 									</p>
 									<p className="timestamp">
 										{' '}
-								•{' '}
-										{new Date(post.timeStamp).toLocaleString([], {
+										•{' '}
+										{new Date(
+											post.timeStamp,
+										).toLocaleString([], {
 											dateStyle: 'long',
 											timeStyle: 'short',
 										})}
 									</p>
-									{post.userUID == user.uid ? (
-										<div>
-											<button onClick={deletePost}>X</button>
-										</div>
-									) : (<div></div>)}
 								</div>
 								<div className="full-postContent">
 									{post.content ? (
@@ -261,16 +240,27 @@ const FullPost = ({ post, id }) => {
 									>
 										{edit ? (
 											<MdCancel
-												size="20px"
+												size="25px"
 												style={{ fill: '#f48c51' }}
 											/>
 										) : (
 											<MdEdit
-												size="20px"
+												size="25px"
 												style={{ fill: '#f48c51' }}
 											/>
 										)}
 									</button>
+									{post.userUID == user.uid && (
+										<button
+											onClick={deletePost}
+											className="editPostBtn"
+										>
+											<MdDelete
+												size="25px"
+												style={{ fill: '#f48c51' }}
+											/>
+										</button>
+									)}
 								</div>
 							) : (
 								<div></div>
