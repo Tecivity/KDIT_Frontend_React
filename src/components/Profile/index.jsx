@@ -143,10 +143,7 @@ const Profile = ({ id }) => {
 
 								<div className="content">
 									<div className="editProfilePane">
-										<form
-											action=""
-											className="editProfileForm"
-										>
+										<div className="editProfileForm">
 											<label htmlFor="">
 												Profile Picture
 											</label>
@@ -188,7 +185,7 @@ const Profile = ({ id }) => {
 											<button className="btn" onClick={updateProfile}>
 												<a onClick={close}>Save Changes</a>
 											</button>
-										</form>
+										</div>
 									</div>
 								</div>
 							</div>
