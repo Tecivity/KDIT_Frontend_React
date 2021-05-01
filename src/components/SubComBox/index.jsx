@@ -16,6 +16,23 @@ const SubComBox = ({ subCom }) => {
 	return (
 		<>
 			<div id={subCom.id} className="subcomDiv" onClick={handleOnClick}>
+				<div className="subComBackgroundPane">
+					<img
+						src="https://i2.wp.com/nixtsblog.com/wp-content/uploads/2020/11/among-us-couch.jpg?ssl=1"
+						alt=""
+						width="100%"
+						height="130%"
+						style={{
+							margin: '0',
+							objectFit: 'cover',
+							borderRadius: '2rem 2rem 0 0',
+							verticalAlign: 'bottom',
+							display: 'block',
+							transform: 'scale(1.005)',
+							zIndex: '20',
+						}}
+					/>
+				</div>
 				<div className="subComImagePane">
 					<img src={subCom.photoURL} alt="" className="subComImg" />
 				</div>
