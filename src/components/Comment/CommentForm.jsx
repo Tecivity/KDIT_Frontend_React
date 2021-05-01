@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import "./index.css";
 import firebase from "../../firebase";
 import { SessionApi } from '../../hook/SessionApi';
+import { CommentService } from "../../services";
 
 const CommentForm = ({ post, id }) => {
   //States
@@ -52,17 +53,11 @@ const CommentForm = ({ post, id }) => {
         voteUp: 0,
       };
 
-      console.log(newComment)
-      console.log(post)
-
-      firebase
-        .firestore()
-        .collection("comments")
-        .add(newComment)
-        .then(() => {
-          setComment("");
-          window.location.reload();
-        });
+      CommentService.addComment(newComment).then(data=>{
+        console.log(data)
+        setComment('')
+        window.location.reload();
+      })
     }
   };
 

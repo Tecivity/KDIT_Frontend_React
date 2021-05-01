@@ -14,10 +14,6 @@ const Profile = () => {
 	const [posts, setPosts] = useState([]);
 	const [url, setUrl] = useState('');
 
-	const updatePost = () => {
-		fetchData();
-	};
-
 	//Functions
 	const handleOnClick = () => {
 		setEdit(!edit);
@@ -72,7 +68,7 @@ const Profile = () => {
 						>
 							@username
 						</h3>
-						<p style={{ marginTop: '0' }}>Bio ต้องมีมั้ยนิ้</p>
+						<p style={{ marginTop: '0' }}>{userInfo.bio}</p>
 					</div>
 					<div style={{ alignSelf: 'center' }}>
 						{/* <button className="edit-btn" onClick={handleOnClick}>
@@ -110,21 +106,6 @@ const Profile = () => {
 											<label htmlFor="">
 												Profile Picture
 											</label>
-											{/* <div className="componentBox">
-									<h1>Upload picture</h1>
-									<br />
-									<progress value={progress} max="100" />
-									<br />
-									<input type="file" onChange={handleChange} />
-									<button onClick={handleUpload}>Upload</button>
-									<br />
-									{(url !== "") ? (<a href={url}>Click me</a>) : (<h3>upload something</h3>)}
-									<br />
-									<h3>Uploaded image</h3>
-									<img src={url || "http://via.placeholder.com/400"} alt="firebase-image" width="400px" />
-									<h3>Preview image</h3>
-									{image ? <img src={path} alt="firebase-image" width="400px" /> : <></>}
-								</div> */}
 											<FileUpload
 												url={url}
 												setUrl={setUrl}
