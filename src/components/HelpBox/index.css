@@ -74,6 +74,10 @@ body {
 	transform: scale(1);
 }
 
+.popup-content {
+	width: 50%;
+}
+
 .popup .modal .header {
 	border-bottom: 1px solid lightgrey;
 }
@@ -86,5 +90,5 @@ body {
 .subPopup-content {
 	display: flex;
 	flex-direction: column;
-	width: 100%;
+	width: 50%;
 }

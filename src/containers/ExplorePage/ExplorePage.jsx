@@ -15,7 +15,6 @@ import {
 	connectPagination,
 	HitsPerPage,
 } from 'react-instantsearch-dom';
-import { BsChevronRight, BsChevronLeft } from 'react-icons/bs';
 //Components
 import { SearchBar, Navbar } from '../../components';
 //External

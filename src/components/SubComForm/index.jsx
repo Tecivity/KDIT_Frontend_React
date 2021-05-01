@@ -55,6 +55,10 @@ const SubComForm = () => {
 	return (
 		<>
 			<div className="subcomForm">
+				<div className="subComForm-imgPane">
+					<h2>Upload Com Img HERE</h2>
+					<h2>Upload Com Banner HERE</h2>
+				</div>
 				<form action="">
 					<div className="inputForm">
 						<label htmlFor="">Community Name</label>

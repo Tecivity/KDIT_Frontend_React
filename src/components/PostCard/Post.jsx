@@ -98,18 +98,18 @@ const Post = ({ post, upVote, downVote }) => {
 
 			<div className="infoPane">
 				<div className="votePane">
-					<button onClick={() => upVote(post)} className="voteUpBT">
+					<div onClick={() => upVote(post)} className="voteUpBT">
 						<BiUpArrow size="25px" />
-					</button>
+					</div>
 
-					{post.voteUp + post.voteDown}
+					<h4 style={{ margin: '0' }}>
+						{' '}
+						{post.voteUp + post.voteDown}
+					</h4>
 
-					<button
-						onClick={() => downVote(post)}
-						className="voteDownBT"
-					>
+					<div onClick={() => downVote(post)} className="voteDownBT">
 						<BiDownArrow size="25px" />
-					</button>
+					</div>
 				</div>
 				<div
 					style={{
@@ -118,11 +118,13 @@ const Post = ({ post, upVote, downVote }) => {
 						alignItems: 'center',
 					}}
 				>
-					<h4 style={{ margin: '0' }}>{totalComment}</h4>
-					<BiCommentDetail
-						size="25px"
-						style={{ marginLeft: '0.5rem' }}
-					/>
+					<div className="post-commentBtn" onClick={handlePostClick}>
+						<h4 style={{ margin: '0' }}>{totalComment}</h4>
+						<BiCommentDetail
+							size="25px"
+							style={{ marginLeft: '0.5rem' }}
+						/>
+					</div>
 				</div>
 			</div>
 		</div>
