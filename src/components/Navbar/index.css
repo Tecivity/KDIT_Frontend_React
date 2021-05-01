@@ -134,8 +134,5 @@ body {
 
 	color: #ffffff;
 	background-color: #ffaa79;
-	transition: 500ms;
-}
-.create-button:hover {
-	background-color: #4cc216;
+	transition: 0.2s;
 }

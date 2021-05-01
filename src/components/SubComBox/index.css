@@ -58,15 +58,7 @@
 
 	color: white;
 
-	transition: 0.3s;
-}
-
-.btn:active {
-	transform: translateY(5px);
-}
-
-.btn:hover {
-	transform: translateY(-3px);
+	transition: 0.2s;
 }
 
 .subComImagePane {

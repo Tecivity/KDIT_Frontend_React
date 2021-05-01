@@ -300,17 +300,29 @@ h1.loginWarn {
 	background: #f48c51;
 
 	width: 15%;
-	height: 3rem;
+	height: 2.5rem;
 
 	color: white;
 	font-weight: 700;
 	border: none;
-	border-radius: 3rem;
+	border-radius: 1rem;
 
 	font-size: 1rem;
 
 	margin: 0.5rem;
 	margin-left: auto;
+
+	transition: 0.2s;
+}
+
+.postBT:hover {
+	transform: translateY(-0.5rem);
+	box-shadow: 0 0.5rem #d37a46;
+}
+
+.postBT:active {
+	transform: translateY(0rem);
+	box-shadow: 0 0rem #d37a46;
 }
 
 .btn {

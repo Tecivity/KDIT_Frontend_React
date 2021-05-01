@@ -85,11 +85,7 @@ body {
 
 	background-color: #f48c51;
 	border: none;
-	border-radius: 3rem;
+	border-radius: 1rem;
 
-	transition: 0.5s;
-}
-
-.create-button:hover {
-	transform: scale(1.2);
+	transition: 0.2s;
 }
