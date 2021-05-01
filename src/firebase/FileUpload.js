@@ -18,29 +18,33 @@ export default function FileUpload({ url, setUrl }) {
 
     const handleUpload = e => {
         e.preventDefault()
-        const uploadTask = storage.ref(`images/${image.name}`).put(image)
-        uploadTask.on(
-            "state_changed",
-            snapshot => {
-                const progress = Math.round(
-                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                )
-                setProgress(progress)
-            },
-            error => {
-                console.log(error)
-            },
-            () => {
-                storage
-                    .ref("images")
-                    .child(image.name)
-                    .getDownloadURL()
-                    .then(url => {
-                        console.log(url)
-                        setUrl(url)
-                    })
-            }
-        )
+        if (image) {
+            const uploadTask = storage.ref(`images/${image.name}`).put(image)
+            uploadTask.on(
+                "state_changed",
+                snapshot => {
+                    const progress = Math.round(
+                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                    )
+                    setProgress(progress)
+                },
+                error => {
+                    console.log(error)
+                },
+                () => {
+                    storage
+                        .ref("images")
+                        .child(image.name)
+                        .getDownloadURL()
+                        .then(url => {
+                            console.log(url)
+                            setUrl(url)
+                        })
+                }
+            )
+        }
+
+
     }
 
     return (
@@ -53,7 +57,7 @@ export default function FileUpload({ url, setUrl }) {
             {image ? <img src={path} alt="firebase-image" width="400px" /> : <></>}
             <h3>Uploaded image</h3>
             <img src={url || "http://via.placeholder.com/400"} alt="firebase-image" width="400px" /> */}
-            {(url !== "") ? (<a href={url}> ✔</a>) : (<h3>upload something</h3>)}
+            {(progress == "100") ? (<a> ✔</a>) : <></>}
         </div>
     )
 }

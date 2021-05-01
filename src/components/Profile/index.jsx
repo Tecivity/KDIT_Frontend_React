@@ -14,15 +14,15 @@ import './index.css';
 import { getSuggestedQuery } from '@testing-library/dom';
 import { PostService, UserService } from '../../services';
 
-const Profile = ({id}) => {
+const Profile = ({ id }) => {
 	//States
 	const [edit, setEdit] = useState(false);
 	const [posts, setPosts] = useState([]);
 	const [photoURL, setPhotoURL] = useState('');
 	const [bannerURL, setBannerURL] = useState('')
-	const [displayName, setDisplayname] = useState('')
+	const [displayName, setDisplayName] = useState('')
 	const [bio, setBio] = useState('')
-	const [profile ,setProfile] = useState({})
+	const [profile, setProfile] = useState({})
 
 	//Contexts
 	const { user, defaultImage, defaultBanner } = useContext(SessionApi)
@@ -30,7 +30,22 @@ const Profile = ({id}) => {
 	//Functions
 
 	const updateProfile = e => {
-		e.preventDefault() 
+		e.preventDefault()
+		const newProfile = {
+			displayName,
+			bannerURL,
+			photoURL,
+			bio,
+		}
+		console.log(profile)
+		console.log(newProfile)
+		UserService.updateUser(profile.id,newProfile).then(result=>{
+			console.log('Updated data')
+			setProfile({...profile,displayName,
+				bannerURL,
+				photoURL,
+				bio,})
+		})
 	}
 
 	const handleOnClick = () => {
@@ -38,12 +53,14 @@ const Profile = ({id}) => {
 	};
 
 	const fetchData = async () => {
-
-		UserService.getUser(id).then(data=>{
+		UserService.getUser(id).then(data => {
 			setProfile(data)
 			getPost(data.id)
+			setDisplayName(data.displayName)
+			setBio(data.bio)
+			setBannerURL(data.bannerURL)
+			setPhotoURL(data.photoURL)
 		})
-		
 	};
 
 	const getPost = (id) => {
@@ -63,7 +80,7 @@ const Profile = ({id}) => {
 	//Effects
 	useEffect(() => {
 		fetchData();
-	}, [profile,posts]);
+	}, []);
 
 	return (
 		<>
@@ -85,7 +102,7 @@ const Profile = ({id}) => {
 							className="full-profilePic"
 						/>
 						<h2 style={{ marginTop: '0', marginBottom: '0rem' }}>
-							{user.displayName}
+							{profile.displayName}
 						</h2>
 						<h3
 							style={{
@@ -103,7 +120,7 @@ const Profile = ({id}) => {
 							{edit ? 'X' : 'Edit'}
 						</button> */}
 					</div>
-						{profile.id == user.uid ? <Popup
+					{profile.id == user.uid ? <Popup
 						trigger={
 							<button
 								className="edit-btn"
@@ -154,10 +171,22 @@ const Profile = ({id}) => {
 											<input
 												type="text"
 												name="displayNames"
+												value={displayName}
+												onChange={(e) => setDisplayName(e.target.value)}
+											/>
+
+											<label htmlFor="">
+												Bio
+											</label>
+											<input
+												type="text"
+												name="displayNames"
+												value={bio}
+												onChange={(e) => setBio(e.target.value)}
 											/>
 
 											<button className="btn" onClick={updateProfile}>
-												Save Changes
+												<a onClick={close}>Save Changes</a>
 											</button>
 										</form>
 									</div>
@@ -165,7 +194,7 @@ const Profile = ({id}) => {
 							</div>
 						)}
 					</Popup> : <></>}
-					
+
 				</div>
 				<div className="profileCard">
 					{/* <PostForm updatePost={updatePost} /> */}
