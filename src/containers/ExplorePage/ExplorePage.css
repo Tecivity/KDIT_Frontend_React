@@ -1,0 +1,112 @@
+.explorePane {
+	position: absolute;
+	width: 43%;
+	height: 100%;
+	left: 25%;
+	top: 5%;
+	padding: 0;
+	padding-left: 5rem;
+
+	border-left: 1px solid lightgrey;
+
+	z-index: -1;
+	font-family: DM Sans;
+
+	background: white;
+}
+
+.explore-searchContainer {
+	padding: 1rem;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+
+	border: 3px solid #f48c51;
+	border-radius: 1rem;
+}
+
+.explore-searchBar {
+	width: 90%;
+
+	background: none;
+
+	border: 0;
+	border-bottom: 1px solid gray;
+
+	font-size: 1rem;
+
+	transition: 0.1s;
+}
+
+.explore-searchBar:focus {
+	border-bottom: 2px solid gray;
+
+	outline: none;
+}
+
+.explore-searchOptionPane {
+	margin-left: 1rem;
+
+	display: flex;
+	flex-direction: row;
+
+	/* border: 1px solid black; */
+}
+
+.explore-dropdown {
+	margin-top: 0.5rem;
+	margin-left: auto;
+	padding-left: 0.5rem;
+
+	border-radius: 1rem;
+
+	font-size: 1rem;
+}
+
+.explore-dropdown:focus {
+	border: 1px solid #f48c51;
+
+	outline: none;
+}
+
+.explore-hitContainer {
+}
+
+.explore-hit {
+	margin: 0.5rem 0;
+
+	border: 3px solid #f48c51;
+	border-radius: 1rem;
+}
+
+.explore-postHitPane {
+	display: flex;
+	flex-direction: row;
+}
+
+.explore-userImgPane {
+	margin-right: 1rem;
+}
+
+.explore-votePane {
+	margin: 0;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.explore-pagesPane {
+	width: 100%;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+
+	/* border: 1px solid black; */
+}
+
+.explore-page {
+	margin: 0 0.5rem;
+}
