@@ -58,7 +58,7 @@ const Post = ({ post, upVote, downVote }) => {
 	return (
 		<div id={post.id} className="postPane">
 			<div>
-				<div className="post">
+				<div className="post" onClick={handlePostClick}>
 					<div onClick={handlePostClick}>
 						<img
 							src={postUser.photoURL}

@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { BiUpArrow, BiDownArrow } from 'react-icons/bi';
+import { MdCancel, MdEdit, MdDelete } from 'react-icons/md';
 //Components
 import { SessionApi } from '../../hook/SessionApi';
 //Firebase
@@ -19,6 +20,8 @@ const CommentCard = ({ comment }) => {
 
 	//States
 	const [commentOwner, setcommentOwner] = useState({});
+	const [edit, setEdit] = useState(false);
+	const [newComment, setNewComment] = useState(parse(comment.content));
 
 	//Effects
 	useEffect(() => {
@@ -55,6 +58,18 @@ const CommentCard = ({ comment }) => {
 			});
 	};
 
+	const handleEditComment = () => {
+		setEdit(!edit);
+	};
+
+	const handleChangeComment = (e) => {
+		setNewComment(e.target.value);
+	};
+
+	const handleSubmitComment = () => {};
+
+	const handleDeleteComment = () => {};
+
 	return (
 		<div id={comment.id} className="commentPane">
 			<div className="comment">
@@ -85,8 +100,11 @@ const CommentCard = ({ comment }) => {
 				</div>
 
 				<div className="commentInfo">
-					<div className="postBy">
-						<p className="displayName">
+					<div className="commentBy">
+						<p
+							className="displayName"
+							style={{ fontWeight: '700', marginRight: '0.5rem' }}
+						>
 							{commentOwner.displayName}
 						</p>
 						{/* <p className="username">@{comment.userId}</p> */}
@@ -98,8 +116,51 @@ const CommentCard = ({ comment }) => {
 								timeStyle: 'short',
 							})}
 						</p>
+						<button
+							style={{
+								background: 'none',
+								border: 'none',
+								marginLeft: 'auto',
+							}}
+						>
+							<MdEdit
+								size="20px"
+								style={{ marginLeft: 'auto', fill: '#f48c51' }}
+								onClick={handleEditComment}
+							/>
+						</button>
+						<button
+							style={{
+								background: 'none',
+								border: 'none',
+							}}
+							onClick={handleDeleteComment}
+						>
+							<MdDelete
+								size="20px"
+								style={{ marginLeft: 'auto', fill: '#f48c51' }}
+							/>
+						</button>
 					</div>
 					<div className="postContent">
+						{edit && (
+							<div className="editCommentPane">
+								<textarea
+									name=""
+									id=""
+									cols="30"
+									rows="10"
+									className="editCommentArea"
+									onChange={handleChangeComment}
+								></textarea>
+								<button
+									className="saveComment"
+									onClick={handleSubmitComment}
+								>
+									Save
+								</button>
+							</div>
+						)}
 						<p>{parse(comment.content)}</p>
 						{/* แสดง Post */}
 					</div>

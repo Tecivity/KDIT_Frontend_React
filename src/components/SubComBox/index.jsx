@@ -15,8 +15,8 @@ const SubComBox = ({ subCom }) => {
 
 	return (
 		<>
-			<div id={subCom.id} className="subcomDiv" onClick={handleOnClick}>
-				<div className="subComBackgroundPane">
+			<div id={subCom.id} className="subcomDiv">
+				<div className="subComBackgroundPane" onClick={handleOnClick}>
 					<img
 						src="https://thumbs.dreamstime.com/b/outdoor-park-activities-people-relaxing-nature-walking-riding-bicycle-communicating-outdoor-park-activities-people-relaxing-110176169.jpg"
 						alt=""
@@ -30,10 +30,10 @@ const SubComBox = ({ subCom }) => {
 						}}
 					/>
 				</div>
-				<div className="subComImagePane">
+				<div className="subComImagePane" onClick={handleOnClick}>
 					<img src={subCom.photoURL} alt="" className="subComImg" />
 				</div>
-				<div className="subcomInfoPane">
+				<div className="subcomInfoPane" onClick={handleOnClick}>
 					<h3 style={{ display: 'inline', margin: '0' }}>
 						{subCom.name}
 					</h3>

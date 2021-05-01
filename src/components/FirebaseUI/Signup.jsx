@@ -36,20 +36,7 @@ var uiConfig = {
 						console.log('Sync auth to firestore');
 					});
 			}
-			// else {
-			// 	firebase
-			// 		.firestore()
-			// 		.collection('users')
-			// 		.doc(userCredential.uid)
-			// 		.update({
-			// 			displayName: userCredential.displayName,
-			// 			photoURL: userCredential.photoURL,
-			// 			phoneNumber: userCredential.phoneNumber,
-			// 		})
-			// 		.then(() => {
-			// 			console.log('Update auth to firestore');
-			// 		});
-			// }
+
 			if (userInfo.isNewUser && userInfo.providerId === 'password') {
 				try {
 					await authResult.user.sendEmailVerification();

@@ -1,6 +1,6 @@
 //React
 import React, { useState, useEffect, useContext } from 'react';
-import { Link, Switch } from 'react-router-dom';
+import Select from 'react-select';
 //Components
 import { SessionApi } from '../../hook/SessionApi';
 //Firebase
@@ -9,11 +9,27 @@ import MyUploadAdapter from '../../firebase/ckeditor_image_firebase';
 //External
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { styles } from 'react-animations/lib/swing';
 
 const PostForm = ({ updatePost }) => {
 	//Variables
 	const defaultImage =
 		'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg';
+
+	const comData = [
+		{
+			value: 'community1',
+			label: 'Community 1',
+		},
+		{
+			value: 'community2',
+			label: 'Community 2',
+		},
+		{
+			value: 'community3',
+			label: 'Community 3',
+		},
+	];
 
 	//Contexts
 	const { session, user } = useContext(SessionApi);
@@ -149,6 +165,13 @@ const PostForm = ({ updatePost }) => {
 						/>
 						<div className="postText">
 							<div className="postOption">
+								<Select
+									options={comData}
+									isMulti
+									isClearable
+									placeholder="Select Community"
+									className="com-dropdown"
+								/>
 								<button
 									onClick={handleClick}
 									className="postBT"

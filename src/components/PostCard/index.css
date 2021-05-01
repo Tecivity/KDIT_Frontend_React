@@ -293,7 +293,7 @@ h1.loginWarn {
 	width: 100%;
 	display: flex;
 	flex-direction: row;
-	/* justify-content: flex-start; */
+	align-items: center;
 }
 
 .postBT {
@@ -382,4 +382,9 @@ h1.loginWarn {
 
 .page h2 {
 	margin: 0.5rem;
+}
+
+.com-dropdown {
+	min-width: 50%;
+	width: auto;
 }
