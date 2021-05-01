@@ -30,7 +30,14 @@ const HelpBox = ({ id, question, answer, fullAnswer }) => {
 								/>
 							</div>
 							<div className="header">
-								<h1>{question}</h1>
+								<h1
+									style={{
+										paddingBottom: '0.5rem',
+										borderBottom: '1px solid lightgrey',
+									}}
+								>
+									{question}
+								</h1>
 							</div>
 							<div className="content">{parse(answer)}</div>
 
@@ -38,7 +45,10 @@ const HelpBox = ({ id, question, answer, fullAnswer }) => {
 								trigger={
 									<button
 										className="seeMoreHelpBtn"
-										style={{ marginTop: '2rem' }}
+										style={{
+											marginTop: '2rem',
+											width: '70%',
+										}}
 									>
 										Answer in detail
 									</button>
@@ -55,7 +65,15 @@ const HelpBox = ({ id, question, answer, fullAnswer }) => {
 											/>
 										</div>
 										<div className="header">
-											<h1>{question}</h1>
+											<h1
+												style={{
+													paddingBottom: '0.5rem',
+													borderBottom:
+														'1px solid lightgrey',
+												}}
+											>
+												{question}
+											</h1>
 										</div>
 										<div className="content">
 											{parse(fullAnswer)}

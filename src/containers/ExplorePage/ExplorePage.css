@@ -22,7 +22,7 @@
 	flex-direction: row;
 	justify-content: space-between;
 
-	border: 3px solid #f48c51;
+	border: 2px solid #f48c51;
 	border-radius: 1rem;
 }
 
@@ -76,7 +76,7 @@
 .explore-hit {
 	margin: 0.5rem 0;
 
-	border: 3px solid #f48c51;
+	border: 2px solid #f48c51;
 	border-radius: 1rem;
 }
 

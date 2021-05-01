@@ -16,6 +16,20 @@ const SubComBox = ({ subCom }) => {
 	return (
 		<>
 			<div id={subCom.id} className="subcomDiv" onClick={handleOnClick}>
+				<div className="subComBackgroundPane">
+					<img
+						src="https://thumbs.dreamstime.com/b/outdoor-park-activities-people-relaxing-nature-walking-riding-bicycle-communicating-outdoor-park-activities-people-relaxing-110176169.jpg"
+						alt=""
+						width="100%"
+						height="130%"
+						style={{
+							margin: '0',
+							objectFit: 'cover',
+							borderRadius: '2rem 2rem 0 0',
+							zIndex: '-1',
+						}}
+					/>
+				</div>
 				<div className="subComImagePane">
 					<img src={subCom.photoURL} alt="" className="subComImg" />
 				</div>
