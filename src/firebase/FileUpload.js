@@ -18,45 +18,46 @@ export default function FileUpload({ url, setUrl }) {
 
     const handleUpload = e => {
         e.preventDefault()
-        const uploadTask = storage.ref(`images/${image.name}`).put(image)
-        uploadTask.on(
-            "state_changed",
-            snapshot => {
-                const progress = Math.round(
-                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-                )
-                setProgress(progress)
-            },
-            error => {
-                console.log(error)
-            },
-            () => {
-                storage
-                    .ref("images")
-                    .child(image.name)
-                    .getDownloadURL()
-                    .then(url => {
-                        console.log(url)
-                        setUrl(url)
-                    })
-            }
-        )
+        if (image) {
+            const uploadTask = storage.ref(`images/${image.name}`).put(image)
+            uploadTask.on(
+                "state_changed",
+                snapshot => {
+                    const progress = Math.round(
+                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                    )
+                    setProgress(progress)
+                },
+                error => {
+                    console.log(error)
+                },
+                () => {
+                    storage
+                        .ref("images")
+                        .child(image.name)
+                        .getDownloadURL()
+                        .then(url => {
+                            console.log(url)
+                            setUrl(url)
+                        })
+                }
+            )
+        }
+
+
     }
 
     return (
         <div>
-            <h1>Upload picture</h1>
-            <br />
             <progress value={progress} max="100" />
             <br />
             <input type="file" onChange={handleChange} />
             <button onClick={handleUpload}>Upload</button>
-            <br />
-            <h3>Preview image</h3>
+            {/* <h3>Preview image</h3>
             {image ? <img src={path} alt="firebase-image" width="400px" /> : <></>}
             <h3>Uploaded image</h3>
-            <img src={url || "http://via.placeholder.com/400"} alt="firebase-image" width="400px" />
-            {(url !== "") ? (<a href={url}>Click me</a>) : (<h3>upload something</h3>)}
+            <img src={url || "http://via.placeholder.com/400"} alt="firebase-image" width="400px" /> */}
+            {(progress == "100") ? (<a> ✔</a>) : <></>}
         </div>
     )
 }

@@ -16,6 +16,20 @@ class PostService {
             })
     }
 
+    getUserPost(id){
+        return firebase
+			.firestore()
+			.collection('posts')
+			.where('userUID', '==', id)
+			.onSnapshot((querySnapshot) => {
+                const postsArray = [];
+				querySnapshot.forEach((doc) => {
+					postsArray.push({ id: doc.id, ...doc.data() });
+				});
+				return (postsArray)
+			});
+    }
+
     deletePost(id) {
         return firebase
             .firestore()

@@ -50,12 +50,8 @@ const Routes = () => {
 			<Route exact path="/community/:id" component={FullSubComPage} />
 			<Route exact path="/explore" component={ExplorePage} />
 			<Route exact path="/welcome" component={WelcomePage} />
-			<ProtectedRoute
-				auth={Session.session}
-				exact
-				path="/Profile"
-				component={ProfilePage}
-			/>
+			<ProtectedRoute auth={Session.session} exact path="/profile" component={ProfilePage}/>
+			<ProtectedRoute auth={Session.session} exact path="/profile/:id" component={ProfilePage}/>
 
 			<Redirect to="/" />
 		</Switch>

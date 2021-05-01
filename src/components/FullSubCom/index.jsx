@@ -147,8 +147,8 @@ const FullSubCom = ({ subCom, update }) => {
 			<div className="fullComCard">
 				{/* <PostForm updatePost={updatePost} /> */}
 				<div className="content">
-					{posts.map((post) => (
-						<Post post={post} />
+					{posts.map((post,i) => (
+						<Post key={i} post={post} />
 					))}
 				</div>
 			</div>

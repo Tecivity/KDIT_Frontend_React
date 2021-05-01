@@ -32,10 +32,10 @@ const PostForm = ({ updatePost }) => {
 	];
 
 	//Contexts
-	const { session, user } = useContext(SessionApi);
+	const { session, user, userInfo } = useContext(SessionApi);
 
 	//States
-	const [imageURL, setImageURL] = useState(user.photoURL);
+	const [imageURL, setImageURL] = useState(userInfo.photoURL);
 	const [post, setPost] = useState({
 		content: '',
 		subCom: '',
@@ -49,8 +49,8 @@ const PostForm = ({ updatePost }) => {
 
 	//Effects
 	useEffect(() => {
-		setImageURL(user.photoURL);
-	}, [user]);
+		setImageURL(userInfo.photoURL);
+	}, [userInfo]);
 
 	//Functions
 	const clearInput = () => {
@@ -101,10 +101,10 @@ const PostForm = ({ updatePost }) => {
 				.collection('posts')
 				.add(newPost)
 				.then(() => {
-					updatePost();
+					updatePost(newPost);
 					e.target.value = '';
 					clearInput();
-					window.location.reload();
+					// window.location.reload();
 				});
 		}
 	};

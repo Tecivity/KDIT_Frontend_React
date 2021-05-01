@@ -2,10 +2,7 @@
 import React, { useState, useContext } from 'react';
 //Components
 import { SessionApi } from '../../hook/SessionApi';
-//Firebase
-import firebase from '../../firebase';
-//CSS
-import './index.css';
+import { CommentService } from "../../services";
 
 const CommentForm = ({ post, id }) => {
 	//States
@@ -41,7 +38,6 @@ const CommentForm = ({ post, id }) => {
 
 		return [hour, minute].join(':');
 	}
-
 	const handleSubmit = (e) => {
 		if (comment.trim() === '') {
 			console.log({ error: 'Must not be empty' });
@@ -56,18 +52,11 @@ const CommentForm = ({ post, id }) => {
 				voteDown: 0,
 				voteUp: 0,
 			};
-
-			console.log(newComment);
-			console.log(post);
-
-			firebase
-				.firestore()
-				.collection('comments')
-				.add(newComment)
-				.then(() => {
-					setComment('');
-					window.location.reload();
-				});
+			CommentService.addComment(newComment).then(data=>{
+				console.log(data)
+				setComment('')
+				window.location.reload();
+			  })
 		}
 	};
 

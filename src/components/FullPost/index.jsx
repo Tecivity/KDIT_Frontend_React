@@ -149,6 +149,7 @@ const FullPost = ({ post, id }) => {
 									src={postUser.photoURL}
 									alt="full-profile picture"
 									className="fullprofilePic"
+									onClick={()=>history.push(`/profile/${postUser.id}`)}
 								/>
 							</div>
 

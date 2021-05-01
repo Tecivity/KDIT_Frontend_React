@@ -116,8 +116,8 @@ const SubComPage = () => {
 									<div>Followed Sub Com HERE</div>
 								</div>
 								<div className="ourCom">
-									{subComs.map((subCom) => {
-										return <SubComBox subCom={subCom} />;
+									{subComs.map((subCom,i) => {
+										return <SubComBox key={i} subCom={subCom} />;
 									})}
 									<button onClick={firebaseTest}>
 										Test firebase

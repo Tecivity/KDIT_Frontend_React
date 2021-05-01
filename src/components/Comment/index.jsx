@@ -60,8 +60,8 @@ const Comment = ({ post, id }) => {
 		<div className="commentCard">
 			<CommentForm post={post} id={id} />
 			<div className="content">
-				{comments.map((comment) => (
-					<CommentCard comment={comment} />
+				{comments.map((comment,i) => (
+					<CommentCard key={i} comment={comment} />
 				))}
 			</div>
 		</div>

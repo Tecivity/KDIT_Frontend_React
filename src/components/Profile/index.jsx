@@ -11,52 +11,83 @@ import firebase from '../../firebase';
 import FileUpload from '../../firebase/FileUpload';
 //CSS
 import './index.css';
+import { getSuggestedQuery } from '@testing-library/dom';
+import { PostService, UserService } from '../../services';
 
-const Profile = () => {
+const Profile = ({ id }) => {
 	//States
 	const [edit, setEdit] = useState(false);
 	const [posts, setPosts] = useState([]);
-	const [url, setUrl] = useState('');
+	const [photoURL, setPhotoURL] = useState('');
+	const [bannerURL, setBannerURL] = useState('')
+	const [displayName, setDisplayName] = useState('')
+	const [bio, setBio] = useState('')
+	const [profile, setProfile] = useState({})
 
 	//Contexts
-	const { user, defaultImage, defaultBanner, userInfo } = useContext(
-		SessionApi,
-	);
-
-	//Effects
-	useEffect(() => {
-		fetchData();
-	}, []);
+	const { user, defaultImage, defaultBanner } = useContext(SessionApi)
 
 	//Functions
-	const updatePost = () => {
-		fetchData();
-	};
+
+	const updateProfile = e => {
+		e.preventDefault()
+		const newProfile = {
+			displayName,
+			bannerURL,
+			photoURL,
+			bio,
+		}
+		console.log(profile)
+		console.log(newProfile)
+		UserService.updateUser(profile.id,newProfile).then(result=>{
+			console.log('Updated data')
+			setProfile({...profile,displayName,
+				bannerURL,
+				photoURL,
+				bio,})
+		})
+	}
 
 	const handleOnClick = () => {
 		setEdit(!edit);
 	};
 
 	const fetchData = async () => {
+		UserService.getUser(id).then(data => {
+			setProfile(data)
+			getPost(data.id)
+			setDisplayName(data.displayName)
+			setBio(data.bio)
+			setBannerURL(data.bannerURL)
+			setPhotoURL(data.photoURL)
+		})
+	};
+
+	const getPost = (id) => {
 		const postsArray = [];
 		firebase
 			.firestore()
 			.collection('posts')
-			.where('userUID', '==', userInfo.id)
+			.where('userUID', '==', id)
 			.onSnapshot((querySnapshot) => {
 				querySnapshot.forEach((doc) => {
 					postsArray.push({ id: doc.id, ...doc.data() });
 				});
 				setPosts(postsArray);
 			});
-	};
+	}
+
+	//Effects
+	useEffect(() => {
+		fetchData();
+	}, []);
 
 	return (
 		<>
 			<div className="profilePane">
 				<div className="bannerImgPane">
 					<img
-						src={userInfo.bannerURL || defaultBanner}
+						src={profile.bannerURL || defaultBanner}
 						onError={defaultBanner}
 						alt=""
 						className="bannerImg"
@@ -65,13 +96,13 @@ const Profile = () => {
 				<div className="profileInfoPane">
 					<div>
 						<img
-							src={userInfo.photoURL || defaultImage}
+							src={profile.photoURL || defaultImage}
 							onError={defaultImage}
 							alt="profile picture"
 							className="full-profilePic"
 						/>
 						<h2 style={{ marginTop: '0', marginBottom: '0rem' }}>
-							{user.displayName}
+							{profile.displayName}
 						</h2>
 						<h3
 							style={{
@@ -82,15 +113,14 @@ const Profile = () => {
 						>
 							@username
 						</h3>
-						<p style={{ marginTop: '0' }}>Bio ต้องมีมั้ยนิ้</p>
+						<p style={{ marginTop: '0' }}>{profile.bio}</p>
 					</div>
 					<div style={{ alignSelf: 'center' }}>
 						{/* <button className="edit-btn" onClick={handleOnClick}>
 							{edit ? 'X' : 'Edit'}
 						</button> */}
 					</div>
-
-					<Popup
+					{profile.id == user.uid ? <Popup
 						trigger={
 							<button
 								className="edit-btn"
@@ -122,32 +152,55 @@ const Profile = () => {
 											</label>
 
 											<FileUpload
-												url={url}
-												setUrl={setUrl}
+												url={photoURL}
+												setUrl={setPhotoURL}
 											/>
+
+											<label htmlFor="">
+												Banner Picture
+											</label>
+
+											<FileUpload
+												url={bannerURL}
+												setUrl={setBannerURL}
+											/>
+
 											<label htmlFor="">
 												Display Name
 											</label>
 											<input
 												type="text"
 												name="displayNames"
+												value={displayName}
+												onChange={(e) => setDisplayName(e.target.value)}
 											/>
 
-											<button className="btn">
-												Save Changes
+											<label htmlFor="">
+												Bio
+											</label>
+											<input
+												type="text"
+												name="displayNames"
+												value={bio}
+												onChange={(e) => setBio(e.target.value)}
+											/>
+
+											<button className="btn" onClick={updateProfile}>
+												<a onClick={close}>Save Changes</a>
 											</button>
 										</form>
 									</div>
 								</div>
 							</div>
 						)}
-					</Popup>
+					</Popup> : <></>}
+
 				</div>
 				<div className="profileCard">
 					{/* <PostForm updatePost={updatePost} /> */}
 					<div className="content">
-						{posts.map((post) => (
-							<Post post={post} />
+						{posts.map((post,i) => (
+							<Post key={i} post={post} />
 						))}
 					</div>
 				</div>
