@@ -1,5 +1,6 @@
 //React
 import React, { useContext, useState } from 'react';
+import parse from 'html-react-parser';
 import {
 	InstantSearch,
 	// SearchBox,
@@ -53,7 +54,7 @@ const CustomHits = connectHits(({ hits, indice }) => (
 								</p>
 							</div>
 							<div className="explore-postContentPane">
-								{stripHtml(hit.objectID).result}
+								{parse(hit.content)}
 							</div>
 						</div>
 					</div>
