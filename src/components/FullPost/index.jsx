@@ -130,7 +130,7 @@ const FullPost = ({ post, id }) => {
 								<BiUpArrow size="25px" />
 							</button>
 
-							{post.voteUp + post.voteDown}
+							<h3>{post.voteUp + post.voteDown}</h3>
 
 							<button
 								onClick={() => downVote(post)}
@@ -140,7 +140,7 @@ const FullPost = ({ post, id }) => {
 							</button>
 						</div>
 						<div style={{ display: 'flex', alignItems: 'center' }}>
-							<h4>{totalComment}</h4>
+							<h3>{totalComment}</h3>
 							<BiCommentDetail
 								size="25px"
 								style={{ marginLeft: '0.5rem' }}

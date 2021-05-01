@@ -92,7 +92,7 @@
 	box-shadow: 0 1rem #d37a46;
 }
 
-.explore:active {
+.explore-hit:active {
 	transform: translateY(0);
 	box-shadow: 0 0rem #d37a46;
 }

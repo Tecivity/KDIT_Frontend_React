@@ -13,8 +13,28 @@ body {
 	align-items: center;
 	justify-content: space-between;
 
-	border: 2px solid #f48c51;
+	border: 3px solid #f48c51;
 	border-radius: 1rem;
+
+	transition: 0.2s;
+}
+
+.helpBox:hover {
+	background: #f48c51;
+	color: white;
+	transform: translateY(-1rem);
+	box-shadow: 0 1rem #d37a46;
+
+	cursor: pointer;
+}
+
+.helpBox:hover h2 {
+	color: white;
+}
+
+.helpBox:active {
+	transform: translateY(0rem);
+	box-shadow: 0 0rem #d37a46;
 }
 
 .seeMoreHelpBtn {

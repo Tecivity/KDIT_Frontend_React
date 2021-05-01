@@ -323,6 +323,4 @@ div[role='menu'] {
 
 div[role='menu'].visible {
 	visibility: visible;
-
-	color: white;
 }

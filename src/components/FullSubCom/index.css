@@ -53,10 +53,12 @@
 }
 
 .editCombtn {
+	margin-top: 0.5rem;
+
 	background: white;
 
 	border: 2px solid #f48c51;
-	border-radius: 1rem;
+	border-radius: 0.5rem;
 
 	width: 5rem;
 	height: 2rem;
@@ -65,6 +67,9 @@
 }
 
 .editCombtn:hover {
+	background: #f48c51;
+	color: white;
+	font-weight: 500;
 	transform: translateY(-0.5rem);
 	box-shadow: 0 0.5rem #d37a46;
 }

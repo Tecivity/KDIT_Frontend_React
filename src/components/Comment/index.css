@@ -81,8 +81,11 @@
 
 	font-size: 1rem;
 
-	border: 1px solid orange;
+	/* border: 1px solid orange; */
+	border: none;
 	border-radius: 1rem;
+
+	box-shadow: 0 0 0 2px #f48c51;
 
 	align-self: center;
 
@@ -90,7 +93,7 @@
 }
 
 .commentTextarea:focus {
-	border-width: 2px;
+	box-shadow: 0 0 0 4px #f48c51;
 }
 
 .postCommentBtn {
@@ -104,7 +107,7 @@
 	color: white;
 	font-weight: 700;
 	border: none;
-	border-radius: 3rem;
+	border-radius: 1rem;
 
 	font-size: 1rem;
 
@@ -140,14 +143,14 @@
 	background-color: lightgreen;
 }
 .voteUpBTC:hover {
-	background-color: rgb(85, 219, 174);
+	border: 2px solid #f48c51;
 	transform: translateY(-0.5rem);
-	box-shadow: 0 0.5rem #d37a46;
+	box-shadow: 0 0.5rem #f48c51;
 }
-.voteUpBTC:acitve {
-	background-color: rgb(85, 219, 174);
+.voteUpBTC:active {
+	border: 2px solid #f48c51;
 	transform: translateY(0);
-	box-shadow: 0 0rem #d37a46;
+	box-shadow: 0 0rem #f48c51;
 }
 
 .voteDownBTC {
@@ -166,12 +169,17 @@
 }
 
 .voteDownBTC:focus {
-	background-color: red;
+	background-color: rgb(253, 91, 91);
 }
 .voteDownBTC:hover {
-	background: lightpink;
+	border: 2px solid #f48c51;
 	transform: translateY(-0.5rem);
-	box-shadow: 0 0.5rem #d37a46;
+	box-shadow: 0 0.5rem #f48c51;
+}
+.voteDownBTC:active {
+	border: 2px solid #f48c51;
+	transform: translateY(0);
+	box-shadow: 0 0rem #f48c51;
 }
 
 .commentBy {
@@ -239,11 +247,11 @@
 .editCommentBtn:hover {
 	border: 2px solid #f48c51;
 	transform: translateY(-0.5rem);
-	box-shadow: 0 0.5rem #d37a46;
+	box-shadow: 0 0.5rem #f48c51;
 }
 .editCommentBtn:active {
 	transform: translateY(0);
-	box-shadow: 0 0rem #d37a46;
+	box-shadow: 0 0rem #f48c51;
 }
 
 .delCommentBtn {
@@ -257,9 +265,9 @@
 .delCommentBtn:hover {
 	border: 2px solid #f48c51;
 	transform: translateY(-0.5rem);
-	box-shadow: 0 0.5rem #d37a46;
+	box-shadow: 0 0.5rem #f48c51;
 }
 .delCommentBtn:active {
 	transform: translateY(0);
-	box-shadow: 0 0rem #d37a46;
+	box-shadow: 0 0rem #f48c51;
 }

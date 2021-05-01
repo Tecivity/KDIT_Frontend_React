@@ -19,48 +19,45 @@ const Profile = ({ id }) => {
 	const [edit, setEdit] = useState(false);
 	const [posts, setPosts] = useState([]);
 	const [photoURL, setPhotoURL] = useState('');
-	const [bannerURL, setBannerURL] = useState('')
-	const [displayName, setDisplayName] = useState('')
-	const [bio, setBio] = useState('')
-	const [profile, setProfile] = useState({})
+	const [bannerURL, setBannerURL] = useState('');
+	const [displayName, setDisplayName] = useState('');
+	const [bio, setBio] = useState('');
+	const [profile, setProfile] = useState({});
 
 	//Contexts
-	const { user, defaultImage, defaultBanner } = useContext(SessionApi)
+	const { user, defaultImage, defaultBanner } = useContext(SessionApi);
 
 	//Functions
 
-	const updateProfile = e => {
-		e.preventDefault()
+	const updateProfile = (e) => {
+		e.preventDefault();
 		const newProfile = {
 			displayName,
 			bannerURL,
 			photoURL,
 			bio,
-		}
-		console.log(profile)
-		console.log(newProfile)
-		UserService.updateUser(profile.id,newProfile).then(result=>{
-			console.log('Updated data')
-			setProfile({...profile,displayName,
-				bannerURL,
-				photoURL,
-				bio,})
-		})
-	}
+		};
+		console.log(profile);
+		console.log(newProfile);
+		UserService.updateUser(profile.id, newProfile).then((result) => {
+			console.log('Updated data');
+			setProfile({ ...profile, displayName, bannerURL, photoURL, bio });
+		});
+	};
 
 	const handleOnClick = () => {
 		setEdit(!edit);
 	};
 
 	const fetchData = async () => {
-		UserService.getUser(id).then(data => {
-			setProfile(data)
-			getPost(data.id)
-			setDisplayName(data.displayName)
-			setBio(data.bio)
-			setBannerURL(data.bannerURL)
-			setPhotoURL(data.photoURL)
-		})
+		UserService.getUser(id).then((data) => {
+			setProfile(data);
+			getPost(data.id);
+			setDisplayName(data.displayName);
+			setBio(data.bio);
+			setBannerURL(data.bannerURL);
+			setPhotoURL(data.photoURL);
+		});
 	};
 
 	const getPost = (id) => {
@@ -75,7 +72,7 @@ const Profile = ({ id }) => {
 				});
 				setPosts(postsArray);
 			});
-	}
+	};
 
 	//Effects
 	useEffect(() => {
@@ -120,83 +117,100 @@ const Profile = ({ id }) => {
 							{edit ? 'X' : 'Edit'}
 						</button> */}
 					</div>
-					{profile.id == user.uid ? <Popup
-						trigger={
-							<button
-								className="edit-btn"
-								onClick={handleOnClick}
-							>
-								{edit ? 'X' : 'Edit'}
-							</button>
-						}
-						modal
-						className="editProfile"
-					>
-						{(close) => (
-							<div className="modal">
-								<div className="close" onClick={close}>
-									<MdCancel
-										size="30px"
-										style={{ fill: '#f48c51' }}
-									/>
-								</div>
+					{profile.id == user.uid ? (
+						<Popup
+							trigger={
+								<button
+									className="edit-btn"
+									onClick={handleOnClick}
+								>
+									{edit ? 'X' : 'Edit'}
+								</button>
+							}
+							modal
+							className="editProfile"
+						>
+							{(close) => (
+								<div className="modal">
+									<div className="close" onClick={close}>
+										<MdCancel
+											size="30px"
+											style={{ fill: '#f48c51' }}
+										/>
+									</div>
 
-								<div className="content">
-									<div className="editProfilePane">
-										<div className="editProfileForm">
-											<label htmlFor="">
-												Profile Picture
-											</label>
+									<div className="content">
+										<div className="editProfilePane">
+											<div className="editProfileForm">
+												<label htmlFor="">
+													Profile Picture
+												</label>
 
-											<FileUpload
-												url={photoURL}
-												setUrl={setPhotoURL}
-											/>
+												<FileUpload
+													url={photoURL}
+													setUrl={setPhotoURL}
+												/>
 
-											<label htmlFor="">
-												Banner Picture
-											</label>
+												<label htmlFor="">
+													Banner Picture
+												</label>
 
-											<FileUpload
-												url={bannerURL}
-												setUrl={setBannerURL}
-											/>
+												<FileUpload
+													url={bannerURL}
+													setUrl={setBannerURL}
+												/>
 
-											<label htmlFor="">
-												Display Name
-											</label>
-											<input
-												type="text"
-												name="displayNames"
-												value={displayName}
-												onChange={(e) => setDisplayName(e.target.value)}
-											/>
+												<label htmlFor="">
+													Display Name
+												</label>
+												<input
+													type="text"
+													name="displayNames"
+													value={displayName}
+													onChange={(e) =>
+														setDisplayName(
+															e.target.value,
+														)
+													}
+												/>
 
-											<label htmlFor="">
-												Bio
-											</label>
-											<input
-												type="text"
-												name="displayNames"
-												value={bio}
-												onChange={(e) => setBio(e.target.value)}
-											/>
+												<label htmlFor="">Bio</label>
+												<input
+													type="text"
+													name="displayNames"
+													value={bio}
+													onChange={(e) =>
+														setBio(e.target.value)
+													}
+												/>
 
-											<button className="btn" onClick={updateProfile}>
-												<a onClick={close}>Save Changes</a>
-											</button>
+												<button
+													className="btn"
+													onClick={updateProfile}
+												>
+													<a
+														onClick={close}
+														style={{
+															color: 'white',
+														}}
+													>
+														Save Changes
+													</a>
+												</button>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						)}
-					</Popup> : <></>}
-
+							)}
+						</Popup>
+					) : (
+						<></>
+					)}
 				</div>
 				<div className="profileCard">
 					{/* <PostForm updatePost={updatePost} /> */}
 					<div className="content">
-						{posts.map((post,i) => (
+						{posts.map((post, i) => (
 							<Post key={i} post={post} />
 						))}
 					</div>

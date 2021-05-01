@@ -1,7 +1,7 @@
 //React
 import React, { useState } from 'react';
 import Select from 'react-select';
-import { bounceInLeft, fadeIn, slideInUp } from 'react-animations';
+import { bounceInLeft, fadeIn, fadeInUp } from 'react-animations';
 //External
 import Radium, { StyleRoot } from 'radium';
 //CSS
@@ -29,9 +29,9 @@ const styles = {
 		animation: '1s',
 		animationName: Radium.keyframes(bounceInLeft, 'bounceInLeft'),
 	},
-	slideInUp: {
+	fadeInUp: {
 		animation: '1s',
-		animationName: Radium.keyframes(slideInUp, 'slideInUp'),
+		animationName: Radium.keyframes(fadeInUp, 'fadeInUp'),
 	},
 	fadeIn: {
 		animation: '3s',
@@ -83,7 +83,7 @@ const WelcomePage = () => {
 						fontSize: '8em',
 						marginTop: '0',
 						animation: '1s',
-						animationName: Radium.keyframes(slideInUp, 'slideInUp'),
+						animationName: Radium.keyframes(fadeInUp, 'fadeInUp'),
 					}}
 				>
 					NISIT
