@@ -199,8 +199,8 @@ const Profile = ({ id }) => {
 				<div className="profileCard">
 					{/* <PostForm updatePost={updatePost} /> */}
 					<div className="content">
-						{posts.map((post) => (
-							<Post post={post} />
+						{posts.map((post,i) => (
+							<Post key={i} post={post} />
 						))}
 					</div>
 				</div>

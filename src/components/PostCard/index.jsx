@@ -4,6 +4,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Post from './Post';
 import PostForm from './PostForm';
 import { SessionApi } from '../../hook/SessionApi';
+import HashLoader from 'react-spinners/HashLoader';
 //Firebase
 import firebase from '../../firebase';
 import { PostModel } from '../../firebase/models';
@@ -19,17 +20,13 @@ const Card = () => {
 	//States
 	const [posts, setPosts] = useState([]);
 
-	//Effects
-	useEffect(() => {
-		fetchData();
-	}, []);
-
 	//Context
-	const { user } = useContext(SessionApi);
+	const { user, loading, setLoading } = useContext(SessionApi);
 
 	//Functions
-	const updatePost = () => {
-		fetchData();
+	const updatePost = (newPost) => {
+		// setPosts([newPost, ...posts])
+		fetchData()
 	};
 
 	//Functions
@@ -232,23 +229,43 @@ const Card = () => {
 	};
 
 	const fetchData = async () => {
+		setLoading(true)
 		const postsArray = [];
 		ref.onSnapshot((querySnapshot) => {
 			querySnapshot.forEach((doc) => {
 				postsArray.push({ id: doc.id, ...doc.data() });
 			});
 			setPosts(postsArray);
+			setLoading(false)
 		});
+		setLoading(false)
 	};
+
+	//Effects
+	useEffect(() => {
+		fetchData();
+	}, []);
 
 	return (
 		<div className="card-pane">
 			<PostForm updatePost={updatePost} />
-			<div className="cardContent-pane">
-				{posts.map((post) => (
-					<Post post={post} upVote={upVote} downVote={downVote} />
-				))}
-			</div>
+			{loading ? (
+				<div className="auth-loading">
+					<HashLoader
+						className="auth-loading"
+						color={'#272727'}
+						loading={loading}
+						size={100}
+					/>
+				</div>
+			) : (
+				<div className="cardContent-pane">
+					{posts.map((post, i) => (
+						<Post key={i} post={post} upVote={upVote} downVote={downVote} />
+					))}
+				</div>
+			)}
+
 		</div>
 	);
 };
