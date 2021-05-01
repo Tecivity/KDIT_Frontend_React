@@ -20,6 +20,8 @@
 
 .fullsubcomForm {
 	width: 90%;
+
+	overflow: auto;
 }
 
 .subcom-btn {
@@ -41,11 +43,13 @@
 }
 
 .subcom-btn:hover {
-	transform: translateY(-3px);
+	transform: translateY(-0.5rem);
+	box-shadow: 0 0.5rem #d37a46;
 }
 
 .subcom-btn:active {
-	transform: translateY(5px);
+	transform: translateY(0);
+	box-shadow: 0 0rem #d37a46;
 }
 
 .editCombtn {
@@ -61,13 +65,13 @@
 }
 
 .editCombtn:hover {
-	background: #f48c51;
-	color: white;
+	transform: translateY(-0.5rem);
+	box-shadow: 0 0.5rem #d37a46;
 }
 
 .editCombtn:active {
-	background: #ad6439;
-	color: white;
+	transform: translateY(0);
+	box-shadow: 0 0rem #d37a46;
 }
 
 .subComImg {

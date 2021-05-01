@@ -15,6 +15,7 @@
     "html-react-parser": "^1.2.6",
     "radium": "^0.26.1",
     "react": "^17.0.1",
+    "react-accessible-dropdown-menu-hook": "^2.2.2",
     "react-animations": "^1.0.0",
     "react-dom": "^17.0.1",
     "react-firebaseui": "^4.1.0",

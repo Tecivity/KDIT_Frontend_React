@@ -87,8 +87,9 @@ const CommentCard = ({ comment }) => {
 						>
 							<BiUpArrow size="25px" />
 						</button>
-
-						{comment.voteUp - comment.voteDown}
+						<h4 style={{ margin: '0' }}>
+							{comment.voteUp - comment.voteDown}
+						</h4>
 
 						<button
 							// onClick={}
@@ -116,25 +117,30 @@ const CommentCard = ({ comment }) => {
 								timeStyle: 'short',
 							})}
 						</p>
-						<button
-							style={{
-								background: 'none',
-								border: 'none',
-								marginLeft: 'auto',
-							}}
-						>
-							<MdEdit
-								size="20px"
-								style={{ marginLeft: 'auto', fill: '#f48c51' }}
-								onClick={handleEditComment}
-							/>
+						<button className="editCommentBtn">
+							{edit ? (
+								<MdCancel
+									size="20px"
+									style={{
+										marginLeft: 'auto',
+										fill: '#f48c51',
+									}}
+									onClick={handleEditComment}
+								/>
+							) : (
+								<MdEdit
+									size="20px"
+									style={{
+										marginLeft: 'auto',
+										fill: '#f48c51',
+									}}
+									onClick={handleEditComment}
+								/>
+							)}
 						</button>
 						<button
-							style={{
-								background: 'none',
-								border: 'none',
-							}}
 							onClick={handleDeleteComment}
+							className="delCommentBtn"
 						>
 							<MdDelete
 								size="20px"

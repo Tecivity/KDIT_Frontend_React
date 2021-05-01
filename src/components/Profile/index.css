@@ -83,10 +83,13 @@
 .edit-btn:hover {
 	color: white;
 	background: #f48c51;
+	transform: translateY(-0.5rem);
+	box-shadow: 0 0.5rem #d37a46;
 }
 
 .edit-btn:active {
-	transform: scale(0.9);
+	transform: translateY(0rem);
+	box-shadow: 0 0rem #d37a46;
 }
 
 .profileCard {

@@ -1,5 +1,7 @@
 //React
 import React, { useState, useEffect, useContext } from 'react';
+import Popup from 'reactjs-popup';
+import { MdCancel } from 'react-icons/md';
 //Components
 import { SessionApi } from '../../hook/SessionApi';
 import Post from '../PostCard/Post';
@@ -90,55 +92,86 @@ const FullSubCom = ({ subCom, update }) => {
 
 				{userInfo.id == subCom.ownerUID ? (
 					<>
-						<button className="editCombtn" onClick={handleOnClick}>
-							{edit ? 'X' : 'Edit'}
-						</button>
-						{edit && (
-							<>
-								<div className="fullsubcomForm">
-									<form action="">
-										<label htmlFor="">
-											Community Picture
-										</label>
-										<h1>Upload Picture Here</h1>
-										<div className="inputForm">
-											<label htmlFor="">
-												Community Name
-											</label>
-											<input
-												type="text"
-												name="name"
-												className="nameInput"
-												onChange={(e) =>
-													handleChange(e)
-												}
-												value={newSubCom.name}
-											/>
-											<label htmlFor="">
-												Description
-											</label>
-											<textarea
-												id=""
-												cols="30"
-												rows="10"
-												name="description"
-												className="desInput"
-												onChange={(e) =>
-													handleChange(e)
-												}
-												value={newSubCom.description}
-											></textarea>
-										</div>
-										<button
-											onClick={handleSubmit}
-											className="btn"
+						<Popup
+							trigger={
+								<button
+									className="editCombtn"
+									onClick={handleOnClick}
+								>
+									Edit
+								</button>
+							}
+							modal
+							className="subPopup"
+						>
+							{(close) => (
+								<div className="modal">
+									<div className="close" onClick={close}>
+										<MdCancel
+											size="30px"
+											style={{ fill: '#f48c51' }}
+										/>
+									</div>
+									<div className="header">
+										<h1
+											style={{
+												paddingBottom: '0.5rem',
+												borderBottom:
+													'1px solid lightgrey',
+											}}
 										>
-											Save
-										</button>
-									</form>
+											Edit Community
+										</h1>
+									</div>
+									<div className="content">
+										<div className="fullsubcomForm">
+											<form action="">
+												<label htmlFor="">
+													Community Picture
+												</label>
+												<h2>Upload Picture Here</h2>
+												<div className="inputForm">
+													<label htmlFor="">
+														Community Name
+													</label>
+													<input
+														type="text"
+														name="name"
+														className="nameInput"
+														onChange={(e) =>
+															handleChange(e)
+														}
+														value={newSubCom.name}
+													/>
+													<label htmlFor="">
+														Description
+													</label>
+													<textarea
+														id=""
+														cols="30"
+														rows="10"
+														name="description"
+														className="desInput"
+														onChange={(e) =>
+															handleChange(e)
+														}
+														value={
+															newSubCom.description
+														}
+													></textarea>
+												</div>
+												<button
+													onClick={handleSubmit}
+													className="btn"
+												>
+													Save
+												</button>
+											</form>
+										</div>
+									</div>
 								</div>
-							</>
-						)}
+							)}
+						</Popup>
 					</>
 				) : (
 					<></>
@@ -147,7 +180,7 @@ const FullSubCom = ({ subCom, update }) => {
 			<div className="fullComCard">
 				{/* <PostForm updatePost={updatePost} /> */}
 				<div className="content">
-					{posts.map((post,i) => (
+					{posts.map((post, i) => (
 						<Post key={i} post={post} />
 					))}
 				</div>

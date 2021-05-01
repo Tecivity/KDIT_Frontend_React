@@ -43,14 +43,22 @@ h1.loginWarn {
 
 	background: white;
 
-	transition: 500ms;
+	transition: 0.2s;
 }
 
 .full-voteUpBT:focus {
-	background-color: lightgreen;
+	background: rgb(230, 255, 242);
 }
+
+.full-voteUpBT:active {
+	transform: translateY(0rem);
+	box-shadow: 0 0rem #d37a46;
+}
+
 .full-voteUpBT:hover {
-	background-color: rgb(85, 219, 174);
+	border: 2px solid #f48c51;
+	transform: translateY(-0.5rem);
+	box-shadow: 0 0.5rem #d37a46;
 }
 
 .full-voteDownBT {
@@ -73,8 +81,15 @@ h1.loginWarn {
 .full-voteDownBT:focus {
 	background-color: red;
 }
+
+.full-voteDownBT:acitve {
+	transform: translateY(0rem);
+	box-shadow: 0 0rem #d37a46;
+}
 .full-voteDownBT:hover {
-	background-color: rgb(219, 85, 107);
+	border: 2px solid #f48c51;
+	transform: translateY(-0.5rem);
+	box-shadow: 0 0.5rem #d37a46;
 }
 
 .full-votePane {
@@ -95,7 +110,7 @@ h1.loginWarn {
 	display: flex;
 	flex-direction: column-reverse;
 	margin: 0;
-	margin-bottom: 2rem;
+	margin-bottom: 1rem;
 
 	border: 4px solid #f48c51;
 	border-radius: 2rem;
@@ -228,9 +243,11 @@ h1.loginWarn {
 }
 
 .editPostBtn {
+	margin-bottom: 1rem;
+
 	background: none;
 	border: none;
-	border: 50%;
+	border-radius: 50%;
 
 	transition: 0.2s;
 }
@@ -238,12 +255,12 @@ h1.loginWarn {
 .editPostBtn:hover {
 	/* background: #ffe4d5; */
 
-	transform: scale(1.2);
+	border: 2px solid #f48c51;
 }
 
 .editModePane {
 	margin: 1rem 0;
-	padding: 1.5rem;
+	padding: 1rem;
 
 	width: 90%;
 
@@ -267,4 +284,45 @@ h1.loginWarn {
 	color: white;
 	font-size: 1rem;
 	font-weight: 700;
+}
+
+.reportBtnPane {
+	margin-top: 0;
+	margin-bottom: 0.5rem;
+
+	display: flex;
+	flex-direction: row;
+
+	/* border: 1px solid black; */
+}
+
+.reportBt {
+	margin-left: auto;
+
+	background: none;
+	border: none;
+	border-radius: 1rem;
+
+	transition: 0.2s;
+}
+
+.reportBt:hover {
+	/* border: 2px solid #f48c51; */
+	transform: translateY(-0.5rem);
+	box-shadow: 0 0.5rem #d37a46;
+}
+
+.report:active {
+	transform: translateY(0rem);
+	box-shadow: 0 0rem #d37a46;
+}
+
+div[role='menu'] {
+	visibility: hidden;
+}
+
+div[role='menu'].visible {
+	visibility: visible;
+
+	color: white;
 }

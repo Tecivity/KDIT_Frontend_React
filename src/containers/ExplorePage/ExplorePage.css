@@ -22,8 +22,8 @@
 	flex-direction: row;
 	justify-content: space-between;
 
-	border: 2px solid #f48c51;
-	border-radius: 1rem;
+	border-bottom: 2px solid #f48c51;
+	/* border-radius: 1rem; */
 }
 
 .explore-searchBar {
@@ -71,13 +71,30 @@
 }
 
 .explore-hitContainer {
+	/* border: 1px solid lightgrey; */
 }
 
 .explore-hit {
 	margin: 0.5rem 0;
 
+	max-height: 30%;
+
 	border: 2px solid #f48c51;
 	border-radius: 1rem;
+
+	background: white;
+
+	transition: 0.2s;
+}
+
+.explore-hit:hover {
+	transform: translateY(-1rem);
+	box-shadow: 0 1rem #d37a46;
+}
+
+.explore:active {
+	transform: translateY(0);
+	box-shadow: 0 0rem #d37a46;
 }
 
 .explore-postHitPane {
@@ -104,9 +121,23 @@
 	flex-direction: row;
 	justify-content: center;
 
+	text-decoration: none;
+
+	border-bottom: 2px solid #f48c51;
+
 	/* border: 1px solid black; */
 }
 
 .explore-page {
 	margin: 0 0.5rem;
+	padding: 0 0.5rem;
+
+	border-radius: 1rem;
+
+	text-decoration: none;
+	font-size: 1rem;
+}
+
+.explore-page:hover {
+	background: #f7e1d5;
 }

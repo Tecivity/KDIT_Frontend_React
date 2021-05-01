@@ -1,7 +1,9 @@
 //React
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { MdCancel, MdEdit, MdDelete } from 'react-icons/md';
+import { MdCancel, MdEdit, MdDelete, MdReportProblem } from 'react-icons/md';
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
 //Components
 import { BiUpArrow, BiDownArrow, BiCommentDetail } from 'react-icons/bi';
 import Comment from '../Comment/index';
@@ -15,6 +17,7 @@ import { PostService } from '../../services';
 import parse from 'html-react-parser';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 //CSS
 import './index.css';
 
@@ -35,6 +38,9 @@ const FullPost = ({ post, id }) => {
 
 	//History
 	const history = useHistory();
+
+	//DropDown Menu
+	const { buttonProps, itemProps, isOpen, setIsOpen } = useDropdownMenu(1);
 
 	//Functions
 	const upVote = (post) => {
@@ -149,7 +155,9 @@ const FullPost = ({ post, id }) => {
 									src={postUser.photoURL}
 									alt="full-profile picture"
 									className="fullprofilePic"
-									onClick={()=>history.push(`/profile/${postUser.id}`)}
+									onClick={() =>
+										history.push(`/profile/${postUser.id}`)
+									}
 								/>
 							</div>
 
@@ -229,39 +237,65 @@ const FullPost = ({ post, id }) => {
 									{/* แสดง Post */}
 								</div>
 							</div>
-							{post.userUID === user.uid ? (
-								<div>
-									<button
-										onClick={editPost}
-										className="editPostBtn"
-									>
-										{edit ? (
-											<MdCancel
-												size="25px"
-												style={{ fill: '#f48c51' }}
-											/>
-										) : (
-											<MdEdit
-												size="25px"
-												style={{ fill: '#f48c51' }}
-											/>
-										)}
+							<div className="reportBtPane">
+								<button {...buttonProps} className="reportBt">
+									{isOpen ? (
+										<IoIosArrowUp size="25px" />
+									) : (
+										<IoIosArrowDown size="25px" />
+									)}
+								</button>
+								<div
+									className={isOpen ? 'visible' : ''}
+									role="menu"
+								>
+									<button className="reportBt">
+										<MdReportProblem
+											size="25px"
+											style={{ fill: '#f48c51' }}
+										/>
 									</button>
-									{post.userUID == user.uid && (
-										<button
-											onClick={deletePost}
-											className="editPostBtn"
-										>
-											<MdDelete
-												size="25px"
-												style={{ fill: '#f48c51' }}
-											/>
-										</button>
+									{post.userUID === user.uid ? (
+										<div>
+											<button
+												onClick={editPost}
+												className="reportBt"
+											>
+												{edit ? (
+													<MdCancel
+														size="25px"
+														style={{
+															fill: '#f48c51',
+														}}
+													/>
+												) : (
+													<MdEdit
+														size="25px"
+														style={{
+															fill: '#f48c51',
+														}}
+													/>
+												)}
+											</button>
+											{post.userUID == user.uid && (
+												<button
+													onClick={deletePost}
+													className="reportBt"
+												>
+													<MdDelete
+														size="25px"
+														style={{
+															fill: '#f48c51',
+														}}
+													/>
+												</button>
+											)}
+										</div>
+									) : (
+										<div></div>
 									)}
 								</div>
-							) : (
-								<div></div>
-							)}
+							</div>
 						</div>
 					</div>
 				</div>

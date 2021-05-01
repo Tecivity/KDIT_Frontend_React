@@ -34,6 +34,16 @@ body {
 	transition: 0.2s;
 }
 
+.seeMoreHelpBtn:hover {
+	transform: translateY(-0.5rem);
+	box-shadow: 0 0.5rem #d37a46;
+}
+
+.seeMoreHelpBtn:active {
+	transform: translateY(0);
+	box-shadow: 0 0rem #d37a46;
+}
+
 /* Popups */
 .popup-content {
 	display: flex;

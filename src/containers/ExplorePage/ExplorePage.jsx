@@ -153,9 +153,9 @@ const ExplorePage = () => {
 			<div className="explorePane">
 				<InstantSearch searchClient={searchClient} indexName={indice}>
 					<CustomSearchBox setIndice={setIndice} />
+					<CustomPagination />
 					<CustomHits indice={indice} />
 					<Configure hitsPerPage={3} />
-					<CustomPagination />
 				</InstantSearch>
 			</div>
 		</>

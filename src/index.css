@@ -11,20 +11,6 @@ html {
 	font-size: 16px;
 }
 
-button {
-	transition: 0.2s;
-}
-
-button:hover {
-	transform: translateY(-0.5rem);
-	box-shadow: 0 0.5rem #d37a46;
-}
-
-button:active {
-	transform: translateY(0);
-	box-shadow: 0 0rem #d37a46;
-}
-
 /* dark mode goes here 
 @media (prefers-color-scheme: light) {
 	body, h1, h2, h3 {

@@ -65,7 +65,9 @@ const Post = ({ post, upVote, downVote }) => {
 							onError={defaultImage}
 							alt="profile picture"
 							className="profilePic"
-							onClick={()=>history.push(`/profile/${postUser.id}`)}
+							onClick={() =>
+								history.push(`/profile/${postUser.id}`)
+							}
 						/>
 					</div>
 
@@ -82,13 +84,6 @@ const Post = ({ post, upVote, downVote }) => {
 									timeStyle: 'short',
 								})}
 							</p>
-							{/* {post.userUID == user.uid ? (
-								<div>
-									<button onClick={deletePost}>X</button>
-								</div>
-							) : (
-								<div></div>
-							)} */}
 						</div>
 						<div className="postContent" onClick={handlePostClick}>
 							<p>{parse(post.content)}</p>

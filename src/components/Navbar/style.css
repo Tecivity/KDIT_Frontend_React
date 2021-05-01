@@ -89,3 +89,13 @@ body {
 
 	transition: 0.2s;
 }
+
+.create-button:hover {
+	transform: translateY(-0.5rem);
+	box-shadow: 0 0.5rem #d37a46;
+}
+
+.create-button:active {
+	transform: translateY(0);
+	box-shadow: 0 0rem #d37a46;
+}

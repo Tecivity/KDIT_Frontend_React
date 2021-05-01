@@ -23,7 +23,7 @@
 
 .subcomDiv:active {
 	transform: translateY(0rem);
-	box-shadow: 0;
+	box-shadow: none;
 }
 
 .subComBackgroundPane {
@@ -59,6 +59,16 @@
 	color: white;
 
 	transition: 0.2s;
+}
+
+.btn:hover {
+	transform: translateY(-0.5rem);
+	box-shadow: 0 0.5rem #d37a46;
+}
+
+.btn:active {
+	transform: translateY(0rem);
+	box-shadow: 0 0rem #d37a46;
 }
 
 .subComImagePane {
