@@ -1,9 +1,8 @@
 import Navbar from './Navbar/index.jsx';
-import Card from './Card/index.jsx';
+import Card from './PostCard/index.jsx';
 import Login from './Authen';
 import SideNavbar from './SideNavbar/index.jsx';
 import HelpBox from './HelpBox/index.jsx';
-import ProfileNavbar from './ProfileNavbar/index.jsx';
 import SubComBox from './SubComBox/index.jsx';
 import Signup from './FirebaseUI/Signup.jsx';
 import FullPost from './FullPost/index.jsx';
@@ -18,7 +17,6 @@ export {
 	Login,
 	SideNavbar,
 	HelpBox,
-	ProfileNavbar,
 	SubComBox,
 	Signup,
 	FullPost,

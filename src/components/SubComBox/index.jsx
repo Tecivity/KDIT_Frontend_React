@@ -1,5 +1,7 @@
+//React
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+//CSS
 import './index.css';
 
 const SubComBox = ({ subCom }) => {
@@ -18,17 +20,27 @@ const SubComBox = ({ subCom }) => {
 					<img src={subCom.photoURL} alt="" className="subComImg" />
 				</div>
 				<div className="subcomInfoPane">
-					<h3 style={{ display: 'inline' }}>{subCom.name} ○ </h3>
+					<h3 style={{ display: 'inline', margin: '0' }}>
+						{subCom.name}
+					</h3>
 					<p
 						style={{
-							fontSize: '10',
+							fontSize: '0.8rem',
 							display: 'inline',
 							color: 'grey',
+							margin: '0',
 						}}
 					>
 						{subCom.totalFollow} Members
 					</p>
-					<h4>{subCom.description}</h4>
+					<p
+						style={{
+							fontSize: '1rem',
+							color: 'grey',
+						}}
+					>
+						{subCom.description}
+					</p>
 				</div>
 				<div className="followPane">
 					<button className="btn">Follow</button>

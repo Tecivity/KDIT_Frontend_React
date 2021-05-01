@@ -1,0 +1,59 @@
+/* Login Page  */
+.auth-Pane {
+	height: 100vh;
+}
+
+.auth-Background {
+	position: absolute;
+	top: 0;
+
+	width: 100vw;
+	height: 100vh;
+
+	z-index: -1;
+
+	background-image: url('../../assets/NISIT\ BACKGROUND.png');
+	background-size: 90vw;
+	background-position-x: 250%;
+	background-position-y: 50%;
+	background-repeat: no-repeat;
+
+	transition: 0.3s;
+}
+
+.auth-TextPane {
+	position: absolute;
+	top: 20%;
+	left: 10%;
+
+	line-height: 2rem;
+
+	font-size: 2em;
+
+	opacity: 1;
+}
+
+.nisitText {
+	font-size: 3em;
+	text-shadow: 5px 5px #f48c51;
+
+	transition: 0.5s;
+}
+
+.auth-TextPane:hover .nisitText {
+	transform: translateY(-5rem) translateX(-3rem);
+
+	text-shadow: 5rem 5rem #f48c51;
+}
+
+.auth-login {
+	transition: 0.3s;
+}
+
+.auth-login:hover {
+	transform: scale(1.2);
+}
+
+.auth-login:active {
+	transform: scale(1);
+}

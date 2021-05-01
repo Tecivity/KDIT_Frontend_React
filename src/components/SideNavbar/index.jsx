@@ -1,7 +1,9 @@
-import './index.css';
-
+//React
 import React from 'react';
+//Components
 import SearchBar from '../SearchBar';
+//CSS
+import './index.css';
 
 const SideNavbar = () => {
 	return (

@@ -1,28 +1,42 @@
+//React
 import React, { useState, useEffect, useContext } from 'react';
-import Comment from '../Comment/index';
-import parse from 'html-react-parser';
-import firebase from '../../firebase';
-import './index.css';
-import { User } from '../../firebase/models';
-import { SessionApi } from '../../hook/SessionApi';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import MyUploadAdapter from '../../firebase/ckeditor_image_firebase';
-import { BiUpArrow, BiDownArrow, BiCommentDetail } from 'react-icons/bi';
 import { useHistory } from 'react-router-dom';
 import { MdCancel, MdEdit, MdDelete } from 'react-icons/md';
-import { PostService } from '../../services'
+//Components
+import { BiUpArrow, BiDownArrow, BiCommentDetail } from 'react-icons/bi';
+import Comment from '../Comment/index';
+import { SessionApi } from '../../hook/SessionApi';
+//Firebase
+import firebase from '../../firebase';
+import { User } from '../../firebase/models';
+import MyUploadAdapter from '../../firebase/ckeditor_image_firebase';
+import { PostService } from '../../services';
+//External
+import parse from 'html-react-parser';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+//CSS
+import './index.css';
 
 const FullPost = ({ post, id }) => {
-	const history = useHistory();
-	const [postUser, setPostUser] = useState('');
-
-	const { session, user, loading } = useContext(SessionApi);
-	const [totalComment, setTotalComment] = useState(0);
-
 	//States
 	const [newPost, setNewPost] = useState('');
+	const [postUser, setPostUser] = useState('');
+	const [totalComment, setTotalComment] = useState(0);
 
+	//Effects
+	useEffect(() => {
+		fetchData();
+		console.log(postUser.photoURL);
+	}, [post]);
+
+	//Contexts
+	const { session, user, loading } = useContext(SessionApi);
+
+	//History
+	const history = useHistory();
+
+	//Functions
 	const upVote = (post) => {
 		firebase
 			.firestore()
@@ -45,10 +59,10 @@ const FullPost = ({ post, id }) => {
 		if (!window.confirm('Are you sure for delete post ❓')) {
 			return console.log('Cancel delete.');
 		}
-		PostService.deletePost(post.id).then(()=>{
+		PostService.deletePost(post.id).then(() => {
 			history.push(`/`);
-		})
-	}
+		});
+	};
 
 	const fetchData = async () => {
 		firebase
@@ -57,7 +71,7 @@ const FullPost = ({ post, id }) => {
 			.doc(post.userUID)
 			.get()
 			.then((doc) => {
-				setPostUser({id:doc.id, ...doc.data()})
+				setPostUser({ id: doc.id, ...doc.data() });
 			})
 			.catch((err) => {
 				console.log(err);
@@ -73,11 +87,6 @@ const FullPost = ({ post, id }) => {
 				});
 		}
 	};
-
-	useEffect(() => {
-		fetchData();
-		console.log(postUser.photoURL);
-	}, [post]);
 
 	//Functions
 	const editPost = () => {
@@ -140,6 +149,7 @@ const FullPost = ({ post, id }) => {
 									src={postUser.photoURL}
 									alt="full-profile picture"
 									className="fullprofilePic"
+									onClick={()=>history.push(`/profile/${postUser.id}`)}
 								/>
 							</div>
 

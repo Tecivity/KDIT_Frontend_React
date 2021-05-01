@@ -1,13 +1,13 @@
-import HomePage from './homePage.jsx';
-import AuthPage from './authPage.jsx';
-import ProfilePage from './ProfilePage.jsx';
-import AboutPage from './AboutPage.jsx';
-import SubComPage from './SubComPage.jsx';
-import HelpPage from './HelpPage.jsx';
-import PostPage from './PostPage.jsx';
-import FullSubComPage from './FullSubComPage.jsx';
-import ExplorePage from './ExplorePage.jsx';
-import WelcomePage from './WelcomePage.jsx';
+import HomePage from './HomePage/homePage.jsx';
+import AuthPage from './AuthPage/authPage.jsx';
+import ProfilePage from './ProfilePage/ProfilePage.jsx';
+import AboutPage from './AboutPage/AboutPage.jsx';
+import SubComPage from './ComPage/SubComPage.jsx';
+import HelpPage from './HelpPage/HelpPage.jsx';
+import PostPage from './PostPage/PostPage.jsx';
+import FullSubComPage from './FullComPage/FullSubComPage.jsx';
+import ExplorePage from './ExplorePage/ExplorePage.jsx';
+import WelcomePage from './WelcomePage/WelcomePage.jsx';
 
 export {
 	HomePage,

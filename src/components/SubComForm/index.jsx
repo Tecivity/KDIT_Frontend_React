@@ -1,17 +1,23 @@
+//React
 import React, { useState, useContext } from 'react';
+//Components
+import { SessionApi } from '../../hook/SessionApi';
+//Firebase
+import firebase from '../../firebase';
+//CSS
 import './index.css';
-import firebase from '../../firebase'
-import { SessionApi } from '../../hook/SessionApi'
 
 const SubComForm = () => {
-	const { user,defaultBanner } = useContext(SessionApi)
 	//States
 	const [subcom, setSubCom] = useState({
 		name: '',
 		description: '',
 		ownerUID: '',
-		photoURL: ''
+		photoURL: '',
 	});
+
+	//Context
+	const { user, defaultBanner } = useContext(SessionApi);
 
 	//Functions
 	const handleChange = (e) => {
@@ -21,29 +27,38 @@ const SubComForm = () => {
 	};
 
 	const clearInput = () => {
-		setSubCom({ name: '', description: '' })
-	}
+		setSubCom({ name: '', description: '' });
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (subcom.name && subcom.description) {
-			firebase.firestore().collection('sub_community').add({
-				...subcom,
-				ownerUID: user.uid,
-				photoURL: 'https://cdn.jeab.com/wp-content/uploads/2020/03/wallpaper-for-jeab06.jpg',
-				totalFollow: 0,
-				bannerURL: defaultBanner
-			}).then(() => {
-				e.target.value = ''
-				clearInput()
-				window.location.reload()
-			})
+			firebase
+				.firestore()
+				.collection('sub_community')
+				.add({
+					...subcom,
+					ownerUID: user.uid,
+					photoURL:
+						'https://cdn.jeab.com/wp-content/uploads/2020/03/wallpaper-for-jeab06.jpg',
+					totalFollow: 0,
+					bannerURL: defaultBanner,
+				})
+				.then(() => {
+					e.target.value = '';
+					clearInput();
+					window.location.reload();
+				});
 		}
 	};
 
 	return (
 		<>
 			<div className="subcomForm">
+				<div className="subComForm-imgPane">
+					<h2>Upload Com Img HERE</h2>
+					<h2>Upload Com Banner HERE</h2>
+				</div>
 				<form action="">
 					<div className="inputForm">
 						<label htmlFor="">Community Name</label>

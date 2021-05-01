@@ -1,8 +1,9 @@
+//React
 import React from 'react';
+//Compontnts
 import { Signup } from '..';
-// import './styles.css';
 
-export default function Login({
+const Login = ({
 	email,
 	setEmail,
 	password,
@@ -13,19 +14,23 @@ export default function Login({
 	setHasAccount,
 	emailError,
 	passwordError,
-}) {
+}) => {
+	//Functions
 	const submitHandler = (e) => {
 		e.preventDefault();
 		!hasAccount ? handleLogin() : handleSingup();
 	};
 
+	//Render
 	return (
 		<>
-			<form onSubmit={submitHandler} class="auth">
-				<div className="form-inner">
+			<form onSubmit={submitHandler}>
+				<div>
 					<Signup />
 				</div>
 			</form>
 		</>
 	);
-}
+};
+
+export default Login;

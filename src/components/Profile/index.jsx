@@ -1,48 +1,76 @@
+//React
 import React, { useState, useContext, useEffect } from 'react';
-import './index.css';
-import { SessionApi } from '../../hook/SessionApi';
-import firebase from '../../firebase';
-import Post from '../Card/Post';
-import PostForm from '../Card/PostForm';
-import FileUpload from '../../firebase/FileUpload';
 import Popup from 'reactjs-popup';
 import { MdCancel } from 'react-icons/md';
+//Components
+import { SessionApi } from '../../hook/SessionApi';
+import Post from '../PostCard/Post';
+//Firebase
+import firebase from '../../firebase';
+//External
+import FileUpload from '../../firebase/FileUpload';
+//CSS
+import './index.css';
+import { getSuggestedQuery } from '@testing-library/dom';
+import { PostService, UserService } from '../../services';
 
-const Profile = () => {
-	const { user, defaultImage, defaultBanner, userInfo } = useContext(SessionApi);
+const Profile = ({id}) => {
+	//States
 	const [edit, setEdit] = useState(false);
 	const [posts, setPosts] = useState([]);
-	const [url, setUrl] = useState('');
+	const [photoURL, setPhotoURL] = useState('');
+	const [bannerURL, setBannerURL] = useState('')
+	const [displayName, setDisplayname] = useState('')
+	const [bio, setBio] = useState('')
+	const [profile ,setProfile] = useState({})
+
+	//Contexts
+	const { user, defaultImage, defaultBanner } = useContext(SessionApi)
 
 	//Functions
+
+	const updateProfile = e => {
+		e.preventDefault() 
+	}
+
 	const handleOnClick = () => {
 		setEdit(!edit);
 	};
 
 	const fetchData = async () => {
+
+		UserService.getUser(id).then(data=>{
+			setProfile(data)
+			getPost(data.id)
+		})
+		
+	};
+
+	const getPost = (id) => {
 		const postsArray = [];
 		firebase
 			.firestore()
 			.collection('posts')
-			.where('userUID', '==', userInfo.id)
+			.where('userUID', '==', id)
 			.onSnapshot((querySnapshot) => {
 				querySnapshot.forEach((doc) => {
-					postsArray.push({id:doc.id, ...doc.data()})
+					postsArray.push({ id: doc.id, ...doc.data() });
 				});
 				setPosts(postsArray);
 			});
-	};
+	}
 
+	//Effects
 	useEffect(() => {
 		fetchData();
-	}, []);
+	}, [profile,posts]);
 
 	return (
 		<>
 			<div className="profilePane">
 				<div className="bannerImgPane">
 					<img
-						src={userInfo.bannerURL || defaultBanner}
+						src={profile.bannerURL || defaultBanner}
 						onError={defaultBanner}
 						alt=""
 						className="bannerImg"
@@ -51,7 +79,7 @@ const Profile = () => {
 				<div className="profileInfoPane">
 					<div>
 						<img
-							src={userInfo.photoURL || defaultImage}
+							src={profile.photoURL || defaultImage}
 							onError={defaultImage}
 							alt="profile picture"
 							className="full-profilePic"
@@ -68,15 +96,14 @@ const Profile = () => {
 						>
 							@username
 						</h3>
-						<p style={{ marginTop: '0' }}>{userInfo.bio}</p>
+						<p style={{ marginTop: '0' }}>{profile.bio}</p>
 					</div>
 					<div style={{ alignSelf: 'center' }}>
 						{/* <button className="edit-btn" onClick={handleOnClick}>
 							{edit ? 'X' : 'Edit'}
 						</button> */}
 					</div>
-
-					<Popup
+						{profile.id == user.uid ? <Popup
 						trigger={
 							<button
 								className="edit-btn"
@@ -106,10 +133,21 @@ const Profile = () => {
 											<label htmlFor="">
 												Profile Picture
 											</label>
+
 											<FileUpload
-												url={url}
-												setUrl={setUrl}
+												url={photoURL}
+												setUrl={setPhotoURL}
 											/>
+
+											<label htmlFor="">
+												Banner Picture
+											</label>
+
+											<FileUpload
+												url={bannerURL}
+												setUrl={setBannerURL}
+											/>
+
 											<label htmlFor="">
 												Display Name
 											</label>
@@ -118,7 +156,7 @@ const Profile = () => {
 												name="displayNames"
 											/>
 
-											<button className="btn">
+											<button className="btn" onClick={updateProfile}>
 												Save Changes
 											</button>
 										</form>
@@ -126,9 +164,9 @@ const Profile = () => {
 								</div>
 							</div>
 						)}
-					</Popup>
+					</Popup> : <></>}
+					
 				</div>
-
 				<div className="profileCard">
 					{/* <PostForm updatePost={updatePost} /> */}
 					<div className="content">
