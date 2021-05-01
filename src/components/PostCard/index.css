@@ -127,6 +127,8 @@ h1.loginWarn {
 		0.9rem 0.9rem #df814a, 1rem 1rem #df814a, 1.1rem 1.1rem #df814a,
 		1.2rem 1.2rem #df814a, 1.3rem 1.3rem #df814a, 1.4rem 1.4rem #df814a,
 		1.5rem 1.5rem #df814a;
+
+	cursor: pointer;
 }
 
 .post:active {

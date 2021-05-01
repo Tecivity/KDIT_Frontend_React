@@ -18,7 +18,7 @@ const SubComBox = ({ subCom }) => {
 			<div id={subCom.id} className="subcomDiv" onClick={handleOnClick}>
 				<div className="subComBackgroundPane">
 					<img
-						src="https://i2.wp.com/nixtsblog.com/wp-content/uploads/2020/11/among-us-couch.jpg?ssl=1"
+						src="https://thumbs.dreamstime.com/b/outdoor-park-activities-people-relaxing-nature-walking-riding-bicycle-communicating-outdoor-park-activities-people-relaxing-110176169.jpg"
 						alt=""
 						width="100%"
 						height="130%"
@@ -26,10 +26,7 @@ const SubComBox = ({ subCom }) => {
 							margin: '0',
 							objectFit: 'cover',
 							borderRadius: '2rem 2rem 0 0',
-							verticalAlign: 'bottom',
-							display: 'block',
-							transform: 'scale(1.005)',
-							zIndex: '20',
+							zIndex: '-1',
 						}}
 					/>
 				</div>

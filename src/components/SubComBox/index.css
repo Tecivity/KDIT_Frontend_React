@@ -7,9 +7,11 @@
 
 	width: 100%;
 
-	border: 3px solid #f48c51;
+	/* border: 3px solid #f48c51; */
 	/* border-width: 1px 0 1px 0; */
-	border-radius: 2rem;
+	border-radius: 2.2rem;
+
+	box-shadow: 0 0 0 3px #f48c51;
 
 	transition: 0.2s;
 }
