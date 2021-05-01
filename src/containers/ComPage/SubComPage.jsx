@@ -1,5 +1,7 @@
 //React
 import React, { useState, useEffect } from 'react';
+import Popup from 'reactjs-popup';
+import { MdCancel } from 'react-icons/md';
 //Components
 import { Navbar, SubComBox, SideNavbar, SubComForm } from '../../components';
 import { SessionApi } from '../../hook/SessionApi';
@@ -11,6 +13,7 @@ import HashLoader from 'react-spinners/HashLoader';
 import { UserService, PostService } from '../../services';
 //CSS
 import './ComPage.css';
+import parse from 'html-react-parser';
 
 const SubComPage = () => {
 	//Variables
@@ -77,41 +80,48 @@ const SubComPage = () => {
 						{session ? (
 							<>
 								<div className="myCom">
-									<div className="myComTextPane">
-										{showCreate ? (
-											<SubComForm />
-										) : (
-											<>
-												<h1>My Community</h1>
-												<h2>Awwww</h2>
-												<h3>
-													Follow our community or
-													create your own
-												</h3>
-											</>
-										)}
-									</div>
-									<div className="com-btnPane">
-										<button
-											className="createComBtn"
-											onClick={handleShowCreate}
+									<div className="myComInfo">
+										<h2>My Community</h2>
+										<Popup
+											trigger={
+												<button
+													className="createComBtn"
+													onClick={handleShowCreate}
+												>
+													Create
+												</button>
+											}
+											modal
+											className="com-popup"
 										>
-											{showCreate ? 'X' : 'Create'}
-										</button>
+											{(close) => (
+												<div className="modal">
+													<div
+														className="close"
+														onClick={close}
+													>
+														<MdCancel
+															size="30px"
+															style={{
+																fill: '#f48c51',
+															}}
+														/>
+													</div>
+
+													<SubComForm />
+												</div>
+											)}
+										</Popup>
 									</div>
+									<div>Followed Sub Com HERE</div>
 								</div>
 								<div className="ourCom">
-									<h1>Our Community</h1>
-									<div>
-										{subComs.map((subCom) => {
-											return (
-												<SubComBox subCom={subCom} />
-											);
-										})}
-										<button onClick={firebaseTest}>
-											Test firebase
-										</button>
-									</div>
+									{subComs.map((subCom) => {
+										return <SubComBox subCom={subCom} />;
+									})}
+									<button onClick={firebaseTest}>
+										Test firebase
+									</button>
 								</div>
 							</>
 						) : (
