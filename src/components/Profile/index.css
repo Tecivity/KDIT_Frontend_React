@@ -1,3 +1,10 @@
+.editProfile{
+	display: flex;
+	flex-direction: column;
+	/* width: 100%; */
+	border-radius: 2rem;
+}
+
 .profilePane {
 	position: absolute;
 	left: 25%;
@@ -20,18 +27,20 @@
 	margin: 2rem 0;
 
 	display: flex;
-	justify-content: flex-start;
+	flex-direction: row;
 
 	width: 100%;
+	border-radius: 2rem;
 
 	/* border-top: 1px solid black; */
 }
 
 .editProfileForm {
 	margin-top: 2rem;
-
+	border-radius: 2rem;
 	display: flex;
 	flex-direction: column;
+	width: 100%;
 }
 
 .full-profilePic {
@@ -96,7 +105,7 @@
 }
 
 /* Popup */
-.editProfile-content {
+/* .editProfile-content {
 	margin: auto;
 
 	height: 90vh;
@@ -105,4 +114,5 @@
 	border-radius: 0;
 
 	overflow: auto;
-}
+} */
+
