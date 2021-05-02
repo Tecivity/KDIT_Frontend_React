@@ -76,6 +76,10 @@ body {
 	height: 8%;
 	bottom: 5%;
 
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
 	position: fixed; /* Fixed Sidebar (stay in place on scroll) */
 	z-index: 1;
 

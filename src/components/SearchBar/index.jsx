@@ -1,5 +1,8 @@
 //React
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { MdCancel } from 'react-icons/md';
+
 //External
 import algoliasearch from 'algoliasearch/lite';
 import { stripHtml } from 'string-strip-html';
@@ -24,21 +27,34 @@ const searchClient = algoliasearch(
 );
 
 //Custom Hits
-const Hits = ({ hits }) => (
-	<div className="hitContainer">
-		{hits.map((hit) => (
-			<p key={hit.objectID} className="hit">
-				{stripHtml(hit.content).result}
-			</p>
-		))}
-	</div>
-);
+const Hits = ({ hits }) => {
+	const history = useHistory();
+
+	return (
+		<div className="hitContainer">
+			{hits.map((hit) => (
+				<p
+					key={hit.objectID}
+					className="hit"
+					onClick={() => {
+						history.push(`/post/${hit.objectID}`);
+						// window.location.reload(true);
+					}}
+				>
+					{stripHtml(hit.content).result}
+				</p>
+			))}
+		</div>
+	);
+};
 const CustomHits = connectHits(Hits);
 
 //Custom SearchBar
 const SearchBox = ({ currentRefinement, isSearchStalled, refine }) => {
 	//States
 	const [showHit, setShowHit] = useState(false);
+
+	//Effects
 
 	//Functions
 	const handleOnClick = (e) => {
@@ -51,15 +67,19 @@ const SearchBox = ({ currentRefinement, isSearchStalled, refine }) => {
 
 	return (
 		<div className="searchContainer">
-			<input
-				type="search"
-				value={currentRefinement}
-				onChange={(event) => refine(event.currentTarget.value)}
-				className="searchBar"
-				placeholder="Search Something..."
-				onClick={handleOnClick}
-				onBlur={handleBlur}
-			/>
+			<div className="searchBarPane">
+				<input
+					type="search"
+					value={currentRefinement}
+					onChange={(event) => refine(event.currentTarget.value)}
+					className="searchBar"
+					placeholder="Search..."
+					onClick={handleOnClick}
+				/>
+				<button onBlur={handleBlur} className="clearBt">
+					<MdCancel size="30px" style={{ fill: '#f48c51' }} />
+				</button>
+			</div>
 
 			{showHit && <CustomHits />}
 		</div>

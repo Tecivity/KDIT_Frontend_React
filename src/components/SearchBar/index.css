@@ -1,6 +1,6 @@
 .hitContainer {
 	width: 100%;
-	margin: 0;
+	margin-top: 0.5rem;
 
 	background: white;
 	border: 2px solid #ffccaef1;
@@ -63,4 +63,14 @@
 .searchBar:focus {
 	background: white;
 	border: 2px solid #ffccaef1;
+}
+
+.searchBarPane {
+	display: flex;
+	width: 100%;
+}
+
+.clearBt {
+	background: none;
+	border: none;
 }

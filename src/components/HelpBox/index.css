@@ -2,6 +2,10 @@ body {
 	color: black;
 }
 
+* {
+	font-family: Iconic;
+}
+
 .helpBox {
 	margin: 1rem;
 	padding: 2rem;

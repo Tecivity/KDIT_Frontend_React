@@ -9,6 +9,7 @@ import {
 	MdInfo,
 	MdAccountCircle,
 } from 'react-icons/md';
+import { BiLogOut, BiLogIn } from 'react-icons/bi';
 //Components
 import { SessionApi } from '../../hook/SessionApi';
 //CSS
@@ -226,11 +227,23 @@ export default function Navbar() {
 				</div>
 				{session ? (
 					<Link to="/auth" onClick={() => handleLogout()}>
-						<button className="create-button">Logout</button>
+						<button className="create-button">
+							<BiLogOut
+								size="30px"
+								style={{ fill: 'white', marginRight: '0.5rem' }}
+							/>
+							Logout
+						</button>
 					</Link>
 				) : (
 					<Link to="/auth">
-						<button className="create-button">Login</button>
+						<button className="create-button">
+							<BiLogIn
+								size="30px"
+								style={{ fill: 'white', marginRight: '0.5rem' }}
+							/>
+							Login
+						</button>
 					</Link>
 				)}
 			</div>
