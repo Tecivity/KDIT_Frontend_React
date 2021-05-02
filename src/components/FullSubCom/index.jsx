@@ -5,6 +5,7 @@ import { MdCancel } from 'react-icons/md';
 //Components
 import { SessionApi } from '../../hook/SessionApi';
 import Post from '../PostCard/Post';
+import FileUpload from '../../firebase/FileUpload';
 //Firebase
 import firebase from '../../firebase';
 import './index.css';
@@ -12,25 +13,11 @@ import './index.css';
 const FullSubCom = ({ subCom, update }) => {
 	//States
 	const [edit, setEdit] = useState(false);
-	const [newSubCom, setNewSubCom] = useState({
-		name: '',
-		description: '',
-		photoURL: '',
-		bannerURL: '',
-	});
 	const [posts, setPosts] = useState([]);
-
-	//Effects
-	useEffect(() => {
-		fetchData();
-		setNewSubCom({
-			name: subCom.name,
-			description: subCom.description,
-			photoURL: subCom.photoURL,
-			bannerURL: subCom.bannerURL,
-		});
-		console.log(subCom);
-	}, [subCom]);
+	const [photoURL, setPhotoURL] = useState('');
+	const [bannerURL, setBannerURL] = useState('');
+	const [name, setName] = useState('')
+	const [description, setDescription] = useState('')
 
 	//Contexts
 	const { defaultBanner, userInfo, user } = useContext(SessionApi);
@@ -40,37 +27,50 @@ const FullSubCom = ({ subCom, update }) => {
 		setEdit(!edit);
 	};
 
-	const handleChange = (e) => {
-		const name = e.target.name;
-		const value = e.target.value;
-		setNewSubCom({ ...newSubCom, [name]: value });
-	};
-
 	// const clearInput = () => {
 	// 	setSubCom({ name: '', description: '' });
 	// };
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(newSubCom);
+		const newSubCom = {
+			name,
+			description,
+			bannerURL,
+			photoURL,
+		}
 		update(newSubCom);
+	};
+
+	const getPost = (id) => {
+		const postsArray = [];
+		firebase
+			.firestore()
+			.collection('posts')
+			.where('subComUID', '==', id)
+			.onSnapshot((querySnapshot) => {
+				querySnapshot.forEach((doc) => {
+					postsArray.push({ id: doc.id, ...doc.data() });
+				});
+				setPosts(postsArray);
+			});
 	};
 
 	const fetchData = async () => {
 		if (subCom.id) {
-			const postsArray = [];
-			firebase
-				.firestore()
-				.collection('posts')
-				.where('subComUID', '==', subCom.id)
-				.onSnapshot((querySnapshot) => {
-					querySnapshot.forEach((doc) => {
-						postsArray.push({ id: doc.id, ...doc.data() });
-					});
-					setPosts(postsArray);
-				});
+			getPost(subCom.id)
+			setName(subCom.name);
+			setDescription(subCom.description);
+			setBannerURL(subCom.bannerURL);
+			setPhotoURL(subCom.photoURL);
+			console.log(subCom);
 		}
 	};
+
+	//Effects
+	useEffect(() => {
+		fetchData();
+	}, []);
 
 	return (
 		<div className="fullComPane">
@@ -126,10 +126,57 @@ const FullSubCom = ({ subCom, update }) => {
 									<div className="content">
 										<div className="fullsubcomForm">
 											<form action="">
-												<label htmlFor="">
-													Community Picture
-												</label>
-												<h2>Upload Picture Here</h2>
+
+												<div
+													className="editSubComForm"
+													style={{
+														borderBottom:
+															'2px solid lightgrey',
+													}}
+												>
+													<h1 htmlFor="">
+														Profile Picture
+												</h1>
+
+													<FileUpload
+														url={photoURL}
+														setUrl={setPhotoURL}
+													/>
+
+													<img
+														src={photoURL}
+														alt=""
+														className="full-editProfilePic"
+														draggable="false"
+													/>
+												</div>
+
+												<div
+													className="editSubComForm"
+													style={{
+														borderBottom:
+															'2px solid lightgrey',
+													}}
+												>
+													<h1 htmlFor="">
+														Banner Picture
+												</h1>
+
+													<FileUpload
+														url={bannerURL}
+														setUrl={setBannerURL}
+													/>
+
+													<img
+														src={bannerURL}
+														alt=""
+														className="full-editBannerPic"
+														draggable="false"
+													/>
+												</div>
+
+
+
 												<div className="inputForm">
 													<label htmlFor="">
 														Community Name
@@ -138,10 +185,10 @@ const FullSubCom = ({ subCom, update }) => {
 														type="text"
 														name="name"
 														className="nameInput"
+														value={name}
 														onChange={(e) =>
-															handleChange(e)
+															setName(e.target.value)
 														}
-														value={newSubCom.name}
 													/>
 													<label htmlFor="">
 														Description
@@ -152,11 +199,9 @@ const FullSubCom = ({ subCom, update }) => {
 														rows="10"
 														name="description"
 														className="desInput"
+														value={description}
 														onChange={(e) =>
-															handleChange(e)
-														}
-														value={
-															newSubCom.description
+															setDescription(e.target.value)
 														}
 													></textarea>
 												</div>
