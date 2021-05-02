@@ -9,6 +9,7 @@ import FileUpload from '../../firebase/FileUpload';
 //Firebase
 import firebase from '../../firebase';
 import './index.css';
+import { UserService } from '../../services';
 
 const FullSubCom = ({ subCom, update }) => {
 	//States
@@ -18,6 +19,7 @@ const FullSubCom = ({ subCom, update }) => {
 	const [bannerURL, setBannerURL] = useState('');
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
+	const [isFollow, setIsFollow] = useState(false)
 
 	//Contexts
 	const { defaultBanner, userInfo, user } = useContext(SessionApi);
@@ -65,8 +67,16 @@ const FullSubCom = ({ subCom, update }) => {
 			setPhotoURL(subCom.photoURL);
 			getPost(subCom.id);
 			console.log(posts)
+			try{
+				if (userInfo.mySubCom.includes(subCom.id)) {
+				setIsFollow(true)
+				}
+			}catch(err){
+				UserService.updateUser(userInfo.id,{mySubCom:[]})
+			}
+			
 		}
-		
+
 	};
 
 	//Effects
@@ -90,7 +100,16 @@ const FullSubCom = ({ subCom, update }) => {
 				</div>
 				<h2 style={{ marginBottom: '0' }}>{subCom.name}</h2>
 				<p>{subCom.description}</p>
-				<button className="subcom-btn">Follow</button>
+				{isFollow ? (
+					<>
+						<button className="subcom-btn">Followed</button>
+					</>
+				) : (
+					<>
+						<button className="subcom-btn">Follow</button>
+					</>
+				)}
+
 
 				{userInfo.id == subCom.ownerUID ? (
 					<>

@@ -14,6 +14,7 @@ import { UserService, PostService } from '../../services';
 //CSS
 import './ComPage.css';
 import parse from 'html-react-parser';
+import userService from '../../services/user.service';
 
 const SubComPage = () => {
 	//Variables
@@ -42,9 +43,22 @@ const SubComPage = () => {
 
 	//Functions
 	const firebaseTest = async () => {
-		getUserInfo(user.uid).then((data) => {
-			console.log(data);
+		userService.getUser(user.uid).then((data) => {
+			console.log(data.mySubCom.includes('kdR5zUidEkhQGhpcBup4'));
 		});
+		// firebase
+		// 	.firestore()
+		// 	.collection('users')
+		// 	.doc(user.uid)
+		// 	.get()
+		// 	.then((doc) => {
+		// 		const obj = {id:doc.id, ...doc.data()}
+		// 		console.log(obj.mySubCom)
+		// 	})
+		// 	.catch((err) => {
+		// 		return err
+		// 	});
+
 	};
 
 	const fetchData = async () => {
