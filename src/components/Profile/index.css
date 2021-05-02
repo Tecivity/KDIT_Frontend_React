@@ -1,8 +1,10 @@
-.editProfile{
+.editProfile {
 	display: flex;
 	flex-direction: column;
-	/* width: 100%; */
+	width: 100%;
 	border-radius: 2rem;
+
+	overflow: auto;
 }
 
 .profilePane {
@@ -20,6 +22,8 @@
 	justify-content: center;
 	flex-wrap: wrap;
 
+	overflow: auto;
+
 	border: 1px solid lightgrey;
 }
 
@@ -32,6 +36,8 @@
 	width: 100%;
 	border-radius: 2rem;
 
+	overflow: auto;
+
 	/* border-top: 1px solid black; */
 }
 
@@ -40,7 +46,32 @@
 	border-radius: 2rem;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 	width: 100%;
+
+	overflow: auto;
+}
+
+.editProfileForm .editInput {
+	padding-left: 0.5rem;
+
+	border: none;
+	border-bottom: 1px solid black;
+
+	font-size: 1rem;
+}
+
+.editProfileForm .editInput:focus {
+	outline: none;
+	border: none;
+	border: 2px solid lightgrey;
+	border-radius: 1rem;
+}
+
+.editProfileForm label {
+	border-bottom: 2px solid lightgrey;
+
+	margin-bottom: 1rem;
 }
 
 .full-profilePic {
@@ -49,7 +80,37 @@
 
 	border-radius: 50%;
 
+	object-fit: cover;
+
 	border: 4px solid white;
+}
+
+.full-editProfilePic {
+	width: 200px;
+	height: 200px;
+
+	border-radius: 50%;
+
+	border: 4px solid lightgrey;
+
+	object-fit: cover;
+
+	margin: 1rem 0;
+
+	/* pointer-events: none; */
+}
+
+.full-editBannerPic {
+	width: 80%;
+	height: 30%;
+
+	object-fit: cover;
+	object-position: 50% 50%;
+
+	margin: 1rem 0;
+
+	border: 4px solid lightgrey;
+	border-radius: 2rem;
 }
 
 .profileInfoPane {
@@ -108,14 +169,12 @@
 }
 
 /* Popup */
-/* .editProfile-content {
-	margin: auto;
+.editProfile-content {
+	height: 80%;
+	overflow-y: auto;
+}
 
-	height: 90vh;
-	width: 50%;
-
-	border-radius: 0;
-
-	overflow: auto;
-} */
-
+.bannerImg {
+	object-fit: cover;
+	object-position: 50% 50%;
+}
