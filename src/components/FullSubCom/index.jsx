@@ -34,6 +34,7 @@ const FullSubCom = ({ subCom, update }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const newSubCom = {
+			...subCom,
 			name,
 			description,
 			bannerURL,
@@ -58,19 +59,20 @@ const FullSubCom = ({ subCom, update }) => {
 
 	const fetchData = async () => {
 		if (subCom.id) {
-			getPost(subCom.id);
 			setName(subCom.name);
 			setDescription(subCom.description);
 			setBannerURL(subCom.bannerURL);
 			setPhotoURL(subCom.photoURL);
-			console.log(subCom);
+			getPost(subCom.id);
+			console.log(posts)
 		}
+		
 	};
 
 	//Effects
 	useEffect(() => {
 		fetchData();
-	}, []);
+	}, [subCom]);
 
 	return (
 		<div className="fullComPane">
@@ -204,7 +206,14 @@ const FullSubCom = ({ subCom, update }) => {
 												onClick={handleSubmit}
 												className="btn"
 											>
-												Save
+												<a
+													onClick={close}
+													style={{
+														color: 'white',
+													}}
+												>
+													Save
+												</a>
 											</button>
 										</div>
 									</div>
