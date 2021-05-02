@@ -41,7 +41,7 @@ const CustomHits = connectHits(({ hits, indice }) => (
 						<div className="explore-postPane">
 							<div className=" explore-postInfoPane">
 								<h4 style={{ display: 'inline' }}>
-									{hit.userUID}
+									{String(hit.userUID)}
 								</h4>
 								<p
 									style={{
@@ -53,7 +53,7 @@ const CustomHits = connectHits(({ hits, indice }) => (
 								</p>
 							</div>
 							<div className="explore-postContentPane">
-								{parse(hit.content)}
+								{parse(String(hit.content))}
 							</div>
 						</div>
 					</div>

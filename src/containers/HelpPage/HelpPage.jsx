@@ -84,7 +84,7 @@ const HelpPage = () => {
 						class="helpHead"
 						style={{ fontSize: '5em', margin: '0' }}
 					>
-						Need Help?
+						<br></br>Need Help?
 					</h1>
 					<div class="helpBoxPane">
 						{questions.map((question) => {
