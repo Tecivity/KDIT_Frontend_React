@@ -10,6 +10,11 @@ import firebase from '../../firebase';
 import { CommentService, PostService, UserService } from '../../services';
 //External
 import parse from 'html-react-parser';
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
+import ReactTimeAgo from 'react-time-ago'
+
+TimeAgo.addDefaultLocale(en)
 
 const Post = ({ post, upVote, downVote }) => {
 	//Variables
@@ -83,6 +88,9 @@ const Post = ({ post, upVote, downVote }) => {
 									dateStyle: 'long',
 									timeStyle: 'short',
 								})}
+							</p>
+							<p className="timestamp">
+							<ReactTimeAgo date={post.timeStamp} locale="en-US"/>
 							</p>
 						</div>
 						<div className="postContent" onClick={handlePostClick}>

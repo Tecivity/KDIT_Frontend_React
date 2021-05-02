@@ -29,6 +29,7 @@
     "react-scripts": "4.0.3",
     "react-select": "^4.3.0",
     "react-spinners": "^0.10.6",
+    "react-time-ago": "^6.2.2",
     "react-transition-group": "^4.4.1",
     "reactjs-popup": "^2.0.4",
     "string-strip-html": "^8.2.13",
