@@ -107,7 +107,7 @@ const PostForm = ({ updatePost }) => {
 		<>
 			{session ? (
 				<div className="postFormBox">
-					<div>
+					<div className="postForm-profile">
 						<img
 							src={imageURL}
 							onError={() => setImageURL(defaultImage)}

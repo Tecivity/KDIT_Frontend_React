@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { MdCancel, MdEdit, MdDelete, MdReportProblem } from 'react-icons/md';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
+import Popup from 'reactjs-popup';
 //Components
 import { BiUpArrow, BiDownArrow, BiCommentDetail } from 'react-icons/bi';
 import Comment from '../Comment/index';
@@ -20,6 +21,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 //CSS
 import './index.css';
+import 'reactjs-popup/dist/index.css';
 
 const FullPost = ({ post, id }) => {
 	//States
@@ -249,12 +251,6 @@ const FullPost = ({ post, id }) => {
 									className={isOpen ? 'visible' : ''}
 									role="menu"
 								>
-									<button className="reportBt">
-										<MdReportProblem
-											size="25px"
-											style={{ fill: '#f48c51' }}
-										/>
-									</button>
 									{post.userUID === user.uid ? (
 										<div>
 											<button
@@ -295,6 +291,90 @@ const FullPost = ({ post, id }) => {
 										<div></div>
 									)}
 								</div>
+
+								<Popup
+									trigger={
+										<button className="reportBt">
+											<MdReportProblem
+												size="25px"
+												style={{ fill: '#f48c51' }}
+											/>
+										</button>
+									}
+									modal
+									className="subPopup"
+								>
+									{(close) => (
+										<div className="modal">
+											<div
+												className="close"
+												onClick={close}
+											>
+												<MdCancel
+													size="30px"
+													style={{ fill: '#f48c51' }}
+												/>
+											</div>
+											<div className="header">
+												<h1>Report</h1>
+											</div>
+											<div className="content">
+												<div className="reportPane">
+													<h3>
+														Please Inform Your
+														Reason For Reporting
+														This Post
+													</h3>
+													<div>
+														<input
+															type="checkbox"
+															name="Abuse"
+															id=""
+															value="reason1"
+														/>
+														<label htmlFor="">
+															Reason 1
+														</label>
+													</div>
+													<div>
+														<input
+															type="checkbox"
+															name="Abuse"
+															id=""
+															value="reason2"
+														/>
+														<label htmlFor="">
+															Reason 2
+														</label>
+													</div>
+													<div>
+														<input
+															type="checkbox"
+															name="Abuse"
+															id=""
+															value="reason2"
+														/>
+														<label htmlFor="">
+															Reason 3
+														</label>
+													</div>
+													<div>
+														<h3>
+															Additional Reason
+														</h3>
+														<textarea
+															name=""
+															id=""
+															cols="30"
+															rows="10"
+														></textarea>
+													</div>
+													<button>Report</button>
+												</div>
+											</div>
+										</div>
+									)}
+								</Popup>
 							</div>
 						</div>
 					</div>

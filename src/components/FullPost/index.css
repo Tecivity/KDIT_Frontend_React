@@ -312,7 +312,7 @@ h1.loginWarn {
 	box-shadow: 0 0.5rem #d37a46;
 }
 
-.report:active {
+.reportBt:active {
 	transform: translateY(0rem);
 	box-shadow: 0 0rem #d37a46;
 }
@@ -323,4 +323,9 @@ div[role='menu'] {
 
 div[role='menu'].visible {
 	visibility: visible;
+}
+
+.reportPane {
+	display: flex;
+	flex-direction: column;
 }

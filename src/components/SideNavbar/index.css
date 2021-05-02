@@ -1,3 +1,9 @@
+@media only screen and (max-width: 1000px) {
+	.side-navbar {
+		visibility: hidden;
+	}
+}
+
 .side-navbar {
 	height: 80%; /* Full-height: remove this if you want "auto" height */
 	width: 23%; /* Set the width of the sidebar */

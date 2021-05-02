@@ -293,6 +293,10 @@ h1.loginWarn {
 	background: white;
 }
 
+.postForm-profile {
+	width: 10%;
+}
+
 .postFormBox {
 	width: 100%;
 
