@@ -45,7 +45,7 @@ const FullSubComPage = () => {
 			.update(newSubCom)
 			.then(() => {
 				console.log('Update subcom success');
-				window.location.reload();
+				setSubCom(newSubCom)
 			});
 	};
 
