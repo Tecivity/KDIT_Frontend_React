@@ -18,7 +18,7 @@ const SubComBox = ({ subCom }) => {
 			<div id={subCom.id} className="subcomDiv">
 				<div className="subComBackgroundPane" onClick={handleOnClick}>
 					<img
-						src="https://thumbs.dreamstime.com/b/outdoor-park-activities-people-relaxing-nature-walking-riding-bicycle-communicating-outdoor-park-activities-people-relaxing-110176169.jpg"
+						src={subCom.bannerURL}
 						alt=""
 						width="100%"
 						height="130%"

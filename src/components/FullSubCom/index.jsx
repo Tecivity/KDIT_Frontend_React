@@ -16,8 +16,8 @@ const FullSubCom = ({ subCom, update }) => {
 	const [posts, setPosts] = useState([]);
 	const [photoURL, setPhotoURL] = useState('');
 	const [bannerURL, setBannerURL] = useState('');
-	const [name, setName] = useState('')
-	const [description, setDescription] = useState('')
+	const [name, setName] = useState('');
+	const [description, setDescription] = useState('');
 
 	//Contexts
 	const { defaultBanner, userInfo, user } = useContext(SessionApi);
@@ -38,7 +38,7 @@ const FullSubCom = ({ subCom, update }) => {
 			description,
 			bannerURL,
 			photoURL,
-		}
+		};
 		update(newSubCom);
 	};
 
@@ -58,7 +58,7 @@ const FullSubCom = ({ subCom, update }) => {
 
 	const fetchData = async () => {
 		if (subCom.id) {
-			getPost(subCom.id)
+			getPost(subCom.id);
 			setName(subCom.name);
 			setDescription(subCom.description);
 			setBannerURL(subCom.bannerURL);
@@ -102,7 +102,7 @@ const FullSubCom = ({ subCom, update }) => {
 								</button>
 							}
 							modal
-							className="subPopup"
+							className="comPopup"
 						>
 							{(close) => (
 								<div className="modal">
@@ -125,93 +125,87 @@ const FullSubCom = ({ subCom, update }) => {
 									</div>
 									<div className="content">
 										<div className="fullsubcomForm">
-											<form action="">
-
-												<div
-													className="editSubComForm"
-													style={{
-														borderBottom:
-															'2px solid lightgrey',
-													}}
-												>
-													<h1 htmlFor="">
-														Profile Picture
+											<div className="editSubComForm">
+												<h1 htmlFor="">
+													Profile Picture
 												</h1>
 
-													<FileUpload
-														url={photoURL}
-														setUrl={setPhotoURL}
-													/>
+												<FileUpload
+													url={photoURL}
+													setUrl={setPhotoURL}
+												/>
 
-													<img
-														src={photoURL}
-														alt=""
-														className="full-editProfilePic"
-														draggable="false"
-													/>
-												</div>
+												<img
+													src={photoURL}
+													alt=""
+													className="full-editProfilePic"
+													draggable="false"
+												/>
+											</div>
 
-												<div
-													className="editSubComForm"
-													style={{
-														borderBottom:
-															'2px solid lightgrey',
-													}}
-												>
-													<h1 htmlFor="">
-														Banner Picture
+											<div
+												className="editSubComForm"
+												style={{
+													borderBottom:
+														'2px solid lightgrey',
+												}}
+											>
+												<h1 htmlFor="">
+													Banner Picture
 												</h1>
 
-													<FileUpload
-														url={bannerURL}
-														setUrl={setBannerURL}
-													/>
+												<FileUpload
+													url={bannerURL}
+													setUrl={setBannerURL}
+												/>
 
-													<img
-														src={bannerURL}
-														alt=""
-														className="full-editBannerPic"
-														draggable="false"
-													/>
-												</div>
+												<img
+													src={bannerURL}
+													alt=""
+													className="full-editBannerPic"
+													draggable="false"
+													style={{
+														marginBottom: '2rem',
+													}}
+												/>
+											</div>
 
-
-
-												<div className="inputForm">
-													<label htmlFor="">
-														Community Name
-													</label>
-													<input
-														type="text"
-														name="name"
-														className="nameInput"
-														value={name}
-														onChange={(e) =>
-															setName(e.target.value)
-														}
-													/>
-													<label htmlFor="">
-														Description
-													</label>
-													<textarea
-														id=""
-														cols="30"
-														rows="10"
-														name="description"
-														className="desInput"
-														value={description}
-														onChange={(e) =>
-															setDescription(e.target.value)
-														}
-													></textarea>
-												</div>
-												<button
-													onClick={handleSubmit}
-													className="btn"
-												>
-													Save
-												</button>
-											</form>
+											<div className="inputForm">
+												<label htmlFor="">
+													Community Name
+												</label>
+												<input
+													type="text"
+													name="name"
+													className="nameInput"
+													value={name}
+													onChange={(e) =>
+														setName(e.target.value)
+													}
+												/>
+												<label htmlFor="">
+													Description
+												</label>
+												<textarea
+													id=""
+													cols="30"
+													rows="10"
+													name="description"
+													className="desInput"
+													value={description}
+													onChange={(e) =>
+														setDescription(
+															e.target.value,
+														)
+													}
+												></textarea>
+											</div>
+											<button
+												onClick={handleSubmit}
+												className="btn"
+											>
+												Save
+											</button>
 										</div>
 									</div>
 								</div>
@@ -223,7 +217,6 @@ const FullSubCom = ({ subCom, update }) => {
 				)}
 			</div>
 			<div className="fullComCard">
-				{/* <PostForm updatePost={updatePost} /> */}
 				<div className="content">
 					{posts.map((post, i) => (
 						<Post key={i} post={post} />
