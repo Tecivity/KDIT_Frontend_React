@@ -8,6 +8,7 @@ import PostPage from './PostPage/PostPage.jsx';
 import FullSubComPage from './FullComPage/FullSubComPage.jsx';
 import ExplorePage from './ExplorePage/ExplorePage.jsx';
 import WelcomePage from './WelcomePage/WelcomePage.jsx';
+import AdminPage from './AdminPage/AdminPage.jsx';
 
 export {
 	HomePage,
@@ -20,4 +21,5 @@ export {
 	FullSubComPage,
 	ExplorePage,
 	WelcomePage,
+	AdminPage,
 };
