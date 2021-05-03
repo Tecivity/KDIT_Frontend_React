@@ -77,7 +77,7 @@ const SearchBox = ({ currentRefinement, isSearchStalled, refine }) => {
 					onClick={handleOnClick}
 				/>
 				<button onBlur={handleBlur} className="clearBt">
-					<MdCancel size="30px" style={{ fill: '#f48c51' }} />
+					<MdCancel size="30px" style={{ fill: 'lightgrey' }} />
 				</button>
 			</div>
 

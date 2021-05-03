@@ -19,8 +19,8 @@ const FullSubCom = ({ subCom, update }) => {
 	const [bannerURL, setBannerURL] = useState('');
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
-	const [isFollow, setIsFollow] = useState(false)
-	const [subComData, setSubComData] = useState({})
+	const [isFollow, setIsFollow] = useState(false);
+	const [subComData, setSubComData] = useState({});
 
 	//Contexts
 	const { defaultBanner, userInfo, authListener } = useContext(SessionApi);
@@ -69,35 +69,40 @@ const FullSubCom = ({ subCom, update }) => {
 			setSubComData({
 				value: subCom.id,
 				label: subCom.name,
-			})
+			});
 			getPost(subCom.id);
-			console.log(posts)
-			try{
-				const listSubCom = userInfo.mySubCom
-				if (listSubCom.some(listSubCom=>listSubCom['value'] == subCom.id)) {
-				setIsFollow(true)
+			console.log(posts);
+			try {
+				const listSubCom = userInfo.mySubCom;
+				if (
+					listSubCom.some(
+						(listSubCom) => listSubCom['value'] == subCom.id,
+					)
+				) {
+					setIsFollow(true);
 				}
-			}catch(err){
-				UserService.updateUser(userInfo.id,{mySubCom:[]})
+			} catch (err) {
+				UserService.updateUser(userInfo.id, { mySubCom: [] });
 			}
-			
 		}
 	};
 
 	const followOnClick = async () => {
-		const newFollowList = [...userInfo.mySubCom]
-		if(isFollow){
-			newFollowList.pop(subComData)
-		}else{
-			newFollowList.push(subComData)
+		const newFollowList = [...userInfo.mySubCom];
+		if (isFollow) {
+			newFollowList.pop(subComData);
+		} else {
+			newFollowList.push(subComData);
 		}
-		console.log(newFollowList)
+		console.log(newFollowList);
 		// setIsFollow(!isFollow)
-		UserService.updateUser(userInfo.id,{mySubCom:newFollowList}).then(()=>{
-			setIsFollow(!isFollow)
-			authListener()
-		})
-	}
+		UserService.updateUser(userInfo.id, { mySubCom: newFollowList }).then(
+			() => {
+				setIsFollow(!isFollow);
+				authListener();
+			},
+		);
+	};
 
 	//Effects
 	useEffect(() => {
@@ -113,6 +118,7 @@ const FullSubCom = ({ subCom, update }) => {
 						onError={defaultBanner}
 						alt=""
 						className="bannerImg"
+						style={{ background: 'white' }}
 					/>
 				</div>
 				<div className="subComImagePane">
@@ -122,14 +128,17 @@ const FullSubCom = ({ subCom, update }) => {
 				<p>{subCom.description}</p>
 				{isFollow ? (
 					<>
-						<button className="subcom-btn" onClick={followOnClick}>Followed</button>
+						<button className="subcom-btn" onClick={followOnClick}>
+							Followed
+						</button>
 					</>
 				) : (
 					<>
-						<button className="subcom-btn" onClick={followOnClick}>Follow</button>
+						<button className="subcom-btn" onClick={followOnClick}>
+							Follow
+						</button>
 					</>
 				)}
-
 
 				{userInfo.id == subCom.ownerUID ? (
 					<>

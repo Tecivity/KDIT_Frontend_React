@@ -80,10 +80,7 @@ const HelpPage = () => {
 
 			<div className="helpPane">
 				<div class="topHelpBox">
-					<h1
-						class="helpHead"
-						style={{ fontSize: '5em', margin: '0' }}
-					>
+					<h1 class="helpHead">
 						<br></br>Need Help?
 					</h1>
 					<div class="helpBoxPane">

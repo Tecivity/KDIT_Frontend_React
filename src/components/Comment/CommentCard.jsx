@@ -1,27 +1,27 @@
 //React
-import React, { useState, useEffect, useContext } from "react";
-import { useHistory } from "react-router-dom";
-import { BiUpArrow, BiDownArrow } from "react-icons/bi";
-import { MdCancel, MdEdit, MdDelete } from "react-icons/md";
+import React, { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import { BiUpArrow, BiDownArrow } from 'react-icons/bi';
+import { MdCancel, MdEdit, MdDelete } from 'react-icons/md';
 //Components
-import { SessionApi } from "../../hook/SessionApi";
+import { SessionApi } from '../../hook/SessionApi';
 //Firebase
-import firebase from "../../firebase";
-import { User } from "../../firebase/models";
+import firebase from '../../firebase';
+import { User } from '../../firebase/models';
 //External
-import parse from "html-react-parser";
-import TimeAgo from "javascript-time-ago";
-import en from "javascript-time-ago/locale/en";
-import ReactTimeAgo from "react-time-ago";
+import parse from 'html-react-parser';
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
+import ReactTimeAgo from 'react-time-ago';
 //CSS
-import "./index.css";
+import './index.css';
 
 TimeAgo.addLocale(en);
 
 const CommentCard = ({ comment }) => {
-  //Variables
-  const defaultImage =
-    "https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg";
+	//Variables
+	const defaultImage =
+		'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg';
 
   //States
   const [commentOwner, setcommentOwner] = useState({});
@@ -36,8 +36,8 @@ const CommentCard = ({ comment }) => {
   //Contexts
   const { session, user, loading } = useContext(SessionApi);
 
-  //Hstory
-  const history = useHistory();
+	//Hstory
+	const history = useHistory();
 
   //Functions
   const fetchData = async () => {
@@ -63,13 +63,13 @@ const CommentCard = ({ comment }) => {
       });
   };
 
-  const handleEditComment = () => {
-    setEdit(!edit);
-  };
+	const handleEditComment = () => {
+		setEdit(!edit);
+	};
 
-  const handleChangeComment = (e) => {
-    setNewComment(e.target.value);
-  };
+	const handleChangeComment = (e) => {
+		setNewComment(e.target.value);
+	};
 
   const handleSubmitComment = (newContent) => {
     firebase
@@ -85,35 +85,37 @@ const CommentCard = ({ comment }) => {
       });
   };
 
-  const handleDeleteComment = () => {};
+	const handleDeleteComment = () => {};
 
-  return (
-    <div id={comment.id} className="commentPane">
-      <div className="comment">
-        <div className="commentVotePane">
-          <img
-            src={commentOwner.photoURL}
-            onError={defaultImage}
-            alt="profile picture"
-            className="profilePic"
-          />
-          <div className="voteCommentPane">
-            <button
-              // onClick={}
-              className="voteUpBTC"
-            >
-              <BiUpArrow size="25px" />
-            </button>
-            <h4 style={{ margin: "0" }}>{comment.voteUp - comment.voteDown}</h4>
+	return (
+		<div id={comment.id} className="commentPane">
+			<div className="comment">
+				<div className="commentVotePane">
+					<img
+						src={commentOwner.photoURL}
+						onError={defaultImage}
+						alt="profile picture"
+						className="profilePic"
+					/>
+					<div className="voteCommentPane">
+						<button
+							// onClick={}
+							className="voteUpBTC"
+						>
+							<BiUpArrow size="25px" />
+						</button>
+						<h4 style={{ margin: '0' }}>
+							{comment.voteUp - comment.voteDown}
+						</h4>
 
-            <button
-              // onClick={}
-              className="voteDownBTC"
-            >
-              <BiDownArrow size="25px" />
-            </button>
-          </div>
-        </div>
+						<button
+							// onClick={}
+							className="voteDownBTC"
+						>
+							<BiDownArrow size="25px" />
+						</button>
+					</div>
+				</div>
 
         <div className="commentInfo">
           <div className="commentBy">

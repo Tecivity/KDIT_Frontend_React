@@ -118,3 +118,23 @@ body {
 	flex-direction: column;
 	width: 50%;
 }
+
+@media only screen and (max-width: 800px) {
+	.helpBox {
+		margin: 0rem;
+		padding: 2rem;
+
+		width: 100%;
+
+		/* display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between; */
+
+		border: 1px solid lightgrey;
+		border-width: 1px 0 3px 0;
+		border-radius: 0;
+
+		transition: 0.2s;
+	}
+}
