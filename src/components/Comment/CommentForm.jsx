@@ -74,7 +74,7 @@ const CommentForm = ({ post, id }) => {
 					value={comment}
 				></textarea>
 				<button className="postCommentBtn" onClick={handleSubmit}>
-					Comment
+					Submit Comment
 				</button>
 			</div>
 		</div>

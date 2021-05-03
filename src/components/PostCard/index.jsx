@@ -19,8 +19,8 @@ import { act } from 'react-dom/test-utils';
 const Card = () => {
 	//Varables
 	const ref = firebase.firestore().collection('posts');
-	const voteUp = 'voteUp';
-	const voteDown = 'voteDown';
+	// const voteUp = 'voteUp';
+	// const voteDown = 'voteDown';
 
 	//States
 	const [posts, setPosts] = useState([]);
@@ -36,211 +36,318 @@ const Card = () => {
 		new: false,
 		top: false,
 	});
+	const [newPost, setNewPost] = useState();
 
 	//Context
 	const { user, loading, setLoading } = useContext(SessionApi);
 
 	//Functions
 	const updatePost = (newPost) => {
+		// setPosts([newPost, ...posts])
 		fetchData();
 	};
 
 	//Functions
+	// const upVote = (post) => {
+	// ref.doc(post.id).set({ ...post, voteUp: post.voteUp + 1 });
+	// const voteDocument = firebase
+	// 	.firestore()
+	// 	.collection('votes')
+	// 	.where('userUID', '==', user.uid) // userId
+	// 	.where('postUID', '==', post.id) // postId
+	// 	.limit(1);
+
+	// let postData;
+	// const postDoc = firebase.firestore().doc(`/posts/${post.id}`); // postId
+
+	// postDoc
+	// 	.get()
+	// 	.then((doc) => {
+	// 		if (doc.exists) {
+	// 			postData = doc.data();
+	// 			postData.postUID = doc.id;
+	// 			return voteDocument.get();
+	// 		} else {
+	// 			return console.error('Post not found');
+	// 		}
+	// 	})
+	// 	.then((data) => {
+	// 		// no data in database, not voted yet
+
+	// 		if (data.empty) {
+	// 			return firebase
+	// 				.firestore()
+	// 				.collection('votes')
+	// 				.add({
+	// 					postUID: post.id, // postUID
+	// 					userUID: user.uid,
+	// 					voteType: voteUp,
+	// 				})
+	// 				.then(() => {
+	// 					postData.voteUp++;
+	// 					return postDoc.update({
+	// 						voteUp: firebase.firestore.FieldValue.increment(
+	// 							1,
+	// 						),
+	// 					});
+	// 				})
+	// 				.then(() => {
+	// 					console.log(postData);
+	// 					console.log('vote success');
+	// 				});
+	// 		} else {
+	// 			console.log(data.docs[0].data());
+	// 			const voteType = data.docs[0].data().voteType;
+	// 			if (voteType === voteUp) {
+	// 				firebase
+	// 					.firestore()
+	// 					.doc(`/votes/${data.docs[0].id}`)
+	// 					.delete()
+	// 					.then(() => {
+	// 						postDoc.update({
+	// 							voteUp: firebase.firestore.FieldValue.increment(
+	// 								-1,
+	// 							),
+	// 						});
+	// 						console.log('unvoted!!! ');
+	// 					})
+	// 					.catch((err) => {
+	// 						console.error(err.code);
+	// 					});
+	// 			} else if (voteType === voteDown) {
+	// 				firebase
+	// 					.firestore()
+	// 					.doc(`/votes/${data.docs[0].id}`)
+	// 					.update({
+	// 						voteType: voteUp,
+	// 					})
+	// 					.then(() => {
+	// 						postDoc.update({
+	// 							voteUp: firebase.firestore.FieldValue.increment(
+	// 								1,
+	// 							),
+	// 							voteDown: firebase.firestore.FieldValue.increment(
+	// 								-1,
+	// 							),
+	// 						});
+	// 						console.log('change to voteUp');
+	// 					})
+	// 					.catch((err) => {
+	// 						console.error(err.code);
+	// 					});
+	// 			} else {
+	// 				console.error('error');
+	// 			}
+	// 		}
+	// 	})
+	// 	.catch((err) => {
+	// 		console.error(err.code);
+	// 	});
+
+	// 	fetchData();
+	// };
+
+	// const downVote = (post) => {
+	// 	// ref.doc(post.id).set({ ...post, voteDown: post.voteDown - 1 });
+	// 	const voteDocument = firebase
+	// 		.firestore()
+	// 		.collection('votes')
+	// 		.where('userUID', '==', user.uid) // userId
+	// 		.where('postUID', '==', post.id) // postId
+	// 		.limit(1);
+
+	// 	const postDoc = firebase.firestore().doc(`/posts/${post.id}`); // postId
+
+	// 	let postData;
+
+	// 	postDoc
+	// 		.get()
+	// 		.then((doc) => {
+	// 			if (doc.exists) {
+	// 				postData = doc.data();
+	// 				postData.postUID = doc.id;
+	// 				return voteDocument.get();
+	// 			} else {
+	// 				return console.error('Post not found');
+	// 			}
+	// 		})
+	// 		.then((data) => {
+	// 			// no data in database, not voted yet
+	// 			if (data.empty) {
+	// 				return firebase
+	// 					.firestore()
+	// 					.collection('votes')
+	// 					.add({
+	// 						postUID: post.id, // postUID
+	// 						userUID: user.uid,
+	// 						voteType: voteDown,
+	// 					})
+	// 					.then(() => {
+	// 						postData.voteDown++;
+	// 						return postDoc.update({
+	// 							voteDown: firebase.firestore.FieldValue.increment(
+	// 								1,
+	// 							),
+	// 						});
+	// 					})
+	// 					.then(() => {
+	// 						console.log(postData);
+	// 						console.log('vote success');
+	// 					});
+	// 			} else {
+	// 				console.log(data.docs[0].data());
+	// 				const voteType = data.docs[0].data().voteType;
+	// 				// voteDown === voteDown
+	// 				if (voteType === voteDown) {
+	// 					firebase
+	// 						.firestore()
+	// 						.doc(`/votes/${data.docs[0].id}`)
+	// 						.delete()
+	// 						.then(() => {
+	// 							postDoc.update({
+	// 								voteUp: firebase.firestore.FieldValue.increment(
+	// 									-1,
+	// 								),
+	// 							});
+	// 							console.log('unvoted!!! ');
+	// 						})
+	// 						.catch((err) => {
+	// 							console.error(err.code);
+	// 						});
+	// 					// voteUp === voteUp
+	// 				} else if (voteType === voteUp) {
+	// 					firebase
+	// 						.firestore()
+	// 						.doc(`/votes/${data.docs[0].id}`)
+	// 						.update({
+	// 							voteType: voteDown,
+	// 						})
+	// 						.then(() => {
+	// 							postDoc.update({
+	// 								voteUp: firebase.firestore.FieldValue.increment(
+	// 									-1,
+	// 								),
+	// 								voteDown: firebase.firestore.FieldValue.increment(
+	// 									1,
+	// 								),
+	// 							});
+	// 							console.log('change to voteDown');
+	// 						})
+	// 						.catch((err) => {
+	// 							console.error(err.code);
+	// 						});
+	// 				} else {
+	// 					console.error('error');
+	// 				}
+	// 			}
+	// 		})
+	// 		.catch((err) => {
+	// 			console.error(err.code);
+	// 		});
+	// 	fetchData();
+	// };
+	// post from postpage
+
+	const db = firebase.firestore();
 	const upVote = (post) => {
-		const voteDocument = firebase
-			.firestore()
-			.collection('votes')
-			.where('userUID', '==', user.uid) // userId
-			.where('postUID', '==', post.id) // postId
-			.limit(1);
+		console.log(post);
+		const list = post.voteUp;
+		const userUID = user.uid;
+		if (Array.isArray(list)) {
+			if (list.some((id) => id === userUID)) {
+				//  already voteUp => unvoteUp
+				db.collection('posts')
+					.doc(post.id)
+					.update({
+						voteUp: firebase.firestore.FieldValue.arrayRemove(
+							user.uid,
+						),
+					});
+				console.log('unvoteUp');
+			} else if (post.voteDown.some((id) => id === userUID)) {
+				// already voteDown
+				// change from voteDown to voteUp
+				db.collection('posts')
+					.doc(post.id)
+					.update({
+						// add userUID to voteUp Array
+						voteUp: firebase.firestore.FieldValue.arrayUnion(
+							user.uid,
+						),
+						// remove userUID from voteDown Array
+						voteDown: firebase.firestore.FieldValue.arrayRemove(
+							user.uid,
+						),
+					});
+				console.log('change from voteDown to voteUp');
+			} else {
+				// not vote yet => voteUp
+				db.collection('posts')
+					.doc(post.id)
+					.update({
+						voteUp: firebase.firestore.FieldValue.arrayUnion(
+							user.uid,
+						),
+					});
 
-		let postData;
-		const postDoc = firebase.firestore().doc(`/posts/${post.id}`); // postId
-
-		postDoc
-			.get()
-			.then((doc) => {
-				if (doc.exists) {
-					postData = doc.data();
-					postData.postUID = doc.id;
-					return voteDocument.get();
-				} else {
-					return console.error('Post not found');
-				}
-			})
-			.then((data) => {
-				// no data in database, not voted yet
-
-				if (data.empty) {
-					return firebase
-						.firestore()
-						.collection('votes')
-						.add({
-							postUID: post.id, // postUID
-							userUID: user.uid,
-							voteType: voteUp,
-						})
-						.then(() => {
-							postData.voteUp++;
-							return postDoc.update({
-								voteUp: firebase.firestore.FieldValue.increment(
-									1,
-								),
-							});
-						})
-						.then(() => {
-							console.log(postData);
-							console.log('vote success');
-						});
-				} else {
-					console.log(data.docs[0].data());
-					const voteType = data.docs[0].data().voteType;
-					if (voteType === voteUp) {
-						firebase
-							.firestore()
-							.doc(`/votes/${data.docs[0].id}`)
-							.delete()
-							.then(() => {
-								postDoc.update({
-									voteUp: firebase.firestore.FieldValue.increment(
-										-1,
-									),
-								});
-								console.log('unvoted!!! ');
-							})
-							.catch((err) => {
-								console.error(err.code);
-							});
-					} else if (voteType === voteDown) {
-						firebase
-							.firestore()
-							.doc(`/votes/${data.docs[0].id}`)
-							.update({
-								voteType: voteUp,
-							})
-							.then(() => {
-								postDoc.update({
-									voteUp: firebase.firestore.FieldValue.increment(
-										1,
-									),
-									voteDown: firebase.firestore.FieldValue.increment(
-										-1,
-									),
-								});
-								console.log('change to voteUp');
-							})
-							.catch((err) => {
-								console.error(err.code);
-							});
-					} else {
-						console.error('error');
-					}
-				}
-			})
-			.catch((err) => {
-				console.error(err.code);
+				console.log('voteUp success');
+			}
+		} else {
+			db.collection('posts').doc(post.id).update({
+				voteUp: [],
 			});
-		fetchData();
+			console.log('change voteUp to array');
+		}
 	};
 
 	const downVote = (post) => {
-		// ref.doc(post.id).set({ ...post, voteDown: post.voteDown - 1 });
-		const voteDocument = firebase
-			.firestore()
-			.collection('votes')
-			.where('userUID', '==', user.uid) // userId
-			.where('postUID', '==', post.id) // postId
-			.limit(1);
-
-		const postDoc = firebase.firestore().doc(`/posts/${post.id}`); // postId
-
-		let postData;
-
-		postDoc
-			.get()
-			.then((doc) => {
-				if (doc.exists) {
-					postData = doc.data();
-					postData.postUID = doc.id;
-					return voteDocument.get();
-				} else {
-					return console.error('Post not found');
-				}
-			})
-			.then((data) => {
-				// no data in database, not voted yet
-				if (data.empty) {
-					return firebase
-						.firestore()
-						.collection('votes')
-						.add({
-							postUID: post.id, // postUID
-							userUID: user.uid,
-							voteType: voteDown,
-						})
-						.then(() => {
-							postData.voteDown++;
-							return postDoc.update({
-								voteDown: firebase.firestore.FieldValue.increment(
-									1,
-								),
-							});
-						})
-						.then(() => {
-							console.log(postData);
-							console.log('vote success');
-						});
-				} else {
-					console.log(data.docs[0].data());
-					const voteType = data.docs[0].data().voteType;
-					// voteDown === voteDown
-					if (voteType === voteDown) {
-						firebase
-							.firestore()
-							.doc(`/votes/${data.docs[0].id}`)
-							.delete()
-							.then(() => {
-								postDoc.update({
-									voteUp: firebase.firestore.FieldValue.increment(
-										-1,
-									),
-								});
-								console.log('unvoted!!! ');
-							})
-							.catch((err) => {
-								console.error(err.code);
-							});
-						// voteUp === voteUp
-					} else if (voteType === voteUp) {
-						firebase
-							.firestore()
-							.doc(`/votes/${data.docs[0].id}`)
-							.update({
-								voteType: voteDown,
-							})
-							.then(() => {
-								postDoc.update({
-									voteUp: firebase.firestore.FieldValue.increment(
-										-1,
-									),
-									voteDown: firebase.firestore.FieldValue.increment(
-										1,
-									),
-								});
-								console.log('change to voteDown');
-							})
-							.catch((err) => {
-								console.error(err.code);
-							});
-					} else {
-						console.error('error');
-					}
-				}
-			})
-			.catch((err) => {
-				console.error(err.code);
+		console.log(post);
+		const list = post.voteDown;
+		const userUID = user.uid;
+		if (Array.isArray(list)) {
+			if (list.some((id) => id === userUID)) {
+				//  already voteDown => unvoteDown
+				db.collection('posts')
+					.doc(post.id)
+					.update({
+						voteDown: firebase.firestore.FieldValue.arrayRemove(
+							user.uid,
+						),
+					});
+				console.log('unvoteDown');
+			} else if (post.voteUp.some((id) => id === userUID)) {
+				// already voteUp
+				// change from voteUp to voteDown
+				db.collection('posts')
+					.doc(post.id)
+					.update({
+						// add userUID to voteDown Array
+						voteDown: firebase.firestore.FieldValue.arrayUnion(
+							user.uid,
+						),
+						// remove userUID from voteUp Array
+						voteUp: firebase.firestore.FieldValue.arrayRemove(
+							user.uid,
+						),
+					});
+				console.log('change from voteUp to voteDown');
+			} else {
+				// not vote yet => voteDown
+				db.collection('posts')
+					.doc(post.id)
+					.update({
+						voteDown: firebase.firestore.FieldValue.arrayUnion(
+							user.uid,
+						),
+					});
+				console.log('voteDown success');
+			}
+		} else {
+			db.collection('posts').doc(post.id).update({
+				voteDown: [],
 			});
-		fetchData();
+			console.log('change voteDown to array');
+		}
 	};
 
 	const fetchData = async () => {

@@ -24,8 +24,6 @@ const Post = ({ post, upVote, downVote }) => {
 	//States
 	const [postUser, setPostUser] = useState('');
 	const [totalComment, setTotalComment] = useState(0);
-	const [voteUp, setVoteUp] = useState(post.voteUp);
-	const [voteDown, setVoteDown] = useState(post.voteDown);
 
 	//Effects
 	useEffect(() => {
@@ -121,16 +119,15 @@ const Post = ({ post, upVote, downVote }) => {
 
 			<div className="infoPane">
 				<div className="votePane">
-					<div onClick={() => upVote(post)} className="voteUpBT">
+					<div onClick={() => upVote} className="voteUpBT">
 						<BiUpArrow size="25px" />
 					</div>
 
 					<h4 style={{ margin: '0' }}>
-						{' '}
-						{post.voteUp + post.voteDown}
+						{post.voteUp.length - post.voteDown.length}{' '}
 					</h4>
 
-					<div onClick={() => downVote(post)} className="voteDownBT">
+					<div onClick={() => downVote} className="voteDownBT">
 						<BiDownArrow size="25px" />
 					</div>
 				</div>
