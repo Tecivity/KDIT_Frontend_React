@@ -29,8 +29,8 @@ const PostForm = ({ updatePost }) => {
 		subComUID: '',
 		timeStamp: '',
 		userUID: '',
-		voteUp: 0,
-		voteDown: 0,
+		voteUp: [],
+		voteDown: [],
 	});
 	const [show, setShow] = useState(true);
 
@@ -53,8 +53,8 @@ const PostForm = ({ updatePost }) => {
 			subComUID: '',
 			timeStamp: '',
 			userUID: '',
-			voteUp: 0,
-			voteDown: 0,
+			voteUp: [],
+			voteDown: [],
 		});
 	};
 
