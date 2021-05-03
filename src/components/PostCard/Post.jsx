@@ -239,7 +239,7 @@ const Post = ({ post }) => {
 						onClick={upVote}
 						className="voteUpBT"
 						style={{
-							background: isVoteUp ? 'green' : 'none',
+							background: isVoteUp ? '#c5ffae' : 'none',
 						}}
 					>
 						<BiUpArrow size="25px" />
@@ -251,7 +251,7 @@ const Post = ({ post }) => {
 						onClick={downVote}
 						className="voteDownBT"
 						style={{
-							background: isVoteDown ? 'red' : 'none',
+							background: isVoteDown ? '#ffaeae' : 'none',
 						}}
 					>
 						<BiDownArrow size="25px" />

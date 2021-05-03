@@ -123,6 +123,7 @@ const Profile = ({ id }) => {
 							}}
 							alt="profile picture"
 							className="full-profilePic"
+							style={{ background: 'white' }}
 						/>
 						<h2 style={{ marginTop: '0', marginBottom: '0rem' }}>
 							{profile.displayName}
@@ -132,11 +133,6 @@ const Profile = ({ id }) => {
 							{profile.bio}
 						</p>
 					</div>
-					<div style={{ alignSelf: 'center' }}>
-						{/* <button className="edit-btn" onClick={handleOnClick}>
-							{edit ? 'X' : 'Edit'}
-						</button> */}
-					</div>
 					{profile.id == user.uid ? (
 						<Popup
 							trigger={
@@ -144,7 +140,7 @@ const Profile = ({ id }) => {
 									className="edit-btn"
 									onClick={handleOnClick}
 								>
-									{edit ? 'X' : 'Edit'}
+									Edit
 								</button>
 							}
 							modal
@@ -238,7 +234,7 @@ const Profile = ({ id }) => {
 											<button
 												className="btn"
 												onClick={updateProfile}
-												onClick={close}
+												// onClick={close}
 											>
 												<a
 													style={{

@@ -131,6 +131,7 @@ h1.loginWarn {
 
 .post:hover {
 	background: #ffeade;
+	/* background: #ffaeae; */
 	/* transform: translate(-1rem, -1rem); */
 	/* box-shadow: 0.1rem 0.1rem #df814a, 0.2rem 0.2rem #df814a,
 		0.3rem 0.3rem #df814a, 0.4rem 0.4rem #df814a, 0.5rem 0.5rem #df814a,

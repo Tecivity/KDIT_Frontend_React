@@ -181,7 +181,12 @@ const FullSubCom = ({ subCom, update }) => {
 					/>
 				</div>
 				<div className="subComImagePane">
-					<img src={subCom.photoURL} alt="" className="subComImg" />
+					<img
+						src={subCom.photoURL}
+						alt=""
+						className="subComImg"
+						style={{ background: 'white' }}
+					/>
 				</div>
 				<h2 style={{ marginBottom: '0' }}>{subCom.name}</h2>
 				<p
@@ -323,7 +328,7 @@ const FullSubCom = ({ subCom, update }) => {
 											<button
 												onClick={handleSubmit}
 												className="btn"
-												onClick={close}
+												// onClick={close}
 											>
 												<a
 													style={{
