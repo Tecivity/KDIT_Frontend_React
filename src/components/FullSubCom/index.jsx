@@ -11,6 +11,11 @@ import firebase from '../../firebase';
 import './index.css';
 import { SubComService, UserService } from '../../services';
 
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+import { store } from 'react-notifications-component';
+import 'animate.css';
+
 const FullSubCom = ({ subCom, update }) => {
 	//States
 	const [edit, setEdit] = useState(false);
@@ -120,6 +125,40 @@ const FullSubCom = ({ subCom, update }) => {
 				authListener();
 			},
 		);
+		if (!isFollow) {
+			store.addNotification({
+				title: 'You successfully followed this sub-community!',
+				message:
+					'You will receive the post from this sub-community from now on.',
+				type: 'success',
+				insert: 'top',
+				container: 'bottom-right',
+				animationIn: ['animate__animated', 'animate__flipInX'],
+				animationOut: ['animate__animated', 'animate__zoomOut'],
+				dismiss: {
+					duration: 8000,
+					onScreen: true,
+					pauseOnHover: true,
+				},
+			});
+		} else {
+			store.addNotification({
+				title:
+					'You successfully unfollowed this sub-community, awwwww.',
+				message:
+					'You will not receive the post from this sub-community from now on. Sorry that you have to go.',
+				type: 'info',
+				insert: 'top',
+				container: 'bottom-right',
+				animationIn: ['animate__animated', 'animate__flipInX'],
+				animationOut: ['animate__animated', 'animate__zoomOut'],
+				dismiss: {
+					duration: 8000,
+					onScreen: true,
+					pauseOnHover: true,
+				},
+			});
+		}
 	};
 
 	//Effects
@@ -175,20 +214,12 @@ const FullSubCom = ({ subCom, update }) => {
 					<>
 						<Popup
 							trigger={
-								<>
-									<button
-										className="editCombtn"
-										onClick={handleOnClick}
-									>
-										Edit
-									</button>
-									<button
-										className="editCombtn"
-										onClick={handleOnClick}
-									>
-										Delete
-									</button>
-								</>
+								<button
+									className="editCombtn"
+									onClick={handleOnClick}
+								>
+									Edit
+								</button>
 							}
 							modal
 							className="comPopup"
@@ -292,9 +323,135 @@ const FullSubCom = ({ subCom, update }) => {
 											<button
 												onClick={handleSubmit}
 												className="btn"
+												onClick={close}
 											>
 												<a
-													onClick={close}
+													style={{
+														color: 'white',
+													}}
+												>
+													Save
+												</a>
+											</button>
+										</div>
+									</div>
+								</div>
+							)}
+						</Popup>
+						<Popup
+							trigger={
+								<button
+									className="editCombtn"
+									onClick={handleOnClick}
+								>
+									Delete
+								</button>
+							}
+							modal
+							className="comPopup"
+						>
+							{(close) => (
+								<div className="modal">
+									<div className="close" onClick={close}>
+										<MdCancel
+											size="30px"
+											style={{ fill: '#f48c51' }}
+										/>
+									</div>
+									<div className="header">
+										<h1
+											style={{
+												paddingBottom: '0.5rem',
+												borderBottom:
+													'1px solid lightgrey',
+											}}
+										>
+											Edit Community
+										</h1>
+									</div>
+									<div className="content">
+										<div className="fullsubcomForm">
+											<div className="editSubComForm">
+												<h1 htmlFor="">
+													Profile Picture
+												</h1>
+
+												<FileUpload
+													url={photoURL}
+													setUrl={setPhotoURL}
+												/>
+
+												<img
+													src={photoURL}
+													alt=""
+													className="full-editProfilePic"
+													draggable="false"
+												/>
+											</div>
+
+											<div
+												className="editSubComForm"
+												style={{
+													borderBottom:
+														'2px solid lightgrey',
+												}}
+											>
+												<h1 htmlFor="">
+													Banner Picture
+												</h1>
+
+												<FileUpload
+													url={bannerURL}
+													setUrl={setBannerURL}
+												/>
+
+												<img
+													src={bannerURL}
+													alt=""
+													className="full-editBannerPic"
+													draggable="false"
+													style={{
+														marginBottom: '2rem',
+													}}
+												/>
+											</div>
+
+											<div className="inputForm">
+												<label htmlFor="">
+													Community Name
+												</label>
+												<input
+													type="text"
+													name="name"
+													className="nameInput"
+													value={name}
+													onChange={(e) =>
+														setName(e.target.value)
+													}
+												/>
+												<label htmlFor="">
+													Description
+												</label>
+												<textarea
+													id=""
+													cols="30"
+													rows="10"
+													name="description"
+													className="desInput"
+													value={description}
+													onChange={(e) =>
+														setDescription(
+															e.target.value,
+														)
+													}
+												></textarea>
+											</div>
+											<button
+												onClick={handleSubmit}
+												className="btn"
+												onClick={close}
+											>
+												<a
 													style={{
 														color: 'white',
 													}}

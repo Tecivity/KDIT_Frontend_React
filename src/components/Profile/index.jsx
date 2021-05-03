@@ -49,14 +49,14 @@ const Profile = ({ id }) => {
 			console.log('Updated data');
 			setProfile({ ...profile, displayName, bannerURL, photoURL, bio });
 			store.addNotification({
-				title: 'Please Insert The Story In The Editor.',
+				title: 'Your profile is updated successfully!',
 				message:
-					"We can't let you write an empty story! Please insert the story that you want to share.",
-				type: 'warning',
+					'Yeah! your change that you made to your profile is now on our server.',
+				type: 'success',
 				insert: 'top',
-				container: 'bottom-right',
-				animationIn: ['animate__animated', 'animate__flash'],
-				animationOut: ['animate__animated', 'animate__zoomOut'],
+				container: 'bottom-full',
+				animationIn: ['animate__animated', 'animate__fadeIn'],
+				animationOut: ['animate__animated', 'animate__fadeOut'],
 				dismiss: {
 					duration: 8000,
 					onScreen: true,
