@@ -8,6 +8,7 @@ import {
 	MdHelp,
 	MdInfo,
 	MdAccountCircle,
+	MdWidgets,
 } from 'react-icons/md';
 import { BiLogOut, BiLogIn } from 'react-icons/bi';
 import { useMediaQuery } from 'react-responsive';
@@ -26,6 +27,7 @@ export default function Navbar() {
 		help: false,
 		about: false,
 		profile: false,
+		admin: false,
 	});
 
 	//Media
@@ -234,6 +236,39 @@ export default function Navbar() {
 							Profile
 						</h4>
 					</Link>
+
+					{isMobile && (
+						<Link
+							to="/admin"
+							className="siteName"
+							onMouseOver={() =>
+								setMouseOver({ ...mouseOver, admin: true })
+							}
+							onMouseLeave={() =>
+								setMouseOver({ ...mouseOver, admin: false })
+							}
+							style={{
+								transform: menu === '/admin' && 'scale(1.2)',
+							}}
+						>
+							<MdWidgets
+								size="30px"
+								style={{
+									fill:
+										mouseOver.admin || menu === '/admin'
+											? '#f8640e'
+											: 'black',
+								}}
+							/>
+							<h4
+								style={{
+									color: menu === '/admin' && '#f8640e',
+								}}
+							>
+								Manage
+							</h4>
+						</Link>
+					)}
 				</div>
 				{session ? (
 					<Link to="/auth" onClick={() => handleLogout()}>
