@@ -51,21 +51,23 @@ const FullPost = ({ post, id }) => {
 
   //Functions
   const upVote = (post) => {
-    firebase
-      .firestore()
-      .collection("posts")
-      .doc(post.id)
-      .set({ ...post, voteUp: post.voteUp + 1 });
-    fetchData();
+    // firebase
+    //   .firestore()
+    //   .collection("posts")
+    //   .doc(post.id)
+    //   .set({ ...post, voteUp: post.voteUp + 1 });
+    // fetchData();
+    console.log(post)
   };
 
   const downVote = (post) => {
-    firebase
-      .firestore()
-      .collection("posts")
-      .doc(post.id)
-      .set({ ...post, voteDown: post.voteDown - 1 });
-    fetchData();
+    // firebase
+    //   .firestore()
+    //   .collection("posts")
+    //   .doc(post.id)
+    //   .set({ ...post, voteDown: post.voteDown - 1 });
+    // fetchData();
+    console.log(post)
   };
 
   const deletePost = () => {
@@ -134,7 +136,7 @@ const FullPost = ({ post, id }) => {
                 <BiUpArrow size="25px" />
               </button>
 
-              <h3>{post.voteUp + post.voteDown}</h3>
+              <h3>{post.voteUp.length + post.voteDown.length}</h3>
 
               <button
                 onClick={() => downVote(post)}

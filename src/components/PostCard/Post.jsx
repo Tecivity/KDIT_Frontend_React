@@ -104,7 +104,7 @@ const Post = ({ post, upVote, downVote }) => {
             <BiUpArrow size="25px" />
           </div>
 
-          <h4 style={{ margin: "0" }}> {post.voteUp + post.voteDown}</h4>
+          <h4 style={{ margin: "0" }}> {post.voteUp.length - post.voteDown.length}</h4>
 
           <div onClick={() => downVote(post)} className="voteDownBT">
             <BiDownArrow size="25px" />
