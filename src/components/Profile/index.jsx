@@ -2,7 +2,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import Popup from 'reactjs-popup';
 import { MdCancel } from 'react-icons/md';
-import ReactCrop from 'react-image-crop';
 //Components
 import { SessionApi } from '../../hook/SessionApi';
 import Post from '../PostCard/Post';

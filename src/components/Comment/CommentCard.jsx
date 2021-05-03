@@ -24,45 +24,45 @@ const CommentCard = ({ comment }) => {
 	const defaultImage =
 		'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg';
 
-  //States
-  const [commentOwner, setcommentOwner] = useState({});
-  const [edit, setEdit] = useState(false);
-  const [newComment, setNewComment] = useState("");
+	//States
+	const [commentOwner, setcommentOwner] = useState({});
+	const [edit, setEdit] = useState(false);
+	const [newComment, setNewComment] = useState('');
 
-  //Effects
-  useEffect(() => {
-    fetchData();
-  }, [comment]);
+	//Effects
+	useEffect(() => {
+		fetchData();
+	}, [comment]);
 
-  //Contexts
-  const { session, user, loading } = useContext(SessionApi);
+	//Contexts
+	const { session, user, loading } = useContext(SessionApi);
 
 	//Hstory
 	const history = useHistory();
 
-  //Functions
-  const fetchData = async () => {
-    firebase
-      .firestore()
-      .collection("users")
-      .doc(comment.userId)
-      .get()
-      .then((doc) => {
-        const pUser = new User(
-          doc.id,
-          doc.data().totalVote,
-          doc.data().bio,
-          doc.data().displayName,
-          doc.data().photoURL,
-          doc.data().email
-        );
-        setcommentOwner(pUser);
-        //  console.log(commentOwner.displayName)
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+	//Functions
+	const fetchData = async () => {
+		firebase
+			.firestore()
+			.collection('users')
+			.doc(comment.userId)
+			.get()
+			.then((doc) => {
+				const pUser = new User(
+					doc.id,
+					doc.data().totalVote,
+					doc.data().bio,
+					doc.data().displayName,
+					doc.data().photoURL,
+					doc.data().email,
+				);
+				setcommentOwner(pUser);
+				//  console.log(commentOwner.displayName)
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
 
 	const handleEditComment = () => {
 		setEdit(!edit);
@@ -72,19 +72,19 @@ const CommentCard = ({ comment }) => {
 		setNewComment(e.target.value);
 	};
 
-  const handleSubmitComment = (newContent) => {
-    firebase
-      .firestore()
-      .collection("comments")
-      .doc(comment.id)
-      .update({
-        content: newComment,
-      })
-      .then(() => {
-        console.log("Update comment to firestore");
-        window.location.reload();
-      });
-  };
+	const handleSubmitComment = (newContent) => {
+		firebase
+			.firestore()
+			.collection('comments')
+			.doc(comment.id)
+			.update({
+				content: newComment,
+			})
+			.then(() => {
+				console.log('Update comment to firestore');
+				window.location.reload();
+			});
+	};
 
 	const handleDeleteComment = () => {
     if (!window.confirm('Are you sure for delete comment ❓')) {
