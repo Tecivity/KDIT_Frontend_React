@@ -45,11 +45,11 @@ const SubComPage = () => {
 	const firebaseTest = async () => {
 		userService.getUser(user.uid).then((data) => {
 			console.log(data.mySubCom.includes('kdR5zUidEkhQGhpcBup4'));
-			const testList = data.mySubCom
-			console.log(testList.push('test'))
-			console.log(testList)
-			console.log(testList.pop('test'))
-			console.log(testList)
+			const testList = data.mySubCom;
+			console.log(testList.push('test'));
+			console.log(testList);
+			console.log(testList.pop('test'));
+			console.log(testList);
 		});
 		// firebase
 		// 	.firestore()
@@ -63,7 +63,6 @@ const SubComPage = () => {
 		// 	.catch((err) => {
 		// 		return err
 		// 	});
-
 	};
 
 	const fetchData = async () => {
@@ -132,15 +131,16 @@ const SubComPage = () => {
 											)}
 										</Popup>
 									</div>
-									<div>Followed Sub Com HERE</div>
 								</div>
 								<div className="ourCom">
-									{subComs.map((subCom,i) => {
-										return <SubComBox key={i} subCom={subCom} />;
+									{subComs.map((subCom, i) => {
+										return (
+											<SubComBox
+												key={i}
+												subCom={subCom}
+											/>
+										);
 									})}
-									<button onClick={firebaseTest}>
-										Test firebase
-									</button>
 								</div>
 							</>
 						) : (

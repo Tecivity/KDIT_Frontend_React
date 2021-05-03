@@ -1,8 +1,8 @@
 //React
-import React, { useState, useEffect, useContext } from "react";
-import { Redirect, Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-import { BiUpArrow, BiDownArrow, BiCommentDetail } from "react-icons/bi";
+import React, { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import { BiUpArrow, BiDownArrow, BiCommentDetail } from 'react-icons/bi';
+
 //Components
 import { SessionApi } from "../../hook/SessionApi";
 //Firebase
@@ -30,8 +30,8 @@ const Post = ({ post, upVote, downVote }) => {
     fetchData();
   }, []);
 
-  //Context
-  const { session, user, loading } = useContext(SessionApi);
+	//Context
+	const { session, user, loading, setLoading } = useContext(SessionApi);
 
   //History
   const history = useHistory();
@@ -51,14 +51,18 @@ const Post = ({ post, upVote, downVote }) => {
     });
   };
 
-  const fetchData = async () => {
-    UserService.getUser(post.userUID).then((data) => {
-      setPostUser(data);
-    });
-    CommentService.getCommentSize(post.id).then((data) => {
-      setTotalComment(data);
-    });
-  };
+	const fetchData = async () => {
+		setLoading(true);
+		UserService.getUser(post.userUID).then((data) => {
+			setPostUser(data);
+			setLoading(false);
+		});
+		CommentService.getCommentSize(post.id).then((data) => {
+			setTotalComment(data);
+			setLoading(false);
+		});
+		setLoading(false);
+	};
 
   return (
     <div id={post.id} className="postPane">
@@ -84,11 +88,27 @@ const Post = ({ post, upVote, downVote }) => {
                   dateStyle: "long",
                   timeStyle: "short",
                 })}
-              </p>
-              <p className="timestamp">
-                {String(post.timeStamp) !== "undefined" && (
-                  <ReactTimeAgo date={String(post.timeStamp)} locale="en-US" />
-                )}
+              {" "}
+              •{" "}
+              {String(post.timeStamp) !== "undefined" && (
+                <ReactTimeAgo
+                  date={String(post.timeStamp)}
+                  locale="en-US"
+                  style={{ color: "grey" }}
+                />
+              )}
+			  </p>
+            </div>
+            <div>
+              <p
+                style={{
+                  marginTop: "0",
+                  fontSize: "0.8rem",
+                  color: "grey",
+                  textDecoration: "underline",
+                }}
+              >
+                Community
               </p>
             </div>
             <div className="postContent" onClick={handlePostClick}>

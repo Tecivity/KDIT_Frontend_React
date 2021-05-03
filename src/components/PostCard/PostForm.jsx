@@ -16,7 +16,7 @@ const PostForm = ({ updatePost }) => {
 	const defaultImage =
 		'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg';
 	const [data, setData] = useState([]);
-	const [selectedData, setSelectedData] = useState()
+	const [selectedData, setSelectedData] = useState();
 
 	//Contexts
 	const { session, user, userInfo } = useContext(SessionApi);
@@ -34,15 +34,15 @@ const PostForm = ({ updatePost }) => {
 	});
 	const [show, setShow] = useState(true);
 
-	const handleChange = e => {
-		setSelectedData(e)
+	const handleChange = (e) => {
+		setSelectedData(e);
 		console.log(selectedData);
-	}
+	};
 
 	//Effects
 	useEffect(() => {
 		setImageURL(userInfo.photoURL);
-		setData(userInfo.mySubCom)
+		setData(userInfo.mySubCom);
 	}, [userInfo]);
 
 	//Functions
@@ -82,8 +82,8 @@ const PostForm = ({ updatePost }) => {
 	}
 
 	const handleClick = async (e) => {
-		if(!selectedData){
-			return alert("please select subcom")
+		if (!selectedData) {
+			return alert('please select subcom');
 		}
 		if (post.content) {
 			const newPost = {
@@ -169,7 +169,6 @@ const PostForm = ({ updatePost }) => {
 										options={data}
 										value={selectedData}
 										onChange={handleChange}
-										// isMulti
 									/>
 								</div>
 								<button

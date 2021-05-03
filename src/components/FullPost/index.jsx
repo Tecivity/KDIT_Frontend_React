@@ -21,7 +21,6 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en";
 import ReactTimeAgo from "react-time-ago";
-
 //CSS
 import "./index.css";
 import "reactjs-popup/dist/index.css";
@@ -128,41 +127,38 @@ const FullPost = ({ post, id }) => {
 
   return (
     <div className="fullPane">
-      <div>
-        <div id={post.id} className="full-postPane">
-          <div className="full-infoPane">
-            <div className="full-votePane">
-              <button onClick={() => upVote(post)} className="full-voteUpBT">
-                <BiUpArrow size="25px" />
-              </button>
+      <div id={post.id} className="full-postPane">
+        <div className="full-infoPane">
+          <div className="full-votePane">
+            <button onClick={() => upVote(post)} className="full-voteUpBT">
+              <BiUpArrow size="25px" />
+            </button>
 
               <h3>{post.voteUp.length + post.voteDown.length}</h3>
 
-              <button
-                onClick={() => downVote(post)}
-                className="full-voteDownBT"
-              >
-                <BiDownArrow size="25px" />
-              </button>
-            </div>
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <h3>{totalComment}</h3>
-              <BiCommentDetail size="25px" style={{ marginLeft: "0.5rem" }} />
-            </div>
+            <button onClick={() => downVote(post)} className="full-voteDownBT">
+              <BiDownArrow size="25px" />
+            </button>
           </div>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <h3>{totalComment}</h3>
+            <BiCommentDetail size="25px" style={{ marginLeft: "0.5rem" }} />
+          </div>
+        </div>
 
-          <div>
-            <div className="full-post">
-              <div style={{ marginBottom: "1rem" }}>
-                <img
-                  src={postUser.photoURL}
-                  alt="full-profile picture"
-                  className="fullprofilePic"
-                  onClick={() => history.push(`/profile/${postUser.id}`)}
-                />
-              </div>
+        <div>
+          <div className="full-post">
+            <div style={{ marginBottom: "1rem" }}>
+              <img
+                src={postUser.photoURL}
+                alt="full-profile picture"
+                className="fullprofilePic"
+                onClick={() => history.push(`/profile/${postUser.id}`)}
+              />
+            </div>
 
-              <div className="full-postInfo">
+            <div className="full-postInfo">
+              <div>
                 <div className="full-postBy">
                   <p className="full-displayName">{postUser.displayName}</p>
                   <p className="timestamp">
@@ -171,9 +167,8 @@ const FullPost = ({ post, id }) => {
                     {new Date(post.timeStamp).toLocaleString([], {
                       dateStyle: "long",
                       timeStyle: "short",
-                    })}
-                  </p>
-                  <p className="timestamp">
+                    })}{" "}
+                    •{" "}
                     {String(post.timeStamp) !== "undefined" && (
                       <ReactTimeAgo
                         date={String(post.timeStamp)}
@@ -182,172 +177,181 @@ const FullPost = ({ post, id }) => {
                     )}
                   </p>
                 </div>
-                <div className="full-postContent">
-                  {post.content ? (
-                    edit ? (
-                      <div className="editModePane">
-                        <CKEditor
-                          className="ckEditor"
-                          editor={ClassicEditor}
-                          data={post.content}
-                          config={{
-                            mediaEmbed: {
-                              previewsInData: true,
-                            },
-                          }}
-                          onReady={(editor, config) => {
-                            // You can store the "editor" and use when it is needed.
-                            // console.log('Editor is ready to use!', editor);
-                            const data = editor.getData();
-                            setNewPost(data);
-                            if (editor) {
-                              editor.plugins.get(
-                                "FileRepository"
-                              ).createUploadAdapter = (loader) => {
-                                return new MyUploadAdapter(loader);
-                              };
-                            }
-                          }}
-                          onChange={(event, editor) => {
-                            const data = editor.getData();
-                            // console.log({ event, editor, data });
-                            setNewPost(data);
+                <div>
+                  <p
+                    style={{
+                      marginTop: "0",
+                      fontSize: "0.8rem",
+                      color: "grey",
+                      textDecoration: "underline",
+                    }}
+                  >
+                    Community
+                  </p>
+                </div>
+              </div>
+              <div className="full-postContent">
+                {post.content ? (
+                  edit ? (
+                    <div className="editModePane">
+                      <CKEditor
+                        className="ckEditor"
+                        editor={ClassicEditor}
+                        data={post.content}
+                        config={{
+                          mediaEmbed: {
+                            previewsInData: true,
+                          },
+                        }}
+                        onReady={(editor, config) => {
+                          // You can store the "editor" and use when it is needed.
+                          // console.log('Editor is ready to use!', editor);
+                          const data = editor.getData();
+                          setNewPost(data);
+                          if (editor) {
+                            editor.plugins.get(
+                              "FileRepository"
+                            ).createUploadAdapter = (loader) => {
+                              return new MyUploadAdapter(loader);
+                            };
+                          }
+                        }}
+                        onChange={(event, editor) => {
+                          const data = editor.getData();
+                          // console.log({ event, editor, data });
+                          setNewPost(data);
+                        }}
+                      />
+                      <button onClick={saveChange} className="savePostBtn">
+                        {"Save Change"}
+                      </button>
+                    </div>
+                  ) : (
+                    //Edit Post
+                    <p>{parse(post.content)}</p>
+                  )
+                ) : (
+                  <div></div>
+                )}
+
+                {/* แสดง Post */}
+              </div>
+            </div>
+            <div className="reportBtPane">
+              <button {...buttonProps} className="reportBt">
+                {isOpen ? (
+                  <IoIosArrowUp size="25px" />
+                ) : (
+                  <IoIosArrowDown size="25px" />
+                )}
+              </button>
+              <div className={isOpen ? "visible" : ""} role="menu">
+                {post.userUID === user.uid ? (
+                  <div>
+                    <button onClick={editPost} className="reportBt">
+                      {edit ? (
+                        <MdCancel
+                          size="25px"
+                          style={{
+                            fill: "#f48c51",
                           }}
                         />
-                        <button onClick={saveChange} className="savePostBtn">
-                          {"Save Change"}
-                        </button>
-                      </div>
-                    ) : (
-                      //Edit Post
-                      <p>{parse(post.content)}</p>
-                    )
-                  ) : (
-                    <div></div>
-                  )}
-
-                  {/* แสดง Post */}
-                </div>
-              </div>
-              <div className="reportBtPane">
-                <button {...buttonProps} className="reportBt">
-                  {isOpen ? (
-                    <IoIosArrowUp size="25px" />
-                  ) : (
-                    <IoIosArrowDown size="25px" />
-                  )}
-                </button>
-                <div className={isOpen ? "visible" : ""} role="menu">
-                  {post.userUID === user.uid ? (
-                    <div>
-                      <button onClick={editPost} className="reportBt">
-                        {edit ? (
-                          <MdCancel
-                            size="25px"
-                            style={{
-                              fill: "#f48c51",
-                            }}
-                          />
-                        ) : (
-                          <MdEdit
-                            size="25px"
-                            style={{
-                              fill: "#f48c51",
-                            }}
-                          />
-                        )}
-                      </button>
-                      {post.userUID == user.uid && (
-                        <button onClick={deletePost} className="reportBt">
-                          <MdDelete
-                            size="25px"
-                            style={{
-                              fill: "#f48c51",
-                            }}
-                          />
-                        </button>
+                      ) : (
+                        <MdEdit
+                          size="25px"
+                          style={{
+                            fill: "#f48c51",
+                          }}
+                        />
                       )}
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-                </div>
-
-                <Popup
-                  trigger={
-                    <button className="reportBt">
-                      <MdReportProblem
-                        size="25px"
-                        style={{ fill: "#f48c51" }}
-                      />
                     </button>
-                  }
-                  modal
-                  className="subPopup"
-                >
-                  {(close) => (
-                    <div className="modal">
-                      <div className="close" onClick={close}>
-                        <MdCancel size="30px" style={{ fill: "#f48c51" }} />
-                      </div>
-                      <div className="header">
-                        <h1>Report</h1>
-                      </div>
-                      <div className="content">
-                        <div className="reportPane">
-                          <h3>
-                            Please Inform Your Reason For Reporting This Post
-                          </h3>
-                          <div>
-                            <input
-                              type="checkbox"
-                              name="Abuse"
-                              id=""
-                              value="reason1"
-                            />
-                            <label htmlFor="">Reason 1</label>
-                          </div>
-                          <div>
-                            <input
-                              type="checkbox"
-                              name="Abuse"
-                              id=""
-                              value="reason2"
-                            />
-                            <label htmlFor="">Reason 2</label>
-                          </div>
-                          <div>
-                            <input
-                              type="checkbox"
-                              name="Abuse"
-                              id=""
-                              value="reason2"
-                            />
-                            <label htmlFor="">Reason 3</label>
-                          </div>
-                          <div>
-                            <h3>Additional Reason</h3>
-                            <textarea
-                              name=""
-                              id=""
-                              cols="30"
-                              rows="10"
-                            ></textarea>
-                          </div>
-                          <button>Report</button>
+                    {post.userUID == user.uid && (
+                      <button onClick={deletePost} className="reportBt">
+                        <MdDelete
+                          size="25px"
+                          style={{
+                            fill: "#f48c51",
+                          }}
+                        />
+                      </button>
+                    )}
+                  </div>
+                ) : (
+                  <div></div>
+                )}
+              </div>
+
+              <Popup
+                trigger={
+                  <button className={isOpen ? "reportBt" : "reportBtHide"}>
+                    <MdReportProblem size="25px" style={{ fill: "#f48c51" }} />
+                  </button>
+                }
+                modal
+                className="subPopup"
+              >
+                {(close) => (
+                  <div className="modal">
+                    <div className="close" onClick={close}>
+                      <MdCancel size="30px" style={{ fill: "#f48c51" }} />
+                    </div>
+                    <div className="header">
+                      <h1>Report</h1>
+                    </div>
+                    <div className="content">
+                      <div className="reportPane">
+                        <h3>
+                          Please Inform Your Reason For Reporting This Post
+                        </h3>
+                        <div>
+                          <input
+                            type="checkbox"
+                            name="Abuse"
+                            id=""
+                            value="reason1"
+                          />
+                          <label htmlFor="">Reason 1</label>
                         </div>
+                        <div>
+                          <input
+                            type="checkbox"
+                            name="Abuse"
+                            id=""
+                            value="reason2"
+                          />
+                          <label htmlFor="">Reason 2</label>
+                        </div>
+                        <div>
+                          <input
+                            type="checkbox"
+                            name="Abuse"
+                            id=""
+                            value="reason2"
+                          />
+                          <label htmlFor="">Reason 3</label>
+                        </div>
+                        <div>
+                          <h3>Additional Reason</h3>
+                          <textarea
+                            name=""
+                            id=""
+                            cols="30"
+                            rows="10"
+                          ></textarea>
+                        </div>
+                        <button>Report</button>
                       </div>
                     </div>
-                  )}
-                </Popup>
-              </div>
+                  </div>
+                )}
+              </Popup>
             </div>
           </div>
         </div>
-        {/* Comments */}
-        <div className="commentPane">
-          <Comment post={post} id={id} />
-        </div>
+      </div>
+      {/* Comments */}
+      <div className="commentPane">
+        <Comment post={post} id={id} />
       </div>
     </div>
   );
