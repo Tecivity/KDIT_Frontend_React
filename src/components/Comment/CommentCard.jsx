@@ -15,6 +15,7 @@ import en from 'javascript-time-ago/locale/en';
 import ReactTimeAgo from 'react-time-ago';
 //CSS
 import './index.css';
+import { CommentService } from '../../services';
 
 TimeAgo.addLocale(en);
 
@@ -85,7 +86,14 @@ const CommentCard = ({ comment }) => {
       });
   };
 
-	const handleDeleteComment = () => {};
+	const handleDeleteComment = () => {
+    if (!window.confirm('Are you sure for delete comment ❓')) {
+			return console.log('Cancel delete.');
+		}
+		CommentService.deleteComment(comment.id).then(() => {
+			window.location.reload()
+		});
+  };
 
 	return (
 		<div id={comment.id} className="commentPane">
