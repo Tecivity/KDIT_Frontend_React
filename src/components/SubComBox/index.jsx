@@ -10,9 +10,8 @@ const SubComBox = ({ subCom }) => {
 	//History
 	const history = useHistory();
 	const [isFollow, setIsFollow] = useState(false)
-	const [userData ,setUserData] = useState({})
 
-	const { user } = useContext(SessionApi);
+	const { userInfo, authListener } = useContext(SessionApi);
 
 
 	//Functions
@@ -21,41 +20,37 @@ const SubComBox = ({ subCom }) => {
 	};
 
 	const followOnClick = async () => {
-		const newFollowList = [...userData.mySubCom]
-		if (isFollow) {
-			newFollowList.pop(subCom.id)
-		} else {
-			newFollowList.push(subCom.id)
-		}
-		console.log(newFollowList)
-		setIsFollow(!isFollow)
-		// UserService.updateUser(userData.id, { mySubCom: newFollowList }).then(() => {
+		console.log(subCom)
+		// const newFollowList = [...userInfo.mySubCom]
+		// if (isFollow) {
+		// 	newFollowList.pop(subCom.id)
+		// } else {
+		// 	newFollowList.push(subCom.id)
+		// }
+		// console.log(newFollowList)
+		// // setIsFollow(!isFollow)
+		// UserService.updateUser(userInfo.id, { mySubCom: newFollowList }).then(() => {
 		// 	setIsFollow(!isFollow)
-		// 	UserService.getUser(user.uid).then(data=>{
-		// 		setUserData(data)
-		// 	})
+		// 	authListener()
 		// })
 	}
 
 	const fetchData = async () => {
-		UserService.getUser(user.uid).then(data=>{
-			setUserData(data)
-		})
-		if (subCom.id && userData) {
+		if (subCom.id) {
 			try {
-				if (userData.mySubCom.includes(subCom.id)) {
+				if (userInfo.mySubCom.includes(subCom.id)) {
 					setIsFollow(true)
 				}
 			} catch (err) {
-				UserService.updateUser(userData.id, { mySubCom: [] })
+				UserService.updateUser(userInfo.id, { mySubCom: [] })
 			}
-		}
-	};
+		};
+	}
 
 	//Effects
 	useEffect(() => {
 		fetchData();
-	}, []);
+	}, [subCom,isFollow]);
 
 	return (
 		<>

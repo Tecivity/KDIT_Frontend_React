@@ -14,7 +14,7 @@ const PostForm = ({ updatePost }) => {
 	//Variables
 	const defaultImage =
 		'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg';
-	const data = [
+	const [data,setData] = useState([
 		{
 			value: 'community1',
 			label: 'Community 1',
@@ -23,7 +23,7 @@ const PostForm = ({ updatePost }) => {
 			value: 'community2',
 			label: 'Community 2',
 		},
-	];
+	]);
 
 	//Contexts
 	const { session, user, userInfo } = useContext(SessionApi);
@@ -44,6 +44,7 @@ const PostForm = ({ updatePost }) => {
 	//Effects
 	useEffect(() => {
 		setImageURL(userInfo.photoURL);
+		setData(userInfo.mySubCom)
 	}, [userInfo]);
 
 	//Functions

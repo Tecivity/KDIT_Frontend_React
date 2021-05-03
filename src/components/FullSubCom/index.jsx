@@ -20,6 +20,7 @@ const FullSubCom = ({ subCom, update }) => {
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
 	const [isFollow, setIsFollow] = useState(false)
+	const [subComData, setSubComData] = useState({})
 
 	//Contexts
 	const { defaultBanner, userInfo, authListener } = useContext(SessionApi);
@@ -65,10 +66,15 @@ const FullSubCom = ({ subCom, update }) => {
 			setDescription(subCom.description);
 			setBannerURL(subCom.bannerURL);
 			setPhotoURL(subCom.photoURL);
+			setSubComData({
+				value: subCom.id,
+				label: subCom.name,
+			})
 			getPost(subCom.id);
 			console.log(posts)
 			try{
-				if (userInfo.mySubCom.includes(subCom.id)) {
+				const listSubCom = userInfo.mySubCom
+				if (listSubCom.some(listSubCom=>listSubCom['value'] == subCom.id)) {
 				setIsFollow(true)
 				}
 			}catch(err){
@@ -76,15 +82,14 @@ const FullSubCom = ({ subCom, update }) => {
 			}
 			
 		}
-
 	};
 
 	const followOnClick = async () => {
 		const newFollowList = [...userInfo.mySubCom]
 		if(isFollow){
-			newFollowList.pop(subCom.id)
+			newFollowList.pop(subComData)
 		}else{
-			newFollowList.push(subCom.id)
+			newFollowList.push(subComData)
 		}
 		console.log(newFollowList)
 		// setIsFollow(!isFollow)
@@ -92,7 +97,6 @@ const FullSubCom = ({ subCom, update }) => {
 			setIsFollow(!isFollow)
 			authListener()
 		})
-		
 	}
 
 	//Effects
