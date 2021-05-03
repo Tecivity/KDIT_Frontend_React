@@ -26,15 +26,15 @@ const CommentCard = ({ comment }) => {
   //States
   const [commentOwner, setcommentOwner] = useState({});
   const [edit, setEdit] = useState(false);
-  const [newComment, setNewComment] = useState(parse(comment.content));
+  const [newComment, setNewComment] = useState("");
 
   //Effects
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [comment]);
 
-  //Context
-  const { session } = useContext(SessionApi);
+  //Contexts
+  const { session, user, loading } = useContext(SessionApi);
 
   //Hstory
   const history = useHistory();
@@ -56,7 +56,7 @@ const CommentCard = ({ comment }) => {
           doc.data().email
         );
         setcommentOwner(pUser);
-        // console.log(commentOwner.displayName)
+        //  console.log(commentOwner.displayName)
       })
       .catch((err) => {
         console.log(err);
@@ -71,7 +71,19 @@ const CommentCard = ({ comment }) => {
     setNewComment(e.target.value);
   };
 
-  const handleSubmitComment = () => {};
+  const handleSubmitComment = (newContent) => {
+    firebase
+      .firestore()
+      .collection("comments")
+      .doc(comment.id)
+      .update({
+        content: newComment,
+      })
+      .then(() => {
+        console.log("Update comment to firestore");
+        window.location.reload();
+      });
+  };
 
   const handleDeleteComment = () => {};
 
@@ -119,40 +131,47 @@ const CommentCard = ({ comment }) => {
                 dateStyle: "long",
                 timeStyle: "short",
               })}
-            </p>   
+            </p>
             <p className="timestamp">
-               -{" "}
+              -{" "}
               {String(comment.timeStamp) !== "undefined" && (
                 <ReactTimeAgo date={String(comment.timeStamp)} locale="en-US" />
               )}
             </p>
-            <button className="editCommentBtn">
-              {edit ? (
-                <MdCancel
-                  size="20px"
-                  style={{
-                    marginLeft: "auto",
-                    fill: "#f48c51",
-                  }}
-                  onClick={handleEditComment}
-                />
-              ) : (
-                <MdEdit
-                  size="20px"
-                  style={{
-                    marginLeft: "auto",
-                    fill: "#f48c51",
-                  }}
-                  onClick={handleEditComment}
-                />
-              )}
-            </button>
-            <button onClick={handleDeleteComment} className="delCommentBtn">
-              <MdDelete
-                size="20px"
-                style={{ marginLeft: "auto", fill: "#f48c51" }}
-              />
-            </button>
+            {console.log(String(comment.userId))}
+            {comment.userId === user.uid ? (
+              <div>
+                <button className="editCommentBtn">
+                  {edit ? (
+                    <MdCancel
+                      size="20px"
+                      style={{
+                        marginLeft: "auto",
+                        fill: "#f48c51",
+                      }}
+                      onClick={handleEditComment}
+                    />
+                  ) : (
+                    <MdEdit
+                      size="20px"
+                      style={{
+                        marginLeft: "auto",
+                        fill: "#f48c51",
+                      }}
+                      onClick={handleEditComment}
+                    />
+                  )}
+                </button>
+                <button onClick={handleDeleteComment} className="delCommentBtn">
+                  <MdDelete
+                    size="20px"
+                    style={{ marginLeft: "auto", fill: "#f48c51" }}
+                  />
+                </button>
+              </div>
+            ) : (
+              <div></div>
+            )}
           </div>
           <div className="postContent">
             {edit && (
@@ -164,14 +183,15 @@ const CommentCard = ({ comment }) => {
                   rows="10"
                   className="editCommentArea"
                   onChange={handleChangeComment}
-                ></textarea>
+                >
+                  {comment.content}
+                </textarea>
                 <button className="saveComment" onClick={handleSubmitComment}>
                   Save
                 </button>
               </div>
             )}
-            <p>{parse(comment.content)}</p>
-            {/* แสดง Post */}
+            {!edit ? <p>{parse(comment.content)}</p> : <div></div>}
           </div>
         </div>
       </div>
