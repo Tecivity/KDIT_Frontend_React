@@ -14,6 +14,10 @@ import './index.css';
 import { getSuggestedQuery } from '@testing-library/dom';
 import { PostService, UserService } from '../../services';
 import 'react-image-crop/dist/ReactCrop.css';
+import ReactNotification from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
+import { store } from "react-notifications-component";
+import "animate.css";
 
 const Profile = ({ id }) => {
 	//States
@@ -44,6 +48,21 @@ const Profile = ({ id }) => {
 		UserService.updateUser(profile.id, newProfile).then((result) => {
 			console.log('Updated data');
 			setProfile({ ...profile, displayName, bannerURL, photoURL, bio });
+			store.addNotification({
+				title: "Please Insert The Story In The Editor.",
+				message:
+				  "We can't let you write an empty story! Please insert the story that you want to share.",
+				type: "warning",
+				insert: "top",
+				container: "bottom-right",
+				animationIn: ["animate__animated", "animate__flash"],
+				animationOut: ["animate__animated", "animate__zoomOut"],
+				dismiss: {
+				  duration: 8000,
+				  onScreen: true,
+				  pauseOnHover: true,
+				},
+			  });
 		});
 	};
 
@@ -84,6 +103,7 @@ const Profile = ({ id }) => {
 	return (
 		<>
 			<div className="profilePane">
+				{console.disableRedBox = true}
 				<div className="bannerImgPane">
 					<img
 						src={profile.bannerURL || defaultBanner}
