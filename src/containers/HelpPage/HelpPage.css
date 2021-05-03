@@ -38,5 +38,38 @@
 
 h1.helpHead {
 	text-align: center;
-	font-size: 35px;
+	font-size: 5em;
+	margin: 0;
+}
+
+@media only screen and (max-width: 800px) {
+	.helpPane {
+		position: absolute;
+		margin: 0;
+		width: 100%;
+		left: 0;
+
+		/* border: 1px solid lightgrey; */
+		padding-bottom: 5rem;
+	}
+
+	.topHelpBox {
+		margin-top: 1rem;
+		margin: 0 0;
+	}
+
+	.topHelpBox h1 {
+		font-size: 3rem;
+		margin-bottom: 1rem;
+	}
+
+	.helpBoxPane {
+		margin: 0;
+		margin-left: 0%;
+		padding: 0rem;
+
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
 }

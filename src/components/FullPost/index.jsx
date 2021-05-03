@@ -168,29 +168,43 @@ const FullPost = ({ post, id }) => {
 						</div>
 
 						<div className="full-postInfo">
-							<div className="full-postBy">
-								<p className="full-displayName">
-									{postUser.displayName}
-								</p>
-								<p className="timestamp">
-									{' '}
-									•{' '}
-									{new Date(post.timeStamp).toLocaleString(
-										[],
-										{
+							<div>
+								<div className="full-postBy">
+									<p className="full-displayName">
+										{postUser.displayName}
+									</p>
+									<p className="timestamp">
+										{' '}
+										•{' '}
+										{new Date(
+											post.timeStamp,
+										).toLocaleString([], {
 											dateStyle: 'long',
 											timeStyle: 'short',
-										},
-									)}
-								</p>
-								<p className="timestamp">
-									{String(post.timeStamp) !== 'undefined' && (
-										<ReactTimeAgo
-											date={String(post.timeStamp)}
-											locale="en-US"
-										/>
-									)}
-								</p>
+										})}
+									</p>
+									<p className="timestamp">
+										{String(post.timeStamp) !==
+											'undefined' && (
+											<ReactTimeAgo
+												date={String(post.timeStamp)}
+												locale="en-US"
+											/>
+										)}
+									</p>
+								</div>
+								<div>
+									<p
+										style={{
+											marginTop: '0',
+											fontSize: '0.8rem',
+											color: 'grey',
+											textDecoration: 'underline',
+										}}
+									>
+										Community
+									</p>
+								</div>
 							</div>
 							<div className="full-postContent">
 								{post.content ? (

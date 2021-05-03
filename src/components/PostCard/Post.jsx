@@ -99,6 +99,18 @@ const Post = ({ post, upVote, downVote }) => {
 								)}
 							</p>
 						</div>
+						<div>
+							<p
+								style={{
+									marginTop: '0',
+									fontSize: '0.8rem',
+									color: 'grey',
+									textDecoration: 'underline',
+								}}
+							>
+								Community
+							</p>
+						</div>
 						<div className="postContent" onClick={handlePostClick}>
 							<p>{parse(post.content)}</p>
 						</div>

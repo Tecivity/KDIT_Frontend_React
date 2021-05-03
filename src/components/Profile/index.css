@@ -163,7 +163,9 @@
 }
 
 .profileCard {
-	width: 95%;
+	width: 90%;
+
+	z-index: 19;
 
 	border-top: 1px solid lightgrey;
 }
