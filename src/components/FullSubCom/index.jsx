@@ -133,7 +133,9 @@ const FullSubCom = ({ subCom, update }) => {
 				<div className="bannerImgPane">
 					<img
 						src={subCom.bannerURL || defaultBanner}
-						onError={defaultBanner}
+						onError={(e) => {
+							e.src = defaultBanner;
+						}}
 						alt=""
 						className="bannerImg"
 						style={{ background: 'white' }}

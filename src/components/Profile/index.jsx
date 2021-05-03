@@ -14,10 +14,10 @@ import './index.css';
 import { getSuggestedQuery } from '@testing-library/dom';
 import { PostService, UserService } from '../../services';
 import 'react-image-crop/dist/ReactCrop.css';
-import ReactNotification from "react-notifications-component";
-import "react-notifications-component/dist/theme.css";
-import { store } from "react-notifications-component";
-import "animate.css";
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+import { store } from 'react-notifications-component';
+import 'animate.css';
 
 const Profile = ({ id }) => {
 	//States
@@ -49,20 +49,20 @@ const Profile = ({ id }) => {
 			console.log('Updated data');
 			setProfile({ ...profile, displayName, bannerURL, photoURL, bio });
 			store.addNotification({
-				title: "Please Insert The Story In The Editor.",
+				title: 'Please Insert The Story In The Editor.',
 				message:
-				  "We can't let you write an empty story! Please insert the story that you want to share.",
-				type: "warning",
-				insert: "top",
-				container: "bottom-right",
-				animationIn: ["animate__animated", "animate__flash"],
-				animationOut: ["animate__animated", "animate__zoomOut"],
+					"We can't let you write an empty story! Please insert the story that you want to share.",
+				type: 'warning',
+				insert: 'top',
+				container: 'bottom-right',
+				animationIn: ['animate__animated', 'animate__flash'],
+				animationOut: ['animate__animated', 'animate__zoomOut'],
 				dismiss: {
-				  duration: 8000,
-				  onScreen: true,
-				  pauseOnHover: true,
+					duration: 8000,
+					onScreen: true,
+					pauseOnHover: true,
 				},
-			  });
+			});
 		});
 	};
 
@@ -103,11 +103,13 @@ const Profile = ({ id }) => {
 	return (
 		<>
 			<div className="profilePane">
-				{console.disableRedBox = true}
+				{(console.disableRedBox = true)}
 				<div className="bannerImgPane">
 					<img
 						src={profile.bannerURL || defaultBanner}
-						// onError={defaultBanner}
+						onError={(e) => {
+							e.src = defaultBanner;
+						}}
 						alt=""
 						className="bannerImg"
 					/>
@@ -116,7 +118,9 @@ const Profile = ({ id }) => {
 					<div>
 						<img
 							src={profile.photoURL || defaultImage}
-							// onError={defaultImage}
+							onError={(e) => {
+								e.src = defaultImage;
+							}}
 							alt="profile picture"
 							className="full-profilePic"
 						/>
@@ -234,11 +238,12 @@ const Profile = ({ id }) => {
 											<button
 												className="btn"
 												onClick={updateProfile}
+												onClick={close}
 											>
 												<a
-													onClick={close}
 													style={{
 														color: 'white',
+														margin: '2rem',
 													}}
 												>
 													Save Changes
