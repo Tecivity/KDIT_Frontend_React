@@ -26,6 +26,8 @@ class UserService {
 				return result
 			})
 	}
+
+	
 }
 
 export default new UserService()

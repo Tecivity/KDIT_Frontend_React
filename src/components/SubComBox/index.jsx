@@ -84,7 +84,7 @@ const SubComBox = ({ subCom }) => {
 							margin: '0',
 						}}
 					>
-						{subCom.totalFollow} Members
+						{subCom.totalFollow.length} Members
 					</p>
 					<p
 						style={{
