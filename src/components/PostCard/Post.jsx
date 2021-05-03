@@ -205,7 +205,9 @@ const Post = ({ post }) => {
 					<div onClick={handlePostClick}>
 						<img
 							src={postUser.photoURL}
-							// onError={defaultImage}
+							onError={(e) => {
+								e.src = defaultImage;
+							}}
 							alt="profile picture"
 							className="profilePic"
 							onClick={() =>
@@ -272,7 +274,7 @@ const Post = ({ post }) => {
 						onClick={upVote}
 						className="voteUpBT"
 						style={{
-							background: isVoteUp ? 'green' : 'none',
+							background: isVoteUp ? '#c5ffae' : 'none',
 						}}
 					>
 						<BiUpArrow size="25px" />
@@ -284,7 +286,7 @@ const Post = ({ post }) => {
 						onClick={downVote}
 						className="voteDownBT"
 						style={{
-							background: isVoteDown ? 'red' : 'none',
+							background: isVoteDown ? '#ffaeae' : 'none',
 						}}
 					>
 						<BiDownArrow size="25px" />

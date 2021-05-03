@@ -53,7 +53,7 @@ const CustomHits = connectHits(({ hits, indice }) => {
 										</p>
 									</div>
 									<div className="explore-postContentPane">
-										{parse(hit.content)}
+										{parse(String(hit.content))}
 									</div>
 								</div>
 							</div>

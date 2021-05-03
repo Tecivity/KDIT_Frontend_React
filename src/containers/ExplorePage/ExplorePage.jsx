@@ -202,7 +202,7 @@ const ExplorePage = () => {
 					<CustomSearchBox setIndice={setIndice} />
 					{/* <CustomPagination /> */}
 					<CustomHits indice={indice} />
-					<Configure hitsPerPage={500} />
+					<Configure hitsPerPage={50} />
 				</InstantSearch>
 			</div>
 		</>
