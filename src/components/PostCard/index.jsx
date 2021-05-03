@@ -42,13 +42,11 @@ const Card = () => {
 
 	//Functions
 	const updatePost = (newPost) => {
-		// setPosts([newPost, ...posts])
 		fetchData();
 	};
 
 	//Functions
 	const upVote = (post) => {
-		// ref.doc(post.id).set({ ...post, voteUp: post.voteUp + 1 });
 		const voteDocument = firebase
 			.firestore()
 			.collection('votes')

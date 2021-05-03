@@ -2,7 +2,7 @@
 import React, { useState, useContext } from 'react';
 //Components
 import { SessionApi } from '../../hook/SessionApi';
-import { CommentService } from "../../services";
+import { CommentService } from '../../services';
 
 const CommentForm = ({ post, id }) => {
 	//States
@@ -52,11 +52,11 @@ const CommentForm = ({ post, id }) => {
 				voteDown: 0,
 				voteUp: 0,
 			};
-			CommentService.addComment(newComment).then(data=>{
-				console.log(data)
-				setComment('')
+			CommentService.addComment(newComment).then((data) => {
+				console.log(data);
+				setComment('');
 				window.location.reload();
-			  })
+			});
 		}
 	};
 
@@ -74,7 +74,7 @@ const CommentForm = ({ post, id }) => {
 					value={comment}
 				></textarea>
 				<button className="postCommentBtn" onClick={handleSubmit}>
-					Post
+					Comment
 				</button>
 			</div>
 		</div>

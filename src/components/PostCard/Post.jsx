@@ -1,173 +1,157 @@
 //React
-<<<<<<< HEAD
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { BiUpArrow, BiDownArrow, BiCommentDetail } from 'react-icons/bi';
 
-=======
-import React, { useState, useEffect, useContext } from "react";
-import { Redirect, Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-import { BiUpArrow, BiDownArrow, BiCommentDetail } from "react-icons/bi";
->>>>>>> d9805dd48e895b62b381485039fae961d2ee7f5c
 //Components
-import { SessionApi } from "../../hook/SessionApi";
+import { SessionApi } from '../../hook/SessionApi';
 //Firebase
-import firebase from "../../firebase";
-import { CommentService, PostService, UserService } from "../../services";
+import firebase from '../../firebase';
+import { CommentService, PostService, UserService } from '../../services';
 //External
-import parse from "html-react-parser";
-import TimeAgo from "javascript-time-ago";
-import en from "javascript-time-ago/locale/en";
-import ReactTimeAgo from "react-time-ago";
+import parse from 'html-react-parser';
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
+import ReactTimeAgo from 'react-time-ago';
 
 TimeAgo.addLocale(en);
 
 const Post = ({ post, upVote, downVote }) => {
-  //Variables
-  const defaultImage =
-    "https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg";
+	//Variables
+	const defaultImage =
+		'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg';
 
-  //States
-  const [postUser, setPostUser] = useState("");
-  const [totalComment, setTotalComment] = useState(0);
+	//States
+	const [postUser, setPostUser] = useState('');
+	const [totalComment, setTotalComment] = useState(0);
+	const [voteUp, setVoteUp] = useState(post.voteUp);
+	const [voteDown, setVoteDown] = useState(post.voteDown);
 
-  //Effects
-  useEffect(() => {
-    fetchData();
-  }, []);
+	//Effects
+	useEffect(() => {
+		fetchData();
+	}, []);
 
-<<<<<<< HEAD
 	//Context
 	const { session, user, loading, setLoading } = useContext(SessionApi);
-=======
-  //Context
-  const { session, user, loading } = useContext(SessionApi);
->>>>>>> d9805dd48e895b62b381485039fae961d2ee7f5c
 
-  //History
-  const history = useHistory();
+	//History
+	const history = useHistory();
 
-  //Functions
-  const handlePostClick = () => {
-    console.log("post clicked");
-    history.push(`/post/${post.id}`);
-  };
+	//Functions
+	const handlePostClick = () => {
+		console.log('post clicked');
+		history.push(`/post/${post.id}`);
+	};
 
-  const deletePost = () => {
-    if (!window.confirm("Are you sure for delete post ❓")) {
-      return console.log("Cancel delete.");
-    }
-    PostService.deletePost(post.id).then(() => {
-      window.location.reload();
-    });
-  };
+	const deletePost = () => {
+		if (!window.confirm('Are you sure for delete post ❓')) {
+			return console.log('Cancel delete.');
+		}
+		PostService.deletePost(post.id).then(() => {
+			window.location.reload();
+		});
+	};
 
-<<<<<<< HEAD
 	const fetchData = async () => {
-		setLoading(true);
 		UserService.getUser(post.userUID).then((data) => {
 			setPostUser(data);
-			setLoading(false);
 		});
 		CommentService.getCommentSize(post.id).then((data) => {
 			setTotalComment(data);
-			setLoading(false);
 		});
-		setLoading(false);
 	};
-=======
-  const fetchData = async () => {
-    UserService.getUser(post.userUID).then((data) => {
-      setPostUser(data);
-    });
-    CommentService.getCommentSize(post.id).then((data) => {
-      setTotalComment(data);
-    });
-  };
->>>>>>> d9805dd48e895b62b381485039fae961d2ee7f5c
 
-  return (
-    <div id={post.id} className="postPane">
-      <div>
-        <div className="post" onClick={handlePostClick}>
-          <div onClick={handlePostClick}>
-            <img
-              src={postUser.photoURL}
-              onError={defaultImage}
-              alt="profile picture"
-              className="profilePic"
-              onClick={() => history.push(`/profile/${postUser.id}`)}
-            />
-          </div>
+	return (
+		<div id={post.id} className="postPane">
+			<div>
+				<div className="post" onClick={handlePostClick}>
+					<div onClick={handlePostClick}>
+						<img
+							src={postUser.photoURL}
+							onError={defaultImage}
+							alt="profile picture"
+							className="profilePic"
+							onClick={() =>
+								history.push(`/profile/${postUser.id}`)
+							}
+						/>
+					</div>
 
-          <div className="postInfo" onClick={handlePostClick}>
-            <div className="postBy">
-              <p className="displayName">{postUser.displayName}</p>
-              <p className="timestamp">
-                {" "}
-                •{" "}
-                {new Date(post.timeStamp).toLocaleString([], {
-                  dateStyle: "long",
-                  timeStyle: "short",
-                })}
-              {" "}
-              •{" "}
-              {String(post.timeStamp) !== "undefined" && (
-                <ReactTimeAgo
-                  date={String(post.timeStamp)}
-                  locale="en-US"
-                  style={{ color: "grey" }}
-                />
-              )}
-			  </p>
-            </div>
-            <div>
-              <p
-                style={{
-                  marginTop: "0",
-                  fontSize: "0.8rem",
-                  color: "grey",
-                  textDecoration: "underline",
-                }}
-              >
-                Community
-              </p>
-            </div>
-            <div className="postContent" onClick={handlePostClick}>
-              <p>{parse(post.content)}</p>
-            </div>
-          </div>
-        </div>
-      </div>
+					<div className="postInfo" onClick={handlePostClick}>
+						<div className="postBy">
+							<p className="displayName">
+								{postUser.displayName}
+							</p>
+							<p className="timestamp">
+								{' '}
+								•{' '}
+								{new Date(post.timeStamp).toLocaleString([], {
+									dateStyle: 'long',
+									timeStyle: 'short',
+								})}{' '}
+								•{' '}
+								{String(post.timeStamp) !== 'undefined' && (
+									<ReactTimeAgo
+										date={String(post.timeStamp)}
+										locale="en-US"
+										style={{ color: 'grey' }}
+									/>
+								)}
+							</p>
+						</div>
+						<div>
+							<p
+								style={{
+									marginTop: '0',
+									fontSize: '0.8rem',
+									color: 'grey',
+									textDecoration: 'underline',
+								}}
+							>
+								Community
+							</p>
+						</div>
+						<div className="postContent" onClick={handlePostClick}>
+							<p>{parse(post.content)}</p>
+						</div>
+					</div>
+				</div>
+			</div>
 
-      <div className="infoPane">
-        <div className="votePane">
-          <div onClick={() => upVote(post)} className="voteUpBT">
-            <BiUpArrow size="25px" />
-          </div>
+			<div className="infoPane">
+				<div className="votePane">
+					<div onClick={() => upVote(post)} className="voteUpBT">
+						<BiUpArrow size="25px" />
+					</div>
 
-          <h4 style={{ margin: "0" }}> {post.voteUp + post.voteDown}</h4>
+					<h4 style={{ margin: '0' }}>
+						{' '}
+						{post.voteUp + post.voteDown}
+					</h4>
 
-          <div onClick={() => downVote(post)} className="voteDownBT">
-            <BiDownArrow size="25px" />
-          </div>
-        </div>
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
-          <div className="post-commentBtn" onClick={handlePostClick}>
-            <h4 style={{ margin: "0" }}>{totalComment}</h4>
-            <BiCommentDetail size="25px" style={{ marginLeft: "0.5rem" }} />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+					<div onClick={() => downVote(post)} className="voteDownBT">
+						<BiDownArrow size="25px" />
+					</div>
+				</div>
+				<div
+					style={{
+						display: 'flex',
+						flexDirection: 'row',
+						alignItems: 'center',
+					}}
+				>
+					<div className="post-commentBtn" onClick={handlePostClick}>
+						<h4 style={{ margin: '0' }}>{totalComment}</h4>
+						<BiCommentDetail
+							size="25px"
+							style={{ marginLeft: '0.5rem' }}
+						/>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default Post;
