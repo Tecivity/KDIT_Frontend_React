@@ -28,7 +28,7 @@ const Profile = ({ id }) => {
 	const [displayName, setDisplayName] = useState('');
 	const [bio, setBio] = useState('');
 	const [profile, setProfile] = useState({});
-	const [mouseDown, setMouseDown] = useState(false);
+	const [showSave, setShowSave] = useState(true);
 
 	//Contexts
 	const { user, defaultImage, defaultBanner } = useContext(SessionApi);
@@ -64,6 +64,7 @@ const Profile = ({ id }) => {
 				},
 			});
 		});
+		setShowSave(false);
 	};
 
 	const handleOnClick = () => {
@@ -205,9 +206,7 @@ const Profile = ({ id }) => {
 												/>
 											</div>
 
-											<label htmlFor="">
-												Display Name
-											</label>
+											<h3>Display Name</h3>
 											<input
 												type="text"
 												name="displayNames"
@@ -220,7 +219,7 @@ const Profile = ({ id }) => {
 												className="editInput"
 											/>
 
-											<label htmlFor="">Bio</label>
+											<h3>Bio</h3>
 											<input
 												type="text"
 												name="displayNames"
@@ -231,20 +230,22 @@ const Profile = ({ id }) => {
 												className="editInput"
 											/>
 
-											<button
-												className="btn"
-												onClick={updateProfile}
-												// onClick={close}
-											>
-												<a
-													style={{
-														color: 'white',
-														margin: '2rem',
-													}}
+											{showSave && (
+												<button
+													className="btn"
+													onClick={updateProfile}
+													// onClick={close}
 												>
-													Save Changes
-												</a>
-											</button>
+													<a
+														style={{
+															color: 'white',
+															margin: '2rem',
+														}}
+													>
+														Save Changes
+													</a>
+												</button>
+											)}
 										</div>
 									</div>
 								</div>
@@ -255,7 +256,6 @@ const Profile = ({ id }) => {
 					)}
 				</div>
 				<div className="profileCard">
-					{/* <PostForm updatePost={updatePost} /> */}
 					<div className="content">
 						{posts.map((post, i) => (
 							<Post key={i} post={post} />
