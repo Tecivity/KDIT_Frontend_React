@@ -10,6 +10,7 @@ import {
 	MdAccountCircle,
 } from 'react-icons/md';
 import { BiLogOut, BiLogIn } from 'react-icons/bi';
+import { useMediaQuery } from 'react-responsive';
 //Components
 import { SessionApi } from '../../hook/SessionApi';
 //CSS
@@ -25,6 +26,11 @@ export default function Navbar() {
 		help: false,
 		about: false,
 		profile: false,
+	});
+
+	//Media
+	const isMobile = useMediaQuery({
+		query: '(min-device-width: 1000px)',
 	});
 
 	//params
@@ -132,67 +138,71 @@ export default function Navbar() {
 						</h4>
 					</Link>
 
-					<Link
-						to="/help"
-						className="siteName"
-						onMouseOver={() =>
-							setMouseOver({ ...mouseOver, help: true })
-						}
-						onMouseLeave={() =>
-							setMouseOver({ ...mouseOver, help: false })
-						}
-						style={{
-							transform: menu === '/help' && 'scale(1.2)',
-						}}
-					>
-						<MdHelp
-							size="30px"
+					{isMobile && (
+						<Link
+							to="/help"
+							className="siteName"
+							onMouseOver={() =>
+								setMouseOver({ ...mouseOver, help: true })
+							}
+							onMouseLeave={() =>
+								setMouseOver({ ...mouseOver, help: false })
+							}
 							style={{
-								fill:
-									mouseOver.help || menu === '/help'
-										? '#f8640e'
-										: 'black',
-							}}
-						/>
-						<h4
-							style={{
-								color: menu === '/help' && '#f8640e',
+								transform: menu === '/help' && 'scale(1.2)',
 							}}
 						>
-							Help
-						</h4>
-					</Link>
+							<MdHelp
+								size="30px"
+								style={{
+									fill:
+										mouseOver.help || menu === '/help'
+											? '#f8640e'
+											: 'black',
+								}}
+							/>
+							<h4
+								style={{
+									color: menu === '/help' && '#f8640e',
+								}}
+							>
+								Help
+							</h4>
+						</Link>
+					)}
 
-					<Link
-						to="/about"
-						className="siteName"
-						onMouseOver={() =>
-							setMouseOver({ ...mouseOver, about: true })
-						}
-						onMouseLeave={() =>
-							setMouseOver({ ...mouseOver, about: false })
-						}
-						style={{
-							transform: menu === '/about' && 'scale(1.2)',
-						}}
-					>
-						<MdInfo
-							size="30px"
+					{isMobile && (
+						<Link
+							to="/about"
+							className="siteName"
+							onMouseOver={() =>
+								setMouseOver({ ...mouseOver, about: true })
+							}
+							onMouseLeave={() =>
+								setMouseOver({ ...mouseOver, about: false })
+							}
 							style={{
-								fill:
-									mouseOver.about || menu === '/about'
-										? '#f8640e'
-										: 'black',
-							}}
-						/>
-						<h4
-							style={{
-								color: menu === '/about' && '#f8640e',
+								transform: menu === '/about' && 'scale(1.2)',
 							}}
 						>
-							About Us
-						</h4>
-					</Link>
+							<MdInfo
+								size="30px"
+								style={{
+									fill:
+										mouseOver.about || menu === '/about'
+											? '#f8640e'
+											: 'black',
+								}}
+							/>
+							<h4
+								style={{
+									color: menu === '/about' && '#f8640e',
+								}}
+							>
+								About Us
+							</h4>
+						</Link>
+					)}
 
 					<Link
 						to="/profile"

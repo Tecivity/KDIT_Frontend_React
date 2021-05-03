@@ -303,7 +303,7 @@ h1.loginWarn {
 	border: none;
 	border-radius: 1rem;
 
-	transition: 0.2s;
+	transition: 0.1s;
 }
 
 .reportBt:hover {
@@ -325,7 +325,94 @@ div[role='menu'].visible {
 	visibility: visible;
 }
 
+.reportBtHide {
+	margin-left: auto;
+
+	background: none;
+	border: none;
+	border-radius: 1rem;
+
+	transition: 0.1s;
+	visibility: hidden;
+}
+
 .reportPane {
 	display: flex;
 	flex-direction: column;
+}
+
+@media only screen and (max-width: 800px) {
+	.fullPane {
+		position: absolute;
+		width: 100%;
+		left: 0%;
+		top: 0%;
+
+		z-index: -1;
+		font-family: DM Sans;
+
+		background: white;
+	}
+
+	.full-post {
+		display: flex;
+		flex-direction: row;
+		font-size: 1rem;
+
+		margin: 0;
+		padding-top: 1rem;
+
+		border: 2px solid #f48c51;
+		border-width: 2px 0px 0px 0px;
+		border-radius: 0;
+
+		background: white;
+
+		color: black;
+
+		transition: 0.2s;
+	}
+
+	.full-infoPane {
+		border-radius: 0;
+		margin: 0;
+		margin-bottom: 0rem;
+		padding: 5px;
+
+		display: flex;
+		flex-direction: row;
+		justify-content: space-around;
+		align-items: center;
+
+		background: white;
+
+		border: 2px solid #f48c51;
+		border-width: 0 0px 2px 0px;
+		border-radius: 0;
+
+		transition: 500ms;
+	}
+
+	.full-postBy {
+		flex-direction: column;
+
+		/* border: 1px solid black; */
+	}
+
+	.full-postPane {
+		/* background: #e8e8e8; */
+		/* border-radius: 10px; */
+
+		display: flex;
+		flex-direction: column-reverse;
+		margin: 0;
+		margin-bottom: 1rem;
+
+		border: 2px solid #f48c51;
+		border-radius: 0;
+
+		box-shadow: 0;
+
+		transition: 500ms;
+	}
 }

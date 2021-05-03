@@ -178,3 +178,41 @@
 	object-fit: cover;
 	object-position: 50% 50%;
 }
+
+@media only screen and (max-width: 800px) {
+	.profilePane {
+		position: absolute;
+		left: 0%;
+
+		width: 100%;
+
+		padding-top: 10rem;
+		padding-left: 0rem;
+
+		display: flex;
+		flex-direction: row;
+		align-items: flex-start;
+		justify-content: center;
+		flex-wrap: wrap;
+
+		overflow: auto;
+
+		border: none;
+	}
+
+	.edit-btn {
+		margin-top: 6rem;
+	}
+
+	.profileCard {
+		width: 100%;
+
+		border-top: 1px solid lightgrey;
+	}
+
+	.editProfile-content {
+		width: 100%;
+		height: 80%;
+		overflow-y: auto;
+	}
+}
