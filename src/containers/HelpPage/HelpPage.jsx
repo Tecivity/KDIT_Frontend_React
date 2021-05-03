@@ -79,14 +79,15 @@ const HelpPage = () => {
 			<Navbar />
 
 			<div className="helpPane">
-				<div class="topHelpBox">
-					<h1 class="helpHead">
+				<div className="topHelpBox">
+					<h1 className="helpHead">
 						<br></br>Need Help?
 					</h1>
-					<div class="helpBoxPane">
+					<div className="helpBoxPane">
 						{questions.map((question) => {
 							return (
 								<HelpBox
+									key={question.id}
 									id={question.id}
 									question={question.question}
 									answer={question.answer}
@@ -99,6 +100,7 @@ const HelpPage = () => {
 						{FAQ.map((question) => {
 							return (
 								<HelpBox
+									key={question.id}
 									id={question.id}
 									question={question.question}
 									answer={question.answer}

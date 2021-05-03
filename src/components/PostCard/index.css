@@ -43,13 +43,9 @@ h1.loginWarn {
 	transition: 0.2s;
 }
 
-.voteUpBT:focus {
-	background: rgb(230, 255, 242);
-}
-
 .voteUpBT:active {
 	transform: translateY(0rem);
-	box-shadow: 0 0rem #d37a46;
+	box-shadow: 0;
 }
 .voteUpBT:hover {
 	/* background: #f48c51; */
@@ -67,10 +63,6 @@ h1.loginWarn {
 	/* background: white; */
 
 	transition: 0.2s;
-}
-
-.voteDownBT:focus {
-	background-color: red;
 }
 
 .voteDownBT:active {

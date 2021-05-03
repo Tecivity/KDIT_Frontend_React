@@ -87,7 +87,7 @@ const Profile = ({ id }) => {
 				<div className="bannerImgPane">
 					<img
 						src={profile.bannerURL || defaultBanner}
-						onError={defaultBanner}
+						// onError={defaultBanner}
 						alt=""
 						className="bannerImg"
 					/>
@@ -96,7 +96,7 @@ const Profile = ({ id }) => {
 					<div>
 						<img
 							src={profile.photoURL || defaultImage}
-							onError={defaultImage}
+							// onError={defaultImage}
 							alt="profile picture"
 							className="full-profilePic"
 						/>

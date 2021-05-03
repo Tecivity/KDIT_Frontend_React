@@ -19,7 +19,6 @@ import {
 import { SearchBar, Navbar } from '../../components';
 //External
 import algoliasearch from 'algoliasearch/lite';
-import { stripHtml } from 'string-strip-html';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import ReactTimeAgo from 'react-time-ago';
@@ -37,7 +36,7 @@ const searchClient = algoliasearch(
 const CustomHits = connectHits(({ hits, indice }) => (
 	<div className="explore-hitContainer">
 		{hits.map((hit) => (
-			<p key={hit.objectID} className="explore-hit">
+			<div key={hit.objectID} className="explore-hit">
 				{indice === 'posts' && (
 					<div className="explore-postHitPane">
 						<div className="explore-userImgPane">
@@ -49,7 +48,7 @@ const CustomHits = connectHits(({ hits, indice }) => (
 									{String(hit.userUID)}
 									{/* แก้เป็น ชื่อ display */}
 								</h4>
-								<p
+								<div
 									style={{
 										display: 'inline',
 										marginLeft: '0.3rem',
@@ -79,7 +78,7 @@ const CustomHits = connectHits(({ hits, indice }) => (
 											},
 										)}
 									</span>
-								</p>
+								</div>
 							</div>
 							<div className="explore-postContentPane">
 								{parse(String(hit.content))}
@@ -105,13 +104,13 @@ const CustomHits = connectHits(({ hits, indice }) => (
 						</div>
 					</div>
 				)}
-			</p>
+			</div>
 		))}
 	</div>
 ));
 
 const CustomSearchBox = connectSearchBox(
-	({ currentRefinement, isSearchStalled, refine, setIndice }) => {
+	({ currentRefinement, refine, setIndice }) => {
 		//Functions
 		const changeIndice = (e) => {
 			setIndice(e.target.value);
@@ -184,7 +183,7 @@ const ExplorePage = () => {
 					<CustomSearchBox setIndice={setIndice} />
 					<CustomPagination />
 					<CustomHits indice={indice} />
-					<Configure hitsPerPage={4} />
+					<Configure hitsPerPage={15} />
 				</InstantSearch>
 			</div>
 		</>

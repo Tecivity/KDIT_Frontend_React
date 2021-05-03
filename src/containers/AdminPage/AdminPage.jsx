@@ -33,7 +33,7 @@ const searchClient = algoliasearch(
 const CustomHits = connectHits(({ hits, indice }) => (
 	<div className="explore-hitContainer">
 		{hits.map((hit) => (
-			<p key={hit.objectID} className="explore-hit">
+			<div key={hit.objectID} className="explore-hit">
 				{indice === 'posts' && (
 					<div>
 						<div className="explore-postHitPane">
@@ -95,7 +95,7 @@ const CustomHits = connectHits(({ hits, indice }) => (
 						</div>
 					</div>
 				)}
-			</p>
+			</div>
 		))}
 	</div>
 ));
@@ -174,7 +174,7 @@ const AdminPage = () => {
 					<CustomSearchBox setIndice={setIndice} />
 					<CustomPagination />
 					<CustomHits indice={indice} />
-					<Configure hitsPerPage={3} />
+					<Configure hitsPerPage={10} />
 				</InstantSearch>
 			</div>
 		</>
