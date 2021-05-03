@@ -65,7 +65,6 @@ const Post = ({ post }) => {
           setPostDummy(data)
           setVoteUpNum(data.voteUp.length)
           setVoteDownNum(data.voteDown.length)
-          console.log('Vote : ', voteUpNum, voteDownNum)
         })
       })
     } else if (voteUpList.includes(userInfo.id)) {
@@ -74,7 +73,6 @@ const Post = ({ post }) => {
         PostService.getPost(post.id).then(data => {
           setPostDummy(data)
           setVoteUpNum(data.voteUp.length)
-          console.log('Vote : ', voteUpNum, voteDownNum)
         })
       })
     } else {
@@ -83,7 +81,6 @@ const Post = ({ post }) => {
         PostService.getPost(post.id).then(data => {
           setPostDummy(data)
           setVoteUpNum(data.voteUp.length)
-          console.log('Vote : ', voteUpNum, voteDownNum)
         })
       })
     }
@@ -100,7 +97,6 @@ const Post = ({ post }) => {
           setPostDummy(data)
           setVoteUpNum(data.voteUp.length)
           setVoteDownNum(data.voteDown.length)
-          console.log('Vote : ', voteUpNum, voteDownNum)
         })
       })
     } else if (voteDownList.includes(userInfo.id)) {
@@ -109,7 +105,6 @@ const Post = ({ post }) => {
         PostService.getPost(post.id).then(data => {
           setPostDummy(data)
           setVoteDownNum(data.voteDown.length)
-          console.log('Vote : ', voteUpNum, voteDownNum)
         })
       })
     }else {
@@ -118,7 +113,6 @@ const Post = ({ post }) => {
         PostService.getPost(post.id).then(data => {
           setPostDummy(data)
           setVoteDownNum(data.voteDown.length)
-          console.log('Vote : ', voteUpNum, voteDownNum)
         })
       })
     }

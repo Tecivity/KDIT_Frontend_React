@@ -184,7 +184,7 @@ const PostForm = ({ updatePost }) => {
 				</div>
 			) : (
 				<div>
-					<h1 class="loginWarn">Please Login to Create Post</h1>
+					<h1 className="loginWarn">Please Login to Create Post</h1>
 				</div>
 			)}
 		</>

@@ -22,6 +22,7 @@ import algoliasearch from 'algoliasearch/lite';
 import { stripHtml } from 'string-strip-html';
 //CSS
 import '../ExplorePage/ExplorePage';
+// import './AdminPage';
 
 //Custom Components
 const searchClient = algoliasearch(
@@ -34,55 +35,61 @@ const CustomHits = connectHits(({ hits, indice }) => (
 		{hits.map((hit) => (
 			<p key={hit.objectID} className="explore-hit">
 				{indice === 'posts' && (
-					<div className="explore-postHitPane">
-						<div className="explore-userImgPane">
-							<h4>Post Owner Image</h4>
-						</div>
-						<div className="explore-postPane">
-							<div className=" explore-postInfoPane">
-								<h4 style={{ display: 'inline' }}>
-									{hit.userUID}
-								</h4>
-								<p
-									style={{
-										display: 'inline',
-										marginLeft: '0.3rem',
-									}}
-								>
-									- {hit.timeStamp}
-								</p>
+					<div>
+						<div className="explore-postHitPane">
+							<div className="explore-userImgPane">
+								<h4>Post Owner Image</h4>
 							</div>
-							<div className="explore-postContentPane">
-								{parse(hit.content)}
+							<div className="explore-postPane">
+								<div className=" explore-postInfoPane">
+									<h4 style={{ display: 'inline' }}>
+										{hit.userUID}
+									</h4>
+									<p
+										style={{
+											display: 'inline',
+											marginLeft: '0.3rem',
+										}}
+									>
+										- {hit.timeStamp}
+									</p>
+								</div>
+								<div className="explore-postContentPane">
+									{parse(hit.content)}
+								</div>
 							</div>
 						</div>
-						<div>
+						<div
+							style={{
+								borderTop: '1px solid black',
+							}}
+						>
 							<h4>Reasons For Reporting </h4>
 							<button>Delete</button>
 						</div>
 					</div>
 				)}
 				{indice === 'sub_community' && (
-					<div>
+					<div style={{ display: 'flex', flexDirection: 'column' }}>
 						<div className="explore-comInfo">
 							<h1>Com Img</h1>
 							{hit.name}
 							<h4>com des.</h4>
 						</div>
-						<div>
+						<div style={{ marginLeft: '1rem' }}>
 							<h4>Reasons For Reporting </h4>
 							<button>Delete</button>
 						</div>
 					</div>
 				)}
 				{indice === 'users' && (
-					<div>
+					<div style={{ display: 'flex', flexDirection: 'column' }}>
 						<div className="explore-comInfo">
 							<h1>User Img</h1>
 							{hit.email}
 							<h4>user bio.</h4>
 						</div>
-						<div>
+						<div style={{ marginLeft: '1rem', width: '50%' }}>
 							<h4>Reasons For Reporting </h4>
 							<button>BAN</button>
 						</div>
@@ -162,7 +169,7 @@ const AdminPage = () => {
 	return (
 		<>
 			<Navbar />
-			<div className="explorePane">
+			<div className="explorePane" style={{ width: '60%' }}>
 				<InstantSearch searchClient={searchClient} indexName={indice}>
 					<CustomSearchBox setIndice={setIndice} />
 					<CustomPagination />

@@ -9,7 +9,7 @@ const CommentForm = ({ post, id }) => {
 	const [comment, setComment] = useState('');
 
 	//Contexts
-	const { user } = useContext(SessionApi);
+	const { session, user } = useContext(SessionApi);
 
 	//Functions
 	const handleOnChange = (e) => {
@@ -63,19 +63,30 @@ const CommentForm = ({ post, id }) => {
 	return (
 		<div>
 			<div className="commentForm">
-				<textarea
-					name=""
-					id=""
-					cols="30"
-					rows="5"
-					placeholder="What's Your Thought About This..."
-					className="commentTextarea"
-					onChange={handleOnChange}
-					value={comment}
-				></textarea>
-				<button className="postCommentBtn" onClick={handleSubmit}>
-					Submit Comment
-				</button>
+				{session ? (
+					<>
+						<textarea
+							name=""
+							id=""
+							cols="30"
+							rows="5"
+							placeholder="What's Your Thought About This..."
+							className="commentTextarea"
+							onChange={handleOnChange}
+							value={comment}
+						></textarea>
+						<button
+							className="postCommentBtn"
+							onClick={handleSubmit}
+						>
+							Submit Comment
+						</button>
+					</>
+				) : (
+					<h3 style={{ textAlign: 'center' }}>
+						Please Login To Comment Post
+					</h3>
+				)}
 			</div>
 		</div>
 	);
