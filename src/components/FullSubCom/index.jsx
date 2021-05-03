@@ -161,32 +161,32 @@ const FullSubCom = ({ subCom, update }) => {
     fetchData();
   }, [subCom]);
 
-  return (
-    <div className="fullComPane">
-      <div className="comInfoPane">
-        <div className="bannerImgPane">
-          <img
-            src={subCom.bannerURL || defaultBanner}
-            onError={defaultBanner}
-            alt=""
-            className="bannerImg"
-            style={{ background: "white" }}
-          />
-        </div>
-        <div className="subComImagePane">
-          <img src={subCom.photoURL} alt="" className="subComImg" />
-        </div>
-        <h2 style={{ marginBottom: "0" }}>{subCom.name}</h2>
-        <p
-          style={{
-            fontSize: "0.8rem",
-            display: "inline",
-            color: "grey",
-            margin: "0",
-          }}
-        >
-          {voteNumber} Members
-        </p>
+	return (
+		<div className="fullComPane">
+			<div className="comInfoPane">
+				<div className="bannerImgPane">
+					<img
+						src={subCom.bannerURL || defaultBanner}
+						onError={defaultBanner}
+						alt=""
+						className="bannerImg"
+						style={{ background: 'white' }}
+					/>
+				</div>
+				<div className="subComImagePane">
+					<img src={subCom.photoURL} alt="" className="subComImg" />
+				</div>
+				<h2 style={{ marginBottom: '0' }}>{subCom.name}</h2>
+				<p
+					style={{
+						fontSize: '0.8rem',
+						display: 'inline',
+						color: 'grey',
+						margin: '0',
+					}}
+				>
+					{voteNumber} Members
+				</p>
 
         <p>{subCom.description}</p>
         {isFollow ? (
@@ -203,36 +203,53 @@ const FullSubCom = ({ subCom, update }) => {
           </>
         )}
 
-        {userInfo.id == subCom.ownerUID ? (
-          <>
-            <Popup
-              trigger={
-                <button className="editCombtn" onClick={handleOnClick}>
-                  Edit
-                </button>
-              }
-              modal
-              className="comPopup"
-            >
-              {(close) => (
-                <div className="modal">
-                  <div className="close" onClick={close}>
-                    <MdCancel size="30px" style={{ fill: "#f48c51" }} />
-                  </div>
-                  <div className="header">
-                    <h1
-                      style={{
-                        paddingBottom: "0.5rem",
-                        borderBottom: "1px solid lightgrey",
-                      }}
-                    >
-                      Edit Community
-                    </h1>
-                  </div>
-                  <div className="content">
-                    <div className="fullsubcomForm">
-                      <div className="editSubComForm">
-                        <h1 htmlFor="">Profile Picture</h1>
+				{userInfo.id == subCom.ownerUID ? (
+					<>
+						<Popup
+							trigger={
+								<>
+									<button
+										className="editCombtn"
+										onClick={handleOnClick}
+									>
+										Edit
+									</button>
+									<button
+										className="editCombtn"
+										onClick={handleOnClick}
+									>
+										Delete
+									</button>
+								</>
+							}
+							modal
+							className="comPopup"
+						>
+							{(close) => (
+								<div className="modal">
+									<div className="close" onClick={close}>
+										<MdCancel
+											size="30px"
+											style={{ fill: '#f48c51' }}
+										/>
+									</div>
+									<div className="header">
+										<h1
+											style={{
+												paddingBottom: '0.5rem',
+												borderBottom:
+													'1px solid lightgrey',
+											}}
+										>
+											Edit Community
+										</h1>
+									</div>
+									<div className="content">
+										<div className="fullsubcomForm">
+											<div className="editSubComForm">
+												<h1 htmlFor="">
+													Profile Picture
+												</h1>
 
                         <FileUpload url={photoURL} setUrl={setPhotoURL} />
 

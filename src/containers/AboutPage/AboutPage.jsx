@@ -21,8 +21,8 @@ const AboutPage = () => {
 			<Navbar />
 			<div className="about-Pane">
 				<div style={{ margin: '1rem', paddingTop: '5rem' }}>
-					<h1 class="about-heading">Connect </h1>
-					<h1 class="about-orangeHead">NISIT</h1>
+					<h1 className="about-heading">Connect </h1>
+					<h1 className="about-orangeHead">NISIT</h1>
 					<h1 style={{ display: 'inline' }}> Together</h1>
 					<h3>
 						"Nisit is home to many communities in KMITL, aims to
