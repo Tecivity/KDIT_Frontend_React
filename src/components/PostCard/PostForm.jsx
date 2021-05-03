@@ -14,16 +14,8 @@ const PostForm = ({ updatePost }) => {
 	//Variables
 	const defaultImage =
 		'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg';
-	const [data,setData] = useState([
-		{
-			value: 'community1',
-			label: 'Community 1',
-		},
-		{
-			value: 'community2',
-			label: 'Community 2',
-		},
-	]);
+	const [data, setData] = useState([]);
+	const [selectedData, setSelectedData] = useState({})
 
 	//Contexts
 	const { session, user, userInfo } = useContext(SessionApi);
@@ -40,6 +32,11 @@ const PostForm = ({ updatePost }) => {
 		voteDown: 0,
 	});
 	const [show, setShow] = useState(true);
+
+	const handleChange = e => {
+		setSelectedData(e)
+		console.log(selectedData);
+	}
 
 	//Effects
 	useEffect(() => {
@@ -89,7 +86,7 @@ const PostForm = ({ updatePost }) => {
 				...post,
 				timeStamp: currentDate() + 'T' + currentTime(),
 				userUID: user.uid,
-				subComUID: '8bDoItM7A7pZZgKO45UK',
+				subComUID: selectedData.value,
 			};
 			firebase
 				.firestore()
@@ -164,7 +161,12 @@ const PostForm = ({ updatePost }) => {
 						<div className="postText">
 							<div className="postOption">
 								<div className="selectCom">
-									<Select options={data} isMulti />
+									<Select
+										options={data}
+										value={selectedData}
+										onChange={handleChange}
+										// isMulti
+									/>
 								</div>
 								<button
 									onClick={handleClick}
