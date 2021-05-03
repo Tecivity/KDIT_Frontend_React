@@ -135,15 +135,14 @@ const CommentCard = ({ comment }) => {
             </p>
             {/* <p className="username">@{comment.userId}</p> */}
             <p className="timestamp">
-              {" "}
-              -{" "}
+            {" "}
+                  •{" "}
               {new Date(comment.timeStamp).toLocaleString([], {
                 dateStyle: "long",
                 timeStyle: "short",
               })}
-            </p>
-            <p className="timestamp">
-              -{" "}
+            {" "}
+                  •{" "}
               {String(comment.timeStamp) !== "undefined" && (
                 <ReactTimeAgo date={String(comment.timeStamp)} locale="en-US" />
               )}
