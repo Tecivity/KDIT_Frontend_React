@@ -11,11 +11,6 @@ const FullSubComPage = () => {
 	//States
 	const [subCom, setSubCom] = useState({});
 
-	//Effects
-	useEffect(() => {
-		fetchData();
-	}, []);
-
 	//Params
 	const { id } = useParams();
 
@@ -48,6 +43,11 @@ const FullSubComPage = () => {
 				setSubCom(newSubCom)
 			});
 	};
+
+	//Effects
+	useEffect(() => {
+		fetchData();
+	}, []);
 
 	//Render
 	return (

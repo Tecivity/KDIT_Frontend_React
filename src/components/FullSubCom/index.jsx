@@ -9,7 +9,7 @@ import FileUpload from '../../firebase/FileUpload';
 //Firebase
 import firebase from '../../firebase';
 import './index.css';
-import { UserService } from '../../services';
+import { SubComService, UserService } from '../../services';
 
 const FullSubCom = ({ subCom, update }) => {
 	//States
@@ -19,8 +19,10 @@ const FullSubCom = ({ subCom, update }) => {
 	const [bannerURL, setBannerURL] = useState('');
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
-	const [isFollow, setIsFollow] = useState(false);
-	const [subComData, setSubComData] = useState({});
+	const [isFollow, setIsFollow] = useState(false)
+	const [subComData, setSubComData] = useState({})
+	const [subComDummy, setSubComDummy] = useState({})
+	const [voteNumber, setVoteNumber] = useState()
 
 	//Contexts
 	const { defaultBanner, userInfo, authListener } = useContext(SessionApi);
@@ -37,7 +39,7 @@ const FullSubCom = ({ subCom, update }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const newSubCom = {
-			...subCom,
+			...subComDummy,
 			name,
 			description,
 			bannerURL,
@@ -62,47 +64,55 @@ const FullSubCom = ({ subCom, update }) => {
 
 	const fetchData = async () => {
 		if (subCom.id) {
+			setSubComDummy(subCom)
 			setName(subCom.name);
 			setDescription(subCom.description);
 			setBannerURL(subCom.bannerURL);
 			setPhotoURL(subCom.photoURL);
+			setVoteNumber(subCom.totalFollow.length)
 			setSubComData({
 				value: subCom.id,
 				label: subCom.name,
 			});
 			getPost(subCom.id);
-			console.log(posts);
 			try {
-				const listSubCom = userInfo.mySubCom;
-				if (
-					listSubCom.some(
-						(listSubCom) => listSubCom['value'] == subCom.id,
-					)
-				) {
-					setIsFollow(true);
+				const listSubCom = userInfo.mySubCom
+				if (listSubCom.some(listSubCom => listSubCom['value'] == subCom.id)) {
+					setIsFollow(true)
 				}
 			} catch (err) {
-				UserService.updateUser(userInfo.id, { mySubCom: [] });
+				UserService.updateUser(userInfo.id, { mySubCom: [] })
 			}
 		}
 	};
 
 	const followOnClick = async () => {
-		const newFollowList = [...userInfo.mySubCom];
+		const newFollowList = [...userInfo.mySubCom]
+		const newTotalFollow = subComDummy.totalFollow
 		if (isFollow) {
-			newFollowList.pop(subComData);
+			newFollowList.pop(subComData)
+			newTotalFollow.pop(userInfo.id)
 		} else {
-			newFollowList.push(subComData);
+			newFollowList.push(subComData)
+			newTotalFollow.push(userInfo.id)
 		}
-		console.log(newFollowList);
+		console.log(newFollowList)
+		console.log(newTotalFollow)
 		// setIsFollow(!isFollow)
-		UserService.updateUser(userInfo.id, { mySubCom: newFollowList }).then(
-			() => {
-				setIsFollow(!isFollow);
-				authListener();
-			},
-		);
-	};
+
+		SubComService.updateSubCom(subCom.id, { totalFollow: newTotalFollow }).then(() => {
+			console.log('update totalFollow success')
+			SubComService.getSubCom(subCom.id).then((data) => {
+				setSubComDummy(data)
+				setVoteNumber(data.totalFollow.length)
+				console.log('update totalFollow success')
+			})
+		})
+		UserService.updateUser(userInfo.id, { mySubCom: newFollowList }).then(() => {
+			setIsFollow(!isFollow)
+			authListener()
+		})
+	}
 
 	//Effects
 	useEffect(() => {
@@ -125,6 +135,17 @@ const FullSubCom = ({ subCom, update }) => {
 					<img src={subCom.photoURL} alt="" className="subComImg" />
 				</div>
 				<h2 style={{ marginBottom: '0' }}>{subCom.name}</h2>
+					<p
+						style={{
+							fontSize: '0.8rem',
+							display: 'inline',
+							color: 'grey',
+							margin: '0',
+						}}
+					>
+						{voteNumber} Members
+					</p>
+
 				<p>{subCom.description}</p>
 				{isFollow ? (
 					<>
