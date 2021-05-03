@@ -9,6 +9,7 @@ export const SessionProvider = ({ children }) => {
     const [userInfo,setUserInfo] = useState('')
     const [session,setSession] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [isAdmin, setIsAdmin] = useState(false)
     const defaultImage = 'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg'
     const defaultBanner = "https://images7.alphacoders.com/110/thumbbig-1104854.jpg"
 
@@ -22,6 +23,9 @@ export const SessionProvider = ({ children }) => {
                 setLoading(false)
                 UserService.getUser(user.uid).then(data=>{
                     setUserInfo(data)
+                    if(data.role == 'admin' || data.role == 'owner'){
+                        setIsAdmin(true)
+                    }
                 })
             } else {
                 setUser('')
@@ -53,7 +57,8 @@ export const SessionProvider = ({ children }) => {
                 setLoading,
                 defaultImage,
                 defaultBanner,
-                userInfo
+                userInfo,
+                isAdmin
                 }}>
             {children}
         </SessionApi.Provider>

@@ -39,7 +39,7 @@ export default function Navbar() {
 	const menu = window.location.pathname;
 
 	//Context
-	const { session, handleLogout } = React.useContext(SessionApi);
+	const { session, handleLogout, isAdmin } = React.useContext(SessionApi);
 
 	//Functions
 
@@ -236,39 +236,44 @@ export default function Navbar() {
 							Profile
 						</h4>
 					</Link>
-
-					{isMobile && (
-						<Link
-							to="/admin"
-							className="siteName"
-							onMouseOver={() =>
-								setMouseOver({ ...mouseOver, admin: true })
-							}
-							onMouseLeave={() =>
-								setMouseOver({ ...mouseOver, admin: false })
-							}
-							style={{
-								transform: menu === '/admin' && 'scale(1.2)',
-							}}
-						>
-							<MdWidgets
-								size="30px"
+					{isAdmin ? <div>
+						{isMobile && (
+							<Link
+								to="/admin"
+								className="siteName"
+								onMouseOver={() =>
+									setMouseOver({ ...mouseOver, admin: true })
+								}
+								onMouseLeave={() =>
+									setMouseOver({ ...mouseOver, admin: false })
+								}
 								style={{
-									fill:
-										mouseOver.admin || menu === '/admin'
-											? '#f8640e'
-											: 'black',
-								}}
-							/>
-							<h4
-								style={{
-									color: menu === '/admin' && '#f8640e',
+									transform: menu === '/admin' && 'scale(1.2)',
 								}}
 							>
-								Manage
+								<MdWidgets
+									size="30px"
+									style={{
+										fill:
+											mouseOver.admin || menu === '/admin'
+												? '#f8640e'
+												: 'black',
+									}}
+								/>
+								<h4
+									style={{
+										color: menu === '/admin' && '#f8640e',
+									}}
+								>
+									Manage
 							</h4>
-						</Link>
-					)}
+							</Link>
+						)}
+
+					</div>
+						:
+						<></>}
+
 				</div>
 				{session ? (
 					<Link to="/auth" onClick={() => handleLogout()}>
