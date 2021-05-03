@@ -67,7 +67,7 @@ const Post = ({ post, upVote, downVote }) => {
 					<div onClick={handlePostClick}>
 						<img
 							src={postUser.photoURL}
-							onError={defaultImage}
+							// onError={defaultImage}
 							alt="profile picture"
 							className="profilePic"
 							onClick={() =>
@@ -122,7 +122,7 @@ const Post = ({ post, upVote, downVote }) => {
 							</p>
 						</div>
 						<div className="postContent" onClick={handlePostClick}>
-							<p>{parse(post.content)}</p>
+							{parse(post.content)}
 						</div>
 					</div>
 				</div>
