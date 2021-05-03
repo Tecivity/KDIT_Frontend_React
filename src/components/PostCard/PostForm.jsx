@@ -9,13 +9,14 @@ import MyUploadAdapter from '../../firebase/ckeditor_image_firebase';
 //External
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { BiFontSize } from 'react-icons/bi';
 
 const PostForm = ({ updatePost }) => {
 	//Variables
 	const defaultImage =
 		'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg';
 	const [data, setData] = useState([]);
-	const [selectedData, setSelectedData] = useState({})
+	const [selectedData, setSelectedData] = useState()
 
 	//Contexts
 	const { session, user, userInfo } = useContext(SessionApi);
@@ -81,6 +82,9 @@ const PostForm = ({ updatePost }) => {
 	}
 
 	const handleClick = async (e) => {
+		if(!selectedData){
+			return alert("please select subcom")
+		}
 		if (post.content) {
 			const newPost = {
 				...post,
