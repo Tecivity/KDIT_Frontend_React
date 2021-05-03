@@ -9,6 +9,7 @@ import FileUpload from '../../firebase/FileUpload';
 //Firebase
 import firebase from '../../firebase';
 import './index.css';
+import { UserService } from '../../services';
 
 const FullSubCom = ({ subCom, update }) => {
 	//States
@@ -18,9 +19,11 @@ const FullSubCom = ({ subCom, update }) => {
 	const [bannerURL, setBannerURL] = useState('');
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
+	const [isFollow, setIsFollow] = useState(false)
+	const [subComData, setSubComData] = useState({})
 
 	//Contexts
-	const { defaultBanner, userInfo, user } = useContext(SessionApi);
+	const { defaultBanner, userInfo, authListener } = useContext(SessionApi);
 
 	//Functions
 	const handleOnClick = () => {
@@ -63,11 +66,38 @@ const FullSubCom = ({ subCom, update }) => {
 			setDescription(subCom.description);
 			setBannerURL(subCom.bannerURL);
 			setPhotoURL(subCom.photoURL);
+			setSubComData({
+				value: subCom.id,
+				label: subCom.name,
+			})
 			getPost(subCom.id);
 			console.log(posts)
+			try{
+				const listSubCom = userInfo.mySubCom
+				if (listSubCom.some(listSubCom=>listSubCom['value'] == subCom.id)) {
+				setIsFollow(true)
+				}
+			}catch(err){
+				UserService.updateUser(userInfo.id,{mySubCom:[]})
+			}
+			
 		}
-		
 	};
+
+	const followOnClick = async () => {
+		const newFollowList = [...userInfo.mySubCom]
+		if(isFollow){
+			newFollowList.pop(subComData)
+		}else{
+			newFollowList.push(subComData)
+		}
+		console.log(newFollowList)
+		// setIsFollow(!isFollow)
+		UserService.updateUser(userInfo.id,{mySubCom:newFollowList}).then(()=>{
+			setIsFollow(!isFollow)
+			authListener()
+		})
+	}
 
 	//Effects
 	useEffect(() => {
@@ -90,7 +120,16 @@ const FullSubCom = ({ subCom, update }) => {
 				</div>
 				<h2 style={{ marginBottom: '0' }}>{subCom.name}</h2>
 				<p>{subCom.description}</p>
-				<button className="subcom-btn">Follow</button>
+				{isFollow ? (
+					<>
+						<button className="subcom-btn" onClick={followOnClick}>Followed</button>
+					</>
+				) : (
+					<>
+						<button className="subcom-btn" onClick={followOnClick}>Follow</button>
+					</>
+				)}
+
 
 				{userInfo.id == subCom.ownerUID ? (
 					<>

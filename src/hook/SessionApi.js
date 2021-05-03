@@ -1,6 +1,7 @@
 import React,{createContext, useState} from 'react'
 import firebase from '../firebase'
 import { User } from '../firebase/models' 
+import { UserService } from '../services'
 
 export const SessionApi = createContext()
 export const SessionProvider = ({ children }) => {
@@ -11,26 +12,15 @@ export const SessionProvider = ({ children }) => {
     const defaultImage = 'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg'
     const defaultBanner = "https://images7.alphacoders.com/110/thumbbig-1104854.jpg"
 
-    const getUserInfo = (id) => {
-        return firebase
-            .firestore()
-            .collection('users')
-            .doc(id)
-            .get()
-            .then(doc => {
-                return({id:doc.id, ...doc.data()})
-            })
-    }
-
     const authListener = () => {
         setLoading(true)
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
-                console.log(user)
+                // console.log(user)
                 setUser(user)
                 setSession(true)
                 setLoading(false)
-                getUserInfo(user.uid).then(data=>{
+                UserService.getUser(user.uid).then(data=>{
                     setUserInfo(data)
                 })
             } else {
@@ -63,8 +53,7 @@ export const SessionProvider = ({ children }) => {
                 setLoading,
                 defaultImage,
                 defaultBanner,
-                userInfo,
-                getUserInfo
+                userInfo
                 }}>
             {children}
         </SessionApi.Provider>
