@@ -15,13 +15,15 @@
 
 .trends {
 	position: relative;
-	margin-top: 2rem;
+	margin: 1rem;
 	width: 90%;
 	height: 80%;
-
-	margin: 0 auto;
 
 	background: rgb(247, 247, 247);
 	border-radius: 1rem;
 	z-index: -1;
+}
+
+.each-slide {
+	margin: 2rem;
 }

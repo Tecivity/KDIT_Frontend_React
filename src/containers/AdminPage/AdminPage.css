@@ -1,0 +1,16 @@
+.adminPane {
+	position: absolute;
+	width: 43%;
+	height: 100%;
+	left: 25%;
+	top: 5%;
+	padding: 0;
+	padding-left: 5rem;
+
+	border-left: 1px solid lightgrey;
+
+	z-index: -1;
+	font-family: DM Sans;
+
+	background: white;
+}

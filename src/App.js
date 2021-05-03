@@ -57,7 +57,7 @@ const Routes = () => {
 			<Route exact path="/community/:id" component={FullSubComPage} />
 			<Route exact path="/explore" component={ExplorePage} />
 			<Route exact path="/welcome" component={WelcomePage} />
-			<Route exact path="/admin" component={AdminPage} />
+			<ProtectedAdmin exact isAdmin={Session.isAdmin} path="/admin" component={AdminPage} />
 			<ProtectedRoute
 				auth={Session.session}
 				exact
@@ -81,6 +81,15 @@ const ProtectedRoute = ({ auth, component: Component, ...rest }) => {
 		<Route
 			{...rest}
 			render={() => (auth ? <Component /> : <Redirect to="/auth" />)}
+		/>
+	);
+};
+
+const ProtectedAdmin = ({ isAdmin, component: Component, ...rest }) => {
+	return (
+		<Route
+			{...rest}
+			render={() => (isAdmin ? <Component /> : <Redirect to="/" />)}
 		/>
 	);
 };

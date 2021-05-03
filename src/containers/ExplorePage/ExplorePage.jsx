@@ -36,7 +36,6 @@ const searchClient = algoliasearch(
 
 const CustomHits = connectHits(({ hits, indice }) => (
   <div className="explore-hitContainer">
-    {console.log(hits)}
     {hits.map((hit) => (
       <p key={hit.objectID} className="explore-hit">
         {indice === "posts" && (

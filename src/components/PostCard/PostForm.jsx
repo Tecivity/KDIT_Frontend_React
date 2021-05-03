@@ -34,8 +34,8 @@ const PostForm = ({ updatePost }) => {
 		subComUID: '',
 		timeStamp: '',
 		userUID: '',
-		voteUp: 0,
-		voteDown: 0,
+		voteUp: [],
+		voteDown: [],
 	});
 	const [show, setShow] = useState(true);
 
@@ -58,8 +58,8 @@ const PostForm = ({ updatePost }) => {
 			subComUID: '',
 			timeStamp: '',
 			userUID: '',
-			voteUp: 0,
-			voteDown: 0,
+			voteUp: [],
+			voteDown: [],
 		});
 	};
 
@@ -222,6 +222,7 @@ const PostForm = ({ updatePost }) => {
 										options={data}
 										value={selectedData}
 										onChange={handleChange}
+										placeholder="Select Community..."
 									/>
 								</div>
 								<button
@@ -236,7 +237,7 @@ const PostForm = ({ updatePost }) => {
 				</div>
 			) : (
 				<div>
-					<h1 class="loginWarn">Please Login to Create Post</h1>
+					<h1 className="loginWarn">Please Login to Create Post</h1>
 				</div>
 			)}
 		</>

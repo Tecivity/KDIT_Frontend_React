@@ -94,17 +94,6 @@ const SubComBox = ({ subCom }) => {
 						{subCom.description}
 					</p>
 				</div>
-				<div className="followPane">
-					{isFollow ? (
-						<>
-							<button className="btn" onClick={followOnClick}>Followed</button>
-						</>
-					) : (
-						<>
-							<button className="btn" onClick={followOnClick}>Follow</button>
-						</>
-					)}
-				</div>
 			</div>
 		</>
 	);
