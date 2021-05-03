@@ -1,15 +1,8 @@
 //React
-<<<<<<< HEAD
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { BiUpArrow, BiDownArrow, BiCommentDetail } from 'react-icons/bi';
 
-=======
-import React, { useState, useEffect, useContext } from "react";
-import { Redirect, Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-import { BiUpArrow, BiDownArrow, BiCommentDetail } from "react-icons/bi";
->>>>>>> d9805dd48e895b62b381485039fae961d2ee7f5c
 //Components
 import { SessionApi } from "../../hook/SessionApi";
 //Firebase
@@ -37,13 +30,8 @@ const Post = ({ post, upVote, downVote }) => {
     fetchData();
   }, []);
 
-<<<<<<< HEAD
 	//Context
 	const { session, user, loading, setLoading } = useContext(SessionApi);
-=======
-  //Context
-  const { session, user, loading } = useContext(SessionApi);
->>>>>>> d9805dd48e895b62b381485039fae961d2ee7f5c
 
   //History
   const history = useHistory();
@@ -63,7 +51,6 @@ const Post = ({ post, upVote, downVote }) => {
     });
   };
 
-<<<<<<< HEAD
 	const fetchData = async () => {
 		setLoading(true);
 		UserService.getUser(post.userUID).then((data) => {
@@ -76,16 +63,6 @@ const Post = ({ post, upVote, downVote }) => {
 		});
 		setLoading(false);
 	};
-=======
-  const fetchData = async () => {
-    UserService.getUser(post.userUID).then((data) => {
-      setPostUser(data);
-    });
-    CommentService.getCommentSize(post.id).then((data) => {
-      setTotalComment(data);
-    });
-  };
->>>>>>> d9805dd48e895b62b381485039fae961d2ee7f5c
 
   return (
     <div id={post.id} className="postPane">
