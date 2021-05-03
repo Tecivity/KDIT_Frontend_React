@@ -1,5 +1,6 @@
 //React
 import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import parse from 'html-react-parser';
 import {
 	InstantSearch,
@@ -30,75 +31,83 @@ const searchClient = algoliasearch(
 	'512e0cbf39c768a80f6c1f95f8099be2',
 );
 
-const CustomHits = connectHits(({ hits, indice }) => (
-	<div className="explore-hitContainer">
-		{hits.map((hit) => (
-			<div key={hit.objectID} className="explore-hit">
-				{indice === 'posts' && (
-					<div>
-						<div className="explore-postHitPane">
-							<div className="explore-userImgPane">
-								<h4>Post Owner Image</h4>
+const CustomHits = connectHits(({ hits, indice }) => {
+	const history = useHistory();
+
+	return (
+		<div className="explore-hitContainer">
+			{hits.map((hit) => (
+				<div key={hit.objectID} className="explore-hit">
+					{indice === 'posts' && (
+						<div>
+							<div className="explore-postHitPane">
+								<div className="explore-postPane">
+									<div className=" explore-postInfoPane">
+										<p
+											style={{
+												display: 'inline',
+												marginLeft: '0.3rem',
+											}}
+										>
+											{hit.timeStamp}
+										</p>
+									</div>
+									<div className="explore-postContentPane">
+										{parse(hit.content)}
+									</div>
+								</div>
 							</div>
-							<div className="explore-postPane">
-								<div className=" explore-postInfoPane">
-									<h4 style={{ display: 'inline' }}>
-										{hit.userUID}
-									</h4>
-									<p
-										style={{
-											display: 'inline',
-											marginLeft: '0.3rem',
-										}}
-									>
-										- {hit.timeStamp}
-									</p>
-								</div>
-								<div className="explore-postContentPane">
-									{parse(hit.content)}
-								</div>
+							<div
+								style={{
+									borderTop: '1px solid black',
+								}}
+							>
+								<h4>Reasons For Reporting </h4>
+								<button>Delete</button>
 							</div>
 						</div>
+					)}
+					{indice === 'sub_community' && (
 						<div
-							style={{
-								borderTop: '1px solid black',
+							style={{ display: 'flex', flexDirection: 'column' }}
+							onClick={() => {
+								history.push(`/community/${hit.objectID}`);
 							}}
 						>
-							<h4>Reasons For Reporting </h4>
-							<button>Delete</button>
+							<div className="explore-comInfo">
+								<h1>Com Img</h1>
+								{hit.name}
+								<h4>com des.</h4>
+							</div>
+							<div style={{ marginLeft: '1rem' }}>
+								<h4>Reasons For Reporting </h4>
+								<button>Delete</button>
+							</div>
 						</div>
-					</div>
-				)}
-				{indice === 'sub_community' && (
-					<div style={{ display: 'flex', flexDirection: 'column' }}>
-						<div className="explore-comInfo">
-							<h1>Com Img</h1>
-							{hit.name}
-							<h4>com des.</h4>
+					)}
+					{indice === 'users' && (
+						<div
+							style={{ display: 'flex', flexDirection: 'column' }}
+							onClick={() => {
+								history.push(`/profile/${hit.objectID}`);
+							}}
+						>
+							<div className="explore-comInfo">
+								<h1>User Img</h1>
+								{hit.email}
+								<h4>user bio.</h4>
+							</div>
+							<div style={{ marginLeft: '1rem', width: '50%' }}>
+								<h4>Reasons For Reporting </h4>
+								<button>BAN</button>
+							</div>
 						</div>
-						<div style={{ marginLeft: '1rem' }}>
-							<h4>Reasons For Reporting </h4>
-							<button>Delete</button>
-						</div>
-					</div>
-				)}
-				{indice === 'users' && (
-					<div style={{ display: 'flex', flexDirection: 'column' }}>
-						<div className="explore-comInfo">
-							<h1>User Img</h1>
-							{hit.email}
-							<h4>user bio.</h4>
-						</div>
-						<div style={{ marginLeft: '1rem', width: '50%' }}>
-							<h4>Reasons For Reporting </h4>
-							<button>BAN</button>
-						</div>
-					</div>
-				)}
-			</div>
-		))}
-	</div>
-));
+					)}
+				</div>
+			))}
+		</div>
+	);
+});
 
 const CustomSearchBox = connectSearchBox(
 	({ currentRefinement, isSearchStalled, refine, setIndice }) => {
@@ -172,9 +181,9 @@ const AdminPage = () => {
 			<div className="explorePane" style={{ width: '60%' }}>
 				<InstantSearch searchClient={searchClient} indexName={indice}>
 					<CustomSearchBox setIndice={setIndice} />
-					<CustomPagination />
+					{/* <CustomPagination /> */}
 					<CustomHits indice={indice} />
-					<Configure hitsPerPage={10} />
+					<Configure hitsPerPage={500} />
 				</InstantSearch>
 			</div>
 		</>

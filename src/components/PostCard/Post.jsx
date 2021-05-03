@@ -33,7 +33,7 @@ const Post = ({ post }) => {
 	//Effects
 	useEffect(() => {
 		fetchData();
-	}, []);
+	}, [post]);
 
 	//Context
 	const { userInfo, loading, setLoading } = useContext(SessionApi);
@@ -93,6 +93,7 @@ const Post = ({ post }) => {
 
 		if (voteUpList.includes(userInfo.id)) {
 			setIsVoteup(true);
+			setIsVoteDown(false);
 		} else {
 			setIsVoteup(false);
 		}
@@ -140,21 +141,26 @@ const Post = ({ post }) => {
 
 		if (voteDownList.includes(userInfo.id)) {
 			setIsVoteDown(true);
+			setIsVoteup(false);
 		} else {
 			setIsVoteDown(false);
 		}
 	};
 
 	const fetchData = async () => {
-		setPostDummy(post);
-		setVoteUpNum(post.voteUp.length);
-		setVoteDownNum(post.voteDown.length);
-		UserService.getUser(post.userUID).then((data) => {
-			setPostUser(data);
-		});
-		CommentService.getCommentSize(post.id).then((data) => {
-			setTotalComment(data);
-		});
+		try {
+			setPostDummy(post);
+			setVoteUpNum(post.voteUp.length);
+			setVoteDownNum(post.voteDown.length);
+			UserService.getUser(post.userUID).then((data) => {
+				setPostUser(data);
+			});
+			CommentService.getCommentSize(post.id).then((data) => {
+				setTotalComment(data);
+			});
+		} catch {
+			console.log('err');
+		}
 	};
 
 	return (

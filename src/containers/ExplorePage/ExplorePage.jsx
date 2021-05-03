@@ -1,5 +1,6 @@
 //React
 import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import parse from 'html-react-parser';
 import {
 	InstantSearch,
@@ -33,81 +34,99 @@ const searchClient = algoliasearch(
 	'512e0cbf39c768a80f6c1f95f8099be2',
 );
 
-const CustomHits = connectHits(({ hits, indice }) => (
-	<div className="explore-hitContainer">
-		{hits.map((hit) => (
-			<div key={hit.objectID} className="explore-hit">
-				{indice === 'posts' && (
-					<div className="explore-postHitPane">
-						<div className="explore-userImgPane">
-							<h4>Post Owner Image</h4>
-						</div>
-						<div className="explore-postPane">
-							<div className=" explore-postInfoPane">
-								<h4 style={{ display: 'inline' }}>
-									{String(hit.userUID)}
-									{/* แก้เป็น ชื่อ display */}
-								</h4>
-								<div
-									style={{
-										display: 'inline',
-										marginLeft: '0.3rem',
-									}}
-								>
-									{' '}
-									•{' '}
-									{String(hit.timeStamp) !== 'undefined' && (
-										<ReactTimeAgo
-											date={String(hit.timeStamp)}
-											locale="en-US"
-											style={{ color: 'grey' }}
-										/>
-									)}{' '}
-									•{' '}
-									<span
+const CustomHits = connectHits(({ hits, indice }) => {
+	//History
+	const history = useHistory();
+
+	return (
+		<div className="explore-hitContainer">
+			{hits.map((hit) => (
+				<div key={hit.objectID} className="explore-hit">
+					{indice === 'posts' && (
+						<div
+							className="explore-postHitPane"
+							onClick={() => {
+								history.push(`/post/${hit.objectID}`);
+							}}
+						>
+							<div className="explore-userImgPane">
+								<h4>Post Owner Image</h4>
+							</div>
+							<div className="explore-postPane">
+								<div className=" explore-postInfoPane">
+									<h4 style={{ display: 'inline' }}>
+										{String(hit.userUID)}
+										{/* แก้เป็น ชื่อ display */}
+									</h4>
+									<div
 										style={{
-											fontSize: '0.8rem',
-											color: 'lightgrey',
+											display: 'inline',
+											marginLeft: '0.3rem',
 										}}
 									>
-										{new Date(hit.timeStamp).toLocaleString(
-											[],
-											{
+										{' '}
+										•{' '}
+										{String(hit.timeStamp) !==
+											'undefined' && (
+											<ReactTimeAgo
+												date={String(hit.timeStamp)}
+												locale="en-US"
+												style={{ color: 'grey' }}
+											/>
+										)}{' '}
+										•{' '}
+										<span
+											style={{
+												fontSize: '0.8rem',
+												color: 'lightgrey',
+											}}
+										>
+											{new Date(
+												hit.timeStamp,
+											).toLocaleString([], {
 												dateStyle: 'long',
 												timeStyle: 'short',
-											},
-										)}
-									</span>
+											})}
+										</span>
+									</div>
+								</div>
+								<div className="explore-postContentPane">
+									{parse(String(hit.content))}
 								</div>
 							</div>
-							<div className="explore-postContentPane">
-								{parse(String(hit.content))}
+						</div>
+					)}
+					{indice === 'sub_community' && (
+						<div
+							onClick={() => {
+								history.push(`/community/${hit.objectID}`);
+							}}
+						>
+							<div className="explore-comInfo">
+								<h1>Com Img</h1>
+								{hit.name}
+								<h4>com des.</h4>
 							</div>
 						</div>
-					</div>
-				)}
-				{indice === 'sub_community' && (
-					<div>
-						<div className="explore-comInfo">
-							<h1>Com Img</h1>
-							{hit.name}
-							<h4>com des.</h4>
+					)}
+					{indice === 'users' && (
+						<div
+							onClick={() => {
+								history.push(`/profile/${hit.objectID}`);
+							}}
+						>
+							<div className="explore-comInfo">
+								<h1>User Img</h1>
+								{hit.email}
+								<h4>user bio.</h4>
+							</div>
 						</div>
-					</div>
-				)}
-				{indice === 'users' && (
-					<div>
-						<div className="explore-comInfo">
-							<h1>User Img</h1>
-							{hit.email}
-							<h4>user bio.</h4>
-						</div>
-					</div>
-				)}
-			</div>
-		))}
-	</div>
-));
+					)}
+				</div>
+			))}
+		</div>
+	);
+});
 
 const CustomSearchBox = connectSearchBox(
 	({ currentRefinement, refine, setIndice }) => {
@@ -181,9 +200,9 @@ const ExplorePage = () => {
 			<div className="explorePane">
 				<InstantSearch searchClient={searchClient} indexName={indice}>
 					<CustomSearchBox setIndice={setIndice} />
-					<CustomPagination />
+					{/* <CustomPagination /> */}
 					<CustomHits indice={indice} />
-					<Configure hitsPerPage={15} />
+					<Configure hitsPerPage={500} />
 				</InstantSearch>
 			</div>
 		</>

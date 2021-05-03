@@ -130,11 +130,12 @@ h1.loginWarn {
 }
 
 .post:hover {
-	transform: translate(-1rem, -1rem);
-	box-shadow: 0.1rem 0.1rem #df814a, 0.2rem 0.2rem #df814a,
+	background: #ffeade;
+	/* transform: translate(-1rem, -1rem); */
+	/* box-shadow: 0.1rem 0.1rem #df814a, 0.2rem 0.2rem #df814a,
 		0.3rem 0.3rem #df814a, 0.4rem 0.4rem #df814a, 0.5rem 0.5rem #df814a,
 		0.6rem 0.6rem #df814a, 0.7rem 0.7rem #df814a, 0.8rem 0.8rem #df814a,
-		0.9rem 0.9rem #df814a, 1rem 1rem #df814a;
+		0.9rem 0.9rem #df814a, 1rem 1rem #df814a; */
 	/* , 1.1rem 1.1rem #df814a,
 		1.2rem 1.2rem #df814a, 1.3rem 1.3rem #df814a, 1.4rem 1.4rem #df814a,
 		1.5rem 1.5rem #df814a; */
