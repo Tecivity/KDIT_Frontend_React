@@ -182,8 +182,8 @@ const FullPost = ({ post, id }) => {
 											dateStyle: 'long',
 											timeStyle: 'short',
 										})}
-									</p>
-									<p className="timestamp">
+									{" "}
+              •{" "}
 										{String(post.timeStamp) !==
 											'undefined' && (
 											<ReactTimeAgo
