@@ -21,6 +21,7 @@ import { SearchBar, Navbar } from '../../components';
 //External
 import algoliasearch from 'algoliasearch/lite';
 import { stripHtml } from 'string-strip-html';
+import ReactTimeAgo from 'react-time-ago';
 //CSS
 import '../ExplorePage/ExplorePage';
 // import './AdminPage';
@@ -49,7 +50,17 @@ const CustomHits = connectHits(({ hits, indice }) => {
 												marginLeft: '0.3rem',
 											}}
 										>
-											{hit.timeStamp}
+											{' '}
+										•{' '}
+										{String(hit.timeStamp) !==
+											'undefined' && (
+											<ReactTimeAgo
+												date={String(hit.timeStamp)}
+												locale="en-US"
+												style={{ color: 'grey' }}
+											/>
+										)}{' '}
+										•{' '}
 										</p>
 									</div>
 									<div className="explore-postContentPane">
