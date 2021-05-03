@@ -49,23 +49,16 @@ const CustomHits = connectHits(({ hits, indice }) => {
 								history.push(`/post/${hit.objectID}`);
 							}}
 						>
-							<div className="explore-userImgPane">
-								<h4>Post Owner Image</h4>
-							</div>
 							<div className="explore-postPane">
 								<div className=" explore-postInfoPane">
-									<h4 style={{ display: 'inline' }}>
-										{String(hit.userUID)}
-										{/* แก้เป็น ชื่อ display */}
-									</h4>
 									<div
 										style={{
 											display: 'inline',
 											marginLeft: '0.3rem',
+											paddingLeft: '1rem',
+											paddingTop: '1rem',
 										}}
 									>
-										{' '}
-										•{' '}
 										{String(hit.timeStamp) !==
 											'undefined' && (
 											<ReactTimeAgo
@@ -90,7 +83,10 @@ const CustomHits = connectHits(({ hits, indice }) => {
 										</span>
 									</div>
 								</div>
-								<div className="explore-postContentPane">
+								<div
+									className="explore-postContentPane"
+									style={{ paddingLeft: '1rem' }}
+								>
 									{parse(String(hit.content))}
 								</div>
 							</div>
@@ -103,9 +99,29 @@ const CustomHits = connectHits(({ hits, indice }) => {
 							}}
 						>
 							<div className="explore-comInfo">
-								<h1>Com Img</h1>
-								{hit.name}
-								<h4>com des.</h4>
+								<div className="subComBackgroundPane">
+									<img
+										src={hit.bannerURL}
+										alt=""
+										width="100%"
+										height="130%"
+										style={{
+											margin: '0',
+											objectFit: 'cover',
+											borderRadius: '0.5rem 0.5rem 0 0',
+											zIndex: '20',
+										}}
+									/>
+								</div>
+								<div className="subComImagePane">
+									<img
+										src={hit.photoURL}
+										alt=""
+										className="subComImg"
+									/>
+								</div>
+								<h3>{hit.name}</h3>
+								<h4>{hit.description}</h4>
 							</div>
 						</div>
 					)}
@@ -116,9 +132,31 @@ const CustomHits = connectHits(({ hits, indice }) => {
 							}}
 						>
 							<div className="explore-comInfo">
-								<h1>User Img</h1>
-								{hit.email}
-								<h4>user bio.</h4>
+								<div className="explore-comInfo">
+									<div className="subComBackgroundPane">
+										<img
+											src={hit.bannerURL}
+											alt=""
+											width="100%"
+											height="130%"
+											style={{
+												margin: '0',
+												objectFit: 'cover',
+												borderRadius: '1rem 1rem 0 0',
+												zIndex: '20',
+											}}
+										/>
+									</div>
+									<div className="subComImagePane">
+										<img
+											src={hit.photoURL}
+											alt=""
+											className="subComImg"
+										/>
+									</div>
+									<h3>{hit.displayName}</h3>
+									<p>{hit.bio}</p>
+								</div>
 							</div>
 						</div>
 					)}
@@ -160,34 +198,6 @@ const CustomSearchBox = connectSearchBox(
 			</div>
 		);
 	},
-);
-
-const CustomPagination = connectPagination(
-	({ currentRefinement, nbPages, refine, createURL }) => (
-		<div className="explore-pagesPane">
-			{new Array(nbPages).fill(null).map((_, index) => {
-				const page = index + 1;
-				const style = {
-					fontWeight: currentRefinement === page ? 'bold' : '',
-				};
-
-				return (
-					<a
-						key={index}
-						href={createURL(page)}
-						style={style}
-						onClick={(event) => {
-							event.preventDefault();
-							refine(page);
-						}}
-						className="explore-page"
-					>
-						{page}
-					</a>
-				);
-			})}
-		</div>
-	),
 );
 
 const ExplorePage = () => {

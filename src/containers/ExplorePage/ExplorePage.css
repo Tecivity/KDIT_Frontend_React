@@ -71,30 +71,24 @@
 }
 
 .explore-hitContainer {
-	/* border: 1px solid lightgrey; */
 }
 
 .explore-hit {
-	margin: 0.5rem 0;
+	margin: 1.5rem 0;
 
 	max-height: 30%;
 
-	border: 2px solid #f48c51;
-	border-radius: 1rem;
+	border-radius: 0.5rem;
 
-	background: white;
+	box-shadow: 0 0 0 2px #f48c51;
+
+	background: none;
 
 	transition: 0.2s;
 }
 
 .explore-hit:hover {
-	transform: translateY(-1rem);
-	box-shadow: 0 1rem #d37a46;
-}
-
-.explore-hit:active {
-	transform: translateY(0);
-	box-shadow: 0 0rem #d37a46;
+	transform: scale(1.05);
 }
 
 .explore-postHitPane {
@@ -140,6 +134,14 @@
 
 .explore-page:hover {
 	background: #f7e1d5;
+}
+
+.explore-comInfo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
+	background: none;
 }
 
 @media only screen and (max-width: 800px) {

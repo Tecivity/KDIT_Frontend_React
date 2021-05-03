@@ -1,6 +1,18 @@
 //React
 import React, { useState, useEffect } from 'react';
 import { Slide } from 'react-slideshow-image';
+import {
+	InstantSearch,
+	connectHighlight,
+	ClearRefinements,
+	RefinementList,
+	Configure,
+	connectSearchBox,
+	connectHits,
+	connectPagination,
+	HitsPerPage,
+	SortBy,
+} from 'react-instantsearch-dom';
 //Components
 import SearchBar from '../SearchBar';
 //Firebase

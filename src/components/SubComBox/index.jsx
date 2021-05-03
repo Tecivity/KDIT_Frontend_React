@@ -53,7 +53,7 @@ const SubComBox = ({ subCom }) => {
 
 	return (
 		<>
-			<div id={subCom.id} className="subcomDiv">
+			<div id={subCom.id} className="subcomDiv" onClick={handleOnClick}>
 				<div className="subComBackgroundPane" onClick={handleOnClick}>
 					<img
 						src={subCom.bannerURL}

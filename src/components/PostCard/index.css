@@ -318,8 +318,7 @@ h1.loginWarn {
 }
 
 .postFormBox:hover {
-	transform: translateY(-1rem);
-	box-shadow: 0 1rem #f48c51;
+	box-shadow: 0 0 0 1rem #f48c51;
 }
 
 .postOption {
@@ -466,6 +465,8 @@ h1.loginWarn {
 
 .selectCom {
 	min-width: 50%;
+
+	z-index: 10;
 }
 
 @media only screen and (max-width: 800px) {
