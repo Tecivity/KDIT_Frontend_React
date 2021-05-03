@@ -351,7 +351,7 @@ div[role='menu'].visible {
 	height: 25px;
 }
 
-. @media only screen and (max-width: 800px) {
+@media only screen and (max-width: 800px) {
 	.fullPane {
 		position: absolute;
 		width: 100%;
