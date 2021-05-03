@@ -9,10 +9,9 @@ import './index.css';
 const SubComBox = ({ subCom }) => {
 	//History
 	const history = useHistory();
-	const [isFollow, setIsFollow] = useState(false)
+	const [isFollow, setIsFollow] = useState(false);
 
 	const { userInfo, authListener } = useContext(SessionApi);
-
 
 	//Functions
 	const handleOnClick = () => {
@@ -20,7 +19,7 @@ const SubComBox = ({ subCom }) => {
 	};
 
 	const followOnClick = async () => {
-		console.log(subCom)
+		console.log(subCom);
 		// const newFollowList = [...userInfo.mySubCom]
 		// if (isFollow) {
 		// 	newFollowList.pop(subCom.id)
@@ -33,24 +32,24 @@ const SubComBox = ({ subCom }) => {
 		// 	setIsFollow(!isFollow)
 		// 	authListener()
 		// })
-	}
+	};
 
 	const fetchData = async () => {
 		if (subCom.id) {
 			try {
 				if (userInfo.mySubCom.includes(subCom.id)) {
-					setIsFollow(true)
+					setIsFollow(true);
 				}
 			} catch (err) {
-				UserService.updateUser(userInfo.id, { mySubCom: [] })
+				UserService.updateUser(userInfo.id, { mySubCom: [] });
 			}
-		};
-	}
+		}
+	};
 
 	//Effects
 	useEffect(() => {
 		fetchData();
-	}, [subCom,isFollow]);
+	}, [subCom, isFollow]);
 
 	return (
 		<>

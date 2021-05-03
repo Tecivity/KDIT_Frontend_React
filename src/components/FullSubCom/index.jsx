@@ -73,7 +73,7 @@ const FullSubCom = ({ subCom, update }) => {
 			setSubComData({
 				value: subCom.id,
 				label: subCom.name,
-			})
+			});
 			getPost(subCom.id);
 			try {
 				const listSubCom = userInfo.mySubCom
@@ -128,6 +128,7 @@ const FullSubCom = ({ subCom, update }) => {
 						onError={defaultBanner}
 						alt=""
 						className="bannerImg"
+						style={{ background: 'white' }}
 					/>
 				</div>
 				<div className="subComImagePane">
@@ -148,14 +149,17 @@ const FullSubCom = ({ subCom, update }) => {
 				<p>{subCom.description}</p>
 				{isFollow ? (
 					<>
-						<button className="subcom-btn" onClick={followOnClick}>Followed</button>
+						<button className="subcom-btn" onClick={followOnClick}>
+							Followed
+						</button>
 					</>
 				) : (
 					<>
-						<button className="subcom-btn" onClick={followOnClick}>Follow</button>
+						<button className="subcom-btn" onClick={followOnClick}>
+							Follow
+						</button>
 					</>
 				)}
-
 
 				{userInfo.id == subCom.ownerUID ? (
 					<>

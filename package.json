@@ -25,6 +25,7 @@
     "react-images-uploading": "^3.1.2",
     "react-instantsearch": "^6.10.3",
     "react-polls": "^1.2.0",
+    "react-responsive": "^8.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-select": "^4.3.0",

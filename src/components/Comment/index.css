@@ -195,6 +195,7 @@
 
 .editCommentPane {
 	padding: 1rem;
+	margin-bottom: 1rem;
 
 	width: 90%;
 
@@ -270,4 +271,27 @@
 .delCommentBtn:active {
 	transform: translateY(0);
 	box-shadow: 0 0rem #f48c51;
+}
+
+@media only screen and (max-width: 800px) {
+	.commentBy {
+		width: 95%;
+
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+
+		/* border: 1px solid black; */
+
+		font-size: 1rem;
+	}
+
+	.commentBy p {
+		margin: 0;
+		margin-top: 0.3rem;
+	}
+
+	.commentPane:last-child {
+		margin-bottom: 2rem;
+	}
 }

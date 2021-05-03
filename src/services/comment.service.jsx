@@ -22,6 +22,16 @@ class CommentService {
         });
 
     }
+
+    deleteComment(id) {
+        return firebase
+            .firestore()
+            .collection('comments')
+            .doc(id)
+            .delete(data => {
+                return ({ message: 'deleted comment.', data: data })
+            })
+    }
 }
 
 export default new CommentService()
