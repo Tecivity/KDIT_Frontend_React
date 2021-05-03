@@ -28,11 +28,6 @@ const Post = ({ post }) => {
   const [voteUpNum, setVoteUpNum] = useState(0)
   const [voteDownNum, setVoteDownNum] = useState(0)
 
-  //Effects
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   //Context
   const { userInfo, loading, setLoading } = useContext(SessionApi);
 
@@ -129,6 +124,11 @@ const Post = ({ post }) => {
       setTotalComment(data);
     });
   };
+
+    //Effects
+    useEffect(() => {
+      fetchData();
+    }, []);
 
   return (
     <div id={post.id} className="postPane">
