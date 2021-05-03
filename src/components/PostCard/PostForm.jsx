@@ -169,6 +169,7 @@ const PostForm = ({ updatePost }) => {
 										options={data}
 										value={selectedData}
 										onChange={handleChange}
+										placeholder="Select Community..."
 									/>
 								</div>
 								<button

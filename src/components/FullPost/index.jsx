@@ -177,20 +177,29 @@ const FullPost = ({ post, id }) => {
 									<p className="timestamp">
 										{' '}
 										•{' '}
-										{new Date(
-											post.timeStamp,
-										).toLocaleString([], {
-											dateStyle: 'long',
-											timeStyle: 'short',
-										})}{' '}
-										•{' '}
 										{String(post.timeStamp) !==
 											'undefined' && (
 											<ReactTimeAgo
 												date={String(post.timeStamp)}
 												locale="en-US"
+												style={{ color: 'grey' }}
 											/>
 										)}
+										<span
+											style={{
+												fontSize: '0.8rem',
+												color: 'lightgrey',
+											}}
+										>
+											{' '}
+											-{' '}
+											{new Date(
+												post.timeStamp,
+											).toLocaleString([], {
+												dateStyle: 'long',
+												timeStyle: 'short',
+											})}
+										</span>
 									</p>
 								</div>
 								<div>
@@ -342,53 +351,80 @@ const FullPost = ({ post, id }) => {
 										</div>
 										<div className="content">
 											<div className="reportPane">
-												<h3>
+												<h3
+													style={{
+														marginTop: '0',
+														borderBottom:
+															'1px solid grey',
+													}}
+												>
 													Please Inform Your Reason
 													For Reporting This Post
 												</h3>
 												<div>
-													<input
-														type="checkbox"
-														name="Abuse"
-														id=""
-														value="reason1"
-													/>
 													<label htmlFor="">
+														<input
+															type="checkbox"
+															name="Abuse"
+															id=""
+															value="reason1"
+														/>
 														Reason 1
+														<span class="checkmark"></span>
 													</label>
 												</div>
 												<div>
-													<input
-														type="checkbox"
-														name="Abuse"
-														id=""
-														value="reason2"
-													/>
 													<label htmlFor="">
-														Reason 2
+														<input
+															type="checkbox"
+															name="Abuse"
+															id=""
+															value="reason1"
+														/>
+														Reason 1
+														<span class="checkmark"></span>
 													</label>
 												</div>
 												<div>
-													<input
-														type="checkbox"
-														name="Abuse"
-														id=""
-														value="reason2"
-													/>
 													<label htmlFor="">
-														Reason 3
+														<input
+															type="checkbox"
+															name="Abuse"
+															id=""
+															value="reason1"
+														/>
+														Reason 1
+														<span class="checkmark"></span>
 													</label>
 												</div>
-												<div>
-													<h3>Additional Reason</h3>
+												<div
+													style={{
+														marginTop: '1rem',
+													}}
+												>
+													<h3
+														style={{
+															marginTop: '0',
+															borderBottom:
+																'1px solid grey',
+														}}
+													>
+														Additional Reason
+													</h3>
 													<textarea
 														name=""
 														id=""
 														cols="30"
 														rows="10"
+														style={{
+															resize: 'none',
+															width: '100%',
+														}}
 													></textarea>
 												</div>
-												<button>Report</button>
+												<button className="postCommentBtn">
+													Report
+												</button>
 											</div>
 										</div>
 									</div>

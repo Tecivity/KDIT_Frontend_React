@@ -84,11 +84,6 @@ const Post = ({ post, upVote, downVote }) => {
 							<p className="timestamp">
 								{' '}
 								•{' '}
-								{new Date(post.timeStamp).toLocaleString([], {
-									dateStyle: 'long',
-									timeStyle: 'short',
-								})}{' '}
-								•{' '}
 								{String(post.timeStamp) !== 'undefined' && (
 									<ReactTimeAgo
 										date={String(post.timeStamp)}
@@ -96,6 +91,22 @@ const Post = ({ post, upVote, downVote }) => {
 										style={{ color: 'grey' }}
 									/>
 								)}
+								<span
+									style={{
+										fontSize: '0.8rem',
+										color: 'lightgrey',
+									}}
+								>
+									{' '}
+									-{' '}
+									{new Date(post.timeStamp).toLocaleString(
+										[],
+										{
+											dateStyle: 'long',
+											timeStyle: 'short',
+										},
+									)}
+								</span>
 							</p>
 						</div>
 						<div>
