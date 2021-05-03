@@ -13,10 +13,10 @@ import parse from 'html-react-parser';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import ReactTimeAgo from 'react-time-ago';
-import ReactNotification from "react-notifications-component";
-import "react-notifications-component/dist/theme.css";
-import { store } from "react-notifications-component";
-import "animate.css";
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+import { store } from 'react-notifications-component';
+import 'animate.css';
 
 TimeAgo.addLocale(en);
 
@@ -99,20 +99,20 @@ const Post = ({ post }) => {
 			setIsVoteup(true);
 			setIsVoteDown(false);
 			store.addNotification({
-				title: "You up vote this post.",
+				title: 'You up vote this post.',
 				message:
-				  "Keep support good content creators to make our world a better place!",
-				type: "default",
-				insert: "top",
-				container: "bottom-right",
-				animationIn: ["animate__animated", "animate__flipInX"],
-				animationOut: ["animate__animated", "animate__zoomOut"],
+					'Keep support good content creators to make our world a better place!',
+				type: 'default',
+				insert: 'top',
+				container: 'bottom-right',
+				animationIn: ['animate__animated', 'animate__flipInX'],
+				animationOut: ['animate__animated', 'animate__zoomOut'],
 				dismiss: {
-				  duration: 8000,
-				  onScreen: true,
-				  pauseOnHover: true,
+					duration: 8000,
+					onScreen: true,
+					pauseOnHover: true,
 				},
-			  });
+			});
 		} else {
 			setIsVoteup(false);
 		}
@@ -162,24 +162,22 @@ const Post = ({ post }) => {
 			setIsVoteDown(true);
 			setIsVoteup(false);
 			store.addNotification({
-				title: "You down vote this post.",
-				message:
-				  "Thank you for keeping our platform a better place.",
-				type: "info",
-				insert: "top",
-				container: "bottom-right",
-				animationIn: ["animate__animated", "animate__flipInX"],
-				animationOut: ["animate__animated", "animate__zoomOut"],
+				title: 'You down vote this post.',
+				message: 'Thank you for keeping our platform a better place.',
+				type: 'info',
+				insert: 'top',
+				container: 'bottom-right',
+				animationIn: ['animate__animated', 'animate__flipInX'],
+				animationOut: ['animate__animated', 'animate__zoomOut'],
 				dismiss: {
-				  duration: 8000,
-				  onScreen: true,
-				  pauseOnHover: true,
+					duration: 8000,
+					onScreen: true,
+					pauseOnHover: true,
 				},
-			  });
+			});
 		} else {
 			setIsVoteDown(false);
 		}
-		
 	};
 
 	const fetchData = async () => {
