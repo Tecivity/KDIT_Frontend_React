@@ -87,13 +87,13 @@ const CommentCard = ({ comment }) => {
 	};
 
 	const handleDeleteComment = () => {
-    if (!window.confirm('Are you sure for delete comment ❓')) {
+		if (!window.confirm('Are you sure for delete comment ❓')) {
 			return console.log('Cancel delete.');
 		}
 		CommentService.deleteComment(comment.id).then(() => {
-			window.location.reload()
+			window.location.reload();
 		});
-  };
+	};
 
 	return (
 		<div id={comment.id} className="commentPane">
@@ -125,87 +125,98 @@ const CommentCard = ({ comment }) => {
 					</div>
 				</div>
 
-        <div className="commentInfo">
-          <div className="commentBy">
-            <p
-              className="displayName"
-              style={{ fontWeight: "700", marginRight: "0.5rem" }}
-            >
-              {commentOwner.displayName}
-            </p>
-            {/* <p className="username">@{comment.userId}</p> */}
-            <p className="timestamp">
-            {" "}
-                  •{" "}
-              {new Date(comment.timeStamp).toLocaleString([], {
-                dateStyle: "long",
-                timeStyle: "short",
-              })}
-            {" "}
-                  •{" "}
-              {String(comment.timeStamp) !== "undefined" && (
-                <ReactTimeAgo date={String(comment.timeStamp)} locale="en-US" />
-              )}
-            </p>
-            {console.log(String(comment.userId))}
-            {comment.userId === user.uid ? (
-              <div>
-                <button className="editCommentBtn">
-                  {edit ? (
-                    <MdCancel
-                      size="20px"
-                      style={{
-                        marginLeft: "auto",
-                        fill: "#f48c51",
-                      }}
-                      onClick={handleEditComment}
-                    />
-                  ) : (
-                    <MdEdit
-                      size="20px"
-                      style={{
-                        marginLeft: "auto",
-                        fill: "#f48c51",
-                      }}
-                      onClick={handleEditComment}
-                    />
-                  )}
-                </button>
-                <button onClick={handleDeleteComment} className="delCommentBtn">
-                  <MdDelete
-                    size="20px"
-                    style={{ marginLeft: "auto", fill: "#f48c51" }}
-                  />
-                </button>
-              </div>
-            ) : (
-              <div></div>
-            )}
-          </div>
-          <div className="postContent">
-            {edit && (
-              <div className="editCommentPane">
-                <textarea
-                  name=""
-                  id=""
-                  cols="30"
-                  rows="10"
-                  className="editCommentArea"
-                  onChange={handleChangeComment}
-                >
-                  {comment.content}
-                </textarea>
-                <button className="saveComment" onClick={handleSubmitComment}>
-                  Save
-                </button>
-              </div>
-            )}
-            {!edit ? <p>{parse(comment.content)}</p> : <div></div>}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+				<div className="commentInfo">
+					<div className="commentBy">
+						<p
+							className="displayName"
+							style={{ fontWeight: '700', marginRight: '0.5rem' }}
+						>
+							{commentOwner.displayName}
+						</p>
+						{/* <p className="username">@{comment.userId}</p> */}
+						<p className="timestamp">
+							{' '}
+							•{' '}
+							{new Date(comment.timeStamp).toLocaleString([], {
+								dateStyle: 'long',
+								timeStyle: 'short',
+							})}{' '}
+							•{' '}
+							{String(comment.timeStamp) !== 'undefined' && (
+								<ReactTimeAgo
+									date={String(comment.timeStamp)}
+									locale="en-US"
+								/>
+							)}
+						</p>
+						{console.log(String(comment.userId))}
+						{comment.userId === user.uid ? (
+							<>
+								<button className="editCommentBtn">
+									{edit ? (
+										<MdCancel
+											size="20px"
+											style={{
+												marginLeft: 'auto',
+												fill: '#f48c51',
+											}}
+											onClick={handleEditComment}
+										/>
+									) : (
+										<MdEdit
+											size="20px"
+											style={{
+												marginLeft: 'auto',
+												fill: '#f48c51',
+											}}
+											onClick={handleEditComment}
+										/>
+									)}
+								</button>
+								<button
+									onClick={handleDeleteComment}
+									className="delCommentBtn"
+								>
+									<MdDelete
+										size="20px"
+										style={{
+											marginLeft: 'auto',
+											fill: '#f48c51',
+										}}
+									/>
+								</button>
+							</>
+						) : (
+							<div></div>
+						)}
+					</div>
+					<div className="postContent">
+						{edit && (
+							<div className="editCommentPane">
+								<textarea
+									name=""
+									id=""
+									cols="30"
+									rows="10"
+									className="editCommentArea"
+									onChange={handleChangeComment}
+								>
+									{comment.content}
+								</textarea>
+								<button
+									className="saveComment"
+									onClick={handleSubmitComment}
+								>
+									Save
+								</button>
+							</div>
+						)}
+						{!edit ? <p>{parse(comment.content)}</p> : <div></div>}
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default CommentCard;

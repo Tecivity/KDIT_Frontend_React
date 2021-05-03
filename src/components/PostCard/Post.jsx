@@ -124,7 +124,7 @@ const Post = ({ post, upVote, downVote }) => {
 					</div>
 
 					<h4 style={{ margin: '0' }}>
-						{post.voteUp.length - post.voteDown.length}{' '}
+						{/* {post.voteUp.length - post.voteDown.length}{' '} */}
 					</h4>
 
 					<div onClick={() => downVote} className="voteDownBT">
