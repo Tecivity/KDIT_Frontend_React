@@ -104,16 +104,10 @@ const Profile = ({ id }) => {
 						<h2 style={{ marginTop: '0', marginBottom: '0rem' }}>
 							{profile.displayName}
 						</h2>
-						<h3
-							style={{
-								marginTop: '0',
-								color: 'grey',
-								fontWeight: '200',
-							}}
-						>
-							@username
-						</h3>
-						<p style={{ marginTop: '0' }}>{profile.bio}</p>
+
+						<p style={{ marginTop: '0', color: 'grey' }}>
+							{profile.bio}
+						</p>
 					</div>
 					<div style={{ alignSelf: 'center' }}>
 						{/* <button className="edit-btn" onClick={handleOnClick}>
