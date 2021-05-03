@@ -22,7 +22,7 @@ const FullSubCom = ({ subCom, update }) => {
 	const [isFollow, setIsFollow] = useState(false)
 
 	//Contexts
-	const { defaultBanner, userInfo, user } = useContext(SessionApi);
+	const { defaultBanner, userInfo, authListener } = useContext(SessionApi);
 
 	//Functions
 	const handleOnClick = () => {
@@ -79,6 +79,22 @@ const FullSubCom = ({ subCom, update }) => {
 
 	};
 
+	const followOnClick = async () => {
+		const newFollowList = [...userInfo.mySubCom]
+		if(isFollow){
+			newFollowList.pop(subCom.id)
+		}else{
+			newFollowList.push(subCom.id)
+		}
+		console.log(newFollowList)
+		// setIsFollow(!isFollow)
+		UserService.updateUser(userInfo.id,{mySubCom:newFollowList}).then(()=>{
+			setIsFollow(!isFollow)
+			authListener()
+		})
+		
+	}
+
 	//Effects
 	useEffect(() => {
 		fetchData();
@@ -102,11 +118,11 @@ const FullSubCom = ({ subCom, update }) => {
 				<p>{subCom.description}</p>
 				{isFollow ? (
 					<>
-						<button className="subcom-btn">Followed</button>
+						<button className="subcom-btn" onClick={followOnClick}>Followed</button>
 					</>
 				) : (
 					<>
-						<button className="subcom-btn">Follow</button>
+						<button className="subcom-btn" onClick={followOnClick}>Follow</button>
 					</>
 				)}
 

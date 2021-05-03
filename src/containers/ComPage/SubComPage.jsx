@@ -45,6 +45,11 @@ const SubComPage = () => {
 	const firebaseTest = async () => {
 		userService.getUser(user.uid).then((data) => {
 			console.log(data.mySubCom.includes('kdR5zUidEkhQGhpcBup4'));
+			const testList = data.mySubCom
+			console.log(testList.push('test'))
+			console.log(testList)
+			console.log(testList.pop('test'))
+			console.log(testList)
 		});
 		// firebase
 		// 	.firestore()

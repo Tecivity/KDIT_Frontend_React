@@ -1,17 +1,61 @@
 //React
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { UserService } from '../../services';
+import { SessionApi } from '../../hook/SessionApi';
 //CSS
 import './index.css';
 
 const SubComBox = ({ subCom }) => {
 	//History
 	const history = useHistory();
+	const [isFollow, setIsFollow] = useState(false)
+	const [userData ,setUserData] = useState({})
+
+	const { user } = useContext(SessionApi);
+
 
 	//Functions
 	const handleOnClick = () => {
 		history.push(`/community/${subCom.id}`);
 	};
+
+	const followOnClick = async () => {
+		const newFollowList = [...userData.mySubCom]
+		if (isFollow) {
+			newFollowList.pop(subCom.id)
+		} else {
+			newFollowList.push(subCom.id)
+		}
+		console.log(newFollowList)
+		setIsFollow(!isFollow)
+		// UserService.updateUser(userData.id, { mySubCom: newFollowList }).then(() => {
+		// 	setIsFollow(!isFollow)
+		// 	UserService.getUser(user.uid).then(data=>{
+		// 		setUserData(data)
+		// 	})
+		// })
+	}
+
+	const fetchData = async () => {
+		UserService.getUser(user.uid).then(data=>{
+			setUserData(data)
+		})
+		if (subCom.id && userData) {
+			try {
+				if (userData.mySubCom.includes(subCom.id)) {
+					setIsFollow(true)
+				}
+			} catch (err) {
+				UserService.updateUser(userData.id, { mySubCom: [] })
+			}
+		}
+	};
+
+	//Effects
+	useEffect(() => {
+		fetchData();
+	}, []);
 
 	return (
 		<>
@@ -57,7 +101,15 @@ const SubComBox = ({ subCom }) => {
 					</p>
 				</div>
 				<div className="followPane">
-					<button className="btn">Follow</button>
+					{isFollow ? (
+						<>
+							<button className="btn" onClick={followOnClick}>Followed</button>
+						</>
+					) : (
+						<>
+							<button className="btn" onClick={followOnClick}>Follow</button>
+						</>
+					)}
 				</div>
 			</div>
 		</>
