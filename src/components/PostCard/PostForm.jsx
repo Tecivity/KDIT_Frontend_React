@@ -10,6 +10,11 @@ import MyUploadAdapter from '../../firebase/ckeditor_image_firebase';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { BiFontSize } from 'react-icons/bi';
+import ReactNotification from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
+import { store } from 'react-notifications-component';
+import "animate.css"
+
 
 const PostForm = ({ updatePost }) => {
 	//Variables
@@ -83,9 +88,24 @@ const PostForm = ({ updatePost }) => {
 
 	const handleClick = async (e) => {
 		if (!selectedData) {
-			return alert('please select subcom');
+			store.addNotification({
+				title: "Please Select Sub-Community.",
+				message: "In order to post, you need to select where your post will display!",
+				type: "warning",
+				insert: "top",
+				container: "bottom-right",
+				animationIn: ["animated", "flash"],
+				animationOut: ["animated", "zoomOut"],
+				dismiss: {
+				  duration: 8000,
+				  onScreen: true,
+				  pauseOnHover: true
+				}
+			  });
 		}
-		if (post.content) {
+		else{
+		if (post.content || String(post.content) !== "") {
+			console.log("Here" + String(post.content))
 			const newPost = {
 				...post,
 				timeStamp: currentDate() + 'T' + currentTime(),
@@ -102,13 +122,46 @@ const PostForm = ({ updatePost }) => {
 					clearInput();
 					// window.location.reload();
 				});
+				store.addNotification({
+					title: "Your story is posted successfully!",
+					message: "We can't let you write an empty story! Please insert the story that you want to share.",
+					type: "success",
+					insert: "top",
+					container: "bottom-full",
+					animationIn: ["animate__animated", "animate__fadeIn"],
+					animationOut: ["animate__animated", "animate__fadeOut"],
+					dismiss: {
+					  duration: 8000,
+					  onScreen: true,
+					  pauseOnHover: true
+					}
+				  });
 		}
+		else{
+			store.addNotification({
+				title: "Please Insert The Story In The Editor.",
+				message: "We can't let you write an empty story! Please insert the story that you want to share.",
+				type: "warning",
+				insert: "top",
+				container: "bottom-right",
+				animationIn: ["animated", "flash"],
+				animationOut: ["animated", "zoomOut"],
+				dismiss: {
+				  duration: 8000,
+				  onScreen: true,
+				  pauseOnHover: true
+				}
+			  });
+		}
+	}
 	};
 
 	return (
 		<>
 			{session ? (
+				
 				<div className="postFormBox">
+					
 					<div className="postForm-profile">
 						<img
 							src={imageURL}
