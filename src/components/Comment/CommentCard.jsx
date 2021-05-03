@@ -149,7 +149,6 @@ const CommentCard = ({ comment }) => {
 								/>
 							)}
 						</p>
-						{console.log(String(comment.userId))}
 						{comment.userId === user.uid ? (
 							<>
 								<button className="editCommentBtn">
