@@ -37,6 +37,7 @@ const Card = () => {
 		top: false,
 	});
 	const [newPost, setNewPost] = useState();
+	const [sortCat, setSortCat] = useState('timeStamp');
 
 	//Context
 	const { user, loading, setLoading, userInfo, authListener } = useContext(
@@ -55,42 +56,55 @@ const Card = () => {
 		const subCom = [];
 		// console.log('userInfo : ', userInfo)
 		// console.log(Array.isArray(userInfo.mySubCom), userInfo.mySubCom);
-		if (Array.isArray(userInfo.mySubCom)) {
-			userInfo.mySubCom.forEach((data) => {
-				subCom.push(data.value);
-				// console.log(typeof data.value)
-			});
-			// console.log('subCom : ', subCom, Array.isArray(subCom));
+		try {
+			if (Array.isArray(userInfo.mySubCom)) {
+				userInfo.mySubCom.forEach((data) => {
+					subCom.push(data.value);
+					// console.log(typeof data.value)
+				});
+				// console.log('subCom : ', subCom, Array.isArray(subCom));
+				ref.orderBy(sortCat, 'desc')
+					.where('subComUID', 'in', [...subCom])
+					.onSnapshot(
+						(querySnapshot) => {
+							querySnapshot.forEach((doc) => {
+								postsArray.push({ id: doc.id, ...doc.data() });
+							});
+							// console.log('Array : ', postsArray)
+							setPosts(postsArray);
+							setLoading(false);
+						},
+						(error) => {
+							console.log(error);
+						},
+					);
+			} else {
+				console.log('error');
+				// ref
+				// .orderBy("timeStamp", "desc")
+				// .limit(10)
+				// .onSnapshot((querySnapshot) => {
+				//   querySnapshot.forEach((doc) => {
+				//     postsArray.push({ id: doc.id, ...doc.data() });
+				//   });
+				//   setPosts(postsArray);
+				//   setLoading(false);
+				// });
+			}
+			// console.log(posts);
+			setLoading(false);
+		} catch (err) {
 			ref.orderBy('timeStamp', 'desc')
-				.where('subComUID', 'in', [...subCom])
-				.onSnapshot(
-					(querySnapshot) => {
-						querySnapshot.forEach((doc) => {
-							postsArray.push({ id: doc.id, ...doc.data() });
-						});
-						// console.log('Array : ', postsArray)
-						setPosts(postsArray);
-						setLoading(false);
-					},
-					(error) => {
-						console.log(error);
-					},
-				);
-		} else {
-			console.log('error');
-			// ref
-			// .orderBy("timeStamp", "desc")
-			// .limit(10)
-			// .onSnapshot((querySnapshot) => {
-			//   querySnapshot.forEach((doc) => {
-			//     postsArray.push({ id: doc.id, ...doc.data() });
-			//   });
-			//   setPosts(postsArray);
-			//   setLoading(false);
-			// });
+				.limit(10)
+				.onSnapshot((querySnapshot) => {
+					querySnapshot.forEach((doc) => {
+						postsArray.push({ id: doc.id, ...doc.data() });
+					});
+					setPosts(postsArray);
+					setLoading(false);
+				});
+			setLoading(false);
 		}
-		// console.log(posts);
-		setLoading(false);
 	};
 
 	//Effects
@@ -157,6 +171,9 @@ const Card = () => {
 							top: false,
 							best: false,
 						});
+						setSortCat('userUID');
+						fetchData();
+						window.location.reload();
 					}}
 					style={{
 						background: activeBt.hot && '#f48c51',
@@ -191,6 +208,9 @@ const Card = () => {
 							top: false,
 							best: false,
 						});
+						setSortCat('timeStamp');
+						fetchData();
+						window.location.reload();
 					}}
 					style={{
 						background: activeBt.new && '#f48c51',

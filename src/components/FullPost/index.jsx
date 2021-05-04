@@ -11,15 +11,15 @@ import { BiUpArrow, BiDownArrow, BiCommentDetail } from 'react-icons/bi';
 import Comment from '../Comment/index';
 import { SessionApi } from '../../hook/SessionApi';
 //Firebase
-import firebase from '../../firebase';
-import { User } from '../../firebase/models';
-import MyUploadAdapter from '../../firebase/ckeditor_image_firebase';
+import firebase from "../../firebase";
+import { User } from "../../firebase/models";
+import MyUploadAdapter from "../../firebase/ckeditor_image_firebase";
 import {
-	CommentService,
-	PostService,
-	SubComService,
-	UserService,
-} from '../../services';
+  CommentService,
+  PostService,
+  SubComService,
+  UserService,
+} from "../../services";
 //External
 import parse from 'html-react-parser';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
@@ -40,12 +40,12 @@ const FullPost = ({ post, id }) => {
 	const [totalComment, setTotalComment] = useState(0);
 	const [edit, setEdit] = useState(false);
 
-	const [postDummy, setPostDummy] = useState();
-	const [voteUpNum, setVoteUpNum] = useState(0);
-	const [voteDownNum, setVoteDownNum] = useState(0);
-	const [isVoteUp, setIsVoteup] = useState(false);
-	const [isVoteDown, setIsVoteDown] = useState(false);
-	const [subComName, setSubComName] = useState('');
+  const [postDummy, setPostDummy] = useState();
+  const [voteUpNum, setVoteUpNum] = useState(0);
+  const [voteDownNum, setVoteDownNum] = useState(0);
+  const [isVoteUp, setIsVoteup] = useState(false);
+  const [isVoteDown, setIsVoteDown] = useState(false);
+  const [subComName, setSubComName] = useState("");
 
 	//Contexts
 	const { session, user, loading, userInfo } = useContext(SessionApi);
@@ -192,24 +192,24 @@ const FullPost = ({ post, id }) => {
 		});
 	};
 
-	const fetchData = async () => {
-		try {
-			setPostDummy(post);
-			setVoteUpNum(post.voteUp.length);
-			setVoteDownNum(post.voteDown.length);
-			UserService.getUser(post.userUID).then((data) => {
-				setPostUser(data);
-			});
-			CommentService.getCommentSize(post.id).then((data) => {
-				setTotalComment(data);
-			});
-			SubComService.getSubCom(post.subComUID).then((data) => {
-				setSubComName(data.name);
-			});
-		} catch (err) {
-			console.log(err);
-		}
-	};
+  const fetchData = async () => {
+    try {
+      setPostDummy(post);
+      setVoteUpNum(post.voteUp.length);
+      setVoteDownNum(post.voteDown.length);
+      UserService.getUser(post.userUID).then((data) => {
+        setPostUser(data);
+      });
+      CommentService.getCommentSize(post.id).then((data) => {
+        setTotalComment(data);
+      });
+      SubComService.getSubCom(post.subComUID).then((data) => {
+        setSubComName(data.name);
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
 	//Functions
 	const editPost = () => {
@@ -217,19 +217,18 @@ const FullPost = ({ post, id }) => {
 		setEdit(!edit);
 	};
 
-	const saveChange = async (newContent) => {
-		firebase
-			.firestore()
-			.collection('posts')
-			.doc(post.id)
-			.update({
-				content: newPost,
-			})
-			.then(() => {
-				fetchData();
-			});
-		window.location.reload();
-	};
+  const saveChange = async (newContent) => {
+    firebase
+      .firestore()
+      .collection("posts")
+      .doc(post.id)
+      .update({
+        content: newPost,
+      })
+      .then(() => {
+        fetchData();
+      });
+  };
 
 	//Effects
 	useEffect(() => {
@@ -286,109 +285,91 @@ const FullPost = ({ post, id }) => {
 							/>
 						</div>
 
-						<div className="full-postInfo">
-							<div>
-								<div className="full-postBy">
-									<p className="full-displayName">
-										{postUser.displayName}
-									</p>
-									<p className="timestamp">
-										{' '}
-										•{' '}
-										{String(post.timeStamp) !==
-											'undefined' && (
-											<ReactTimeAgo
-												date={String(post.timeStamp)}
-												locale="en-US"
-												style={{ color: 'grey' }}
-											/>
-										)}
-										<span
-											style={{
-												fontSize: '0.8rem',
-												color: 'lightgrey',
-											}}
-										>
-											{' '}
-											-{' '}
-											{new Date(
-												post.timeStamp,
-											).toLocaleString([], {
-												dateStyle: 'long',
-												timeStyle: 'short',
-											})}
-										</span>
-									</p>
-								</div>
-								<div>
-									<p
-										style={{
-											marginTop: '0.2rem',
-											fontSize: '1rem',
-											color: 'grey',
-											textDecoration: 'underline',
-											cursor: 'pointer',
-										}}
-										onClick={() =>
-											history.push(
-												`/community/${post.subComUID}`,
-											)
-										}
-									>
-										{subComName}
-									</p>
-								</div>
-							</div>
-							<div className="full-postContent">
-								{post.content ? (
-									edit ? (
-										<div className="editModePane">
-											<CKEditor
-												className="ckEditor"
-												editor={ClassicEditor}
-												data={post.content}
-												config={{
-													mediaEmbed: {
-														previewsInData: true,
-													},
-												}}
-												onReady={(editor, config) => {
-													// You can store the "editor" and use when it is needed.
-													// console.log('Editor is ready to use!', editor);
-													const data = editor.getData();
-													setNewPost(data);
-													if (editor) {
-														editor.plugins.get(
-															'FileRepository',
-														).createUploadAdapter = (
-															loader,
-														) => {
-															return new MyUploadAdapter(
-																loader,
-															);
-														};
-													}
-												}}
-												onChange={(event, editor) => {
-													const data = editor.getData();
-													// console.log({ event, editor, data });
-													setNewPost(data);
-												}}
-											/>
-											<button
-												onClick={saveChange}
-												className="savePostBtn"
-											>
-												{'Save Change'}
-											</button>
-										</div>
-									) : (
-										//Edit Post
-										<p>{parse(post.content)}</p>
-									)
-								) : (
-									<div></div>
-								)}
+            <div className="full-postInfo">
+              <div>
+                <div className="full-postBy">
+                  <p className="full-displayName">{postUser.displayName}</p>
+                  <p className="timestamp">
+                    {" "}
+                    •{" "}
+                    {String(post.timeStamp) !== "undefined" && (
+                      <ReactTimeAgo
+                        date={String(post.timeStamp)}
+                        locale="en-US"
+                        style={{ color: "grey" }}
+                      />
+                    )}
+                    <span
+                      style={{
+                        fontSize: "0.8rem",
+                        color: "lightgrey",
+                      }}
+                    >
+                      {" "}
+                      -{" "}
+                      {new Date(post.timeStamp).toLocaleString([], {
+                        dateStyle: "long",
+                        timeStyle: "short",
+                      })}
+                    </span>
+                  </p>
+                </div>
+                <div>
+                  <p
+                    style={{
+                      marginTop: "0.2rem",
+                      fontSize: "1rem",
+                      color: "grey",
+                      textDecoration: "underline",
+                    }}
+                  >
+                    {subComName}
+                  </p>
+                </div>
+              </div>
+              <div className="full-postContent">
+                {post.content ? (
+                  edit ? (
+                    <div className="editModePane">
+                      <CKEditor
+                        className="ckEditor"
+                        editor={ClassicEditor}
+                        data={post.content}
+                        config={{
+                          mediaEmbed: {
+                            previewsInData: true,
+                          },
+                        }}
+                        onReady={(editor, config) => {
+                          // You can store the "editor" and use when it is needed.
+                          // console.log('Editor is ready to use!', editor);
+                          const data = editor.getData();
+                          setNewPost(data);
+                          if (editor) {
+                            editor.plugins.get(
+                              "FileRepository"
+                            ).createUploadAdapter = (loader) => {
+                              return new MyUploadAdapter(loader);
+                            };
+                          }
+                        }}
+                        onChange={(event, editor) => {
+                          const data = editor.getData();
+                          // console.log({ event, editor, data });
+                          setNewPost(data);
+                        }}
+                      />
+                      <button onClick={saveChange} className="savePostBtn">
+                        {"Save Change"}
+                      </button>
+                    </div>
+                  ) : (
+                    //Edit Post
+                    <p>{parse(post.content)}</p>
+                  )
+                ) : (
+                  <div></div>
+                )}
 
 								{/* แสดง Post */}
 							</div>
