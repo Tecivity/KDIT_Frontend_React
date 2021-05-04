@@ -24,6 +24,7 @@ import { stripHtml } from 'string-strip-html';
 import ReactTimeAgo from 'react-time-ago';
 //CSS
 import '../ExplorePage/ExplorePage';
+import { PostService } from '../../services';
 // import './AdminPage';
 
 //Custom Components
@@ -34,6 +35,17 @@ const searchClient = algoliasearch(
 
 const CustomHits = connectHits(({ hits, indice }) => {
 	const history = useHistory();
+
+	const deletePost = async (id) => {
+		if (!window.confirm('Are you sure for delete post ❓')) {
+			return console.log('Cancel delete.');
+		}
+
+		PostService.deletePost(id).then(()=>{
+			console.log(id,' deleted')
+			window.location.reload()
+		})
+	}
 
 	return (
 		<div className="explore-hitContainer">
@@ -97,7 +109,7 @@ const CustomHits = connectHits(({ hits, indice }) => {
 								}}
 							>
 								<h4>Reasons For Reporting </h4>
-								<button>Delete</button>
+								<button onClick={()=>deletePost(hit.objectID)}>Delete</button>
 							</div>
 						</div>
 					)}
