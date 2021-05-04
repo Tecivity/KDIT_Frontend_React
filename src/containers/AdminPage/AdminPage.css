@@ -1,3 +1,7 @@
+* {
+	font-family: Iconic;
+}
+
 .adminPane {
 	position: absolute;
 	width: 43%;

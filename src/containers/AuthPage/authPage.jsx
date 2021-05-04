@@ -108,7 +108,7 @@ export default function AuthPage() {
 
 	const authListener = () => {
 		firebase.auth().onAuthStateChanged((user) => {
-			console.log(user);
+			// console.log(user);
 			if (user) {
 				clearInputs();
 				setUser(user);

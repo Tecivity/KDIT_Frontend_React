@@ -220,7 +220,7 @@ const Post = ({ post }) => {
 				setSubComName(data.name);
 			});
 		} catch {
-			console.log('err');
+			// console.log('err');
 		}
 	};
 

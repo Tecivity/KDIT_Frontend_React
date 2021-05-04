@@ -70,11 +70,11 @@ const Card = () => {
 							setLoading(false);
 						},
 						(error) => {
-							console.log(error);
+							// console.log(error);
 						},
 					);
 			} else {
-				console.log('error');
+				// console.log('error');
 				// ref
 				// .orderBy("timeStamp", "desc")
 				// .limit(10)

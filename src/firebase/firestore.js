@@ -1,20 +1,19 @@
-import firebase from '../firebase'
-import { PostModel } from './models'
+import firebase from '../firebase';
+import { PostModel } from './models';
 
 class PostService {
-    getAllPosts() {
-        const ref = firebase.firestore().collection('posts')
+	getAllPosts() {
+		const ref = firebase.firestore().collection('posts');
 
-        ref.onSnapshot((querySnapshot) => {
-            const items = []
-            querySnapshot.forEach((doc) => {
-                items.push(doc.data())
-            })
-            console.log(items)
-            return (items)
-        })
-
-    }
+		ref.onSnapshot((querySnapshot) => {
+			const items = [];
+			querySnapshot.forEach((doc) => {
+				items.push(doc.data());
+			});
+			// console.log(items)
+			return items;
+		});
+	}
 }
 
-export default new PostService
+export default new PostService();

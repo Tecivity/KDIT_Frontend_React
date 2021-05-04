@@ -38,7 +38,7 @@ const PostForm = ({ updatePost }) => {
 
 	const handleChange = (e) => {
 		setSelectedData(e);
-		console.log(selectedData);
+		// console.log(selectedData);
 	};
 
 	//Effects
@@ -103,7 +103,7 @@ const PostForm = ({ updatePost }) => {
 			});
 		} else {
 			if (post.content || String(post.content) !== '') {
-				console.log('Here' + String(post.content));
+				// console.log('Here' + String(post.content));
 				const newPost = {
 					...post,
 					timeStamp: currentDate() + 'T' + currentTime(),
@@ -119,7 +119,7 @@ const PostForm = ({ updatePost }) => {
 						e.target.value = '';
 						clearInput();
 						// window.location.reload();
-						console.log('Here!');
+						// console.log('Here!');
 						store.addNotification({
 							title: 'Your story is posted successfully!',
 							message:

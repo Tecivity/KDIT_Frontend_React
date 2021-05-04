@@ -585,3 +585,7 @@ h1.loginWarn {
 		/* border: 1px solid black; */
 	}
 }
+
+* {
+	font-family: Iconic;
+}

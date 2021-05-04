@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { UserService } from '../../services';
 import { SessionApi } from '../../hook/SessionApi';
+import { FaCheckCircle } from 'react-icons/fa';
 //CSS
 import './index.css';
 
@@ -69,10 +70,28 @@ const SubComBox = ({ subCom }) => {
 					/>
 				</div>
 				<div className="subcomInfoPane" onClick={handleOnClick}>
-					<h3 style={{ display: 'inline', margin: '0' }}>
-						{subCom.name}
-						{isApprove ? <span>✔</span> : <span></span>}
-					</h3>
+					<div
+						style={{
+							display: 'flex',
+							alignItems: 'center',
+						}}
+					>
+						<h3
+							style={{
+								margin: '0 0',
+							}}
+						>
+							{subCom.name}
+							{isApprove ? (
+								<FaCheckCircle
+									size="20px"
+									style={{ marginLeft: '0.5rem' }}
+								/>
+							) : (
+								<span></span>
+							)}
+						</h3>
+					</div>
 					<p
 						style={{
 							fontSize: '0.8rem',

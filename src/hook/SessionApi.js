@@ -40,7 +40,7 @@ export const SessionProvider = ({ children }) => {
 						UserService.updateUser(user.uid, {
 							isNewUser: false,
 						}).then(() => {
-							console.log(err);
+							// console.log(err);
 							setLoading(false);
 						});
 					});

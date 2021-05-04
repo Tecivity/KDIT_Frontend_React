@@ -143,7 +143,7 @@ const FullSubCom = ({ subCom, update }) => {
 
 	const onDelete = async () => {
 		if (!window.confirm('Are you sure for delete this community ❓')) {
-			return console.log('Cancel delete.');
+			// return console.log('Cancel delete.');
 		}
 		SubComService.deleteSubCom(subCom.id).then(() => {
 			history.push(`/community`);
@@ -160,18 +160,18 @@ const FullSubCom = ({ subCom, update }) => {
 			newFollowList.push(subComData);
 			newTotalFollow.push(userInfo.id);
 		}
-		console.log(newFollowList);
-		console.log(newTotalFollow);
+		// console.log(newFollowList);
+		// console.log(newTotalFollow);
 		// setIsFollow(!isFollow)
 
 		SubComService.updateSubCom(subCom.id, {
 			totalFollow: newTotalFollow,
 		}).then(() => {
-			console.log('update totalFollow success');
+			// console.log('update totalFollow success');
 			SubComService.getSubCom(subCom.id).then((data) => {
 				setSubComDummy(data);
 				setVoteNumber(data.totalFollow.length);
-				console.log('update totalFollow success');
+				// console.log('update totalFollow success');
 			});
 		});
 		UserService.updateUser(userInfo.id, { mySubCom: newFollowList }).then(

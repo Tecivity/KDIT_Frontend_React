@@ -1,3 +1,7 @@
+* {
+	font-family: Iconic;
+}
+
 .explorePane {
 	position: absolute;
 	width: 43%;

@@ -24,10 +24,10 @@ const FullSubComPage = () => {
 				setSubCom({ id: doc.id, ...doc.data() });
 			})
 			.then(() => {
-				console.log('fetch subcom success');
+				// console.log('fetch subcom success');
 			})
 			.catch((err) => {
-				console.log(err);
+				// console.log(err);
 			});
 	};
 
@@ -38,7 +38,7 @@ const FullSubComPage = () => {
 			.doc(id)
 			.update(newSubCom)
 			.then(() => {
-				console.log('Update subcom success');
+				// console.log('Update subcom success');
 				setSubCom(newSubCom);
 			});
 	};

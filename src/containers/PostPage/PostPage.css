@@ -1,3 +1,7 @@
+* {
+	font-family: Iconic;
+}
+
 .auth-loading {
 	position: fixed;
 	top: 50%;

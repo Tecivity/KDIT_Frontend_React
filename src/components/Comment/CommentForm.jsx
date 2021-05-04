@@ -40,7 +40,7 @@ const CommentForm = ({ post, id }) => {
 	}
 	const handleSubmit = (e) => {
 		if (comment.trim() === '') {
-			console.log({ error: 'Must not be empty' });
+			// console.log({ error: 'Must not be empty' });
 		} else {
 			//Submit Comment
 			const newComment = {
@@ -53,7 +53,6 @@ const CommentForm = ({ post, id }) => {
 				voteUp: 0,
 			};
 			CommentService.addComment(newComment).then((data) => {
-				console.log(data);
 				setComment('');
 				window.location.reload();
 			});

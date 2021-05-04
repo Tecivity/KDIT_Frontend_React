@@ -95,12 +95,12 @@ const Profile = ({ id }) => {
 					photoURL,
 					bio,
 				};
-				console.log(profile);
-				console.log(newProfile);
-				console.log(photoURL);
+				// console.log(profile);
+				// console.log(newProfile);
+				// console.log(photoURL);
 				UserService.updateUser(profile.id, newProfile).then(
 					(result) => {
-						console.log('Updated data');
+						// console.log('Updated data');
 						setProfile({
 							...profile,
 							displayName,
@@ -171,7 +171,7 @@ const Profile = ({ id }) => {
 
 	//Effects
 	useEffect(() => {
-		console.log(id);
+		// console.log(id);
 		fetchData();
 	}, []);
 

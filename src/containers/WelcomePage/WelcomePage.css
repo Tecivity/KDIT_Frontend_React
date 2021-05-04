@@ -1,3 +1,7 @@
+* {
+	font-family: Iconic;
+}
+
 .welcomePane {
 	display: flex;
 	flex-direction: column;

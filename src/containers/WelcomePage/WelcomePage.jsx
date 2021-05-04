@@ -104,7 +104,7 @@ const WelcomePage = () => {
 	const handleChange = (e) => {
 		setSelectedData(e);
 		// setShowSuggest(false)
-		console.log(selectedData);
+		// console.log(selectedData);
 		setSelected(true);
 	};
 
@@ -134,11 +134,11 @@ const WelcomePage = () => {
 			SubComService.updateSubCom(selectedData.value, {
 				totalFollow: newTotalFollow,
 			}).then(() => {
-				console.log('update totalFollow success');
+				// console.log('update totalFollow success');
 			});
 		});
 		UserService.updateUser(userInfo.id, subData).then(() => {
-			console.log(subData);
+			// console.log(subData);
 			setIsNewUser(false);
 			history.push(`/`);
 		});

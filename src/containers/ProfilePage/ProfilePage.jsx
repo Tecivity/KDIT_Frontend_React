@@ -10,7 +10,7 @@ const ProfilePage = () => {
 	const { user, authListener } = React.useContext(SessionApi);
 
 	React.useEffect(() => {
-		console.log(id);
+		// console.log(id);
 		authListener();
 	});
 	//Render

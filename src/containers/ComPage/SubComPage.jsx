@@ -45,7 +45,7 @@ const SubComPage = () => {
 				// console.log(testList.pop('test'));
 				// console.log(testList);
 				const isNewUser = data.isNewUser;
-				console.log(isNewUser);
+				// console.log(isNewUser);
 				if (!data.isNewUser) {
 					throw 'not found inNewUser';
 				}
@@ -54,7 +54,7 @@ const SubComPage = () => {
 				userService
 					.updateUser(user.uid, { isNewUser: false })
 					.then(() => {
-						console.log(err);
+						// console.log(err);
 					});
 			});
 
@@ -159,7 +159,7 @@ const SubComPage = () => {
 						)}
 					</div>
 				)}
-				<button onClick={firebaseTest}>😍</button>
+				{/* <button onClick={firebaseTest}>😍</button> */}
 			</div>
 			<SideNavbar />
 		</>

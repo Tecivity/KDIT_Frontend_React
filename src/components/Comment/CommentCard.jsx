@@ -55,7 +55,7 @@ const CommentCard = ({ comment }) => {
 				//  console.log(commentOwner.displayName)
 			})
 			.catch((err) => {
-				console.log(err);
+				// console.log(err);
 			});
 	};
 
@@ -76,14 +76,13 @@ const CommentCard = ({ comment }) => {
 				content: newComment,
 			})
 			.then(() => {
-				console.log('Update comment to firestore');
 				window.location.reload();
 			});
 	};
 
 	const handleDeleteComment = () => {
 		if (!window.confirm('Are you sure for delete comment ❓')) {
-			return console.log('Cancel delete.');
+			return;
 		}
 		CommentService.deleteComment(comment.id).then(() => {
 			window.location.reload();

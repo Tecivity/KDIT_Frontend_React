@@ -218,3 +218,7 @@
 		overflow-y: auto;
 	}
 }
+
+* {
+	font-family: Iconic;
+}

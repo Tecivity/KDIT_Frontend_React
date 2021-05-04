@@ -156,3 +156,7 @@ body {
 		overflow: auto;
 	}
 }
+
+* {
+	font-family: Iconic;
+}

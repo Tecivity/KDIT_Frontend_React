@@ -29,14 +29,14 @@ const CustomHits = connectHits(({ hits, indice }) => {
 
 	const deletePost = async (id) => {
 		if (!window.confirm('Are you sure for delete post ❓')) {
-			return console.log('Cancel delete.');
+			// return console.log('Cancel delete.');
 		}
 
-		PostService.deletePost(id).then(()=>{
-			console.log(id,' deleted')
-			window.location.reload()
-		})
-	}
+		PostService.deletePost(id).then(() => {
+			// console.log(id, ' deleted');
+			window.location.reload();
+		});
+	};
 
 	return (
 		<div className="explore-hitContainer">
@@ -99,8 +99,11 @@ const CustomHits = connectHits(({ hits, indice }) => {
 									paddingBottom: '1rem',
 								}}
 							>
-								<h4>Reasons For Reporting </h4>
-								<button onClick={()=>deletePost(hit.objectID)}>Delete</button>
+								<button
+									onClick={() => deletePost(hit.objectID)}
+								>
+									Delete
+								</button>
 							</div>
 						</div>
 					)}
@@ -141,10 +144,7 @@ const CustomHits = connectHits(({ hits, indice }) => {
 									borderTop: '1px solid black',
 									paddingLeft: '1rem',
 								}}
-							>
-								<h4>Reasons For Reporting </h4>
-								<button>Delete</button>
-							</div>
+							></div>
 						</div>
 					)}
 					{indice === 'users' && (
@@ -185,10 +185,7 @@ const CustomHits = connectHits(({ hits, indice }) => {
 									width: '50%',
 									paddingLeft: '1rem',
 								}}
-							>
-								<h4>Reasons For Reporting </h4>
-								<button>BAN</button>
-							</div>
+							></div>
 						</div>
 					)}
 				</div>

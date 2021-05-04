@@ -427,16 +427,20 @@ div[role='menu'].visible {
 	}
 }
 
-.reportPane b{
+.reportPane b {
 	margin: 1rem;
 }
 
-.reportPane input[type = "checkbox"]{
-width:  30px;
-height:  30px;
+.reportPane input[type='checkbox'] {
+	width: 30px;
+	height: 30px;
 }
 
-.reportPane label{
+.reportPane label {
 	height: auto;
 	width: fit-content;
+}
+
+* {
+	font-family: Iconic;
 }

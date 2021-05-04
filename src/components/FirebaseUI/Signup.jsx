@@ -35,16 +35,16 @@ var uiConfig = {
 						mySubCom: [],
 					})
 					.then(() => {
-						console.log('Sync auth to firestore');
+						// console.log('Sync auth to firestore');
 					});
 			}
 
 			if (userInfo.isNewUser && userInfo.providerId === 'password') {
 				try {
 					await authResult.user.sendEmailVerification();
-					console.log('Check Your Email.');
+					// console.log('Check Your Email.');
 				} catch (error) {
-					console.log('Enable to send Verification Email');
+					// console.log('Enable to send Verification Email');
 				}
 			}
 			return false;
@@ -71,10 +71,10 @@ const Signup = () => {
 			.auth()
 			.signOut()
 			.then(function () {
-				console.log('Successfully Signed Out.');
+				// console.log('Successfully Signed Out.');
 			})
 			.catch(function () {
-				console.log('Error Signed Out.');
+				// console.log('Error Signed Out.');
 			});
 	};
 

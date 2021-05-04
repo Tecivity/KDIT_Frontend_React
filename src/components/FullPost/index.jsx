@@ -194,7 +194,7 @@ const FullPost = ({ post, id }) => {
 
 	const deletePost = () => {
 		if (!window.confirm('Are you sure for delete post ❓')) {
-			return console.log('Cancel delete.');
+			// return console.log('Cancel delete.');
 		}
 		PostService.deletePost(post.id).then(() => {
 			history.push(`/`);
@@ -216,7 +216,7 @@ const FullPost = ({ post, id }) => {
 				setSubComName(data.name);
 			});
 		} catch (err) {
-			console.log(err);
+			// console.log(err);
 		}
 	};
 
