@@ -219,7 +219,12 @@ const Post = ({ post }) => {
 				<div className="post" onClick={handlePostClick}>
 					<div onClick={handlePostClick}>
 						<img
-							src={postUser.photoURL || defaultImage}
+							src={
+								typeof postUser.photoURL === 'string' ||
+								postUser.photoURL instanceof String
+									? postUser.photoURL
+									: defaultImage
+							}
 							alt="profile picture"
 							className="profilePic"
 							onClick={() =>
@@ -292,7 +297,9 @@ const Post = ({ post }) => {
 						<BiUpArrow size="25px" />
 					</div>
 
-					<h4 style={{ margin: '0' }}>{voteUpNum - voteDownNum}</h4>
+					<h4 style={{ margin: '0' }}>
+						{voteUpNum - voteDownNum || 0}
+					</h4>
 
 					<div
 						onClick={downVote}
