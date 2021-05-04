@@ -89,7 +89,7 @@ const PostForm = ({ updatePost }) => {
     if (!selectedData) {
       store.addNotification({
         id: "1",
-        title: "Please Select Sub-Community.",
+        title: "Please select sub-community.",
         message:
           "In order to post, you need to select where your post will display!",
         type: "warning",
@@ -140,7 +140,7 @@ const PostForm = ({ updatePost }) => {
           });
       } else {
         store.addNotification({
-          title: "Please Insert The Story In The Editor.",
+          title: "Please insert the story in the editor.",
           message:
             "We can't let you write an empty story! Please insert the story that you want to share.",
           type: "warning",

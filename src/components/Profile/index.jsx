@@ -51,21 +51,21 @@ const Profile = ({ id }) => {
 			store.addNotification({
 				title: 'Your profile is updated successfully!',
 				message:
-					'Yeah! your change that you made to your profile is now on our server.',
+					'Yeah! your change that you made to your profile is now on our server. Please wait a moment for us to redirect you.',
 				type: 'success',
 				insert: 'top',
 				container: 'bottom-full',
 				animationIn: ['animate__animated', 'animate__fadeIn'],
 				animationOut: ['animate__animated', 'animate__fadeOut'],
 				dismiss: {
-					duration: 8000,
+					duration: 5000,
 					onScreen: true,
 					pauseOnHover: true,
 				},
 			});
 			setTimeout(function () {
 				window.location.reload();
-			}, 3000);
+			}, 5000);
 		});
 		setShowSave(false);
 	};
