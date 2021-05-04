@@ -14,26 +14,53 @@ import { store } from "react-notifications-component";
 import "animate.css";
 
 const SubComForm = () => {
-  //States
-  const [subcom, setSubCom] = useState({
-    name: "",
-    description: "",
-    ownerUID: "",
-    photoURL: "",
-  });
-  const [photoURL, setPhotoURL] = useState("");
-  const [bannerURL, setBannerURL] = useState("");
-  const [isrCreated, setIsCreated] = useState(false);
+	//States
+	const [subcom, setSubCom] = useState({
+		name: '',
+		description: '',
+		ownerUID: '',
+		photoURL: '',
+	});
+	const [photoURL, setPhotoURL] = useState('');
+	const [bannerURL, setBannerURL] = useState('');
+	const [isrCreated, setIsCreated] = useState(true);
+	const [nameLen, setNameLen] = useState(0);
+	const [desLen, setDesLen] = useState(0);
 
   //Context
   const { user, defaultBanner } = useContext(SessionApi);
 
-  //Functions
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setSubCom({ ...subcom, [name]: value });
-  };
+	//Functions
+
+	const checkNameLen = (e) => {
+		const max_len = 20;
+		if (e.target.value.length < max_len) {
+			handleChange(e);
+		}
+		if (e.target.value.length <= max_len) {
+			setNameLen(e.target.value.length);
+		}
+
+		e.target.value = e.target.value.substr(0, max_len);
+	};
+
+	const checkDesLen = (e) => {
+		const max_len = 250;
+		if (e.target.value.length < max_len) {
+			handleChange(e);
+		}
+		if (e.target.value.length <= max_len) {
+			setDesLen(e.target.value.length);
+		}
+		e.target.value = e.target.value.substr(0, max_len);
+	};
+
+	const handleChange = (e) => {
+		const name = e.target.name;
+		const value = e.target.value;
+		setSubCom({ ...subcom, [name]: value });
+		setIsCreated(false);
+	};
 
   const clearInput = () => {
     setSubCom({ name: "", description: "" });
@@ -140,13 +167,16 @@ const SubComForm = () => {
             <h2>Community Picture</h2>
             <FileUpload url={photoURL} setUrl={setPhotoURL} />
 
-            <img
-              src={photoURL}
-              alt=""
-              className="full-editProfilePic"
-              draggable="false"
-            />
-          </div>
+						<img
+							src={
+								photoURL ||
+								'https://cdn.jeab.com/wp-content/uploads/2020/03/wallpaper-for-jeab06.jpg'
+							}
+							alt=""
+							className="full-editProfilePic"
+							draggable="false"
+						/>
+					</div>
 
           <div
             style={{

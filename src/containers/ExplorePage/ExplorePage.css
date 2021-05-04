@@ -76,7 +76,8 @@
 .explore-hit {
 	margin: 1.5rem 0;
 
-	max-height: 30%;
+	min-height: 50%;
+	max-height: 80%;
 
 	border-radius: 0.5rem;
 
@@ -165,6 +166,6 @@
 	}
 
 	.explore-hitContainer {
-		margin-bottom: 5rem;
+		padding-bottom: 5rem;
 	}
 }

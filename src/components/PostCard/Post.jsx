@@ -40,14 +40,13 @@ const Post = ({ post }) => {
 	}, [post]);
 
 	//Context
-	const { userInfo, loading, setLoading } = useContext(SessionApi);
+	const { userInfo, loading, setLoading, user } = useContext(SessionApi);
 
 	//History
 	const history = useHistory();
 
 	//Functions
 	const handlePostClick = () => {
-		console.log('post clicked');
 		history.push(`/post/${post.id}`);
 	};
 
@@ -58,6 +57,16 @@ const Post = ({ post }) => {
 		PostService.deletePost(post.id).then(() => {
 			window.location.reload();
 		});
+	};
+
+	const check = async () => {
+		if (postDummy.voteUp.includes(userInfo.id)) {
+			setIsVoteup(true);
+			setIsVoteDown(false);
+		} else if (postDummy.voteDown.includes(userInfo.id)) {
+			setIsVoteup(false);
+			setIsVoteDown(true);
+		}
 	};
 
 	const upVote = async () => {
