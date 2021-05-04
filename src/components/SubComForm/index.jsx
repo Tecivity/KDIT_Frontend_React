@@ -113,6 +113,7 @@ const SubComForm = () => {
 						'https://cdn.jeab.com/wp-content/uploads/2020/03/wallpaper-for-jeab06.jpg',
 					totalFollow: [],
 					bannerURL: bannerURL || defaultBanner,
+					isApprove: false
 				})
 				.then(() => {
 					setIsCreated(true);

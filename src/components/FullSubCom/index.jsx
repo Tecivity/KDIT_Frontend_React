@@ -24,7 +24,7 @@ import 'animate.css';
 const FullSubCom = ({ subCom, update }) => {
 	//Variables
 	const { buttonProps, itemProps, isOpen, setIsOpen } = useDropdownMenu(1);
-
+	const [isApprove, setIsApprove] = useState(false)
 	//States
 	const [posts, setPosts] = useState([]);
 	const [photoURL, setPhotoURL] = useState('');
@@ -128,6 +128,7 @@ const FullSubCom = ({ subCom, update }) => {
 				value: subCom.id,
 				label: subCom.name,
 			});
+			setIsApprove(subCom.isApprove)
 			getPost(subCom.id);
 			try {
 				const listSubCom = userInfo.mySubCom;
@@ -250,7 +251,7 @@ const FullSubCom = ({ subCom, update }) => {
 					/>
 				</div>
 				<h2 style={{ marginBottom: '0', textAlign: 'center' }}>
-					{subCom.name}
+					{subCom.name}{isApprove ? <span>✔</span> : <span></span>}
 				</h2>
 				<p
 					style={{
