@@ -14,7 +14,7 @@ import { SessionApi } from '../../hook/SessionApi';
 import firebase from '../../firebase';
 import { User } from '../../firebase/models';
 import MyUploadAdapter from '../../firebase/ckeditor_image_firebase';
-import { CommentService, PostService, UserService } from '../../services';
+import { CommentService, PostService, SubComService, UserService } from '../../services';
 //External
 import parse from 'html-react-parser';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
@@ -40,6 +40,7 @@ const FullPost = ({ post, id }) => {
 	const [voteDownNum, setVoteDownNum] = useState(0);
 	const [isVoteUp, setIsVoteup] = useState(false);
 	const [isVoteDown, setIsVoteDown] = useState(false);
+	const [subComName, setSubComName] = useState('')
 
 	//Contexts
 	const { session, user, loading, userInfo } = useContext(SessionApi);
@@ -197,6 +198,9 @@ const FullPost = ({ post, id }) => {
 			CommentService.getCommentSize(post.id).then((data) => {
 				setTotalComment(data);
 			});
+			SubComService.getSubCom(post.subComUID).then((data)=>{
+				setSubComName(data.name)
+			})
 		} catch (err) {
 			console.log(err);
 		}
@@ -319,7 +323,7 @@ const FullPost = ({ post, id }) => {
 											textDecoration: 'underline',
 										}}
 									>
-										Community
+										{subComName}
 									</p>
 								</div>
 							</div>
