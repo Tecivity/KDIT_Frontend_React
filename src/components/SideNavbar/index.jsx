@@ -1,6 +1,18 @@
 //React
 import React, { useState, useEffect } from 'react';
 import { Slide } from 'react-slideshow-image';
+import {
+	InstantSearch,
+	connectHighlight,
+	ClearRefinements,
+	RefinementList,
+	Configure,
+	connectSearchBox,
+	connectHits,
+	connectPagination,
+	HitsPerPage,
+	SortBy,
+} from 'react-instantsearch-dom';
 //Components
 import SearchBar from '../SearchBar';
 //Firebase
@@ -78,22 +90,7 @@ const SideNavbar = () => {
 					<div>
 						<h3 style={{ marginBottom: '0' }}>Community</h3>
 						<Slide easing="ease" style={{ margin: 'auto' }}>
-							<div className="each-slide">
-								<div>
-									<h4>Community On Trend 1</h4>
-									<p>Community Content</p>
-								</div>
-							</div>
-							<div className="each-slide">
-								<div>
-									<h4>Community On Trend 2</h4>
-								</div>
-							</div>
-							<div className="each-slide">
-								<div>
-									<h4>Community On Trend 3</h4>
-								</div>
-							</div>
+							{genCommunity()}
 						</Slide>
 					</div>
 				</div>

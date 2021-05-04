@@ -131,6 +131,7 @@ h1.loginWarn {
 
 .post:hover {
 	background: #ffeade;
+	/* background: #ffaeae; */
 	/* transform: translate(-1rem, -1rem); */
 	/* box-shadow: 0.1rem 0.1rem #df814a, 0.2rem 0.2rem #df814a,
 		0.3rem 0.3rem #df814a, 0.4rem 0.4rem #df814a, 0.5rem 0.5rem #df814a,
@@ -317,8 +318,7 @@ h1.loginWarn {
 }
 
 .postFormBox:hover {
-	transform: translateY(-1rem);
-	box-shadow: 0 1rem #f48c51;
+	box-shadow: 0 0 0 1rem #f48c51;
 }
 
 .postOption {
@@ -465,6 +465,8 @@ h1.loginWarn {
 
 .selectCom {
 	min-width: 50%;
+
+	z-index: 10;
 }
 
 @media only screen and (max-width: 800px) {
