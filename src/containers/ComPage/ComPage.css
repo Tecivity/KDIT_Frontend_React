@@ -85,14 +85,9 @@
 }
 
 .com-popup-content {
-	display: flex;
-	flex-direction: column;
-
 	width: 60%;
-	height: auto;
-	padding: 0;
-
-	/* background: red; */
+	height: 80%;
+	overflow: auto;
 }
 
 @media only screen and (max-width: 800px) {
@@ -128,10 +123,10 @@
 	.com-popup-content {
 		display: flex;
 		flex-direction: column;
+		align-items: center;
 
 		width: 100%;
 		height: 80%;
-		height: auto;
 		padding: 0;
 
 		/* background: red; */

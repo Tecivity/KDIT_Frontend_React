@@ -11,7 +11,7 @@ const SubComBox = ({ subCom }) => {
 	const history = useHistory();
 	const [isFollow, setIsFollow] = useState(false);
 
-	const { userInfo, authListener } = useContext(SessionApi);
+	const { userInfo, authListener, defaultBanner } = useContext(SessionApi);
 
 	//Functions
 	const handleOnClick = () => {
@@ -56,7 +56,7 @@ const SubComBox = ({ subCom }) => {
 			<div id={subCom.id} className="subcomDiv" onClick={handleOnClick}>
 				<div className="subComBackgroundPane" onClick={handleOnClick}>
 					<img
-						src={subCom.bannerURL}
+						src={subCom.bannerURL || defaultBanner}
 						alt=""
 						width="100%"
 						height="130%"
@@ -69,7 +69,14 @@ const SubComBox = ({ subCom }) => {
 					/>
 				</div>
 				<div className="subComImagePane" onClick={handleOnClick}>
-					<img src={subCom.photoURL} alt="" className="subComImg" />
+					<img
+						src={
+							subCom.photoURL ||
+							'https://cdn.jeab.com/wp-content/uploads/2020/03/wallpaper-for-jeab06.jpg'
+						}
+						alt=""
+						className="subComImg"
+					/>
 				</div>
 				<div className="subcomInfoPane" onClick={handleOnClick}>
 					<h3 style={{ display: 'inline', margin: '0' }}>
@@ -83,7 +90,7 @@ const SubComBox = ({ subCom }) => {
 							margin: '0',
 						}}
 					>
-						{subCom.totalFollow.length} Members
+						{subCom.totalFollow.length || 0} Members
 					</p>
 					<p
 						style={{

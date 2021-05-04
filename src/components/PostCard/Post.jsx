@@ -47,7 +47,6 @@ const Post = ({ post }) => {
 
 	//Functions
 	const handlePostClick = () => {
-		console.log('post clicked');
 		history.push(`/post/${post.id}`);
 	};
 
@@ -58,6 +57,16 @@ const Post = ({ post }) => {
 		PostService.deletePost(post.id).then(() => {
 			window.location.reload();
 		});
+	};
+
+	const check = async () => {
+		if (postDummy.voteUp.includes(userInfo.id)) {
+			setIsVoteup(true);
+			setIsVoteDown(false);
+		} else if (postDummy.voteDown.includes(userInfo.id)) {
+			setIsVoteup(false);
+			setIsVoteDown(true);
+		}
 	};
 
 	const upVote = async () => {
@@ -202,10 +211,7 @@ const Post = ({ post }) => {
 				<div className="post" onClick={handlePostClick}>
 					<div onClick={handlePostClick}>
 						<img
-							src={postUser.photoURL}
-							onError={(e) => {
-								e.src = defaultImage;
-							}}
+							src={postUser.photoURL || defaultImage}
 							alt="profile picture"
 							className="profilePic"
 							onClick={() =>

@@ -5,6 +5,7 @@ import { MdCancel, MdEdit, MdDelete, MdReportProblem } from 'react-icons/md';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
 import Popup from 'reactjs-popup';
+import { store } from 'react-notifications-component';
 //Components
 import { BiUpArrow, BiDownArrow, BiCommentDetail } from 'react-icons/bi';
 import Comment from '../Comment/index';
@@ -37,6 +38,8 @@ const FullPost = ({ post, id }) => {
 	const [postDummy, setPostDummy] = useState();
 	const [voteUpNum, setVoteUpNum] = useState(0);
 	const [voteDownNum, setVoteDownNum] = useState(0);
+	const [isVoteUp, setIsVoteup] = useState(false);
+	const [isVoteDown, setIsVoteDown] = useState(false);
 
 	//Contexts
 	const { session, user, loading, userInfo } = useContext(SessionApi);
@@ -46,6 +49,17 @@ const FullPost = ({ post, id }) => {
 
 	//DropDown Menu
 	const { buttonProps, itemProps, isOpen, setIsOpen } = useDropdownMenu(1);
+
+	const check = async () => {
+		console.log(postDummy.voteUp.includes(userInfo.id));
+		if (postDummy.voteUp.includes(userInfo.id)) {
+			setIsVoteup(true);
+			setIsVoteDown(false);
+		} else if (postDummy.voteDown.includes(userInfo.id)) {
+			setIsVoteup(false);
+			setIsVoteDown(true);
+		}
+	};
 
 	const upVote = async () => {
 		const voteUpList = postDummy.voteUp;
@@ -79,6 +93,28 @@ const FullPost = ({ post, id }) => {
 					setVoteUpNum(data.voteUp.length);
 				});
 			});
+		}
+
+		if (voteUpList.includes(userInfo.id)) {
+			setIsVoteup(true);
+			setIsVoteDown(false);
+			store.addNotification({
+				title: 'You up vote this post.',
+				message:
+					'Keep support good content creators to make our world a better place!',
+				type: 'default',
+				insert: 'top',
+				container: 'bottom-right',
+				animationIn: ['animate__animated', 'animate__flipInX'],
+				animationOut: ['animate__animated', 'animate__zoomOut'],
+				dismiss: {
+					duration: 8000,
+					onScreen: true,
+					pauseOnHover: true,
+				},
+			});
+		} else {
+			setIsVoteup(false);
 		}
 	};
 
@@ -118,6 +154,26 @@ const FullPost = ({ post, id }) => {
 					});
 				},
 			);
+		}
+		if (voteDownList.includes(userInfo.id)) {
+			setIsVoteDown(true);
+			setIsVoteup(false);
+			store.addNotification({
+				title: 'You down vote this post.',
+				message: 'Thank you for keeping our platform a better place.',
+				type: 'info',
+				insert: 'top',
+				container: 'bottom-right',
+				animationIn: ['animate__animated', 'animate__flipInX'],
+				animationOut: ['animate__animated', 'animate__zoomOut'],
+				dismiss: {
+					duration: 8000,
+					onScreen: true,
+					pauseOnHover: true,
+				},
+			});
+		} else {
+			setIsVoteDown(false);
 		}
 	};
 
@@ -175,14 +231,26 @@ const FullPost = ({ post, id }) => {
 			<div id={post.id} className="full-postPane">
 				<div className="full-infoPane">
 					<div className="full-votePane">
-						<button onClick={upVote} className="full-voteUpBT">
+						<button
+							onClick={upVote}
+							className="full-voteUpBT"
+							style={{
+								background: isVoteUp ? '#c5ffae' : 'none',
+							}}
+						>
 							<BiUpArrow size="25px" />
 						</button>
 
 						<h4 style={{ margin: '0' }}>
 							{voteUpNum - voteDownNum}
 						</h4>
-						<button onClick={downVote} className="full-voteDownBT">
+						<button
+							onClick={downVote}
+							className="full-voteDownBT"
+							style={{
+								background: isVoteDown ? '#ffaeae' : 'none',
+							}}
+						>
 							<BiDownArrow size="25px" />
 						</button>
 					</div>

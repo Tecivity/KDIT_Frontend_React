@@ -52,6 +52,35 @@
 	box-shadow: 0 0rem #d37a46;
 }
 
+.subcom-btnf {
+	margin: 0.3rem;
+	padding: 0.5rem;
+
+	width: 8rem;
+	height: 3rem;
+
+	background: white;
+
+	border: 2px solid #f48c51;
+	border-radius: 1.5rem;
+
+	color: #b8b8b8;
+	font-size: 1.3rem;
+
+	transition: 0.3s;
+}
+
+.subcom-btnf:hover {
+	transform: translateY(-0.5rem);
+	background: #f48c51;
+	box-shadow: 0 0.5rem #d37a46;
+}
+
+.subcom-btnf:active {
+	transform: translateY(0);
+	box-shadow: 0 0rem #d37a46;
+}
+
 .editCombtn {
 	margin-top: 0.5rem;
 

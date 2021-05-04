@@ -105,24 +105,6 @@ const CommentCard = ({ comment }) => {
 						alt="profile picture"
 						className="profilePic"
 					/>
-					<div className="voteCommentPane">
-						<button
-							// onClick={}
-							className="voteUpBTC"
-						>
-							<BiUpArrow size="25px" />
-						</button>
-						<h4 style={{ margin: '0' }}>
-							{comment.voteUp - comment.voteDown}
-						</h4>
-
-						<button
-							// onClick={}
-							className="voteDownBTC"
-						>
-							<BiDownArrow size="25px" />
-						</button>
-					</div>
 				</div>
 
 				<div className="commentInfo">
