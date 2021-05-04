@@ -4,6 +4,7 @@ import { FaHotjar } from 'react-icons/fa';
 import { AiFillStar } from 'react-icons/ai';
 import { MdNewReleases } from 'react-icons/md';
 import { BsFillBarChartFill } from 'react-icons/bs';
+import { useParams, useHistory } from 'react-router-dom';
 //Components
 import Post from './Post';
 import PostForm from './PostForm';
@@ -15,29 +16,30 @@ import { PostModel } from '../../firebase/models';
 //CSS
 import './index.css';
 import { act } from 'react-dom/test-utils';
+import { BiWindowOpen } from 'react-icons/bi';
 
 const Card = () => {
 	//Varables
 	const ref = firebase.firestore().collection('posts');
-	// const voteUp = 'voteUp';
-	// const voteDown = 'voteDown';
+	const { category } = useParams();
+	const history = useHistory();
 
 	//States
 	const [posts, setPosts] = useState([]);
 	const [activeBt, setActiveBt] = useState({
-		best: false,
-		hot: false,
-		new: false,
-		top: false,
+		// best: false,
+		// hot: false,
+		// new: false,
+		// top: false,
 	});
 	const [hoverBt, setHoverBt] = useState({
-		best: false,
-		hot: false,
-		new: false,
-		top: false,
+		// best: false,
+		// hot: false,
+		// new: false,
+		// top: false,
 	});
 	const [newPost, setNewPost] = useState();
-	const [sortCat, setSortCat] = useState('timeStamp');
+	const [cate, setCate] = useState('');
 
 	//Context
 	const { user, loading, setLoading, userInfo, authListener } = useContext(
@@ -56,13 +58,13 @@ const Card = () => {
 		const subCom = [];
 		// console.log('userInfo : ', userInfo)
 		// console.log(Array.isArray(userInfo.mySubCom), userInfo.mySubCom);
-		if (Array.isArray(userInfo.mySubCom)) {
+		if (Array.isArray(userInfo.mySubCom) && cate) {
 			userInfo.mySubCom.forEach((data) => {
 				subCom.push(data.value);
 				// console.log(typeof data.value)
 			});
 			// console.log('subCom : ', subCom, Array.isArray(subCom));
-			ref.orderBy(sortCat, 'desc')
+			ref.orderBy(cate, 'desc')
 				.where('subComUID', 'in', [...subCom])
 				.limit(20)
 				.onSnapshot(
@@ -78,26 +80,59 @@ const Card = () => {
 						console.log(error);
 					},
 				);
-		} else {
-			console.log('error');
-			// ref
-			// .orderBy("timeStamp", "desc")
-			// .limit(10)
-			// .onSnapshot((querySnapshot) => {
-			//   querySnapshot.forEach((doc) => {
-			//     postsArray.push({ id: doc.id, ...doc.data() });
-			//   });
-			//   setPosts(postsArray);
-			//   setLoading(false);
-			// });
+		} else if (Array.isArray(userInfo.mySubCom)) {
+			userInfo.mySubCom.forEach((data) => {
+				subCom.push(data.value);
+				// console.log(typeof data.value)
+			});
+			// console.log('subCom : ', subCom, Array.isArray(subCom));
+			ref.where('subComUID', 'in', [...subCom])
+				.limit(20)
+				.onSnapshot(
+					(querySnapshot) => {
+						querySnapshot.forEach((doc) => {
+							postsArray.push({ id: doc.id, ...doc.data() });
+						});
+						// console.log('Array : ', postsArray)
+						setPosts(postsArray);
+						setLoading(false);
+					},
+					(error) => {
+						console.log(error);
+					},
+				);
 		}
-		// console.log(posts);
 		setLoading(false);
+	};
+
+	const check = () => {
+		if (category === 'best') {
+			setCate('timeStamp');
+			window.location.reload();
+		}
+		if (activeBt.hot) {
+			history.push('/hot');
+			setCate('userUID');
+			window.location.reload();
+		}
+		if (activeBt.new) {
+			history.push('/new');
+			setCate('timeStamp');
+			window.location.reload();
+		}
+		if (activeBt.top) {
+			history.push('/top');
+			setCate('voteUp');
+			window.location.reload();
+		}
+		console.log(cate);
+		fetchData();
 	};
 
 	//Effects
 	useEffect(() => {
 		fetchData();
+		check();
 	}, [userInfo]);
 
 	return (
@@ -123,6 +158,8 @@ const Card = () => {
 							top: false,
 							best: false,
 						});
+						history.push('/best');
+						window.location.reload();
 					}}
 					style={{
 						background: activeBt.best && '#f48c51',
@@ -159,9 +196,7 @@ const Card = () => {
 							top: false,
 							best: false,
 						});
-						setSortCat('userUID');
-						fetchData();
-						window.location.reload();
+						check();
 					}}
 					style={{
 						background: activeBt.hot && '#f48c51',
@@ -196,9 +231,7 @@ const Card = () => {
 							top: false,
 							best: false,
 						});
-						setSortCat('timeStamp');
-						fetchData();
-						window.location.reload();
+						check();
 					}}
 					style={{
 						background: activeBt.new && '#f48c51',
@@ -233,6 +266,7 @@ const Card = () => {
 							top: false,
 							best: false,
 						});
+						check();
 					}}
 					style={{
 						background: activeBt.top && '#f48c51',
