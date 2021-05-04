@@ -7,13 +7,12 @@ import { BiUpArrow, BiDownArrow, BiCommentDetail } from 'react-icons/bi';
 import { SessionApi } from '../../hook/SessionApi';
 //Firebase
 import firebase from '../../firebase';
-import { CommentService, PostService, UserService } from '../../services';
+import { CommentService, PostService, SubComService, UserService } from '../../services';
 //External
 import parse from 'html-react-parser';
 import TimeAgo from 'javascript-time-ago';
 import en from 'javascript-time-ago/locale/en';
 import ReactTimeAgo from 'react-time-ago';
-import ReactNotification from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import { store } from 'react-notifications-component';
 import 'animate.css';
@@ -33,6 +32,7 @@ const Post = ({ post }) => {
 	const [voteDownNum, setVoteDownNum] = useState(0);
 	const [isVoteUp, setIsVoteup] = useState(false);
 	const [isVoteDown, setIsVoteDown] = useState(false);
+	const [subComName, setSubComName] = useState('')
 
 	//Effects
 	useEffect(() => {
@@ -200,6 +200,9 @@ const Post = ({ post }) => {
 			CommentService.getCommentSize(post.id).then((data) => {
 				setTotalComment(data);
 			});
+			SubComService.getSubCom(post.subComUID).then((data)=>{
+				setSubComName(data.name)
+			})
 		} catch {
 			console.log('err');
 		}
@@ -262,7 +265,7 @@ const Post = ({ post }) => {
 									textDecoration: 'underline',
 								}}
 							>
-								Community
+								{subComName}
 							</p>
 						</div>
 						<div className="postContent" onClick={handlePostClick}>
