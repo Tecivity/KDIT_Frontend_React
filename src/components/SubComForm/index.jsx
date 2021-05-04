@@ -134,7 +134,6 @@ const SubComForm = () => {
             },
           });
           setTimeout(function () {
-            setIsCreated(false);
             window.location.reload();
           }, 5000);
         });
