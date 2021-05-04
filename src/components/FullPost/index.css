@@ -426,3 +426,17 @@ div[role='menu'].visible {
 		transition: 500ms;
 	}
 }
+
+.reportPane b{
+	margin: 1rem;
+}
+
+.reportPane input[type = "checkbox"]{
+width:  30px;
+height:  30px;
+}
+
+.reportPane label{
+	height: auto;
+	width: fit-content;
+}

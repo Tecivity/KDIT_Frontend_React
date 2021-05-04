@@ -144,6 +144,15 @@ const FullSubCom = ({ subCom, update }) => {
 		}
 	};
 
+	const onDelete = async () => {
+		if (!window.confirm('Are you sure for delete this community ❓')) {
+			return console.log('Cancel delete.');
+		}
+		SubComService.deleteSubCom(subCom.id).then(()=>{
+			history.push(`/community`);
+		})
+	}
+
 	const followOnClick = async () => {
 		const newFollowList = [...userInfo.mySubCom];
 		const newTotalFollow = subComDummy.totalFollow;
@@ -454,7 +463,7 @@ const FullSubCom = ({ subCom, update }) => {
 							)}
 						</Popup>
 
-						<button className="editCombtn" onClick={handleOnClick}>
+						<button className="editCombtn" onClick={onDelete}>
 							Delete
 						</button>
 					</>
