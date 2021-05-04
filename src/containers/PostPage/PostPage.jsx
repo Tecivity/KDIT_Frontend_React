@@ -1,13 +1,11 @@
 //React
 import React, { useEffect, useState } from 'react';
 import HashLoader from 'react-spinners/HashLoader';
-import { useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 //Components
-import { Navbar, Card, SideNavbar, FullPost } from '../../components';
+import { Navbar, SideNavbar, FullPost } from '../../components';
 import { SessionApi } from '../../hook/SessionApi';
 //Firebase
-import firebase from '../../firebase';
-import { PostModel } from '../../firebase/models';
 import { PostService } from '../../services';
 
 const PostPage = () => {
@@ -27,9 +25,9 @@ const PostPage = () => {
 	const { authListener, loading } = React.useContext(SessionApi);
 
 	const fetchData = async () => {
-		PostService.getPost(id).then(data=>{
-			setPost(data)
-		})
+		PostService.getPost(id).then((data) => {
+			setPost(data);
+		});
 	};
 
 	return (
@@ -48,10 +46,7 @@ const PostPage = () => {
 					<Navbar />
 					<SideNavbar />
 					<div className>
-						<FullPost
-							post={post}
-							id={id}
-						/>
+						<FullPost post={post} id={id} />
 					</div>
 				</div>
 			)}

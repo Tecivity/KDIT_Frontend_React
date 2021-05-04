@@ -11,9 +11,7 @@ import firebase from '../../firebase';
 import FileUpload from '../../firebase/FileUpload';
 //CSS
 import './index.css';
-import { getSuggestedQuery } from '@testing-library/dom';
-import { PostService, UserService } from '../../services';
-import ReactNotification from 'react-notifications-component';
+import { UserService } from '../../services';
 import 'react-notifications-component/dist/theme.css';
 import { store } from 'react-notifications-component';
 import 'animate.css';
@@ -204,7 +202,7 @@ const Profile = ({ id }) => {
 							{profile.bio}
 						</p>
 					</div>
-					{profile.id == user.uid ? (
+					{profile.id === user.uid ? (
 						<Popup
 							trigger={
 								<button

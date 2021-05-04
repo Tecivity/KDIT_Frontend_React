@@ -1,23 +1,15 @@
 //React
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import parse from 'html-react-parser';
 import {
 	InstantSearch,
-	// SearchBox,
-	// Hits,
-	connectHighlight,
-	ClearRefinements,
-	RefinementList,
 	Configure,
-	// Pagination,
 	connectSearchBox,
 	connectHits,
-	connectPagination,
-	HitsPerPage,
 } from 'react-instantsearch-dom';
 //Components
-import { SearchBar, Navbar, SideNavbar } from '../../components';
+import { Navbar, SideNavbar } from '../../components';
 //External
 import algoliasearch from 'algoliasearch/lite';
 import TimeAgo from 'javascript-time-ago';

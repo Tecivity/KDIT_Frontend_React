@@ -20,19 +20,19 @@ const Comment = ({ post, id }) => {
 	}, []);
 
 	//Functions
-	const updatePost = () => {
-		fetchData();
-	};
+	// const updatePost = () => {
+	// 	fetchData();
+	// };
 
-	const upVote = (post) => {
-		ref.doc(post.id).set({ ...post, voteUp: post.voteUp + 1 });
-		fetchData();
-	};
+	// const upVote = (post) => {
+	// 	ref.doc(post.id).set({ ...post, voteUp: post.voteUp + 1 });
+	// 	fetchData();
+	// };
 
-	const downVote = (post) => {
-		ref.doc(post.id).set({ ...post, voteDown: post.voteDown - 1 });
-		fetchData();
-	};
+	// const downVote = (post) => {
+	// 	ref.doc(post.id).set({ ...post, voteDown: post.voteDown - 1 });
+	// 	fetchData();
+	// };
 
 	const fetchData = async () => {
 		ref.orderBy('timeStamp', 'desc')
@@ -60,7 +60,7 @@ const Comment = ({ post, id }) => {
 		<div className="commentCard">
 			<CommentForm post={post} id={id} />
 			<div className="content">
-				{comments.map((comment,i) => (
+				{comments.map((comment, i) => (
 					<CommentCard key={i} comment={comment} />
 				))}
 			</div>

@@ -28,7 +28,6 @@ import { SessionApi, SessionProvider } from './hook/SessionApi';
 
 import ReactNotification from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
-import { store } from 'react-notifications-component';
 import 'animate.css';
 
 function App() {

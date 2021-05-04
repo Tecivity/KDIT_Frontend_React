@@ -2,10 +2,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import Popup from 'reactjs-popup';
-import { MdCancel, MdEdit, MdDelete, MdReportProblem } from 'react-icons/md';
-import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
+import { MdCancel } from 'react-icons/md';
 import { GoCheck } from 'react-icons/go';
-import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
 
 //Components
 import { SessionApi } from '../../hook/SessionApi';
@@ -16,15 +14,13 @@ import firebase from '../../firebase';
 import './index.css';
 import { SubComService, UserService } from '../../services';
 
-import ReactNotification from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import { store } from 'react-notifications-component';
 import 'animate.css';
 
 const FullSubCom = ({ subCom, update }) => {
 	//Variables
-	const { buttonProps, itemProps, isOpen, setIsOpen } = useDropdownMenu(1);
-	const [isApprove, setIsApprove] = useState(false)
+	const [isApprove, setIsApprove] = useState(false);
 	//States
 	const [posts, setPosts] = useState([]);
 	const [photoURL, setPhotoURL] = useState('');
@@ -128,13 +124,13 @@ const FullSubCom = ({ subCom, update }) => {
 				value: subCom.id,
 				label: subCom.name,
 			});
-			setIsApprove(subCom.isApprove)
+			setIsApprove(subCom.isApprove);
 			getPost(subCom.id);
 			try {
 				const listSubCom = userInfo.mySubCom;
 				if (
 					listSubCom.some(
-						(listSubCom) => listSubCom['value'] == subCom.id,
+						(listSubCom) => listSubCom['value'] === subCom.id,
 					)
 				) {
 					setIsFollow(true);
@@ -149,10 +145,10 @@ const FullSubCom = ({ subCom, update }) => {
 		if (!window.confirm('Are you sure for delete this community ❓')) {
 			return console.log('Cancel delete.');
 		}
-		SubComService.deleteSubCom(subCom.id).then(()=>{
+		SubComService.deleteSubCom(subCom.id).then(() => {
 			history.push(`/community`);
-		})
-	}
+		});
+	};
 
 	const followOnClick = async () => {
 		const newFollowList = [...userInfo.mySubCom];
@@ -202,8 +198,7 @@ const FullSubCom = ({ subCom, update }) => {
 			});
 		} else {
 			store.addNotification({
-				title:
-					'You successfully unfollowed this sub-community.',
+				title: 'You successfully unfollowed this sub-community.',
 				message:
 					'Sorry that you have to go. You will not receive the content form this sub-community from now on',
 				type: 'danger',
@@ -251,7 +246,8 @@ const FullSubCom = ({ subCom, update }) => {
 					/>
 				</div>
 				<h2 style={{ marginBottom: '0', textAlign: 'center' }}>
-					{subCom.name}{isApprove ? <span>✔</span> : <span></span>}
+					{subCom.name}
+					{isApprove ? <span>✔</span> : <span></span>}
 				</h2>
 				<p
 					style={{
@@ -305,7 +301,7 @@ const FullSubCom = ({ subCom, update }) => {
 					</div>
 				)}
 
-				{userInfo.id == subCom.ownerUID ? (
+				{userInfo.id === subCom.ownerUID ? (
 					<>
 						<Popup
 							trigger={

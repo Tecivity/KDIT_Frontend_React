@@ -1,5 +1,5 @@
 //React
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { MdCancel } from 'react-icons/md';
 
@@ -11,11 +11,7 @@ import './index.css';
 
 import {
 	InstantSearch,
-	connectHighlight,
-	ClearRefinements,
-	RefinementList,
 	Configure,
-	Pagination,
 	connectSearchBox,
 	connectHits,
 } from 'react-instantsearch-dom';
@@ -56,7 +52,7 @@ const Hits = ({ hits }) => {
 const CustomHits = connectHits(Hits);
 
 //Custom SearchBar
-const SearchBox = ({ currentRefinement, isSearchStalled, refine }) => {
+const SearchBox = ({ currentRefinement, refine }) => {
 	//States
 	const [showHit, setShowHit] = useState(false);
 

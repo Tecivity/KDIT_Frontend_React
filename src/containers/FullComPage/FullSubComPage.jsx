@@ -2,10 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 //Components
-import { Navbar, Card, SideNavbar, FullSubCom } from '../../components';
+import { Navbar, SideNavbar, FullSubCom } from '../../components';
 //Firebase
 import firebase from '../../firebase';
-import { SubComModel } from '../../firebase/models';
 
 const FullSubComPage = () => {
 	//States
@@ -40,7 +39,7 @@ const FullSubComPage = () => {
 			.update(newSubCom)
 			.then(() => {
 				console.log('Update subcom success');
-				setSubCom(newSubCom)
+				setSubCom(newSubCom);
 			});
 	};
 

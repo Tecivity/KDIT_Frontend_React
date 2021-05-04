@@ -19,7 +19,6 @@ import './style.css';
 
 export default function Navbar() {
 	//States
-	const [searchText, setSearchText] = useState('');
 	const [mouseOver, setMouseOver] = useState({
 		home: false,
 		explore: false,
@@ -236,44 +235,53 @@ export default function Navbar() {
 							Profile
 						</h4>
 					</Link>
-					{isAdmin ? <div>
-						{isMobile && (
-							<Link
-								to="/admin"
-								className="siteName"
-								onMouseOver={() =>
-									setMouseOver({ ...mouseOver, admin: true })
-								}
-								onMouseLeave={() =>
-									setMouseOver({ ...mouseOver, admin: false })
-								}
-								style={{
-									transform: menu === '/admin' && 'scale(1.2)',
-								}}
-							>
-								<MdWidgets
-									size="30px"
+					{isAdmin ? (
+						<div>
+							{isMobile && (
+								<Link
+									to="/admin"
+									className="siteName"
+									onMouseOver={() =>
+										setMouseOver({
+											...mouseOver,
+											admin: true,
+										})
+									}
+									onMouseLeave={() =>
+										setMouseOver({
+											...mouseOver,
+											admin: false,
+										})
+									}
 									style={{
-										fill:
-											mouseOver.admin || menu === '/admin'
-												? '#f8640e'
-												: 'black',
-									}}
-								/>
-								<h4
-									style={{
-										color: menu === '/admin' && '#f8640e',
+										transform:
+											menu === '/admin' && 'scale(1.2)',
 									}}
 								>
-									Manage
-							</h4>
-							</Link>
-						)}
-
-					</div>
-						:
-						<></>}
-
+									<MdWidgets
+										size="30px"
+										style={{
+											fill:
+												mouseOver.admin ||
+												menu === '/admin'
+													? '#f8640e'
+													: 'black',
+										}}
+									/>
+									<h4
+										style={{
+											color:
+												menu === '/admin' && '#f8640e',
+										}}
+									>
+										Manage
+									</h4>
+								</Link>
+							)}
+						</div>
+					) : (
+						<></>
+					)}
 				</div>
 				{session ? (
 					<Link to="/auth" onClick={() => handleLogout()}>
