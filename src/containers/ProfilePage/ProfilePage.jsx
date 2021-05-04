@@ -7,10 +7,11 @@ import { SessionApi } from '../../hook/SessionApi';
 
 const ProfilePage = () => {
 	const { id } = useParams();
-	const { user } = React.useContext(SessionApi);
+	const { user,authListener } = React.useContext(SessionApi);
 
 	React.useEffect(() => {
 		console.log(id);
+		authListener()
 	}, []);
 	//Render
 	return (
