@@ -15,6 +15,7 @@ import { PostModel } from "../../firebase/models";
 //CSS
 import "./index.css";
 import { act } from "react-dom/test-utils";
+import { PostService } from "../../services";
 
 const Card = () => {
   //Varables
@@ -53,41 +54,55 @@ const Card = () => {
     const subCom = [];
     // console.log('userInfo : ', userInfo)
     // console.log(Array.isArray(userInfo.mySubCom), userInfo.mySubCom);
-    if (Array.isArray(userInfo.mySubCom)) {
-      userInfo.mySubCom.forEach(data => {
-        subCom.push(data.value)
-        // console.log(typeof data.value)
-      })
-      // console.log('subCom : ', subCom, Array.isArray(subCom));
+    try {
+      if (Array.isArray(userInfo.mySubCom)) {
+        userInfo.mySubCom.forEach(data => {
+          subCom.push(data.value)
+          // console.log(typeof data.value)
+        })
+        // console.log('subCom : ', subCom, Array.isArray(subCom));
+        ref
+          .orderBy("timeStamp", "desc")
+          .where("subComUID", "in", [...subCom])
+          .onSnapshot((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+              postsArray.push({ id: doc.id, ...doc.data() });
+            });
+            // console.log('Array : ', postsArray)
+            setPosts(postsArray);
+            setLoading(false);
+          }, (error) => {
+            console.log(error)
+          });
+      } else {
+        console.log("error");
+        // ref
+        // .orderBy("timeStamp", "desc")
+        // .limit(10)
+        // .onSnapshot((querySnapshot) => {
+        //   querySnapshot.forEach((doc) => {
+        //     postsArray.push({ id: doc.id, ...doc.data() });
+        //   });
+        //   setPosts(postsArray);
+        //   setLoading(false);
+        // });
+      }
+      // console.log(posts);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
       ref
-        .orderBy("timeStamp", "desc")
-        .where("subComUID", "in", [...subCom])
+      .orderBy("timeStamp", "desc")
+      .limit(10)
         .onSnapshot((querySnapshot) => {
           querySnapshot.forEach((doc) => {
             postsArray.push({ id: doc.id, ...doc.data() });
           });
-          // console.log('Array : ', postsArray)
           setPosts(postsArray);
-          setLoading(false);
-        }, (error) => {
-          console.log(error)
+          console.log(postsArray)
         });
-      
-    } else {
-      console.log("error");
-      // ref
-      // .orderBy("timeStamp", "desc")
-      // .limit(10)
-      // .onSnapshot((querySnapshot) => {
-      //   querySnapshot.forEach((doc) => {
-      //     postsArray.push({ id: doc.id, ...doc.data() });
-      //   });
-      //   setPosts(postsArray);
-      //   setLoading(false);
-      // });
     }
-    // console.log(posts);
-    setLoading(false);
+
   };
 
   //Effects
