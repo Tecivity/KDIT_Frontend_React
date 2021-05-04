@@ -32,6 +32,7 @@ import { store } from 'react-notifications-component';
 import "animate.css"
 
 function App() {
+	{console.disableYellowBox = true;}
 	return (
 		<div className="App">
 			<SessionProvider>
