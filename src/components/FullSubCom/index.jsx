@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Popup from 'reactjs-popup';
 import { MdCancel } from 'react-icons/md';
+import { GoCheck } from 'react-icons/go';
 //Components
 import { SessionApi } from '../../hook/SessionApi';
 import Post from '../PostCard/Post';
@@ -28,6 +29,8 @@ const FullSubCom = ({ subCom, update }) => {
 	const [subComData, setSubComData] = useState({});
 	const [subComDummy, setSubComDummy] = useState({});
 	const [voteNumber, setVoteNumber] = useState();
+	const [isEdited, setIsEdited] = useState(false);
+	const [hover, setHover] = useState(false);
 
 	//Contexts
 	const { defaultBanner, userInfo, authListener } = useContext(SessionApi);
@@ -35,6 +38,7 @@ const FullSubCom = ({ subCom, update }) => {
 	//Functions
 	const handleOnClick = () => {
 		setEdit(!edit);
+		setIsEdited(false);
 	};
 
 	// const clearInput = () => {
@@ -51,6 +55,25 @@ const FullSubCom = ({ subCom, update }) => {
 			photoURL,
 		};
 		update(newSubCom);
+		setIsEdited(true);
+		store.addNotification({
+			title: 'Your Community is updated successfully!',
+			message:
+				'Yeah! your change that you made to your sub-community is now on our server.',
+			type: 'success',
+			insert: 'top',
+			container: 'bottom-full',
+			animationIn: ['animate__animated', 'animate__fadeIn'],
+			animationOut: ['animate__animated', 'animate__fadeOut'],
+			dismiss: {
+				duration: 8000,
+				onScreen: true,
+				pauseOnHover: true,
+			},
+		});
+		setTimeout(function () {
+			window.location.reload();
+		}, 3000);
 	};
 
 	const getPost = (id) => {
@@ -182,7 +205,10 @@ const FullSubCom = ({ subCom, update }) => {
 				</div>
 				<div className="subComImagePane">
 					<img
-						src={subCom.photoURL}
+						src={
+							subCom.photoURL ||
+							'https://cdn.jeab.com/wp-content/uploads/2020/03/wallpaper-for-jeab06.jpg'
+						}
 						alt=""
 						className="subComImg"
 						style={{ background: 'white' }}
@@ -203,8 +229,16 @@ const FullSubCom = ({ subCom, update }) => {
 				<p>{subCom.description}</p>
 				{isFollow ? (
 					<>
-						<button className="subcom-btn" onClick={followOnClick}>
-							Followed
+						<button
+							className="subcom-btnf"
+							onClick={followOnClick}
+							onMouseOver={() => setHover(true)}
+							onMouseLeave={() => setHover(false)}
+						>
+							<GoCheck
+								size="30px"
+								style={{ fill: hover ? 'white' : '#f48c51' }}
+							/>
 						</button>
 					</>
 				) : (
@@ -325,19 +359,21 @@ const FullSubCom = ({ subCom, update }) => {
 													}
 												></textarea>
 											</div>
-											<button
-												onClick={handleSubmit}
-												className="btn"
-												// onClick={close}
-											>
-												<a
-													style={{
-														color: 'white',
-													}}
+											{!isEdited && (
+												<button
+													onClick={handleSubmit}
+													className="btn"
+													// onClick={close}
 												>
-													Save
-												</a>
-											</button>
+													<a
+														style={{
+															color: 'white',
+														}}
+													>
+														Save
+													</a>
+												</button>
+											)}
 										</div>
 									</div>
 								</div>

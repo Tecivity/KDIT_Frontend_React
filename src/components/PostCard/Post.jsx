@@ -202,10 +202,7 @@ const Post = ({ post }) => {
 				<div className="post" onClick={handlePostClick}>
 					<div onClick={handlePostClick}>
 						<img
-							src={postUser.photoURL}
-							onError={(e) => {
-								e.src = defaultImage;
-							}}
+							src={postUser.photoURL || defaultImage}
 							alt="profile picture"
 							className="profilePic"
 							onClick={() =>

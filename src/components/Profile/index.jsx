@@ -63,6 +63,9 @@ const Profile = ({ id }) => {
 					pauseOnHover: true,
 				},
 			});
+			setTimeout(function () {
+				window.location.reload();
+			}, 3000);
 		});
 		setShowSave(false);
 	};
@@ -108,9 +111,6 @@ const Profile = ({ id }) => {
 				<div className="bannerImgPane">
 					<img
 						src={profile.bannerURL || defaultBanner}
-						onError={(e) => {
-							e.src = defaultBanner;
-						}}
 						alt=""
 						className="bannerImg"
 					/>
@@ -119,9 +119,6 @@ const Profile = ({ id }) => {
 					<div>
 						<img
 							src={profile.photoURL || defaultImage}
-							onError={(e) => {
-								e.src = defaultImage;
-							}}
 							alt="profile picture"
 							className="full-profilePic"
 							style={{ background: 'white' }}
