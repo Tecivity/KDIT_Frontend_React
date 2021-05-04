@@ -26,7 +26,13 @@ import {
 //Import Hooks
 import { SessionApi, SessionProvider } from './hook/SessionApi';
 
+import ReactNotification from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
+import { store } from 'react-notifications-component';
+import "animate.css"
+
 function App() {
+	{console.disableYellowBox = true;}
 	return (
 		<div className="App">
 			<SessionProvider>
@@ -34,6 +40,7 @@ function App() {
 					<Routes />
 				</Router>
 			</SessionProvider>
+			<ReactNotification></ReactNotification>
 		</div>
 	);
 }
@@ -51,7 +58,7 @@ const Routes = () => {
 			<Route exact path="/community/:id" component={FullSubComPage} />
 			<Route exact path="/explore" component={ExplorePage} />
 			<Route exact path="/welcome" component={WelcomePage} />
-			<Route exact path="/admin" component={AdminPage} />
+			<ProtectedAdmin exact isAdmin={Session.isAdmin} path="/admin" component={AdminPage} />
 			<ProtectedRoute
 				auth={Session.session}
 				exact
@@ -75,6 +82,15 @@ const ProtectedRoute = ({ auth, component: Component, ...rest }) => {
 		<Route
 			{...rest}
 			render={() => (auth ? <Component /> : <Redirect to="/auth" />)}
+		/>
+	);
+};
+
+const ProtectedAdmin = ({ isAdmin, component: Component, ...rest }) => {
+	return (
+		<Route
+			{...rest}
+			render={() => (isAdmin ? <Component /> : <Redirect to="/" />)}
 		/>
 	);
 };

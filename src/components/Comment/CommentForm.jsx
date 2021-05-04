@@ -2,14 +2,14 @@
 import React, { useState, useContext } from 'react';
 //Components
 import { SessionApi } from '../../hook/SessionApi';
-import { CommentService } from "../../services";
+import { CommentService } from '../../services';
 
 const CommentForm = ({ post, id }) => {
 	//States
 	const [comment, setComment] = useState('');
 
 	//Contexts
-	const { user } = useContext(SessionApi);
+	const { session, user } = useContext(SessionApi);
 
 	//Functions
 	const handleOnChange = (e) => {
@@ -52,30 +52,41 @@ const CommentForm = ({ post, id }) => {
 				voteDown: 0,
 				voteUp: 0,
 			};
-			CommentService.addComment(newComment).then(data=>{
-				console.log(data)
-				setComment('')
+			CommentService.addComment(newComment).then((data) => {
+				console.log(data);
+				setComment('');
 				window.location.reload();
-			  })
+			});
 		}
 	};
 
 	return (
 		<div>
 			<div className="commentForm">
-				<textarea
-					name=""
-					id=""
-					cols="30"
-					rows="5"
-					placeholder="What's Your Thought About This..."
-					className="commentTextarea"
-					onChange={handleOnChange}
-					value={comment}
-				></textarea>
-				<button className="postCommentBtn" onClick={handleSubmit}>
-					Submit Comment
-				</button>
+				{session ? (
+					<>
+						<textarea
+							name=""
+							id=""
+							cols="30"
+							rows="5"
+							placeholder="What's Your Thought About This..."
+							className="commentTextarea"
+							onChange={handleOnChange}
+							value={comment}
+						></textarea>
+						<button
+							className="postCommentBtn"
+							onClick={handleSubmit}
+						>
+							Submit Comment
+						</button>
+					</>
+				) : (
+					<h3 style={{ textAlign: 'center' }}>
+						Please Login To Comment Post
+					</h3>
+				)}
 			</div>
 		</div>
 	);

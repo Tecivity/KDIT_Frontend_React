@@ -14,6 +14,10 @@ import './index.css';
 import { getSuggestedQuery } from '@testing-library/dom';
 import { PostService, UserService } from '../../services';
 import 'react-image-crop/dist/ReactCrop.css';
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
+import { store } from 'react-notifications-component';
+import 'animate.css';
 
 const Profile = ({ id }) => {
 	//States
@@ -24,7 +28,7 @@ const Profile = ({ id }) => {
 	const [displayName, setDisplayName] = useState('');
 	const [bio, setBio] = useState('');
 	const [profile, setProfile] = useState({});
-	const [mouseDown, setMouseDown] = useState(false);
+	const [showSave, setShowSave] = useState(true);
 
 	//Contexts
 	const { user, defaultImage, defaultBanner } = useContext(SessionApi);
@@ -44,7 +48,23 @@ const Profile = ({ id }) => {
 		UserService.updateUser(profile.id, newProfile).then((result) => {
 			console.log('Updated data');
 			setProfile({ ...profile, displayName, bannerURL, photoURL, bio });
+			store.addNotification({
+				title: 'Your profile is updated successfully!',
+				message:
+					'Yeah! your change that you made to your profile is now on our server.',
+				type: 'success',
+				insert: 'top',
+				container: 'bottom-full',
+				animationIn: ['animate__animated', 'animate__fadeIn'],
+				animationOut: ['animate__animated', 'animate__fadeOut'],
+				dismiss: {
+					duration: 8000,
+					onScreen: true,
+					pauseOnHover: true,
+				},
+			});
 		});
+		setShowSave(false);
 	};
 
 	const handleOnClick = () => {
@@ -84,10 +104,13 @@ const Profile = ({ id }) => {
 	return (
 		<>
 			<div className="profilePane">
+				{(console.disableRedBox = true)}
 				<div className="bannerImgPane">
 					<img
 						src={profile.bannerURL || defaultBanner}
-						onError={defaultBanner}
+						onError={(e) => {
+							e.src = defaultBanner;
+						}}
 						alt=""
 						className="bannerImg"
 					/>
@@ -96,9 +119,12 @@ const Profile = ({ id }) => {
 					<div>
 						<img
 							src={profile.photoURL || defaultImage}
-							onError={defaultImage}
+							onError={(e) => {
+								e.src = defaultImage;
+							}}
 							alt="profile picture"
 							className="full-profilePic"
+							style={{ background: 'white' }}
 						/>
 						<h2 style={{ marginTop: '0', marginBottom: '0rem' }}>
 							{profile.displayName}
@@ -108,11 +134,6 @@ const Profile = ({ id }) => {
 							{profile.bio}
 						</p>
 					</div>
-					<div style={{ alignSelf: 'center' }}>
-						{/* <button className="edit-btn" onClick={handleOnClick}>
-							{edit ? 'X' : 'Edit'}
-						</button> */}
-					</div>
 					{profile.id == user.uid ? (
 						<Popup
 							trigger={
@@ -120,7 +141,7 @@ const Profile = ({ id }) => {
 									className="edit-btn"
 									onClick={handleOnClick}
 								>
-									{edit ? 'X' : 'Edit'}
+									Edit
 								</button>
 							}
 							modal
@@ -185,9 +206,7 @@ const Profile = ({ id }) => {
 												/>
 											</div>
 
-											<label htmlFor="">
-												Display Name
-											</label>
+											<h3>Display Name</h3>
 											<input
 												type="text"
 												name="displayNames"
@@ -200,7 +219,7 @@ const Profile = ({ id }) => {
 												className="editInput"
 											/>
 
-											<label htmlFor="">Bio</label>
+											<h3>Bio</h3>
 											<input
 												type="text"
 												name="displayNames"
@@ -211,19 +230,22 @@ const Profile = ({ id }) => {
 												className="editInput"
 											/>
 
-											<button
-												className="btn"
-												onClick={updateProfile}
-											>
-												<a
-													onClick={close}
-													style={{
-														color: 'white',
-													}}
+											{showSave && (
+												<button
+													className="btn"
+													onClick={updateProfile}
+													// onClick={close}
 												>
-													Save Changes
-												</a>
-											</button>
+													<a
+														style={{
+															color: 'white',
+															margin: '2rem',
+														}}
+													>
+														Save Changes
+													</a>
+												</button>
+											)}
 										</div>
 									</div>
 								</div>
@@ -234,7 +256,6 @@ const Profile = ({ id }) => {
 					)}
 				</div>
 				<div className="profileCard">
-					{/* <PostForm updatePost={updatePost} /> */}
 					<div className="content">
 						{posts.map((post, i) => (
 							<Post key={i} post={post} />

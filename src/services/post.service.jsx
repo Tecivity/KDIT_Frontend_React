@@ -16,6 +16,20 @@ class PostService {
             })
     }
 
+    getPost(id){
+        return firebase
+			.firestore()
+			.collection('posts')
+			.doc(id)
+			.get()
+			.then((doc) => {
+				return({id:doc.id, ...doc.data()})
+			})
+			.catch((err) => {
+				return err
+			});
+    }
+
     getUserPost(id){
         return firebase
 			.firestore()
@@ -39,6 +53,17 @@ class PostService {
                 return ({ message: 'deleted post.', data: data })
             })
     }
+
+    updatePost(id,data){
+		return firebase
+			.firestore()
+			.collection('posts')
+			.doc(id)
+			.update(data)
+			.then(result=>{
+				return result
+			})
+	}
 }
 
 export default new PostService()
