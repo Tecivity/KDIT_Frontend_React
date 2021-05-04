@@ -193,10 +193,10 @@ const FullSubCom = ({ subCom, update }) => {
 		} else {
 			store.addNotification({
 				title:
-					'You successfully unfollowed this sub-community, awwwww.',
+					'You successfully unfollowed this sub-community.',
 				message:
-					'You will not receive the post from this sub-community from now on. Sorry that you have to go.',
-				type: 'info',
+					'Sorry that you have to go. You will not receive the content form this sub-community from now on',
+				type: 'danger',
 				insert: 'top',
 				container: 'bottom-right',
 				animationIn: ['animate__animated', 'animate__flipInX'],

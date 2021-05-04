@@ -113,10 +113,10 @@ const Post = ({ post }) => {
 			setIsVoteup(true);
 			setIsVoteDown(false);
 			store.addNotification({
-				title: 'You up vote this post.',
+				title: 'You vote up this post.',
 				message:
 					'Keep support good content creators to make our world a better place!',
-				type: 'default',
+				type: 'success',
 				insert: 'top',
 				container: 'bottom-right',
 				animationIn: ['animate__animated', 'animate__flipInX'],
@@ -176,9 +176,9 @@ const Post = ({ post }) => {
 			setIsVoteDown(true);
 			setIsVoteup(false);
 			store.addNotification({
-				title: 'You down vote this post.',
+				title: 'You vote down this post.',
 				message: 'Thank you for keeping our platform a better place.',
-				type: 'info',
+				type: 'danger',
 				insert: 'top',
 				container: 'bottom-right',
 				animationIn: ['animate__animated', 'animate__flipInX'],
