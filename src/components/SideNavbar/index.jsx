@@ -80,66 +80,61 @@ const SideNavbar = () => {
 			<div className="side-navbar">
 				<SearchBar />
 				<div className="trends">
-					<div>
-						<Slide easing="ease">
-							<div
-								className="each-slide"
-								style={{ marginTop: '0.5rem' }}
-							>
-								<h4 style={{ marginTop: '0.5rem' }}>
-									Search For A Community{' '}
-								</h4>
-								<p>
-									Nisit is a very large site with millions of
-									users and thousands of Community catering to
-									nearly every topic imaginable so it can be a
-									bit hard to find a community that fits your
-									interest. To help you search for one, you
-									can use their explore search which can be
-									accessed by pressing ‘Explore’, located at
-									the very left of the Navigation bar.
-								</p>
-							</div>
-							<div
-								className="each-slide"
-								style={{ marginTop: '0.5rem' }}
-							>
-								<h4 style={{ marginTop: '0.5rem' }}>
-									Create An Account And Follow
-								</h4>
-								<p>
-									Probably the first thing you should do if
-									you’re serious about getting into Nisit is
-									to get an account. Not only will you be able
-									to participate in the comments sections, you
-									can subscribe to the different communities
-									you find intruiging, so that they will
-									appear on the home page. Plus, you will be
-									able to unfollow from any of the default
-									communities that you may not like, so their
-									posts will no longer appear on your page.
-								</p>
-							</div>
-						</Slide>
-						<h3 style={{ marginBottom: '0', marginLeft: '1rem' }}>
-							FAQ
-						</h3>
-						<Slide easing="ease">
-							<div className="each-slide">
-								<h4>{FAQ[0].question}</h4>
-								<p>{FAQ[0].answer}</p>
-							</div>
-							<div className="each-slide">
-								<h4>{FAQ[1].question}</h4>
-								<p>{FAQ[1].answer}</p>
-							</div>
-							<div className="each-slide">
-								<h4>{FAQ[2].question}</h4>
-								<p>{FAQ[2].answer}</p>
-							</div>
-						</Slide>
-					</div>
+					<Slide easing="ease">
+						<div
+							className="each-slide"
+							style={{ marginTop: '0.5rem' }}
+						>
+							<h4 style={{ marginTop: '0.5rem' }}>
+								Search For A Community{' '}
+							</h4>
+							<p>
+								Nisit is a very large site with millions of
+								users and thousands of Community catering to
+								nearly every topic imaginable so it can be a bit
+								hard to find a community that fits your
+								interest. To help you search for one, you can
+								use their explore search which can be accessed
+								by pressing ‘Explore’, located at the very left
+								of the Navigation bar.
+							</p>
+						</div>
+						<div
+							className="each-slide"
+							style={{ marginTop: '0.5rem' }}
+						>
+							<h4 style={{ marginTop: '0.5rem' }}>
+								Create An Account And Follow
+							</h4>
+							<p>
+								Probably the first thing you should do if you’re
+								serious about getting into Nisit is to get an
+								account. Not only will you be able to
+								participate in the comments sections, you can
+								subscribe to the different communities you find
+								intruiging, so that they will appear on the home
+								page. Plus, you will be able to unfollow from
+								any of the default communities that you may not
+								like, so their posts will no longer appear on
+								your page.
+							</p>
+						</div>
+					</Slide>
 				</div>
+				<Slide easing="ease">
+					<div className="each-slide">
+						<h4>{FAQ[0].question}</h4>
+						<p>{FAQ[0].answer}</p>
+					</div>
+					<div className="each-slide">
+						<h4>{FAQ[1].question}</h4>
+						<p>{FAQ[1].answer}</p>
+					</div>
+					<div className="each-slide">
+						<h4>{FAQ[2].question}</h4>
+						<p>{FAQ[2].answer}</p>
+					</div>
+				</Slide>
 			</div>
 		</>
 	);
