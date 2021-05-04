@@ -64,6 +64,7 @@ const Card = () => {
 			// console.log('subCom : ', subCom, Array.isArray(subCom));
 			ref.orderBy(sortCat, 'desc')
 				.where('subComUID', 'in', [...subCom])
+				.limit(20)
 				.onSnapshot(
 					(querySnapshot) => {
 						querySnapshot.forEach((doc) => {
@@ -158,6 +159,9 @@ const Card = () => {
 							top: false,
 							best: false,
 						});
+						setSortCat('userUID');
+						fetchData();
+						window.location.reload();
 					}}
 					style={{
 						background: activeBt.hot && '#f48c51',
@@ -193,6 +197,8 @@ const Card = () => {
 							best: false,
 						});
 						setSortCat('timeStamp');
+						fetchData();
+						window.location.reload();
 					}}
 					style={{
 						background: activeBt.new && '#f48c51',
