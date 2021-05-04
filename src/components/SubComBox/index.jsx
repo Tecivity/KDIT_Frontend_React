@@ -10,6 +10,7 @@ const SubComBox = ({ subCom }) => {
 	//History
 	const history = useHistory();
 	const [isFollow, setIsFollow] = useState(false);
+	const [isApprove, setIsApprove] = useState(false)
 
 	const { userInfo, authListener, defaultBanner } = useContext(SessionApi);
 
@@ -40,6 +41,7 @@ const SubComBox = ({ subCom }) => {
 				if (userInfo.mySubCom.includes(subCom.id)) {
 					setIsFollow(true);
 				}
+				setIsApprove(subCom.isApprove)
 			} catch (err) {
 				UserService.updateUser(userInfo.id, { mySubCom: [] });
 			}
@@ -80,7 +82,7 @@ const SubComBox = ({ subCom }) => {
 				</div>
 				<div className="subcomInfoPane" onClick={handleOnClick}>
 					<h3 style={{ display: 'inline', margin: '0' }}>
-						{subCom.name}
+						{subCom.name}{isApprove ? <span>✔</span> : <span></span>}
 					</h3>
 					<p
 						style={{
