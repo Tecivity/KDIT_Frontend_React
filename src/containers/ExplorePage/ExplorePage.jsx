@@ -17,7 +17,7 @@ import {
 	HitsPerPage,
 } from 'react-instantsearch-dom';
 //Components
-import { SearchBar, Navbar } from '../../components';
+import { SearchBar, Navbar, SideNavbar } from '../../components';
 //External
 import algoliasearch from 'algoliasearch/lite';
 import TimeAgo from 'javascript-time-ago';
@@ -219,6 +219,7 @@ const ExplorePage = () => {
 					<Configure hitsPerPage={50} />
 				</InstantSearch>
 			</div>
+			<SideNavbar />
 		</>
 	);
 };

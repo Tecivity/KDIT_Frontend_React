@@ -3,7 +3,13 @@ import React, { useState, useEffect } from 'react';
 import Popup from 'reactjs-popup';
 import { MdCancel } from 'react-icons/md';
 //Components
-import { Navbar, SubComBox, SideNavbar, SubComForm } from '../../components';
+import {
+	Navbar,
+	SubComBox,
+	SideNavbar,
+	SubComForm,
+	SearchBar,
+} from '../../components';
 import { SessionApi } from '../../hook/SessionApi';
 //Firebase
 import firebase from '../../firebase';
@@ -114,12 +120,16 @@ const SubComPage = () => {
 							<>
 								<div className="myCom">
 									<div className="myComInfo">
-										<h2>My Community</h2>
 										<Popup
 											trigger={
 												<button
 													className="createComBtn"
 													onClick={handleShowCreate}
+													style={{
+														marginTop: '1.5rem',
+														marginLeft: 'auto',
+														marginBottom: '0',
+													}}
 												>
 													Create
 												</button>

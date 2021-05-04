@@ -85,7 +85,12 @@ const SideNavbar = () => {
 							className="each-slide"
 							style={{ marginTop: '0.5rem' }}
 						>
-							<h4 style={{ marginTop: '0.5rem' }}>
+							<h4
+								style={{
+									marginTop: '0.5rem',
+									borderBottom: '2px solid black',
+								}}
+							>
 								Search For A Community{' '}
 							</h4>
 							<p>
@@ -103,7 +108,12 @@ const SideNavbar = () => {
 							className="each-slide"
 							style={{ marginTop: '0.5rem' }}
 						>
-							<h4 style={{ marginTop: '0.5rem' }}>
+							<h4
+								style={{
+									marginTop: '0.5rem',
+									borderBottom: '2px solid black',
+								}}
+							>
 								Create An Account And Follow
 							</h4>
 							<p>
@@ -119,22 +129,93 @@ const SideNavbar = () => {
 								your page.
 							</p>
 						</div>
+						<div
+							className="each-slide"
+							style={{ marginTop: '0.5rem' }}
+						>
+							<h4
+								style={{
+									marginTop: '0.5rem',
+									borderBottom: '2px solid black',
+								}}
+							>
+								You Need To Login
+							</h4>
+							<p>
+								It may seem a little counterintuitive, but the
+								most surefire way to see the best that Nisit has
+								to offer is by going further in. If you don't
+								have an account, you can sign in with
+								@kmitl.ac.th google account and start on the
+								standard "home page". You can still explore the
+								community and find the thing you are interested
+								in, which tends to be the broadest (and
+								popular).
+							</p>
+						</div>
+						<div
+							className="each-slide"
+							style={{ marginTop: '0.5rem' }}
+						>
+							<h4
+								style={{
+									marginTop: '0.5rem',
+									borderBottom: '2px solid black',
+								}}
+							>
+								If There Isn’t a Community For It, You Can Make
+								One
+							</h4>
+							<p>
+								If there isn’t a community for your skill,
+								interest, or hobby (which gets rarer by the day
+								as new pages are created), then you can create
+								your own community page. But, and We say this
+								from long experience, being a nisit moderator is
+								very hard work. Especially if your community
+								becomes extremely popular and the masses start
+								pouring in. But there are many people who thrive
+								in that kind of environment. So each to their
+								own.
+							</p>
+						</div>
 					</Slide>
 				</div>
-				<Slide easing="ease">
-					<div className="each-slide">
-						<h4>{FAQ[0].question}</h4>
-						<p>{FAQ[0].answer}</p>
+				<div style={{ width: '90%', margin: 'auto' }}>
+					<h1
+						style={{
+							marginBottom: '0rem',
+							background: '#f48c51',
+							paddingLeft: '1rem',
+							color: 'white',
+							textAlign: 'center',
+						}}
+					>
+						FAQ
+					</h1>
+					<div
+						style={{
+							border: '2px solid #f48c51',
+							borderRadius: '0 0 2rem 2rem',
+							textAlign: 'center',
+						}}
+					>
+						<Slide easing="ease">
+							<div className="each-slide">
+								<h4>{FAQ[0].question}</h4>
+								<p>{FAQ[0].answer}</p>
+							</div>
+							<div className="each-slide">
+								<h4>{FAQ[1].question}</h4>
+								<p>{FAQ[1].answer}</p>
+							</div>
+							<div className="each-slide">
+								<h4>{FAQ[2].question}</h4>
+								<p>{FAQ[2].answer}</p>
+							</div>
+						</Slide>
 					</div>
-					<div className="each-slide">
-						<h4>{FAQ[1].question}</h4>
-						<p>{FAQ[1].answer}</p>
-					</div>
-					<div className="each-slide">
-						<h4>{FAQ[2].question}</h4>
-						<p>{FAQ[2].answer}</p>
-					</div>
-				</Slide>
+				</div>
 			</div>
 		</>
 	);
