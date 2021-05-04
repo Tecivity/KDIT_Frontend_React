@@ -40,7 +40,7 @@ const Post = ({ post }) => {
 	}, [post]);
 
 	//Context
-	const { userInfo, loading, setLoading } = useContext(SessionApi);
+	const { userInfo, loading, setLoading, user } = useContext(SessionApi);
 
 	//History
 	const history = useHistory();
