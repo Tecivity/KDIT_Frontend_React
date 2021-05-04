@@ -5,7 +5,7 @@ import CommentForm from './CommentForm';
 import CommentCard from './CommentCard';
 //Firebase
 import firebase from '../../firebase';
-import { CommentModel } from '../../firebase/models';
+import CommentModel from '../../firebase/models/comment';
 
 const Comment = ({ post, id }) => {
 	//Variables

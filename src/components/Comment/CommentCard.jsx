@@ -5,7 +5,7 @@ import { MdCancel, MdEdit, MdDelete } from 'react-icons/md';
 import { SessionApi } from '../../hook/SessionApi';
 //Firebase
 import firebase from '../../firebase';
-import { User } from '../../firebase/models';
+import User from '../../firebase/models/user';
 //External
 import parse from 'html-react-parser';
 import TimeAgo from 'javascript-time-ago';

@@ -1,4 +1,4 @@
-class User{
+export default class User{
     constructor(id,totalVote,bio,displayName,photoURL,email,role,bannerURL){
         this.id = id
         this.totalVote = totalVote
@@ -10,5 +10,3 @@ class User{
         this.bannerURL = bannerURL
     }
 }
-
-module.exports = User

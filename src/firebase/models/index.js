@@ -1,9 +1,9 @@
-const PostModel = require('./post');
-const CommentModel = require('./comment');
-const SubComModel = require('./subCom');
-const User = require('./user');
+import PostModel from './post'
+import CommentModel from './comment'
+import SubComModel from './subCom'
+import User from './user'
 
-module.exports = {
+export default {
 	PostModel,
 	CommentModel,
 	SubComModel,

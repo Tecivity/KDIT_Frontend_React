@@ -1,4 +1,4 @@
-class Comment{
+export default class Comment{
     constructor(id,postId,userId,content,timeStamp,voteUp,voteDown){
         this.id = id 
         this.postId = postId
@@ -9,5 +9,3 @@ class Comment{
         this.voteDown = voteDown
     }
 }
-
-module.exports = Comment;

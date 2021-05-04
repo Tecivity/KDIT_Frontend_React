@@ -1,4 +1,4 @@
-class Post{
+export default class Post{
     constructor(id,userUID,content,voteUp,voteDown,timeStamp,subComUID,bannerURL){
         this.id = id
         this.userUID = userUID
@@ -10,5 +10,3 @@ class Post{
         this.bannerURL = bannerURL
     }
 }
-
-module.exports = Post

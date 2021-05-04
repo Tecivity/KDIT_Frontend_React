@@ -1,4 +1,5 @@
-class SubCom{
+
+export default class SubCom{
     constructor(id,name,description,ownerUID,photoURL,totalFollow){
         this.id = id
         this.name = name
@@ -8,5 +9,3 @@ class SubCom{
         this.totalFollow = totalFollow
     }
 }
-
-module.exports = SubCom
