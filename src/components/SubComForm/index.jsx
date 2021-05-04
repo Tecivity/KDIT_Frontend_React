@@ -23,7 +23,7 @@ const SubComForm = () => {
 	});
 	const [photoURL, setPhotoURL] = useState('');
 	const [bannerURL, setBannerURL] = useState('');
-	const [isrCreated, setIsCreated] = useState(false);
+	const [isrCreated, setIsCreated] = useState(true);
 	const [nameLen, setNameLen] = useState(0);
 	const [desLen, setDesLen] = useState(0);
 
@@ -59,6 +59,7 @@ const SubComForm = () => {
 		const name = e.target.name;
 		const value = e.target.value;
 		setSubCom({ ...subcom, [name]: value });
+		setIsCreated(false);
 	};
 
 	const clearInput = () => {
@@ -99,7 +100,6 @@ const SubComForm = () => {
 						},
 					});
 					setTimeout(function () {
-						setIsCreated(false);
 						window.location.reload();
 					}, 3000);
 				});
