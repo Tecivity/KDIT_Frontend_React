@@ -1,7 +1,5 @@
 //React
 import React, { useState, useEffect, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
-import { BiUpArrow, BiDownArrow } from 'react-icons/bi';
 import { MdCancel, MdEdit, MdDelete } from 'react-icons/md';
 //Components
 import { SessionApi } from '../../hook/SessionApi';
@@ -35,10 +33,7 @@ const CommentCard = ({ comment }) => {
 	}, [comment]);
 
 	//Contexts
-	const { session, user, loading } = useContext(SessionApi);
-
-	//Hstory
-	const history = useHistory();
+	const { user } = useContext(SessionApi);
 
 	//Functions
 	const fetchData = async () => {

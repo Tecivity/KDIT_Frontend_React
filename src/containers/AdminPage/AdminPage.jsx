@@ -1,26 +1,17 @@
 //React
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import parse from 'html-react-parser';
 import {
 	InstantSearch,
-	// SearchBox,
-	// Hits,
-	connectHighlight,
-	ClearRefinements,
-	RefinementList,
 	Configure,
-	// Pagination,
 	connectSearchBox,
 	connectHits,
-	connectPagination,
-	HitsPerPage,
 } from 'react-instantsearch-dom';
 //Components
-import { SearchBar, Navbar } from '../../components';
+import { Navbar } from '../../components';
 //External
 import algoliasearch from 'algoliasearch/lite';
-import { stripHtml } from 'string-strip-html';
 import ReactTimeAgo from 'react-time-ago';
 //CSS
 import '../ExplorePage/ExplorePage';
@@ -238,34 +229,6 @@ const CustomSearchBox = connectSearchBox(
 			</div>
 		);
 	},
-);
-
-const CustomPagination = connectPagination(
-	({ currentRefinement, nbPages, refine, createURL }) => (
-		<div className="explore-pagesPane">
-			{new Array(nbPages).fill(null).map((_, index) => {
-				const page = index + 1;
-				const style = {
-					fontWeight: currentRefinement === page ? 'bold' : '',
-				};
-
-				return (
-					<a
-						key={index}
-						href={createURL(page)}
-						style={style}
-						onClick={(event) => {
-							event.preventDefault();
-							refine(page);
-						}}
-						className="explore-page"
-					>
-						{page}
-					</a>
-				);
-			})}
-		</div>
-	),
 );
 
 const AdminPage = () => {

@@ -1,26 +1,12 @@
 //React
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Slide } from 'react-slideshow-image';
-import {
-	InstantSearch,
-	connectHighlight,
-	ClearRefinements,
-	RefinementList,
-	Configure,
-	connectSearchBox,
-	connectHits,
-	connectPagination,
-	HitsPerPage,
-	SortBy,
-} from 'react-instantsearch-dom';
+
 //Components
 import SearchBar from '../SearchBar';
 import { SessionApi } from '../../hook/SessionApi';
-import Post from '../PostCard/Post';
-import parse from 'html-react-parser';
 
 //Firebase
-import firebase from '../../firebase';
 
 //External
 
@@ -30,7 +16,7 @@ import 'react-slideshow-image/dist/styles.css';
 
 const SideNavbar = () => {
 	//Varables
-	const ref = firebase.firestore().collection('posts');
+	// const ref = firebase.firestore().collection('posts');
 	const FAQ = [
 		{
 			id: 4,
@@ -52,8 +38,8 @@ const SideNavbar = () => {
 	];
 
 	//States
-	const [posts, setPosts] = useState([]);
-	const [post, setPost] = useState();
+	// const [posts, setPosts] = useState([]);
+	// const [post, setPost] = useState();
 
 	//Effects
 	useEffect(() => {
@@ -61,9 +47,7 @@ const SideNavbar = () => {
 	}, []);
 
 	//Context
-	const { user, loading, setLoading, userInfo, authListener } = useContext(
-		SessionApi,
-	);
+	const { userInfo } = useContext(SessionApi);
 
 	//Functions
 	const fetchData = async () => {};

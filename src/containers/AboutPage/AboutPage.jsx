@@ -8,7 +8,7 @@ import './AboutPage.css';
 
 const AboutPage = () => {
 	//Contexts
-	const { authListener, loading } = React.useContext(SessionApi);
+	const { authListener } = React.useContext(SessionApi);
 
 	//Effects
 	React.useEffect(() => {

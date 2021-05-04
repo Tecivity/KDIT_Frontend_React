@@ -3,29 +3,20 @@ import React, { useState, useEffect } from 'react';
 import Popup from 'reactjs-popup';
 import { MdCancel } from 'react-icons/md';
 //Components
-import {
-	Navbar,
-	SubComBox,
-	SideNavbar,
-	SubComForm,
-	SearchBar,
-} from '../../components';
+import { Navbar, SubComBox, SideNavbar, SubComForm } from '../../components';
 import { SessionApi } from '../../hook/SessionApi';
 //Firebase
 import firebase from '../../firebase';
-import { SubComModel } from '../../firebase/models';
 //External
 import HashLoader from 'react-spinners/HashLoader';
-import { UserService, PostService } from '../../services';
 //CSS
 import './ComPage.css';
-import parse from 'html-react-parser';
 import userService from '../../services/user.service';
 
 const SubComPage = () => {
 	//Variables
 	const ref = firebase.firestore().collection('sub_community');
-	const auth = firebase.auth();
+	// const auth = firebase.auth();
 
 	//States
 	const [subComs, setSubComs] = useState([]);
@@ -38,14 +29,9 @@ const SubComPage = () => {
 	}, []);
 
 	//Contexts
-	const {
-		session,
-		authListener,
-		loading,
-		userInfo,
-		getUserInfo,
-		user,
-	} = React.useContext(SessionApi);
+	const { session, authListener, loading, user } = React.useContext(
+		SessionApi,
+	);
 
 	//Functions
 	const firebaseTest = async () => {

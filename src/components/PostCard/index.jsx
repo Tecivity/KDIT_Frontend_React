@@ -11,10 +11,8 @@ import { SessionApi } from '../../hook/SessionApi';
 import HashLoader from 'react-spinners/HashLoader';
 //Firebase
 import firebase from '../../firebase';
-import { PostModel } from '../../firebase/models';
 //CSS
 import './index.css';
-import { act } from 'react-dom/test-utils';
 
 const Card = () => {
 	//Varables
@@ -36,13 +34,10 @@ const Card = () => {
 		new: false,
 		top: false,
 	});
-	const [newPost, setNewPost] = useState();
-	const [sortCat, setSortCat] = useState('timeStamp');
+	// const [newPost, setNewPost] = useState();
 
 	//Context
-	const { user, loading, setLoading, userInfo, authListener } = useContext(
-		SessionApi,
-	);
+	const { loading, setLoading, userInfo } = useContext(SessionApi);
 
 	//Functions
 	const updatePost = (newPost) => {
@@ -63,7 +58,7 @@ const Card = () => {
 					// console.log(typeof data.value)
 				});
 				// console.log('subCom : ', subCom, Array.isArray(subCom));
-				ref.orderBy(sortCat, 'desc')
+				ref.orderBy('timeStamp', 'desc')
 					.where('subComUID', 'in', [...subCom])
 					.onSnapshot(
 						(querySnapshot) => {
@@ -171,9 +166,6 @@ const Card = () => {
 							top: false,
 							best: false,
 						});
-						setSortCat('userUID');
-						fetchData();
-						window.location.reload();
 					}}
 					style={{
 						background: activeBt.hot && '#f48c51',
@@ -208,9 +200,6 @@ const Card = () => {
 							top: false,
 							best: false,
 						});
-						setSortCat('timeStamp');
-						fetchData();
-						window.location.reload();
 					}}
 					style={{
 						background: activeBt.new && '#f48c51',

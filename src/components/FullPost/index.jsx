@@ -12,7 +12,6 @@ import Comment from '../Comment/index';
 import { SessionApi } from '../../hook/SessionApi';
 //Firebase
 import firebase from '../../firebase';
-import { User } from '../../firebase/models';
 import MyUploadAdapter from '../../firebase/ckeditor_image_firebase';
 import {
 	CommentService,
@@ -48,139 +47,149 @@ const FullPost = ({ post, id }) => {
 	const [subComName, setSubComName] = useState('');
 
 	//Contexts
-	const { session, user, loading, userInfo } = useContext(SessionApi);
+	const { user, userInfo } = useContext(SessionApi);
 
 	//History
 	const history = useHistory();
 
 	//DropDown Menu
-	const { buttonProps, itemProps, isOpen, setIsOpen } = useDropdownMenu(1);
+	const { buttonProps, isOpen } = useDropdownMenu(1);
 
 	const check = async () => {
-		console.log(postDummy.voteUp.includes(userInfo.id));
-		if (postDummy.voteUp.includes(userInfo.id)) {
-			setIsVoteup(true);
-			setIsVoteDown(false);
-		} else if (postDummy.voteDown.includes(userInfo.id)) {
-			setIsVoteup(false);
-			setIsVoteDown(true);
-		}
+		try {
+			if (postDummy.voteUp.includes(userInfo.id)) {
+				setIsVoteup(true);
+				setIsVoteDown(false);
+			} else if (postDummy.voteDown.includes(userInfo.id)) {
+				setIsVoteup(false);
+				setIsVoteDown(true);
+			}
+		} catch {}
 	};
 
 	const upVote = async () => {
-		const voteUpList = postDummy.voteUp;
-		const voteDownList = postDummy.voteDown;
-		if (voteDownList.includes(userInfo.id)) {
-			voteDownList.pop(userInfo.id);
-			voteUpList.push(userInfo.id);
-			PostService.updatePost(post.id, {
-				voteUp: voteUpList,
-				voteDown: voteDownList,
-			}).then(() => {
-				PostService.getPost(post.id).then((data) => {
-					setPostDummy(data);
-					setVoteUpNum(data.voteUp.length);
-					setVoteDownNum(data.voteDown.length);
+		try {
+			const voteUpList = postDummy.voteUp;
+			const voteDownList = postDummy.voteDown;
+			if (voteDownList.includes(userInfo.id)) {
+				voteDownList.pop(userInfo.id);
+				voteUpList.push(userInfo.id);
+				PostService.updatePost(post.id, {
+					voteUp: voteUpList,
+					voteDown: voteDownList,
+				}).then(() => {
+					PostService.getPost(post.id).then((data) => {
+						setPostDummy(data);
+						setVoteUpNum(data.voteUp.length);
+						setVoteDownNum(data.voteDown.length);
+					});
 				});
-			});
-		} else if (voteUpList.includes(userInfo.id)) {
-			voteUpList.pop(userInfo.id);
-			PostService.updatePost(post.id, { voteUp: voteUpList }).then(() => {
-				PostService.getPost(post.id).then((data) => {
-					setPostDummy(data);
-					setVoteUpNum(data.voteUp.length);
-				});
-			});
-		} else {
-			voteUpList.push(userInfo.id);
-			PostService.updatePost(post.id, { voteUp: voteUpList }).then(() => {
-				PostService.getPost(post.id).then((data) => {
-					setPostDummy(data);
-					setVoteUpNum(data.voteUp.length);
-				});
-			});
-		}
+			} else if (voteUpList.includes(userInfo.id)) {
+				voteUpList.pop(userInfo.id);
+				PostService.updatePost(post.id, { voteUp: voteUpList }).then(
+					() => {
+						PostService.getPost(post.id).then((data) => {
+							setPostDummy(data);
+							setVoteUpNum(data.voteUp.length);
+						});
+					},
+				);
+			} else {
+				voteUpList.push(userInfo.id);
+				PostService.updatePost(post.id, { voteUp: voteUpList }).then(
+					() => {
+						PostService.getPost(post.id).then((data) => {
+							setPostDummy(data);
+							setVoteUpNum(data.voteUp.length);
+						});
+					},
+				);
+			}
 
-		if (voteUpList.includes(userInfo.id)) {
-			setIsVoteup(true);
-			setIsVoteDown(false);
-			store.addNotification({
-				title: 'You up vote this post.',
-				message:
-					'Keep support good content creators to make our world a better place!',
-				type: 'default',
-				insert: 'top',
-				container: 'bottom-right',
-				animationIn: ['animate__animated', 'animate__flipInX'],
-				animationOut: ['animate__animated', 'animate__zoomOut'],
-				dismiss: {
-					duration: 8000,
-					onScreen: true,
-					pauseOnHover: true,
-				},
-			});
-		} else {
-			setIsVoteup(false);
-		}
+			if (voteUpList.includes(userInfo.id)) {
+				setIsVoteup(true);
+				setIsVoteDown(false);
+				store.addNotification({
+					title: 'You up vote this post.',
+					message:
+						'Keep support good content creators to make our world a better place!',
+					type: 'default',
+					insert: 'top',
+					container: 'bottom-right',
+					animationIn: ['animate__animated', 'animate__flipInX'],
+					animationOut: ['animate__animated', 'animate__zoomOut'],
+					dismiss: {
+						duration: 8000,
+						onScreen: true,
+						pauseOnHover: true,
+					},
+				});
+			} else {
+				setIsVoteup(false);
+			}
+		} catch {}
 	};
 
 	const downVote = async () => {
-		const voteUpList = postDummy.voteUp;
-		const voteDownList = postDummy.voteDown;
-		if (voteUpList.includes(userInfo.id)) {
-			voteDownList.push(userInfo.id);
-			voteUpList.pop(userInfo.id);
-			PostService.updatePost(post.id, {
-				voteUp: voteUpList,
-				voteDown: voteDownList,
-			}).then(() => {
-				PostService.getPost(post.id).then((data) => {
-					setPostDummy(data);
-					setVoteUpNum(data.voteUp.length);
-					setVoteDownNum(data.voteDown.length);
+		try {
+			const voteUpList = postDummy.voteUp;
+			const voteDownList = postDummy.voteDown;
+			if (voteUpList.includes(userInfo.id)) {
+				voteDownList.push(userInfo.id);
+				voteUpList.pop(userInfo.id);
+				PostService.updatePost(post.id, {
+					voteUp: voteUpList,
+					voteDown: voteDownList,
+				}).then(() => {
+					PostService.getPost(post.id).then((data) => {
+						setPostDummy(data);
+						setVoteUpNum(data.voteUp.length);
+						setVoteDownNum(data.voteDown.length);
+					});
 				});
-			});
-		} else if (voteDownList.includes(userInfo.id)) {
-			voteDownList.pop(userInfo.id);
-			PostService.updatePost(post.id, { voteDown: voteDownList }).then(
-				() => {
+			} else if (voteDownList.includes(userInfo.id)) {
+				voteDownList.pop(userInfo.id);
+				PostService.updatePost(post.id, {
+					voteDown: voteDownList,
+				}).then(() => {
 					PostService.getPost(post.id).then((data) => {
 						setPostDummy(data);
 						setVoteDownNum(data.voteDown.length);
 					});
-				},
-			);
-		} else {
-			voteDownList.push(userInfo.id);
-			PostService.updatePost(post.id, { voteDown: voteDownList }).then(
-				() => {
+				});
+			} else {
+				voteDownList.push(userInfo.id);
+				PostService.updatePost(post.id, {
+					voteDown: voteDownList,
+				}).then(() => {
 					PostService.getPost(post.id).then((data) => {
 						setPostDummy(data);
 						setVoteDownNum(data.voteDown.length);
 					});
-				},
-			);
-		}
-		if (voteDownList.includes(userInfo.id)) {
-			setIsVoteDown(true);
-			setIsVoteup(false);
-			store.addNotification({
-				title: 'You down vote this post.',
-				message: 'Thank you for keeping our platform a better place.',
-				type: 'info',
-				insert: 'top',
-				container: 'bottom-right',
-				animationIn: ['animate__animated', 'animate__flipInX'],
-				animationOut: ['animate__animated', 'animate__zoomOut'],
-				dismiss: {
-					duration: 8000,
-					onScreen: true,
-					pauseOnHover: true,
-				},
-			});
-		} else {
-			setIsVoteDown(false);
-		}
+				});
+			}
+			if (voteDownList.includes(userInfo.id)) {
+				setIsVoteDown(true);
+				setIsVoteup(false);
+				store.addNotification({
+					title: 'You down vote this post.',
+					message:
+						'Thank you for keeping our platform a better place.',
+					type: 'info',
+					insert: 'top',
+					container: 'bottom-right',
+					animationIn: ['animate__animated', 'animate__flipInX'],
+					animationOut: ['animate__animated', 'animate__zoomOut'],
+					dismiss: {
+						duration: 8000,
+						onScreen: true,
+						pauseOnHover: true,
+					},
+				});
+			} else {
+				setIsVoteDown(false);
+			}
+		} catch {}
 	};
 
 	const deletePost = () => {
@@ -228,11 +237,13 @@ const FullPost = ({ post, id }) => {
 			.then(() => {
 				fetchData();
 			});
+		window.location.reload();
 	};
 
 	//Effects
 	useEffect(() => {
 		fetchData();
+		check();
 	}, [post]);
 
 	return (
@@ -426,7 +437,7 @@ const FullPost = ({ post, id }) => {
 												/>
 											)}
 										</button>
-										{post.userUID == user.uid && (
+										{post.userUID === user.uid && (
 											<button
 												onClick={deletePost}
 												className="reportBt"

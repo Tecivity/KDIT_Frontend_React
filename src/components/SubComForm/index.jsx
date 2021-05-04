@@ -8,7 +8,6 @@ import FileUpload from '../../firebase/FileUpload';
 //CSS
 import './index.css';
 
-import ReactNotification from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import { store } from 'react-notifications-component';
 import 'animate.css';
@@ -113,7 +112,7 @@ const SubComForm = () => {
 						'https://cdn.jeab.com/wp-content/uploads/2020/03/wallpaper-for-jeab06.jpg',
 					totalFollow: [],
 					bannerURL: bannerURL || defaultBanner,
-					isApprove: false
+					isApprove: false,
 				})
 				.then(() => {
 					setIsCreated(true);
