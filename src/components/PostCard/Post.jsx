@@ -7,7 +7,12 @@ import { BiUpArrow, BiDownArrow, BiCommentDetail } from 'react-icons/bi';
 import { SessionApi } from '../../hook/SessionApi';
 //Firebase
 import firebase from '../../firebase';
-import { CommentService, PostService, SubComService, UserService } from '../../services';
+import {
+	CommentService,
+	PostService,
+	SubComService,
+	UserService,
+} from '../../services';
 //External
 import parse from 'html-react-parser';
 import TimeAgo from 'javascript-time-ago';
@@ -32,7 +37,7 @@ const Post = ({ post }) => {
 	const [voteDownNum, setVoteDownNum] = useState(0);
 	const [isVoteUp, setIsVoteup] = useState(false);
 	const [isVoteDown, setIsVoteDown] = useState(false);
-	const [subComName, setSubComName] = useState('')
+	const [subComName, setSubComName] = useState('');
 
 	//Effects
 	useEffect(() => {
@@ -200,9 +205,9 @@ const Post = ({ post }) => {
 			CommentService.getCommentSize(post.id).then((data) => {
 				setTotalComment(data);
 			});
-			SubComService.getSubCom(post.subComUID).then((data)=>{
-				setSubComName(data.name)
-			})
+			SubComService.getSubCom(post.subComUID).then((data) => {
+				setSubComName(data.name);
+			});
 		} catch {
 			console.log('err');
 		}
