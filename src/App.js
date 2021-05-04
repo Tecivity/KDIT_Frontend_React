@@ -51,7 +51,6 @@ const Routes = () => {
 	const Session = useContext(SessionApi);
 	return (
 		<Switch>
-			<Route exact path="/:category" component={HomePage} />
 			<Route exact path="/" component={HomePage} />
 			<Route exact path="/auth" component={AuthPage} />
 			<Route exact path="/community" component={SubComPage} />
@@ -78,7 +77,7 @@ const Routes = () => {
 				path="/profile/:id"
 				component={ProfilePage}
 			/>
-			<Route
+			<ProtectedRoute
 				auth={Session.session}
 				exacts
 				path="/profile"
