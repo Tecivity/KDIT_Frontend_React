@@ -13,7 +13,6 @@ import FileUpload from '../../firebase/FileUpload';
 import './index.css';
 import { getSuggestedQuery } from '@testing-library/dom';
 import { PostService, UserService } from '../../services';
-import 'react-image-crop/dist/ReactCrop.css';
 import ReactNotification from 'react-notifications-component';
 import 'react-notifications-component/dist/theme.css';
 import { store } from 'react-notifications-component';
