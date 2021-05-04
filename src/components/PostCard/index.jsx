@@ -36,6 +36,7 @@ const Card = () => {
     new: false,
     top: false,
   });
+//   const [currentpost, setCurrentpost] = userState(post);
 
   //Context
   const { user, loading, setLoading } = useContext(SessionApi);
@@ -249,7 +250,7 @@ const Card = () => {
 
   const db = firebase.firestore();
   const upVote = (post) => {
-    console.log(post);
+    console.log(post.voteUp);
     const list = post.voteUp;
     const userUID = user.uid;
     if (Array.isArray(list)) {
