@@ -26,13 +26,15 @@ import {
 //Import Hooks
 import { SessionApi, SessionProvider } from './hook/SessionApi';
 
-import ReactNotification from 'react-notifications-component'
-import 'react-notifications-component/dist/theme.css'
+import ReactNotification from 'react-notifications-component';
+import 'react-notifications-component/dist/theme.css';
 import { store } from 'react-notifications-component';
-import "animate.css"
+import 'animate.css';
 
 function App() {
-	{console.disableYellowBox = true;}
+	{
+		console.disableYellowBox = true;
+	}
 	return (
 		<div className="App">
 			<SessionProvider>
@@ -57,18 +59,28 @@ const Routes = () => {
 			<Route exact path="/post/:id" component={PostPage} />
 			<Route exact path="/community/:id" component={FullSubComPage} />
 			<Route exact path="/explore" component={ExplorePage} />
-			<ProtectedNewUser exact isNewUser={Session.isNewUser} path="/welcome" component={WelcomePage} />
-			<ProtectedAdmin exact isAdmin={Session.isAdmin} path="/admin" component={AdminPage} />
-			<ProtectedRoute
-				auth={Session.session}
-				exacts
-				path="/profile"
-				component={ProfilePage}
+			<ProtectedNewUser
+				exact
+				isNewUser={Session.isNewUser}
+				path="/welcome"
+				component={WelcomePage}
+			/>
+			<ProtectedAdmin
+				exact
+				isAdmin={Session.isAdmin}
+				path="/admin"
+				component={AdminPage}
 			/>
 			<ProtectedRoute
 				auth={Session.session}
 				exact
 				path="/profile/:id"
+				component={ProfilePage}
+			/>
+			<Route
+				auth={Session.session}
+				exacts
+				path="/profile"
 				component={ProfilePage}
 			/>
 
