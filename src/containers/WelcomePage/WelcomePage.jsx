@@ -1,11 +1,14 @@
 //React
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Select from 'react-select';
 import { bounceInLeft, fadeIn, fadeInUp } from 'react-animations';
+import { SessionApi } from '../../hook/SessionApi'
+import { useHistory } from 'react-router-dom';
 //External
 import Radium, { StyleRoot } from 'radium';
 //CSS
 import './WelcomePage.css';
+import { SubComService, UserService } from '../../services';
 
 //Data
 const options = [
@@ -92,6 +95,8 @@ const WelcomePage = () => {
 	// const [showSuggest, setShowSuggest] = useState(false);
 	const [displayName, setDisplayName] = useState('')
 	const [selectedData, setSelectedData] = useState();
+	const { userInfo, setIsNewUser } = useContext(SessionApi)
+	const history = useHistory();
 
 	const handleChange = (e) => {
 		setSelectedData(e);
@@ -100,7 +105,29 @@ const WelcomePage = () => {
 	};
 
 	const handleSubmit = () => {
-		console.log(displayName,selectedData)
+		const subData = {
+			displayName,
+			isNewUser: false,
+			mySubCom: [{
+				value: selectedData.value,
+				label: selectedData.label.split('.')[1],
+			}]
+		}
+		SubComService.getSubCom(selectedData.value).then(data => {
+			const newTotalFollow = data.totalFollow
+			newTotalFollow.push(userInfo.id);
+			SubComService.updateSubCom(selectedData.value, {
+				totalFollow: newTotalFollow,
+			}).then(() => {
+				console.log('update totalFollow success');
+			});
+		})
+
+		UserService.updateUser(userInfo.id,subData).then(()=>{
+			console.log(subData)
+			setIsNewUser(false)
+			history.push(`/`);
+		})
 	}
 
 	//Render

@@ -1,15 +1,16 @@
-import React,{createContext, useState} from 'react'
+import React, { createContext, useState } from 'react'
 import firebase from '../firebase'
-import { User } from '../firebase/models' 
+import { User } from '../firebase/models'
 import { UserService } from '../services'
 
 export const SessionApi = createContext()
 export const SessionProvider = ({ children }) => {
-    const [user,setUser] = useState('')
-    const [userInfo,setUserInfo] = useState('')
-    const [session,setSession] = useState(false)
+    const [user, setUser] = useState('')
+    const [userInfo, setUserInfo] = useState('')
+    const [session, setSession] = useState(false)
     const [loading, setLoading] = useState(false)
     const [isAdmin, setIsAdmin] = useState(false)
+    const [isNewUser, setIsNewUser] = useState(false)
     const defaultImage = 'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg'
     const defaultBanner = "https://images7.alphacoders.com/110/thumbbig-1104854.jpg"
 
@@ -20,13 +21,23 @@ export const SessionProvider = ({ children }) => {
                 // console.log(user)
                 setUser(user)
                 setSession(true)
-                setLoading(false)
-                UserService.getUser(user.uid).then(data=>{
+                UserService.getUser(user.uid).then(data => {
                     setUserInfo(data)
-                    if(data.role == 'admin' || data.role == 'owner'){
+                    if (data.role == 'admin' || data.role == 'owner') {
                         setIsAdmin(true)
                     }
-                })
+                    const isNewUser = data.isNewUser
+                    if (!isNewUser) {
+                        throw ('not found inNewUser')
+                    }
+                    setIsNewUser(true)
+                    setLoading(false)
+                }).catch(err => {
+                    UserService.updateUser(user.uid, { isNewUser: false }).then(() => {
+                        console.log(err)
+                        setLoading(false)
+                    })
+                });
             } else {
                 setUser('')
                 setUserInfo('')
@@ -44,7 +55,7 @@ export const SessionProvider = ({ children }) => {
         setSession(false)
     }
 
-    return(
+    return (
         <SessionApi.Provider
             value={{
                 session,
@@ -58,8 +69,10 @@ export const SessionProvider = ({ children }) => {
                 defaultImage,
                 defaultBanner,
                 userInfo,
-                isAdmin
-                }}>
+                isAdmin,
+                isNewUser,
+                setIsNewUser
+            }}>
             {children}
         </SessionApi.Provider>
     )

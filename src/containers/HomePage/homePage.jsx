@@ -1,6 +1,7 @@
 //React
 import React from 'react';
 import HashLoader from 'react-spinners/HashLoader';
+import { useHistory } from 'react-router-dom';
 //Components
 import { Navbar, Card, SideNavbar } from '../../components';
 import { SessionApi } from '../../hook/SessionApi';
@@ -8,10 +9,16 @@ import { SessionApi } from '../../hook/SessionApi';
 import './HomePage.css';
 
 export default function HomePage() {
+	const {isNewUser} = React.useContext(SessionApi)
+	const history = useHistory();
+
 	//Effects
 	React.useEffect(() => {
 		authListener();
-	}, []);
+		if(isNewUser){
+			history.push(`/welcome`);
+		}
+	}, [isNewUser]);
 
 	//Contexts
 	const { authListener, loading } = React.useContext(SessionApi);

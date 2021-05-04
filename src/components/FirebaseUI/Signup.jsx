@@ -31,6 +31,8 @@ var uiConfig = {
 						role: 'user',
 						bannerURL:
 							'https://images7.alphacoders.com/110/thumbbig-1104854.jpg',
+						isNewUser:userInfo.isNewUser,
+						mySubCom: []
 					})
 					.then(() => {
 						console.log('Sync auth to firestore');
