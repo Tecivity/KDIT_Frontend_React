@@ -61,7 +61,7 @@ const Card = () => {
 				// console.log(typeof data.value)
 			});
 			// console.log('subCom : ', subCom, Array.isArray(subCom));
-			ref.orderBy('timeStamp', 'asc')
+			ref.orderBy('timeStamp', 'desc')
 				.where('subComUID', 'in', [...subCom])
 				.onSnapshot(
 					(querySnapshot) => {
