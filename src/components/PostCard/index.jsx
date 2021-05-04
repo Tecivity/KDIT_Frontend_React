@@ -37,10 +37,6 @@ const Card = () => {
 		top: false,
 	});
 	const [newPost, setNewPost] = useState();
-<<<<<<< HEAD
-=======
-	const [sortCat, setSortCat] = useState('timeStamp');
->>>>>>> 32ed789bc8f1ed9b6cd855ac6fdac9ecbdf95cb4
 
 	//Context
 	const { user, loading, setLoading, userInfo, authListener } = useContext(
@@ -65,14 +61,8 @@ const Card = () => {
 				// console.log(typeof data.value)
 			});
 			// console.log('subCom : ', subCom, Array.isArray(subCom));
-<<<<<<< HEAD
-			ref.orderBy('timeStamp', 'desc')
+			ref.orderBy('timeStamp', 'asc')
 				.where('subComUID', 'in', [...subCom])
-=======
-			ref.orderBy(sortCat, 'desc')
-				.where('subComUID', 'in', [...subCom])
-				.limit(20)
->>>>>>> 32ed789bc8f1ed9b6cd855ac6fdac9ecbdf95cb4
 				.onSnapshot(
 					(querySnapshot) => {
 						querySnapshot.forEach((doc) => {
@@ -167,12 +157,6 @@ const Card = () => {
 							top: false,
 							best: false,
 						});
-<<<<<<< HEAD
-=======
-						setSortCat('userUID');
-						fetchData();
-						window.location.reload();
->>>>>>> 32ed789bc8f1ed9b6cd855ac6fdac9ecbdf95cb4
 					}}
 					style={{
 						background: activeBt.hot && '#f48c51',
@@ -207,12 +191,6 @@ const Card = () => {
 							top: false,
 							best: false,
 						});
-<<<<<<< HEAD
-=======
-						setSortCat('timeStamp');
-						fetchData();
-						window.location.reload();
->>>>>>> 32ed789bc8f1ed9b6cd855ac6fdac9ecbdf95cb4
 					}}
 					style={{
 						background: activeBt.new && '#f48c51',

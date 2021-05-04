@@ -29,11 +29,35 @@ const Profile = ({ id }) => {
 	const [bio, setBio] = useState('');
 	const [profile, setProfile] = useState({});
 	const [showSave, setShowSave] = useState(true);
+	const [nameLen, setNameLen] = useState(0);
+	const [desLen, setDesLen] = useState(0);
 
 	//Contexts
 	const { user, defaultImage, defaultBanner } = useContext(SessionApi);
 
 	//Functions
+	const checkNameLen = (e) => {
+		const max_len = 20;
+		if (e.target.value.length < max_len) {
+			setDisplayName(e.target.value);
+		}
+		if (e.target.value.length <= max_len) {
+			setNameLen(e.target.value.length);
+		}
+
+		e.target.value = e.target.value.substr(0, max_len);
+	};
+
+	const checkDesLen = (e) => {
+		const max_len = 100;
+		if (e.target.value.length < max_len) {
+			setBio(e.target.value);
+		}
+		if (e.target.value.length <= max_len) {
+			setDesLen(e.target.value.length);
+		}
+		e.target.value = e.target.value.substr(0, max_len);
+	};
 
 	const updateProfile = (e) => {
 		if (!displayName) {
@@ -259,23 +283,37 @@ const Profile = ({ id }) => {
 												name="displayNames"
 												value={displayName}
 												onChange={(e) =>
-													setDisplayName(
-														e.target.value,
-													)
+													checkNameLen(e)
 												}
 												className="editInput"
 											/>
+											<p
+												style={{
+													color: 'grey',
+													fontSize: '0.8rem',
+													marginTop: '0',
+												}}
+											>
+												{nameLen}/20
+											</p>
 
 											<h3>Bio</h3>
 											<input
 												type="text"
 												name="displayNames"
 												value={bio}
-												onChange={(e) =>
-													setBio(e.target.value)
-												}
+												onChange={(e) => checkDesLen(e)}
 												className="editInput"
 											/>
+											<p
+												style={{
+													color: 'grey',
+													fontSize: '0.8rem',
+													marginTop: '0',
+												}}
+											>
+												{desLen}/100
+											</p>
 
 											{showSave && (
 												<button

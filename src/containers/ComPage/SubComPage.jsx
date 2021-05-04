@@ -43,24 +43,28 @@ const SubComPage = () => {
 
 	//Functions
 	const firebaseTest = async () => {
-
-		userService.getUser(user.uid).then((data) => {
-			// console.log(data.mySubCom.includes('kdR5zUidEkhQGhpcBup4'));
-			// const testList = data.mySubCom;
-			// console.log(testList.push('test'));
-			// console.log(testList);
-			// console.log(testList.pop('test'));
-			// console.log(testList);
-			const isNewUser = data.isNewUser
-			console.log(isNewUser)
-			if (!data.isNewUser) {
-				throw ('not found inNewUser')
-			}
-		}).catch(err => {
-			userService.updateUser(user.uid,{isNewUser:false}).then(()=>{
-				console.log(err)
+		userService
+			.getUser(user.uid)
+			.then((data) => {
+				// console.log(data.mySubCom.includes('kdR5zUidEkhQGhpcBup4'));
+				// const testList = data.mySubCom;
+				// console.log(testList.push('test'));
+				// console.log(testList);
+				// console.log(testList.pop('test'));
+				// console.log(testList);
+				const isNewUser = data.isNewUser;
+				console.log(isNewUser);
+				if (!data.isNewUser) {
+					throw 'not found inNewUser';
+				}
 			})
-		});
+			.catch((err) => {
+				userService
+					.updateUser(user.uid, { isNewUser: false })
+					.then(() => {
+						console.log(err);
+					});
+			});
 
 		// firebase
 		// 	.firestore()
