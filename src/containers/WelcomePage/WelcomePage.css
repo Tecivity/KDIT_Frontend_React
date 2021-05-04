@@ -38,3 +38,23 @@
 
 	transition: 0.3s;
 }
+
+.welcome-input {
+	padding: 0.5rem;
+
+	border-radius: 1rem;
+
+	font-size: 1.2rem;
+
+	outline: none;
+
+	border: 2px solid grey;
+
+	transition: 0.2s;
+}
+
+.welcome-input:focus {
+	box-shadow: 0 0 0 0.5rem #f48c51;
+
+	outline: none;
+}

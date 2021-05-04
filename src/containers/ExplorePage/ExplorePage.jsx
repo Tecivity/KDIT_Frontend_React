@@ -120,8 +120,12 @@ const CustomHits = connectHits(({ hits, indice }) => {
 										className="subComImg"
 									/>
 								</div>
-								<h3>{hit.name}</h3>
-								<h4>{hit.description}</h4>
+								<h3 style={{ textAlign: 'center' }}>
+									{hit.name}
+								</h3>
+								<h4 style={{ textAlign: 'center' }}>
+									{hit.description}
+								</h4>
 							</div>
 						</div>
 					)}

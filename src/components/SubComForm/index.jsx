@@ -24,11 +24,37 @@ const SubComForm = () => {
 	const [photoURL, setPhotoURL] = useState('');
 	const [bannerURL, setBannerURL] = useState('');
 	const [isrCreated, setIsCreated] = useState(false);
+	const [nameLen, setNameLen] = useState(0);
+	const [desLen, setDesLen] = useState(0);
 
 	//Context
 	const { user, defaultBanner } = useContext(SessionApi);
 
 	//Functions
+
+	const checkNameLen = (e) => {
+		const max_len = 20;
+		if (e.target.value.length < max_len) {
+			handleChange(e);
+		}
+		if (e.target.value.length <= max_len) {
+			setNameLen(e.target.value.length);
+		}
+
+		e.target.value = e.target.value.substr(0, max_len);
+	};
+
+	const checkDesLen = (e) => {
+		const max_len = 250;
+		if (e.target.value.length < max_len) {
+			handleChange(e);
+		}
+		if (e.target.value.length <= max_len) {
+			setDesLen(e.target.value.length);
+		}
+		e.target.value = e.target.value.substr(0, max_len);
+	};
+
 	const handleChange = (e) => {
 		const name = e.target.name;
 		const value = e.target.value;
@@ -107,7 +133,10 @@ const SubComForm = () => {
 						<FileUpload url={photoURL} setUrl={setPhotoURL} />
 
 						<img
-							src={photoURL}
+							src={
+								photoURL ||
+								'https://cdn.jeab.com/wp-content/uploads/2020/03/wallpaper-for-jeab06.jpg'
+							}
 							alt=""
 							className="full-editProfilePic"
 							draggable="false"
@@ -126,7 +155,7 @@ const SubComForm = () => {
 						<FileUpload url={bannerURL} setUrl={setBannerURL} />
 
 						<img
-							src={bannerURL}
+							src={bannerURL || defaultBanner}
 							alt=""
 							className="full-editBannerPic"
 							draggable="false"
@@ -144,8 +173,17 @@ const SubComForm = () => {
 							name="name"
 							className="nameInput"
 							placeholder="What's Your Community Name?"
-							onChange={(e) => handleChange(e)}
+							onChange={(e) => checkNameLen(e)}
 						/>
+						<p
+							style={{
+								color: 'grey',
+								fontSize: '0.8rem',
+								marginTop: '0',
+							}}
+						>
+							{nameLen}/20
+						</p>
 						<label htmlFor="">Description</label>
 						<textarea
 							id=""
@@ -154,8 +192,17 @@ const SubComForm = () => {
 							name="description"
 							className="desInput"
 							placeholder="Write something about your community..."
-							onChange={(e) => handleChange(e)}
+							onChange={(e) => checkDesLen(e)}
 						></textarea>
+						<p
+							style={{
+								color: 'grey',
+								fontSize: '0.8rem',
+								marginTop: '0',
+							}}
+						>
+							{desLen}/250
+						</p>
 					</div>
 					{!isrCreated && (
 						<button onClick={handleSubmit} className="btn">

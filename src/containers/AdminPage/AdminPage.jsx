@@ -39,155 +39,66 @@ const CustomHits = connectHits(({ hits, indice }) => {
 		<div className="explore-hitContainer">
 			{hits.map((hit) => (
 				<div key={hit.objectID} className="explore-hit">
-					{indice === 'posts' && (
-						<div>
-							<div
-								className="explore-postHitPane"
-								onClick={() => {
-									history.push(`/post/${hit.objectID}`);
-								}}
-							>
-								<div className="explore-postPane">
-									<div className=" explore-postInfoPane">
-										<div
+					<div>
+						<div
+							className="explore-postHitPane"
+							onClick={() => {
+								history.push(`/post/${hit.objectID}`);
+							}}
+						>
+							<div className="explore-postPane">
+								<div className=" explore-postInfoPane">
+									<div
+										style={{
+											display: 'inline',
+											marginLeft: '0.3rem',
+											paddingLeft: '1rem',
+											paddingTop: '1rem',
+										}}
+									>
+										{String(hit.timeStamp) !==
+											'undefined' && (
+											<ReactTimeAgo
+												date={String(hit.timeStamp)}
+												locale="en-US"
+												style={{ color: 'grey' }}
+											/>
+										)}{' '}
+										•{' '}
+										<span
 											style={{
-												display: 'inline',
-												marginLeft: '0.3rem',
-												paddingLeft: '1rem',
-												paddingTop: '1rem',
+												fontSize: '0.8rem',
+												color: 'lightgrey',
 											}}
 										>
-											{String(hit.timeStamp) !==
-												'undefined' && (
-												<ReactTimeAgo
-													date={String(hit.timeStamp)}
-													locale="en-US"
-													style={{ color: 'grey' }}
-												/>
-											)}{' '}
-											•{' '}
-											<span
-												style={{
-													fontSize: '0.8rem',
-													color: 'lightgrey',
-												}}
-											>
-												{new Date(
-													hit.timeStamp,
-												).toLocaleString([], {
-													dateStyle: 'long',
-													timeStyle: 'short',
-												})}
-											</span>
-										</div>
-									</div>
-									<div
-										className="explore-postContentPane"
-										style={{ paddingLeft: '1rem' }}
-									>
-										{parse(String(hit.content))}
+											{new Date(
+												hit.timeStamp,
+											).toLocaleString([], {
+												dateStyle: 'long',
+												timeStyle: 'short',
+											})}
+										</span>
 									</div>
 								</div>
-							</div>
-							<div
-								style={{
-									borderTop: '1px solid black',
-									paddingLeft: '1rem',
-									paddingBottom: '1rem',
-								}}
-							>
-								<h4>Reasons For Reporting </h4>
-								<button>Delete</button>
+								<div
+									className="explore-postContentPane"
+									style={{ paddingLeft: '1rem' }}
+								>
+									{parse(String(hit.content))}
+								</div>
 							</div>
 						</div>
-					)}
-					{indice === 'sub_community' && (
 						<div
-							style={{ display: 'flex', flexDirection: 'column' }}
-							onClick={() => {
-								history.push(`/community/${hit.objectID}`);
+							style={{
+								borderTop: '1px solid black',
+								paddingLeft: '1rem',
+								paddingBottom: '1rem',
 							}}
 						>
-							<div className="explore-comInfo">
-								<div className="subComBackgroundPane">
-									<img
-										src={hit.bannerURL}
-										alt=""
-										width="100%"
-										height="130%"
-										style={{
-											margin: '0',
-											objectFit: 'cover',
-											borderRadius: '0.5rem 0.5rem 0 0',
-											zIndex: '20',
-										}}
-									/>
-								</div>
-								<div className="subComImagePane">
-									<img
-										src={hit.photoURL}
-										alt=""
-										className="subComImg"
-									/>
-								</div>
-								<h3>{hit.name}</h3>
-								<h4>{hit.description}</h4>
-							</div>
-							<div
-								style={{
-									borderTop: '1px solid black',
-									paddingLeft: '1rem',
-								}}
-							>
-								<h4>Reasons For Reporting </h4>
-								<button>Delete</button>
-							</div>
+							<h4>Reasons For Reporting </h4>
+							<button>Delete</button>
 						</div>
-					)}
-					{indice === 'users' && (
-						<div
-							style={{ display: 'flex', flexDirection: 'column' }}
-							onClick={() => {
-								history.push(`/profile/${hit.objectID}`);
-							}}
-						>
-							<div className="explore-comInfo">
-								<div className="subComBackgroundPane">
-									<img
-										src={hit.bannerURL}
-										alt=""
-										width="100%"
-										height="130%"
-										style={{
-											margin: '0',
-											objectFit: 'cover',
-											borderRadius: '1rem 1rem 0 0',
-											zIndex: '20',
-										}}
-									/>
-								</div>
-								<div className="subComImagePane">
-									<img
-										src={hit.photoURL}
-										alt=""
-										className="subComImg"
-									/>
-								</div>
-								<h3>{hit.displayName}</h3>
-								<p>{hit.bio}</p>
-							</div>
-							<div
-								style={{
-									borderTop: '1px solid black',
-									width: '50%',
-									paddingLeft: '1rem',
-								}}
-							>
-								<h4>Reasons For Reporting </h4>
-								<button>BAN</button>
-							</div>
-						</div>
-					)}
+					</div>
 				</div>
 			))}
 		</div>
@@ -210,19 +121,6 @@ const CustomSearchBox = connectSearchBox(
 					className="explore-searchBar"
 					placeholder="Search Something..."
 				/>
-
-				<div className="explore-searchOptionPane">
-					<select
-						name="indices"
-						id=""
-						className="explore-dropdown"
-						onChange={changeIndice}
-					>
-						<option value="posts">Post</option>
-						<option value="sub_community">Community</option>
-						<option value="users">User</option>
-					</select>
-				</div>
 			</div>
 		);
 	},
@@ -264,7 +162,7 @@ const AdminPage = () => {
 		<>
 			<Navbar />
 			<div className="explorePane" style={{ width: '60%' }}>
-				<InstantSearch searchClient={searchClient} indexName={indice}>
+				<InstantSearch searchClient={searchClient} indexName="posts">
 					<CustomSearchBox setIndice={setIndice} />
 					{/* <CustomPagination /> */}
 					<CustomHits indice={indice} />

@@ -2,7 +2,7 @@
 import React, { useState, useContext } from 'react';
 import Select from 'react-select';
 import { bounceInLeft, fadeIn, fadeInUp } from 'react-animations';
-import { SessionApi } from '../../hook/SessionApi'
+import { SessionApi } from '../../hook/SessionApi';
 import { useHistory } from 'react-router-dom';
 //External
 import Radium, { StyleRoot } from 'radium';
@@ -71,7 +71,7 @@ const options = [
 	{
 		value: 'ZHg8sN4DTSgLOskPdc7o',
 		label: '15.วิทยาเขตชุมพรเขตรอุดมศักดิ์',
-	}
+	},
 ];
 
 //Animations
@@ -93,48 +93,62 @@ const styles = {
 const WelcomePage = () => {
 	//States
 	// const [showSuggest, setShowSuggest] = useState(false);
-	const [displayName, setDisplayName] = useState('')
+	const [displayName, setDisplayName] = useState('');
 	const [selectedData, setSelectedData] = useState();
-	const { userInfo, setIsNewUser } = useContext(SessionApi)
+	const [selected, setSelected] = useState(false);
+	const [nameLen, setNameLen] = useState(0);
+
+	const { userInfo, setIsNewUser } = useContext(SessionApi);
 	const history = useHistory();
 
 	const handleChange = (e) => {
 		setSelectedData(e);
 		// setShowSuggest(false)
 		console.log(selectedData);
+		setSelected(true);
 	};
 
-	const handleSubmit = () => {
+	const checkNameLen = (e) => {
+		const max_len = 20;
+		setNameLen(e.target.value.length);
+		if (e.target.value.length < max_len) {
+			setDisplayName(e.target.value);
+		}
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
 		const subData = {
 			displayName,
 			isNewUser: false,
-			mySubCom: [{
-				value: selectedData.value,
-				label: selectedData.label.split('.')[1],
-			}]
-		}
-		SubComService.getSubCom(selectedData.value).then(data => {
-			const newTotalFollow = data.totalFollow
+			mySubCom: [
+				{
+					value: selectedData.value,
+					label: selectedData.label.split('.')[1],
+				},
+			],
+		};
+		SubComService.getSubCom(selectedData.value).then((data) => {
+			const newTotalFollow = data.totalFollow;
 			newTotalFollow.push(userInfo.id);
 			SubComService.updateSubCom(selectedData.value, {
 				totalFollow: newTotalFollow,
 			}).then(() => {
 				console.log('update totalFollow success');
 			});
-		})
-
-		UserService.updateUser(userInfo.id,subData).then(()=>{
-			console.log(subData)
-			setIsNewUser(false)
+		});
+		UserService.updateUser(userInfo.id, subData).then(() => {
+			console.log(subData);
+			setIsNewUser(false);
 			history.push(`/`);
-		})
-	}
+		});
+	};
 
 	//Render
 	return (
 		<StyleRoot>
 			<div className="welcomePane">
-				<div
+				<form
 					action=""
 					className="welcomeForm"
 					style={styles.bounceInLeft}
@@ -142,41 +156,43 @@ const WelcomePage = () => {
 					<h3 style={{ textAlign: 'center' }}>
 						What Should We Call You?
 					</h3>
+
 					<input
 						type="text"
 						value={displayName}
-						onChange={e => setDisplayName(e.target.value)}
+						onChange={(e) => checkNameLen(e)}
 						placeholder="Your name..."
+						className="welcome-input"
+						required
 					/>
+
+					<p
+						style={{
+							color: 'grey',
+							fontSize: '1rem',
+							marginTop: '0.5rem',
+							marginLeft: 'auto',
+						}}
+					>
+						{nameLen}/20
+					</p>
 					<h3 style={{ textAlign: 'center' }}>คณะที่เรียน</h3>
 					<Select
 						options={options}
 						value={selectedData}
 						onChange={handleChange}
 					/>
-
-					<button
-						onClick={handleSubmit}
-						className="btn"
-						style={{ width: '50%', marginTop: '3rem' }}
-					>
-						Next
-						</button>
-					{/* {!showSuggest && (
+					{selected && (
 						<button
-							onClick={() => setShowSuggest(true)}
+							type="submit"
+							onClick={handleSubmit}
 							className="btn"
 							style={{ width: '50%', marginTop: '3rem' }}
 						>
 							Next
 						</button>
-					)} */}
-					{/* {showSuggest && (
-						<div>
-							<h1>This Suggest Community HERE</h1>
-						</div>
-					)} */}
-				</div>
+					)}
+				</form>
 
 				<h1
 					className="nisitText"

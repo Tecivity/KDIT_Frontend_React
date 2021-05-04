@@ -29,11 +29,34 @@ const Profile = ({ id }) => {
 	const [bio, setBio] = useState('');
 	const [profile, setProfile] = useState({});
 	const [showSave, setShowSave] = useState(true);
+	const [nameLen, setNameLen] = useState(0);
+	const [desLen, setDesLen] = useState(0);
 
 	//Contexts
 	const { user, defaultImage, defaultBanner } = useContext(SessionApi);
 
 	//Functions
+	const handleOnHover = () => {
+		setEdit(false);
+		setNameLen(displayName.length);
+		setDesLen(bio.length);
+	};
+
+	const checkNameLen = (e) => {
+		const max_len = 20;
+		setNameLen(e.target.value.length);
+		if (e.target.value.length < max_len) {
+			setDisplayName(e.target.value);
+		}
+	};
+
+	const checkDesLen = (e) => {
+		const max_len = 50;
+		setDesLen(e.target.value.length);
+		if (e.target.value.length < max_len) {
+			setBio(e.target.value);
+		}
+	};
 
 	const updateProfile = (e) => {
 		const newProfile = {
@@ -51,7 +74,7 @@ const Profile = ({ id }) => {
 			store.addNotification({
 				title: 'Your profile is updated successfully!',
 				message:
-					'Yeah! your change that you made to your profile is now on our server.',
+					'Yeah! your change that you made to your profile is now on our server. Pleas click outside the box to continue. ',
 				type: 'success',
 				insert: 'top',
 				container: 'bottom-full',
@@ -63,9 +86,6 @@ const Profile = ({ id }) => {
 					pauseOnHover: true,
 				},
 			});
-			setTimeout(function () {
-				window.location.reload();
-			}, 3000);
 		});
 		setShowSave(false);
 	};
@@ -137,6 +157,7 @@ const Profile = ({ id }) => {
 								<button
 									className="edit-btn"
 									onClick={handleOnClick}
+									onMouseOver={handleOnHover}
 								>
 									Edit
 								</button>
@@ -209,23 +230,37 @@ const Profile = ({ id }) => {
 												name="displayNames"
 												value={displayName}
 												onChange={(e) =>
-													setDisplayName(
-														e.target.value,
-													)
+													checkNameLen(e)
 												}
 												className="editInput"
 											/>
+											<p
+												style={{
+													color: 'grey',
+													fontSize: '0.8rem',
+													marginTop: '0',
+												}}
+											>
+												{nameLen}/20
+											</p>
 
 											<h3>Bio</h3>
 											<input
 												type="text"
 												name="displayNames"
 												value={bio}
-												onChange={(e) =>
-													setBio(e.target.value)
-												}
+												onChange={(e) => checkDesLen(e)}
 												className="editInput"
 											/>
+											<p
+												style={{
+													color: 'grey',
+													fontSize: '0.8rem',
+													marginTop: '0',
+												}}
+											>
+												{desLen}/50
+											</p>
 
 											{showSave && (
 												<button

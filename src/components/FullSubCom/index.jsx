@@ -1,8 +1,12 @@
 //React
 import React, { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import Popup from 'reactjs-popup';
-import { MdCancel } from 'react-icons/md';
+import { MdCancel, MdEdit, MdDelete, MdReportProblem } from 'react-icons/md';
+import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 import { GoCheck } from 'react-icons/go';
+import useDropdownMenu from 'react-accessible-dropdown-menu-hook';
+
 //Components
 import { SessionApi } from '../../hook/SessionApi';
 import Post from '../PostCard/Post';
@@ -18,8 +22,10 @@ import { store } from 'react-notifications-component';
 import 'animate.css';
 
 const FullSubCom = ({ subCom, update }) => {
+	//Variables
+	const { buttonProps, itemProps, isOpen, setIsOpen } = useDropdownMenu(1);
+
 	//States
-	const [edit, setEdit] = useState(false);
 	const [posts, setPosts] = useState([]);
 	const [photoURL, setPhotoURL] = useState('');
 	const [bannerURL, setBannerURL] = useState('');
@@ -31,21 +37,42 @@ const FullSubCom = ({ subCom, update }) => {
 	const [voteNumber, setVoteNumber] = useState();
 	const [isEdited, setIsEdited] = useState(false);
 	const [hover, setHover] = useState(false);
+	const [nameLen, setNameLen] = useState(0);
+	const [desLen, setDesLen] = useState(0);
 
 	//Contexts
-	const { defaultBanner, userInfo, authListener } = useContext(SessionApi);
+	const { session, defaultBanner, userInfo, authListener } = useContext(
+		SessionApi,
+	);
+
+	//History
+	const history = useHistory();
 
 	//Functions
 	const handleOnClick = () => {
-		setEdit(!edit);
-		setIsEdited(false);
+		// setIsEdited(false);
+		setNameLen(name.length);
+		setDesLen(description.length);
 	};
 
-	// const clearInput = () => {
-	// 	setSubCom({ name: '', description: '' });
-	// };
+	const checkNameLen = (e) => {
+		const max_len = 20;
+		setNameLen(e.target.value.length);
+		if (e.target.value.length < max_len) {
+			setName(e.target.value);
+		}
+	};
+
+	const checkDesLen = (e) => {
+		const max_len = 250;
+		setDesLen(e.target.value.length);
+		if (e.target.value.length < max_len) {
+			setDescription(e.target.value);
+		}
+	};
 
 	const handleSubmit = (e) => {
+		setIsEdited(true);
 		e.preventDefault();
 		const newSubCom = {
 			...subComDummy,
@@ -55,7 +82,6 @@ const FullSubCom = ({ subCom, update }) => {
 			photoURL,
 		};
 		update(newSubCom);
-		setIsEdited(true);
 		store.addNotification({
 			title: 'Your Community is updated successfully!',
 			message:
@@ -214,7 +240,9 @@ const FullSubCom = ({ subCom, update }) => {
 						style={{ background: 'white' }}
 					/>
 				</div>
-				<h2 style={{ marginBottom: '0' }}>{subCom.name}</h2>
+				<h2 style={{ marginBottom: '0', textAlign: 'center' }}>
+					{subCom.name}
+				</h2>
 				<p
 					style={{
 						fontSize: '0.8rem',
@@ -227,26 +255,44 @@ const FullSubCom = ({ subCom, update }) => {
 				</p>
 
 				<p>{subCom.description}</p>
-				{isFollow ? (
-					<>
-						<button
-							className="subcom-btnf"
-							onClick={followOnClick}
-							onMouseOver={() => setHover(true)}
-							onMouseLeave={() => setHover(false)}
-						>
-							<GoCheck
-								size="30px"
-								style={{ fill: hover ? 'white' : '#f48c51' }}
-							/>
-						</button>
-					</>
+				{session ? (
+					isFollow ? (
+						<>
+							<button
+								className="subcom-btnf"
+								onClick={followOnClick}
+								onMouseOver={() => setHover(true)}
+								onMouseLeave={() => setHover(false)}
+							>
+								<GoCheck
+									size="30px"
+									style={{
+										fill: hover ? 'white' : '#f48c51',
+									}}
+								/>
+							</button>
+						</>
+					) : (
+						<>
+							<button
+								className="subcom-btn"
+								onClick={followOnClick}
+							>
+								Follow
+							</button>
+						</>
+					)
 				) : (
-					<>
-						<button className="subcom-btn" onClick={followOnClick}>
-							Follow
-						</button>
-					</>
+					<div>
+						Please{' '}
+						<span
+							onClick={() => history.push('/auth')}
+							style={{ textDecoration: 'underline' }}
+						>
+							Login
+						</span>{' '}
+						To Follow Community
+					</div>
 				)}
 
 				{userInfo.id == subCom.ownerUID ? (
@@ -255,7 +301,7 @@ const FullSubCom = ({ subCom, update }) => {
 							trigger={
 								<button
 									className="editCombtn"
-									onClick={handleOnClick}
+									onMouseOver={handleOnClick}
 								>
 									Edit
 								</button>
@@ -295,7 +341,10 @@ const FullSubCom = ({ subCom, update }) => {
 												/>
 
 												<img
-													src={photoURL}
+													src={
+														photoURL ||
+														'https://cdn.jeab.com/wp-content/uploads/2020/03/wallpaper-for-jeab06.jpg'
+													}
 													alt=""
 													className="full-editProfilePic"
 													draggable="false"
@@ -319,7 +368,10 @@ const FullSubCom = ({ subCom, update }) => {
 												/>
 
 												<img
-													src={bannerURL}
+													src={
+														bannerURL ||
+														defaultBanner
+													}
 													alt=""
 													className="full-editBannerPic"
 													draggable="false"
@@ -339,9 +391,21 @@ const FullSubCom = ({ subCom, update }) => {
 													className="nameInput"
 													value={name}
 													onChange={(e) =>
-														setName(e.target.value)
+														checkNameLen(e)
 													}
+													style={{
+														marginBottom: '0',
+													}}
 												/>
+												<p
+													style={{
+														color: 'grey',
+														fontSize: '0.8rem',
+														marginTop: '0',
+													}}
+												>
+													{nameLen}/20
+												</p>
 												<label htmlFor="">
 													Description
 												</label>
@@ -353,11 +417,21 @@ const FullSubCom = ({ subCom, update }) => {
 													className="desInput"
 													value={description}
 													onChange={(e) =>
-														setDescription(
-															e.target.value,
-														)
+														checkDesLen(e)
 													}
+													style={{
+														marginBottom: '0',
+													}}
 												></textarea>
+												<p
+													style={{
+														color: 'grey',
+														fontSize: '0.8rem',
+														marginTop: '0',
+													}}
+												>
+													{desLen}/250
+												</p>
 											</div>
 											{!isEdited && (
 												<button
@@ -379,137 +453,16 @@ const FullSubCom = ({ subCom, update }) => {
 								</div>
 							)}
 						</Popup>
-						<Popup
-							trigger={
-								<button
-									className="editCombtn"
-									onClick={handleOnClick}
-								>
-									Delete
-								</button>
-							}
-							modal
-							className="comPopup"
-						>
-							{(close) => (
-								<div className="modal">
-									<div className="close" onClick={close}>
-										<MdCancel
-											size="30px"
-											style={{ fill: '#f48c51' }}
-										/>
-									</div>
-									<div className="header">
-										<h1
-											style={{
-												paddingBottom: '0.5rem',
-												borderBottom:
-													'1px solid lightgrey',
-											}}
-										>
-											Edit Community
-										</h1>
-									</div>
-									<div className="content">
-										<div className="fullsubcomForm">
-											<div className="editSubComForm">
-												<h1 htmlFor="">
-													Profile Picture
-												</h1>
 
-												<FileUpload
-													url={photoURL}
-													setUrl={setPhotoURL}
-												/>
-
-												<img
-													src={photoURL}
-													alt=""
-													className="full-editProfilePic"
-													draggable="false"
-												/>
-											</div>
-
-											<div
-												className="editSubComForm"
-												style={{
-													borderBottom:
-														'2px solid lightgrey',
-												}}
-											>
-												<h1 htmlFor="">
-													Banner Picture
-												</h1>
-
-												<FileUpload
-													url={bannerURL}
-													setUrl={setBannerURL}
-												/>
-
-												<img
-													src={bannerURL}
-													alt=""
-													className="full-editBannerPic"
-													draggable="false"
-													style={{
-														marginBottom: '2rem',
-													}}
-												/>
-											</div>
-
-											<div className="inputForm">
-												<label htmlFor="">
-													Community Name
-												</label>
-												<input
-													type="text"
-													name="name"
-													className="nameInput"
-													value={name}
-													onChange={(e) =>
-														setName(e.target.value)
-													}
-												/>
-												<label htmlFor="">
-													Description
-												</label>
-												<textarea
-													id=""
-													cols="30"
-													rows="10"
-													name="description"
-													className="desInput"
-													value={description}
-													onChange={(e) =>
-														setDescription(
-															e.target.value,
-														)
-													}
-												></textarea>
-											</div>
-											<button
-												onClick={handleSubmit}
-												className="btn"
-												onClick={close}
-											>
-												<a
-													style={{
-														color: 'white',
-													}}
-												>
-													Save
-												</a>
-											</button>
-										</div>
-									</div>
-								</div>
-							)}
-						</Popup>
+						<button className="editCombtn" onClick={handleOnClick}>
+							Delete
+						</button>
 					</>
 				) : (
 					<></>
 				)}
 			</div>
+
 			<div className="fullComCard">
 				<div className="content">
 					{posts.map((post, i) => (
