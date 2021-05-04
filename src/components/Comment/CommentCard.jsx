@@ -95,8 +95,7 @@ const CommentCard = ({ comment }) => {
 			<div className="comment">
 				<div className="commentVotePane">
 					<img
-						src={commentOwner.photoURL}
-						onError={defaultImage}
+						src={commentOwner.photoURL || defaultImage}
 						alt="profile picture"
 						className="profilePic"
 					/>

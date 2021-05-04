@@ -45,7 +45,7 @@ const PostPage = () => {
 				<div>
 					<Navbar />
 					<SideNavbar />
-					<div className>
+					<div>
 						<FullPost post={post} id={id} />
 					</div>
 				</div>

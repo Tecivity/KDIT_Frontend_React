@@ -55,7 +55,7 @@ export default function FileUpload({ setUrl }) {
             {image ? <img src={path} alt="firebase-image" width="400px" /> : <></>}
             <h3>Uploaded image</h3>
             <img src={url || "http://via.placeholder.com/400"} alt="firebase-image" width="400px" /> */}
-			{progress === '100' ? <a> ✔</a> : <></>}
+			{progress === '100' ? <p> ✔</p> : <></>}
 		</div>
 	);
 }

@@ -57,10 +57,10 @@ const FullPost = ({ post, id }) => {
 
 	const check = async () => {
 		try {
-			if (postDummy.voteUp.includes(userInfo.id)) {
+			if (post.voteUp.includes(userInfo.id)) {
 				setIsVoteup(true);
 				setIsVoteDown(false);
-			} else if (postDummy.voteDown.includes(userInfo.id)) {
+			} else if (post.voteDown.includes(userInfo.id)) {
 				setIsVoteup(false);
 				setIsVoteDown(true);
 			}
@@ -302,7 +302,7 @@ const FullPost = ({ post, id }) => {
 									<p className="full-displayName">
 										{postUser.displayName}
 									</p>
-									<p className="timestamp">
+									<div className="timestamp">
 										{' '}
 										•{' '}
 										{String(post.timeStamp) !==
@@ -328,7 +328,7 @@ const FullPost = ({ post, id }) => {
 												timeStyle: 'short',
 											})}
 										</span>
-									</p>
+									</div>
 								</div>
 								<div>
 									<p
@@ -394,7 +394,7 @@ const FullPost = ({ post, id }) => {
 										</div>
 									) : (
 										//Edit Post
-										<p>{parse(post.content)}</p>
+										<div>{parse(post.content)}</div>
 									)
 								) : (
 									<div></div>

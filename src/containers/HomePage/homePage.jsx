@@ -9,13 +9,13 @@ import { SessionApi } from '../../hook/SessionApi';
 import './HomePage.css';
 
 export default function HomePage() {
-	const {isNewUser} = React.useContext(SessionApi)
+	const { isNewUser } = React.useContext(SessionApi);
 	const history = useHistory();
 
 	//Effects
 	React.useEffect(() => {
 		authListener();
-		if(isNewUser){
+		if (isNewUser) {
 			history.push(`/welcome`);
 		}
 	}, [isNewUser]);

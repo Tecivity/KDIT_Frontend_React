@@ -31,9 +31,9 @@ import 'react-notifications-component/dist/theme.css';
 import 'animate.css';
 
 function App() {
-	{
-		console.disableYellowBox = true;
-	}
+	// {
+	// 	console.disableYellowBox = true;
+	// }
 	return (
 		<div className="App">
 			<SessionProvider>

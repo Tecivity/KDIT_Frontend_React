@@ -318,14 +318,14 @@ const Profile = ({ id }) => {
 													onClick={updateProfile}
 													// onClick={close}
 												>
-													<a
+													<p
 														style={{
 															color: 'white',
 															margin: '2rem',
 														}}
 													>
 														Save Changes
-													</a>
+													</p>
 												</button>
 											)}
 										</div>

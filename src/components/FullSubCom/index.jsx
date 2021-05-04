@@ -445,13 +445,13 @@ const FullSubCom = ({ subCom, update }) => {
 													className="btn"
 													// onClick={close}
 												>
-													<a
+													<p
 														style={{
 															color: 'white',
 														}}
 													>
 														Save
-													</a>
+													</p>
 												</button>
 											)}
 										</div>
