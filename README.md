@@ -1,6 +1,7 @@
 # KDIT_Frontend_React :desktop_computer: :keyboard: :school:
 ### KDIT Website project based on react is more than a social platform for university student. 
 ### AKA: NISIT
+Our first design prototype on [Figma](https://www.figma.com/proto/VVnj7iXkpIN5ONxr0kKEjK/Keddit-Design?node-id=2%3A2&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=2%3A2)\
 Our Home Page :arrow_heading_down:
 ![SDP Projects (Afternoon)-20210505_130049-Meeting Recording 1_Moment](https://user-images.githubusercontent.com/63220854/130402263-de36093f-7cfd-44bf-ac76-c3870461030a.jpg)
 We were develop a platform to centralize every community in KMITL whether Annoucement, Job opportunity or any topics.\
